@@ -1,175 +1,253 @@
-<!-- FINAL PREMIUM VERSION: SAME UI + ADMIN + FOLDERS + ADD FOLDER -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dillu Captures</title>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-
-<style>
-body{margin:0;background:#000;color:#fff;font-family:sans-serif}
-h1{text-align:center;margin:20px}
-
-.top-bar{
-  text-align:center;margin-bottom:20px;
-}
-
-button{
-  padding:10px 16px;border:none;border-radius:20px;cursor:pointer;margin:5px
-}
-
-.add-folder{background:#22c55e;color:#000}
-.upload-btn{background:#eab308;color:#000}
-.delete-btn{
-  position:absolute;top:5px;right:5px;
-  background:red;color:#fff;border:none;border-radius:50%;width:26px;height:26px
-}
-
-.folder{
-  margin:30px;padding:20px;border:1px solid #333;border-radius:16px
-}
-
-.gallery{
-  display:flex;flex-wrap:wrap;gap:12px;justify-content:center
-}
-
-.card{position:relative}
-.card img{
-  width:220px;height:150px;object-fit:cover;border-radius:10px
-}
-
-</style>
-</head>
-
-<body>
-
-<h1>Dillu Captures</h1>
-
-<div class="top-bar">
-  <button class="add-folder" onclick="createFolder()">➕ Add Folder</button>
-</div>
-
-<div id="folders"></div>
-
 <script>
+  // ======================
+  // ADMIN SETTINGS
+  // ======================
+  const ADMIN_PASSWORD = "1234";
 
-const ADMIN_PASSWORD = "dillu123";
-
-function checkPassword(){
-  return prompt("Enter Admin Password") === ADMIN_PASSWORD;
-}
-
-function createFolder(){
-  if(!checkPassword()) return alert("Wrong Password");
-
-  const name = prompt("Enter Folder Name");
-  if(!name) return;
-
-  const id = name.toLowerCase().replace(/\s+/g,'_');
-
-  const container = document.getElementById('folders');
-
-  const div = document.createElement('div');
-  div.className = 'folder';
-  div.innerHTML = `
-    <h2>${name}</h2>
-    <button class="upload-btn" onclick="uploadImage('${id}')">Upload Photo</button>
-    <div class="gallery" id="${id}"></div>
-  `;
-
-  container.appendChild(div);
-
-  localStorage.setItem('folder_'+id, name);
-}
-
-function uploadImage(folder){
-  if(!checkPassword()) return alert("Wrong Password");
-
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'image/*';
-
-  input.onchange = e => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(event){
-      const src = event.target.result;
-      addImage(folder, src);
-      saveLocal(folder, src);
-    }
-
-    reader.readAsDataURL(file);
+  function askPassword() {
+    const pass = prompt("Enter Admin Password:");
+    return pass === ADMIN_PASSWORD;
   }
 
-  input.click();
-}
+  // ======================
+  // NAVBAR (UNCHANGED)
+  // ======================
+  const navLinks = document.querySelectorAll('.nav-link');
+  const indicator = document.querySelector('.nav-indicator');
 
-function addImage(folder, src){
-  const container = document.getElementById(folder);
-
-  const card = document.createElement('div');
-  card.className = 'card';
-
-  const img = document.createElement('img');
-  img.src = src;
-
-  const del = document.createElement('button');
-  del.innerHTML = '×';
-  del.className = 'delete-btn';
-
-  del.onclick = ()=>{
-    if(!checkPassword()) return alert("Wrong Password");
-    card.remove();
-    removeLocal(folder, src);
+  function moveIndicator(link) {
+    const rect = link.getBoundingClientRect();
+    const containerRect = link.parentElement.getBoundingClientRect();
+    const left = rect.left - containerRect.left;
+    indicator.style.left = left + 'px';
+    indicator.style.width = rect.width + 'px';
+    indicator.style.transform = 'scaleX(1)';
   }
 
-  card.appendChild(img);
-  card.appendChild(del);
-  container.appendChild(card);
-}
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => moveIndicator(link));
+    link.addEventListener('click', () => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
 
-function saveLocal(folder, src){
-  let data = JSON.parse(localStorage.getItem(folder)) || [];
-  data.push(src);
-  localStorage.setItem(folder, JSON.stringify(data));
-}
+  window.addEventListener('load', () => {
+    const active = document.querySelector('.nav-link.active');
+    if (active) moveIndicator(active);
+  });
 
-function removeLocal(folder, src){
-  let data = JSON.parse(localStorage.getItem(folder)) || [];
-  data = data.filter(i=>i!==src);
-  localStorage.setItem(folder, JSON.stringify(data));
-}
+  // ======================
+  // REVEAL ANIMATION
+  // ======================
+  const sections = document.querySelectorAll('section[id]');
+  const revealEls = document.querySelectorAll('.reveal');
 
-function load(){
-  const container = document.getElementById('folders');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        navLinks.forEach(link => {
+          const hrefId = link.getAttribute('href').slice(1);
+          if (hrefId === id) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            moveIndicator(link);
+          }
+        });
+      }
+    });
+  }, { threshold: 0.25 });
 
-  for(let key in localStorage){
-    if(key.startsWith('folder_')){
-      const id = key.replace('folder_','');
-      const name = localStorage.getItem(key);
+  sections.forEach(section => observer.observe(section));
+  revealEls.forEach(el => observer.observe(el));
 
-      const div = document.createElement('div');
-      div.className = 'folder';
-      div.innerHTML = `
-        <h2>${name}</h2>
-        <button class="upload-btn" onclick="uploadImage('${id}')">Upload Photo</button>
-        <div class="gallery" id="${id}"></div>
+  // ======================
+  // GALLERY HOVER EFFECT
+  // ======================
+  function applyHoverEffect(card) {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = ((y / rect.height) - 0.5) * -8;
+      const rotateY = ((x / rect.width) - 0.5) * 8;
+      card.style.transform =
+        `translateY(-8px) scale(1.03) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  }
+
+  document.querySelectorAll('.gallery-card').forEach(applyHoverEffect);
+
+  // ======================
+  // ADD DELETE BUTTON TO EXISTING IMAGES
+  // ======================
+  function addDeleteButton(card) {
+    const meta = card.querySelector('.gallery-meta');
+
+    const btn = document.createElement("button");
+    btn.textContent = "Delete";
+    btn.style.background = "red";
+    btn.style.color = "white";
+    btn.style.border = "none";
+    btn.style.padding = "4px 8px";
+    btn.style.borderRadius = "6px";
+    btn.style.cursor = "pointer";
+
+    btn.onclick = (e) => {
+      e.preventDefault();
+      if (!askPassword()) return alert("Wrong Password");
+      card.remove();
+      updateFolderCounts();
+    };
+
+    meta.appendChild(btn);
+  }
+
+  document.querySelectorAll('.gallery-card').forEach(addDeleteButton);
+
+  // ======================
+  // ADD UPLOAD BUTTON TO EACH FOLDER
+  // ======================
+  function setupUploadButtons() {
+    document.querySelectorAll('.folder-header').forEach(header => {
+      const btn = document.createElement("button");
+      btn.innerHTML = '<i class="fas fa-upload"></i> Upload';
+      btn.className = "cta-secondary";
+
+      btn.onclick = () => {
+        if (!askPassword()) return alert("Wrong Password");
+
+        const input = document.createElement("input");
+        input.type = "file";
+        input.multiple = true;
+        input.accept = "image/*";
+
+        input.onchange = (e) => {
+          const files = e.target.files;
+          const folder = header.closest(".folder");
+          const grid = folder.querySelector(".gallery-grid");
+
+          Array.from(files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              const card = document.createElement("a");
+              card.className = "gallery-card";
+              card.href = event.target.result;
+              card.target = "_blank";
+
+              card.innerHTML = `
+                <img src="${event.target.result}">
+                <div class="gallery-meta">
+                  <span>New</span>
+                </div>
+              `;
+
+              applyHoverEffect(card);
+              addDeleteButton(card);
+
+              grid.appendChild(card);
+              updateFolderCounts();
+            };
+            reader.readAsDataURL(file);
+          });
+        };
+
+        input.click();
+      };
+
+      header.appendChild(btn);
+    });
+  }
+
+  // ======================
+  // ADD NEW FOLDER
+  // ======================
+  function setupAddFolder() {
+    const btn = document.createElement("button");
+    btn.innerHTML = '<i class="fas fa-folder-plus"></i> Add Folder';
+    btn.className = "cta-btn";
+    btn.style.marginBottom = "20px";
+
+    document.querySelector("#gallery").prepend(btn);
+
+    btn.onclick = () => {
+      if (!askPassword()) return alert("Wrong Password");
+
+      const name = prompt("Folder name?");
+      if (!name) return;
+
+      const id = name.toLowerCase().replace(/\s+/g, '-');
+
+      // tab
+      const tab = document.createElement("button");
+      tab.className = "tab-btn";
+      tab.dataset.folder = id;
+      tab.innerHTML = `<i class="fas fa-folder"></i> ${name}`;
+      document.querySelector(".gallery-tabs").appendChild(tab);
+
+      // folder
+      const folder = document.createElement("div");
+      folder.className = "folder";
+      folder.dataset.folder = id;
+
+      folder.innerHTML = `
+        <div class="folder-header">
+          <h3>${name}</h3>
+          <span class="folder-count">0 photos</span>
+        </div>
+        <div class="gallery-grid"></div>
       `;
 
-      container.appendChild(div);
+      document.querySelector(".folders-grid").appendChild(folder);
 
-      let images = JSON.parse(localStorage.getItem(id)) || [];
-      images.forEach(src=>addImage(id, src));
-    }
+      location.reload();
+    };
   }
-}
 
-load();
+  // ======================
+  // FOLDER SWITCHING (UNCHANGED)
+  // ======================
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const folders = document.querySelectorAll('.folder');
 
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.folder;
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      folders.forEach(folder => {
+        folder.classList.remove('active');
+        if (folder.dataset.folder === name) {
+          folder.classList.add('active');
+        }
+      });
+    });
+  });
+
+  // ======================
+  // COUNT UPDATE
+  // ======================
+  function updateFolderCounts() {
+    document.querySelectorAll('.folder-count').forEach(el => {
+      const folder = el.closest('.folder');
+      const count = folder.querySelectorAll('.gallery-card').length;
+      el.textContent = `${count} photo${count !== 1 ? 's' : ''}`;
+    });
+  }
+
+  // ======================
+  // INIT
+  // ======================
+  window.addEventListener('load', () => {
+    updateFolderCounts();
+    setupUploadButtons();
+    setupAddFolder();
+  });
 </script>
-
-</body>
-</html>
