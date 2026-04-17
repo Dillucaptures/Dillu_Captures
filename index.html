@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dillu Captures</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <style>
-*{box-sizing:border-box}
 body{
   margin:0;
   font-family:Montserrat;
@@ -21,31 +20,20 @@ body{
 .navbar{
   position:fixed;top:0;width:100%;
   display:flex;justify-content:center;
-  z-index:1000;
 }
 .navbar-inner{
   width:90%;max-width:1200px;
   margin-top:10px;
   background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(20px);
-  border-radius:999px;
   padding:12px 20px;
+  border-radius:999px;
   display:flex;justify-content:space-between;
 }
 .logo{font-family:Dancing Script;font-size:1.6rem}
 .logo span{color:#eab308}
 
-.nav-links a{
-  margin-left:20px;
-  color:#aaa;
-  text-decoration:none;
-}
-.nav-links a.active{color:#fff}
-
 /* MAIN */
 main{max-width:1200px;margin:auto;padding-top:100px}
-
-/* SECTION */
 section{
   margin:50px 10px;
   padding:30px;
@@ -53,38 +41,27 @@ section{
   border-radius:20px;
 }
 
+/* OWNER LOGIN */
+.owner-btn{
+  cursor:pointer;
+  color:#eab308;
+}
+
 /* UPLOAD */
 .upload-section{
+  display:none;
   text-align:center;
-  padding:25px;
+  padding:20px;
   border:2px dashed #555;
   border-radius:20px;
-  margin-bottom:30px;
 }
 .upload-btn{
   background:#eab308;
   padding:10px 20px;
   border-radius:999px;
   cursor:pointer;
-  font-weight:bold;
 }
 #file-input{display:none}
-
-/* TABS */
-.gallery-tabs{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
-}
-.tab-btn{
-  padding:8px 15px;
-  border-radius:999px;
-  border:1px solid #555;
-  cursor:pointer;
-}
-.tab-btn.active{
-  background:#eab308;color:#000;
-}
 
 /* GRID */
 .gallery-grid{
@@ -94,19 +71,26 @@ section{
 }
 .gallery-card{
   position:relative;
-  overflow:hidden;
   border-radius:15px;
+  overflow:hidden;
 }
 .gallery-card img{
-  width:100%;height:100%;object-fit:cover;
-  transition:0.5s;
-}
-.gallery-card:hover img{transform:scale(1.1)}
-.gallery-meta{
-  position:absolute;bottom:0;
   width:100%;
-  background:rgba(0,0,0,0.6);
-  font-size:12px;padding:10px;
+  height:100%;
+  object-fit:cover;
+}
+
+/* DELETE BUTTON */
+.delete-btn{
+  position:absolute;
+  top:10px;right:10px;
+  background:red;
+  color:#fff;
+  border:none;
+  padding:5px 8px;
+  border-radius:50%;
+  cursor:pointer;
+  display:none;
 }
 </style>
 </head>
@@ -116,53 +100,63 @@ section{
 <nav class="navbar">
 <div class="navbar-inner">
   <div class="logo"><span>Dillu</span> Captures</div>
-  <div class="nav-links">
-    <a href="#" class="active">Home</a>
-    <a href="#gallery">Portfolio</a>
+  <div>
+    <span class="owner-btn" onclick="login()">Owner</span>
   </div>
 </div>
 </nav>
 
 <main>
 
-<!-- GALLERY -->
-<section id="gallery">
-<h2>Featured Stories</h2>
-<p>Upload your photos and preview them in the gallery.</p>
+<section>
+<h2>Gallery</h2>
 
 <!-- UPLOAD -->
-<div class="upload-section">
-  <p>Upload your photos</p>
-  <label class="upload-btn" for="file-input">
-    <i class="fas fa-upload"></i> Upload
-  </label>
+<div class="upload-section" id="uploadBox">
+  <label class="upload-btn" for="file-input">Upload Photos</label>
   <input type="file" id="file-input" multiple accept="image/*">
 </div>
 
-<!-- TABS -->
-<div class="gallery-tabs">
-  <button class="tab-btn active">All</button>
-</div>
-
 <!-- GRID -->
-<div class="gallery-grid" id="galleryGrid">
+<div class="gallery-grid" id="grid">
 
-  <!-- Default Image -->
-  <div class="gallery-card">
-    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba">
-    <div class="gallery-meta">Sample Photo</div>
-  </div>
+<div class="gallery-card">
+  <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba">
+  <button class="delete-btn">×</button>
+</div>
 
 </div>
+
 </section>
 
 </main>
 
 <script>
 
-// ===== UPLOAD SYSTEM =====
+// ===== PASSWORD =====
+const PASSWORD = "admin123";
+let isOwner = false;
+
+// LOGIN
+function login(){
+  const pass = prompt("Enter owner password:");
+  if(pass === PASSWORD){
+    isOwner = true;
+    alert("Owner mode activated");
+
+    document.getElementById("uploadBox").style.display="block";
+
+    document.querySelectorAll('.delete-btn').forEach(btn=>{
+      btn.style.display="block";
+    });
+  }else{
+    alert("Wrong password");
+  }
+}
+
+// UPLOAD
 const input = document.getElementById('file-input');
-const grid = document.getElementById('galleryGrid');
+const grid = document.getElementById('grid');
 
 input.addEventListener('change', e=>{
   const files = e.target.files;
@@ -178,12 +172,16 @@ input.addEventListener('change', e=>{
 
       card.innerHTML = `
         <img src="${e.target.result}">
-        <div class="gallery-meta">
-          <i class="fas fa-check-circle"></i> Uploaded
-        </div>
+        <button class="delete-btn">×</button>
       `;
 
       grid.prepend(card);
+
+      if(isOwner){
+        card.querySelector('.delete-btn').style.display="block";
+      }
+
+      addDelete(card);
       addTilt(card);
     }
 
@@ -191,7 +189,18 @@ input.addEventListener('change', e=>{
   }
 });
 
-// ===== TILT EFFECT =====
+// DELETE
+function addDelete(card){
+  const btn = card.querySelector('.delete-btn');
+  btn.addEventListener('click', ()=>{
+    card.remove();
+  });
+}
+
+// apply delete to existing
+document.querySelectorAll('.gallery-card').forEach(addDelete);
+
+// TILT EFFECT
 function addTilt(card){
   card.addEventListener('mousemove',e=>{
     const rect = card.getBoundingClientRect();
@@ -201,7 +210,7 @@ function addTilt(card){
     const rx = ((y/rect.height)-0.5)*-10;
     const ry = ((x/rect.width)-0.5)*10;
 
-    card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
+    card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
   });
 
   card.addEventListener('mouseleave',()=>{
@@ -209,7 +218,6 @@ function addTilt(card){
   });
 }
 
-// apply to existing
 document.querySelectorAll('.gallery-card').forEach(addTilt);
 
 </script>
