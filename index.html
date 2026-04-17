@@ -9,348 +9,132 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-
-/* 🌌 BACKGROUND */
-body{
-  margin:0;
-  font-family:Montserrat;
-  color:#fff;
-  background: radial-gradient(circle at 20% 20%, #0f172a, #000);
-  overflow-x:hidden;
-}
-
-/* GLASS */
-.glass{
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(30px);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:25px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.7);
-}
-
-/* NAV */
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  z-index:1000;
-}
-nav .glass{
-  margin-top:10px;
-  padding:12px 25px;
-  display:flex;
-  gap:25px;
-  border-radius:50px;
-}
-
-a{color:#aaa;text-decoration:none}
-a:hover{color:#fff}
-
-/* SECTION */
-section{
-  max-width:1100px;
-  margin:120px auto;
-  padding:30px;
-}
-
-/* HERO */
-#home{text-align:center}
-#home h1{
-  font-size:48px;
-  background:linear-gradient(90deg,gold,#f97316);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-/* TABS */
+body{margin:0;font-family:Montserrat;background:#000;color:#fff}
+.glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);border-radius:20px;padding:20px}
+nav{position:fixed;width:100%;top:0;text-align:center}
+nav .glass{display:inline-block;margin:10px}
+section{margin:100px auto;max-width:1100px}
 .tabs{display:flex;gap:10px;flex-wrap:wrap}
-.tab{
-  padding:8px 18px;
-  border-radius:30px;
-  cursor:pointer;
-  background:rgba(255,255,255,0.05);
-}
-.tab.active{
-  background:linear-gradient(135deg,gold,orange);
-  color:black;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
-  margin-top:15px;
-}
-
-/* CARD */
-.card{
-  border-radius:20px;
-  overflow:hidden;
-}
-.card img{
-  width:100%;
-}
-
-/* BUTTONS */
-.btn{
-  padding:6px 12px;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:12px;
-  margin:4px;
-}
-
+.tab{padding:8px 15px;background:#222;border-radius:20px;cursor:pointer}
+.tab.active{background:gold;color:black}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:15px}
+.card img{width:100%;border-radius:10px}
+.btn{padding:5px 10px;border:none;border-radius:10px;margin:3px;cursor:pointer}
 .upload{background:gold;color:black}
 .delete{background:red;color:white}
-.download{background:#3b82f6;color:white}
 .addFolder{background:green;color:white}
-
-/* DROP */
-.drop{
-  padding:25px;
-  border:1px dashed rgba(255,255,255,0.3);
-  border-radius:20px;
-  text-align:center;
-}
-
-/* PROGRESS */
-.progressBar{
-  height:10px;
-  width:0%;
-  background:gold;
-  border-radius:10px;
-}
-
-/* CONTACT */
-.contact-icons{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.contact-icons a{
-  padding:10px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-}
-
 </style>
 </head>
 
 <body>
 
 <nav>
-  <div class="glass">
-    <a href="#home">Home</a>
-    <a href="#gallery">Portfolio</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
+<div class="glass">
+<a href="#home">Home</a>
+<a href="#gallery">Gallery</a>
+</div>
 </nav>
 
 <section id="home" class="glass">
-  <h1>Dillu Captures</h1>
-  <p>Premium photography ✨</p>
+<h1>Dillu Captures</h1>
 </section>
 
 <section id="gallery" class="glass">
-  <h2>Gallery</h2>
+<h2>Gallery</h2>
 
-  <div style="display:flex;justify-content:space-between;">
-    <div class="tabs" id="tabs"></div>
-    <button class="btn addFolder" onclick="addFolder()">+ Folder</button>
-  </div>
+<div style="display:flex;justify-content:space-between;">
+<div class="tabs" id="tabs"></div>
+<button class="btn addFolder" onclick="addFolder()">+ Folder</button>
+</div>
 
-  <div id="folders"></div>
-</section>
-
-<section id="about" class="glass">
-  <h2>About</h2>
-  <p>Professional photography by Dillu Captures.</p>
-</section>
-
-<section id="contact" class="glass">
-  <h2>Contact</h2>
-  <p>Email: Dillucapture@gmail.com</p>
-  <p>Phone: +91 9700034138</p>
-
-  <div class="contact-icons">
-    <a href="mailto:Dillucapture@gmail.com">Email</a>
-    <a href="tel:9700034138">Call</a>
-    <a href="https://wa.me/919700034138">WhatsApp</a>
-  </div>
+<div id="folders"></div>
 </section>
 
 <script>
-
 const ADMIN_PASSWORD="1234";
 
-/* 🔥 CLOUDINARY CONFIG */
-const CLOUD_NAME="your_cloud_name";
-const UPLOAD_PRESET="your_upload_preset";
-
-/* DATA */
 let data=JSON.parse(localStorage.getItem("galleryData"))||{
-  folders:{All:[]},
-  active:"All"
-};
+folders:{All:[]},active:"All"};
 
 function save(){localStorage.setItem("galleryData",JSON.stringify(data));}
-function checkAdmin(){return prompt("Admin Password")==ADMIN_PASSWORD;}
+function checkAdmin(){return prompt("Password")===ADMIN_PASSWORD;}
 
-/* RENDER */
 function render(){
-  let tabs=document.getElementById("tabs");
-  let folders=document.getElementById("folders");
+let tabs=document.getElementById("tabs");
+let folders=document.getElementById("folders");
 
-  tabs.innerHTML="";
-  folders.innerHTML="";
+tabs.innerHTML="";folders.innerHTML="";
 
-  Object.keys(data.folders).forEach(name=>{
-    let tab=document.createElement("div");
-    tab.className="tab "+(data.active===name?"active":"");
-    tab.innerText=name;
-    tab.onclick=()=>{data.active=name;render();}
-    tabs.appendChild(tab);
+Object.keys(data.folders).forEach(name=>{
+let tab=document.createElement("div");
+tab.className="tab "+(data.active===name?"active":"");
+tab.innerText=name;
+tab.onclick=()=>{data.active=name;render()};
+tabs.appendChild(tab);
 
-    if(data.active===name){
+if(data.active===name){
+let box=document.createElement("div");
+box.innerHTML=`
+<h3>${name}</h3>
+<button class="btn upload" onclick="uploadImage('${name}')">Upload</button>
+`;
 
-      let container=document.createElement("div");
+let grid=document.createElement("div");
+grid.className="grid";
 
-      container.innerHTML=`
-        <h3>${name}</h3>
-        <div class="drop" id="dropZone">
-          Drag & Drop Images
-          <br><br>
-          <button class="btn upload" onclick="uploadImage('${name}')">Upload</button>
-        </div>
-        <div style="background:#111;margin-top:10px;">
-          <div class="progressBar" id="progressBar"></div>
-        </div>
-      `;
+data.folders[name].forEach((img,i)=>{
+let card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<img src="${img}">
+<button class="btn delete" onclick="deleteImage('${name}',${i})">Delete</button>
+`;
+grid.appendChild(card);
+});
 
-      let grid=document.createElement("div");
-      grid.className="grid";
-
-      data.folders[name].forEach((img,i)=>{
-        let card=document.createElement("div");
-        card.className="card";
-
-        card.innerHTML=`
-          <img src="${img}">
-          <div>
-            <button class="btn download" onclick="downloadImage('${img}')">Download</button>
-            <button class="btn delete" onclick="deleteImage('${name}',${i})">Delete</button>
-          </div>
-        `;
-
-        grid.appendChild(card);
-      });
-
-      container.appendChild(grid);
-      folders.appendChild(container);
-
-      setupDragDrop(name);
-    }
-  });
+box.appendChild(grid);
+folders.appendChild(box);
+}
+});
 }
 
-/* CLOUDINARY UPLOAD */
-function uploadToCloudinary(file,folder){
-  const url=`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
-
-  let formData=new FormData();
-  formData.append("file",file);
-  formData.append("upload_preset",UPLOAD_PRESET);
-
-  return fetch(url,{
-    method:"POST",
-    body:formData
-  }).then(res=>res.json());
-}
-
-/* HANDLE FILES */
-function handleFiles(files,folder){
-  if(!checkAdmin()) return alert("Wrong password");
-
-  let bar=document.getElementById("progressBar");
-  let total=files.length;
-  let count=0;
-
-  Array.from(files).forEach(file=>{
-    uploadToCloudinary(file,folder).then(res=>{
-      data.folders[folder].push(res.secure_url);
-
-      /* ADD TO ALL */
-      if(folder!=="All"){
-        data.folders["All"].push(res.secure_url);
-      }
-
-      count++;
-      bar.style.width=(count/total*100)+"%";
-
-      if(count===total){
-        save();
-        render();
-      }
-    });
-  });
-}
-
-/* DRAG DROP */
-function setupDragDrop(folder){
-  let drop=document.getElementById("dropZone");
-
-  drop.ondragover=e=>{e.preventDefault();}
-  drop.ondrop=e=>{
-    e.preventDefault();
-    handleFiles(e.dataTransfer.files,folder);
-  };
-}
-
-/* MANUAL UPLOAD */
 function uploadImage(folder){
-  let input=document.createElement("input");
-  input.type="file";
-  input.multiple=true;
-
-  input.onchange=e=>handleFiles(e.target.files,folder);
-  input.click();
+if(!checkAdmin())return;
+let input=document.createElement("input");
+input.type="file";input.multiple=true;
+input.onchange=e=>{
+Array.from(e.target.files).forEach(file=>{
+let reader=new FileReader();
+reader.onload=ev=>{
+data.folders[folder].push(ev.target.result);
+if(folder!=="All") data.folders["All"].push(ev.target.result);
+save();render();
+};
+reader.readAsDataURL(file);
+});
+};
+input.click();
 }
 
-/* DELETE IMAGE */
 function deleteImage(folder,i){
-  if(!checkAdmin()) return alert("Wrong password");
-
-  let img=data.folders[folder][i];
-
-  /* remove from all folders */
-  Object.keys(data.folders).forEach(f=>{
-    data.folders[f]=data.folders[f].filter(x=>x!==img);
-  });
-
-  save();
-  render();
+if(!checkAdmin())return;
+let img=data.folders[folder][i];
+Object.keys(data.folders).forEach(f=>{
+data.folders[f]=data.folders[f].filter(x=>x!==img);
+});
+save();render();
 }
 
-/* ADD FOLDER */
 function addFolder(){
-  if(!checkAdmin()) return;
-
-  let name=prompt("Folder name?");
-  if(!name) return;
-
-  data.folders[name]=[];
-  data.active=name;
-  save();
-  render();
+if(!checkAdmin())return;
+let name=prompt("Folder name");
+if(!name)return;
+data.folders[name]=[];
+data.active=name;
+save();render();
 }
 
 render();
-
 </script>
 
 </body>
