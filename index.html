@@ -1,30 +1,45 @@
-<!-- PREMIUM UI + ADMIN PASSWORD (UPLOAD + DELETE INSIDE FOLDERS) -->
+<!-- FINAL PREMIUM VERSION: SAME UI + ADMIN + FOLDERS + ADD FOLDER -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dillu Captures</title>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
 <style>
 body{margin:0;background:#000;color:#fff;font-family:sans-serif}
-h1,h2{text-align:center}
-.folder{margin:40px}
-.gallery{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.card{position:relative}
-.card img{width:220px;height:150px;object-fit:cover;border-radius:12px}
+h1{text-align:center;margin:20px}
 
-.upload-btn{
-  background:#eab308;color:#000;padding:10px 16px;
-  border:none;border-radius:20px;margin:10px;cursor:pointer
+.top-bar{
+  text-align:center;margin-bottom:20px;
 }
+
+button{
+  padding:10px 16px;border:none;border-radius:20px;cursor:pointer;margin:5px
+}
+
+.add-folder{background:#22c55e;color:#000}
+.upload-btn{background:#eab308;color:#000}
 .delete-btn{
   position:absolute;top:5px;right:5px;
-  background:red;color:#fff;border:none;border-radius:50%;
-  width:28px;height:28px;cursor:pointer
+  background:red;color:#fff;border:none;border-radius:50%;width:26px;height:26px
 }
+
+.folder{
+  margin:30px;padding:20px;border:1px solid #333;border-radius:16px
+}
+
+.gallery{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center
+}
+
+.card{position:relative}
+.card img{
+  width:220px;height:150px;object-fit:cover;border-radius:10px
+}
+
 </style>
 </head>
 
@@ -32,53 +47,45 @@ h1,h2{text-align:center}
 
 <h1>Dillu Captures</h1>
 
-<!-- FOLDERS WITH UPLOAD -->
-
-<div class="folder">
-  <h2>Newborn</h2>
-  <button class="upload-btn" onclick="uploadImage('newborn')">Upload Photo</button>
-  <div class="gallery" id="newborn"></div>
+<div class="top-bar">
+  <button class="add-folder" onclick="createFolder()">➕ Add Folder</button>
 </div>
 
-<div class="folder">
-  <h2>Kids</h2>
-  <button class="upload-btn" onclick="uploadImage('kids')">Upload Photo</button>
-  <div class="gallery" id="kids"></div>
-</div>
-
-<div class="folder">
-  <h2>Haldi</h2>
-  <button class="upload-btn" onclick="uploadImage('haldi')">Upload Photo</button>
-  <div class="gallery" id="haldi"></div>
-</div>
-
-<div class="folder">
-  <h2>Temple</h2>
-  <button class="upload-btn" onclick="uploadImage('temple')">Upload Photo</button>
-  <div class="gallery" id="temple"></div>
-</div>
-
-<div class="folder">
-  <h2>Portrait</h2>
-  <button class="upload-btn" onclick="uploadImage('portrait')">Upload Photo</button>
-  <div class="gallery" id="portrait"></div>
-</div>
+<div id="folders"></div>
 
 <script>
 
-// 🔐 CHANGE PASSWORD HERE
 const ADMIN_PASSWORD = "dillu123";
 
 function checkPassword(){
-  const pass = prompt("Enter Admin Password");
-  return pass === ADMIN_PASSWORD;
+  return prompt("Enter Admin Password") === ADMIN_PASSWORD;
+}
+
+function createFolder(){
+  if(!checkPassword()) return alert("Wrong Password");
+
+  const name = prompt("Enter Folder Name");
+  if(!name) return;
+
+  const id = name.toLowerCase().replace(/\s+/g,'_');
+
+  const container = document.getElementById('folders');
+
+  const div = document.createElement('div');
+  div.className = 'folder';
+  div.innerHTML = `
+    <h2>${name}</h2>
+    <button class="upload-btn" onclick="uploadImage('${id}')">Upload Photo</button>
+    <div class="gallery" id="${id}"></div>
+  `;
+
+  container.appendChild(div);
+
+  localStorage.setItem('folder_'+id, name);
 }
 
 function uploadImage(folder){
-  if(!checkPassword()){
-    alert("Wrong Password");
-    return;
-  }
+  if(!checkPassword()) return alert("Wrong Password");
 
   const input = document.createElement('input');
   input.type = 'file';
@@ -110,14 +117,11 @@ function addImage(folder, src){
   img.src = src;
 
   const del = document.createElement('button');
-  del.innerText = '×';
+  del.innerHTML = '×';
   del.className = 'delete-btn';
 
-  del.onclick = () => {
-    if(!checkPassword()){
-      alert("Wrong Password");
-      return;
-    }
+  del.onclick = ()=>{
+    if(!checkPassword()) return alert("Wrong Password");
     card.remove();
     removeLocal(folder, src);
   }
@@ -135,18 +139,35 @@ function saveLocal(folder, src){
 
 function removeLocal(folder, src){
   let data = JSON.parse(localStorage.getItem(folder)) || [];
-  data = data.filter(i => i !== src);
+  data = data.filter(i=>i!==src);
   localStorage.setItem(folder, JSON.stringify(data));
 }
 
-function loadImages(){
-  ['newborn','kids','haldi','temple','portrait'].forEach(folder=>{
-    let data = JSON.parse(localStorage.getItem(folder)) || [];
-    data.forEach(src=>addImage(folder, src));
-  });
+function load(){
+  const container = document.getElementById('folders');
+
+  for(let key in localStorage){
+    if(key.startsWith('folder_')){
+      const id = key.replace('folder_','');
+      const name = localStorage.getItem(key);
+
+      const div = document.createElement('div');
+      div.className = 'folder';
+      div.innerHTML = `
+        <h2>${name}</h2>
+        <button class="upload-btn" onclick="uploadImage('${id}')">Upload Photo</button>
+        <div class="gallery" id="${id}"></div>
+      `;
+
+      container.appendChild(div);
+
+      let images = JSON.parse(localStorage.getItem(id)) || [];
+      images.forEach(src=>addImage(id, src));
+    }
+  }
 }
 
-loadImages();
+load();
 
 </script>
 
