@@ -24,6 +24,7 @@ body {
   backdrop-filter:blur(10px);
   display:flex;
   justify-content:space-between;
+  align-items:center;
   z-index:1000;
 }
 
@@ -42,7 +43,17 @@ body {
   font-weight:600;
 }
 
-main { padding-top:80px; max-width:1200px; margin:auto; }
+.admin-btn {
+  font-size:12px;
+  opacity:0.5;
+  cursor:pointer;
+}
+
+main {
+  padding-top:90px;
+  max-width:1200px;
+  margin:auto;
+}
 
 .upload-box {
   display:none;
@@ -92,7 +103,11 @@ main { padding-top:80px; max-width:1200px; margin:auto; }
 
 <div class="nav">
   <div class="logo">Dillu Captures</div>
-  <a href="https://wa.me/919700034138" class="contact-btn">Contact</a>
+
+  <div>
+    <span class="admin-btn" id="adminBtn">⚙️</span>
+    <a href="https://wa.me/919700034138" class="contact-btn">Contact</a>
+  </div>
 </div>
 
 <main>
@@ -109,22 +124,35 @@ main { padding-top:80px; max-width:1200px; margin:auto; }
 
 <script>
 
-// 🔐 SECRET ADMIN KEY
-const ADMIN_KEY = "dillu123";
+// 🔐 CHANGE THIS PASSWORD
+const ADMIN_PASSWORD = "dillu@123";
 
-// Detect admin mode
-const urlParams = new URLSearchParams(window.location.search);
-const isAdmin = urlParams.get("admin") === ADMIN_KEY;
+let isAdmin = sessionStorage.getItem("admin") === "true";
 
 const uploadBox = document.getElementById("uploadBox");
 const gallery = document.getElementById("gallery");
 
-// Show upload if admin
+// Show admin UI if already unlocked
 if (isAdmin) {
   uploadBox.style.display = "block";
 }
 
-// Load images from localStorage (simple demo)
+// Admin unlock
+document.getElementById("adminBtn").onclick = () => {
+  const pass = prompt("Enter admin password:");
+
+  if (pass === ADMIN_PASSWORD) {
+    alert("Admin mode enabled");
+    isAdmin = true;
+    sessionStorage.setItem("admin", "true");
+    uploadBox.style.display = "block";
+    render();
+  } else {
+    alert("Wrong password");
+  }
+};
+
+// Load images (stored locally)
 let images = JSON.parse(localStorage.getItem("gallery") || "[]");
 
 // Render gallery
@@ -144,10 +172,13 @@ function render() {
 
     if (isAdmin) {
       delBtn.style.display = "block";
+
       delBtn.onclick = () => {
-        images.splice(index,1);
-        localStorage.setItem("gallery", JSON.stringify(images));
-        render();
+        if (confirm("Delete this photo?")) {
+          images.splice(index,1);
+          localStorage.setItem("gallery", JSON.stringify(images));
+          render();
+        }
       };
     }
 
@@ -157,7 +188,7 @@ function render() {
 
 render();
 
-// Upload
+// Upload images
 document.getElementById("fileInput").addEventListener("change", function(e){
   const files = e.target.files;
 
