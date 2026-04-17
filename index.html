@@ -1,380 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Dillu Captures | Visual Storyteller</title>
-    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dillu Captures</title>
 
-        :root {
-            --bg-main: #000000;
-            --accent: #eab308;
-            --accent-soft: rgba(234, 179, 8, 0.18);
-            --text-main: #f9fafb;
-            --muted: #9ca3af;
-            --glass: rgba(15, 23, 42, 0.36);
-            --glass-strong: rgba(15, 23, 42, 0.55);
-            --border-glass: rgba(148, 163, 184, 0.45);
-            --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.8);
-            --radius-lg: 24px;
-            --transition-fast: 0.35s cubic-bezier(0.19, 1, 0.22, 1);
-            --transition-slow: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-main);
-            background: #000000;
-            overflow-x: hidden;
-        }
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Montserrat;
+  background:#000;
+  color:#fff;
+}
 
-        /* Background Glows */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: -40%;
-            background: radial-gradient(circle at 10% 0%, rgba(15, 23, 42, 0.6) 0, transparent 55%),
-                        radial-gradient(circle at 90% 100%, rgba(15, 23, 42, 0.7) 0, transparent 55%);
-            filter: blur(95px);
-            opacity: 0.8;
-            z-index: -2;
-            animation: bgFloat 30s ease-in-out infinite alternate;
-            pointer-events: none;
-        }
+/* NAV */
+.navbar{
+  position:fixed;top:0;width:100%;
+  display:flex;justify-content:center;
+  z-index:1000;
+}
+.navbar-inner{
+  width:90%;max-width:1200px;
+  margin-top:10px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(20px);
+  border-radius:999px;
+  padding:12px 20px;
+  display:flex;justify-content:space-between;
+}
+.logo{font-family:Dancing Script;font-size:1.6rem}
+.logo span{color:#eab308}
 
-        @keyframes bgFloat {
-            0% { transform: translate3d(0,0,0) scale(1); }
-            100% { transform: translate3d(-30px, 30px, 0) scale(1.04); }
-        }
+.nav-links a{
+  margin-left:20px;
+  color:#aaa;
+  text-decoration:none;
+}
+.nav-links a.active{color:#fff}
 
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            padding: 14px 24px;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            pointer-events: none;
-        }
+/* MAIN */
+main{max-width:1200px;margin:auto;padding-top:100px}
 
-        .navbar-inner {
-            width: 100%;
-            max-width: 1200px;
-            padding: 10px 18px;
-            border-radius: 999px;
-            border: 1px solid var(--border-glass);
-            background: var(--glass-strong);
-            backdrop-filter: blur(26px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 24px 65px rgba(0,0,0,0.85);
-            pointer-events: auto;
-        }
+/* SECTION */
+section{
+  margin:50px 10px;
+  padding:30px;
+  background:rgba(255,255,255,0.05);
+  border-radius:20px;
+}
 
-        .logo {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
-            color: #f9fafb;
-            text-decoration: none;
-            letter-spacing: 0.12em;
-        }
+/* UPLOAD */
+.upload-section{
+  text-align:center;
+  padding:25px;
+  border:2px dashed #555;
+  border-radius:20px;
+  margin-bottom:30px;
+}
+.upload-btn{
+  background:#eab308;
+  padding:10px 20px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:bold;
+}
+#file-input{display:none}
 
-        .logo span {
-            background: linear-gradient(135deg, #eab308, #f97316);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+/* TABS */
+.gallery-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+.tab-btn{
+  padding:8px 15px;
+  border-radius:999px;
+  border:1px solid #555;
+  cursor:pointer;
+}
+.tab-btn.active{
+  background:#eab308;color:#000;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 16px;
-            position: relative;
-        }
-
-        .nav-link {
-            color: #9ca3af;
-            text-decoration: none;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            transition: color 0.3s;
-        }
-
-        .nav-link.active { color: #f9fafb; }
-
-        /* Main Content */
-        main {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 96px 16px 64px;
-        }
-
-        section {
-            margin: 72px auto;
-            padding: 48px 28px;
-            background: var(--glass);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-glass);
-            backdrop-filter: blur(30px);
-            box-shadow: var(--shadow-soft);
-        }
-
-        h1, h2 { font-family: 'Merriweather', serif; }
-
-        /* --- NEW UPLOAD BUTTON STYLES --- */
-        .upload-section {
-            margin: 20px 0 40px;
-            padding: 30px;
-            border: 2px dashed var(--border-glass);
-            border-radius: 20px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            transition: all 0.3s ease;
-        }
-
-        .upload-section:hover {
-            border-color: var(--accent);
-            background: rgba(234, 179, 8, 0.05);
-        }
-
-        .upload-btn {
-            background: linear-gradient(135deg, #eab308, #f97316);
-            color: #000;
-            padding: 12px 28px;
-            border-radius: 999px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: none;
-            box-shadow: 0 10px 20px rgba(234, 179, 8, 0.2);
-            transition: transform 0.2s;
-        }
-
-        .upload-btn:hover { transform: scale(1.05); }
-        #file-input { display: none; }
-
-        /* Gallery Grid */
-        .gallery-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 24px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        .tab-btn {
-            background: rgba(15,23,42,0.6);
-            border: 1px solid var(--border-glass);
-            color: var(--muted);
-            padding: 8px 18px;
-            border-radius: 999px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .tab-btn.active {
-            background: rgba(234,179,8,0.2);
-            color: #fff;
-            border-color: var(--accent);
-        }
-
-        .folder { display: none; }
-        .folder.active { display: block; }
-
-        .folder-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
-            aspect-ratio: 4/5;
-            background: #111;
-            transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);
-            cursor: pointer;
-        }
-
-        .gallery-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1s;
-        }
-
-        .gallery-card:hover img { transform: scale(1.1); }
-
-        .gallery-meta {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            font-size: 0.75rem;
-            color: #fff;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
+/* GRID */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+.gallery-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:15px;
+}
+.gallery-card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:0.5s;
+}
+.gallery-card:hover img{transform:scale(1.1)}
+.gallery-meta{
+  position:absolute;bottom:0;
+  width:100%;
+  background:rgba(0,0,0,0.6);
+  font-size:12px;padding:10px;
+}
+</style>
 </head>
+
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <a href="#home" class="logo"><span>Dillu</span> Captures</a>
-            <div class="nav-links">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#gallery" class="nav-link">Portfolio</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
+<nav class="navbar">
+<div class="navbar-inner">
+  <div class="logo"><span>Dillu</span> Captures</div>
+  <div class="nav-links">
+    <a href="#" class="active">Home</a>
+    <a href="#gallery">Portfolio</a>
+  </div>
+</div>
+</nav>
+
+<main>
+
+<!-- GALLERY -->
+<section id="gallery">
+<h2>Featured Stories</h2>
+<p>Upload your photos and preview them in the gallery.</p>
+
+<!-- UPLOAD -->
+<div class="upload-section">
+  <p>Upload your photos</p>
+  <label class="upload-btn" for="file-input">
+    <i class="fas fa-upload"></i> Upload
+  </label>
+  <input type="file" id="file-input" multiple accept="image/*">
+</div>
+
+<!-- TABS -->
+<div class="gallery-tabs">
+  <button class="tab-btn active">All</button>
+</div>
+
+<!-- GRID -->
+<div class="gallery-grid" id="galleryGrid">
+
+  <!-- Default Image -->
+  <div class="gallery-card">
+    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba">
+    <div class="gallery-meta">Sample Photo</div>
+  </div>
+
+</div>
+</section>
+
+</main>
+
+<script>
+
+// ===== UPLOAD SYSTEM =====
+const input = document.getElementById('file-input');
+const grid = document.getElementById('galleryGrid');
+
+input.addEventListener('change', e=>{
+  const files = e.target.files;
+
+  for(let file of files){
+    if(!file.type.startsWith('image')) continue;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+      const card = document.createElement('div');
+      card.className='gallery-card';
+
+      card.innerHTML = `
+        <img src="${e.target.result}">
+        <div class="gallery-meta">
+          <i class="fas fa-check-circle"></i> Uploaded
         </div>
-    </nav>
+      `;
 
-    <main>
-        <section id="gallery">
-            <h2>Featured Stories</h2>
-            <p>Explore our recent sessions or upload your own photos to see how they look in our gallery style.</p>
+      grid.prepend(card);
+      addTilt(card);
+    }
 
-            <div class="upload-section">
-                <p style="margin-bottom: 15px; color: var(--muted);">Want to see your photos here?</p>
-                <label for="file-input" class="upload-btn">
-                    <i class="fas fa-cloud-upload-alt"></i> Upload Photos
-                </label>
-                <input type="file" id="file-input" accept="image/*" multiple />
-            </div>
+    reader.readAsDataURL(file);
+  }
+});
 
-            <div class="gallery-tabs">
-                <button class="tab-btn active" data-folder="all">All</button>
-                <button class="tab-btn" data-folder="newborn">Newborn</button>
-                <button class="tab-btn" data-folder="kids">Kids</button>
-            </div>
+// ===== TILT EFFECT =====
+function addTilt(card){
+  card.addEventListener('mousemove',e=>{
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-            <div class="folder active" data-folder="all">
-                <div class="folder-header">
-                    <h3>All Moments</h3>
-                    <span class="folder-count">3 photos</span>
-                </div>
-                <div class="gallery-grid" id="main-grid">
-                    <div class="gallery-card">
-                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Sample">
-                        <div class="gallery-meta"><span><i class="fas fa-camera"></i> Landscape</span></div>
-                    </div>
-                    <div class="gallery-card">
-                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" alt="Sample">
-                        <div class="gallery-meta"><span><i class="fas fa-leaf"></i> Nature</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    const rx = ((y/rect.height)-0.5)*-10;
+    const ry = ((x/rect.width)-0.5)*10;
 
-        <section id="contact">
-            <h2>Contact Dillu Captures</h2>
-            <p>Email: <a href="mailto:dillucapture@gmail.com" style="color: var(--accent);">dillucapture@gmail.com</a></p>
-        </section>
-    </main>
+    card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
+  });
 
-    <script>
-        // --- UPLOAD LOGIC ---
-        const fileInput = document.getElementById('file-input');
-        const mainGrid = document.getElementById('main-grid');
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='none';
+  });
+}
 
-        fileInput.addEventListener('change', function(e) {
-            const files = e.target.files;
-            
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                if (!file.type.startsWith('image/')) continue;
+// apply to existing
+document.querySelectorAll('.gallery-card').forEach(addTilt);
 
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    // Create new gallery card
-                    const card = document.createElement('div');
-                    card.className = 'gallery-card';
-                    
-                    card.innerHTML = `
-                        <img src="${event.target.result}" alt="Uploaded photo">
-                        <div class="gallery-meta">
-                            <span><i class="fas fa-check-circle"></i> Just Uploaded</span>
-                        </div>
-                    `;
+</script>
 
-                    // Add to grid
-                    mainGrid.prepend(card);
-                    
-                    // Re-apply 3D effect to new card
-                    applyTiltEffect(card);
-                    updateFolderCounts();
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // --- 3D HOVER EFFECT ---
-        function applyTiltEffect(card) {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const rotateX = ((y / rect.height) - 0.5) * -15;
-                const rotateY = ((x / rect.width) - 0.5) * 15;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
-            });
-        }
-
-        // Initialize tilt for existing cards
-        document.querySelectorAll('.gallery-card').forEach(applyTiltEffect);
-
-        // --- COUNTER UPDATE ---
-        function updateFolderCounts() {
-            const count = document.querySelectorAll('#main-grid .gallery-card').length;
-            document.querySelector('.folder-count').textContent = `${count} photo${count !== 1 ? 's' : ''}`;
-        }
-
-        // Initial count
-        updateFolderCounts();
-
-        // --- TAB SWITCHING ---
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // Note: Logic for filtering folders can be added here
-            });
-        });
-    </script>
 </body>
 </html>
