@@ -644,11 +644,10 @@
     }
 
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 18px;
-    }
-
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
     .gallery-card {
       position: relative;
       border-radius: 20px;
@@ -914,7 +913,23 @@
       .gallery-grid {
         grid-template-columns: repeat(2, minmax(0,1fr));
       }
-    }
+      @media (max-width: 1200px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
   </style>
 </head>
 <body>
@@ -1117,7 +1132,7 @@
   <div class="folder" data-folder="kids">
     <div class="folder-header"><h3>Kids</h3></div>
     <div class="gallery-grid">
-      <div ${Array.from({length:10}).map((_,i)=>`
+    ${Array.from({length:10}).map((_,i)=>`
         <a class="gallery-card" href="Images/20240805190232_IMG_0703.webp">
           <img src="Images/20240805190232_IMG_0703.webp">
         </a>
