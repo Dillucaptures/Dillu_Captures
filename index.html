@@ -1,1353 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Dillu Captures | Visual Storyteller</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Dillu Captures | Visual Storyteller</title>
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        :root {
+            --bg-main: #000000;
+            --accent: #eab308;
+            --accent-soft: rgba(234, 179, 8, 0.18);
+            --text-main: #f9fafb;
+            --muted: #9ca3af;
+            --glass: rgba(15, 23, 42, 0.36);
+            --glass-strong: rgba(15, 23, 42, 0.55);
+            --border-glass: rgba(148, 163, 184, 0.45);
+            --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.8);
+            --radius-lg: 24px;
+            --transition-fast: 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+            --transition-slow: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
 
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-    :root {
-      --bg-main: #000000;
-      --accent: #eab308;
-      --accent-soft: rgba(234, 179, 8, 0.18);
-      --text-main: #f9fafb;
-      --muted: #9ca3af;
-      /* lighter, more transparent glass */
-      --glass: rgba(15, 23, 42, 0.36);
-      --glass-strong: rgba(15, 23, 42, 0.55);
-      --border-glass: rgba(148, 163, 184, 0.45);
-      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.8);
-      --radius-lg: 24px;
-      --transition-fast: 0.35s cubic-bezier(0.19, 1, 0.22, 1);
-      --transition-slow: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Montserrat', sans-serif;
-      color: var(--text-main);
-      background: #000000;
-      overflow-x: hidden;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+            background: #000000;
+            overflow-x: hidden;
+        }
 
-    /* pure black with soft neutral glow */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(15, 23, 42, 0.6) 0, transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(15, 23, 42, 0.7) 0, transparent 55%);
-      filter: blur(95px);
-      opacity: 0.8;
-      z-index: -2;
-      animation: bgFloat 30s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-    @keyframes bgFloat {
-      0% { transform: translate3d(0,0,0) scale(1); }
-      100% { transform: translate3d(-30px, 30px, 0) scale(1.04); }
-    }
+        /* Background Glows */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -40%;
+            background: radial-gradient(circle at 10% 0%, rgba(15, 23, 42, 0.6) 0, transparent 55%),
+                        radial-gradient(circle at 90% 100%, rgba(15, 23, 42, 0.7) 0, transparent 55%);
+            filter: blur(95px);
+            opacity: 0.8;
+            z-index: -2;
+            animation: bgFloat 30s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(15,23,42,0.9) 0, transparent 55%),
-        linear-gradient(135deg, rgba(15,23,42,0.7), transparent 45%, transparent 70%, rgba(0,0,0,1));
-      mix-blend-mode: normal;
-      opacity: 0.92;
-      z-index: -1;
-      pointer-events: none;
-    }
+        @keyframes bgFloat {
+            0% { transform: translate3d(0,0,0) scale(1); }
+            100% { transform: translate3d(-30px, 30px, 0) scale(1.04); }
+        }
 
-    main {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 96px 16px 64px;
-    }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 14px 24px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+        }
 
-    section {
-      position: relative;
-      margin: 72px auto;
-      padding: 48px 28px;
-      background: var(--glass);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-glass);
-      backdrop-filter: blur(30px) saturate(180%);
-      -webkit-backdrop-filter: blur(30px) saturate(180%);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-      transform-origin: center;
-      transition: transform var(--transition-slow), box-shadow var(--transition-slow), background var(--transition-slow);
-    }
+        .navbar-inner {
+            width: 100%;
+            max-width: 1200px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--border-glass);
+            background: var(--glass-strong);
+            backdrop-filter: blur(26px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 24px 65px rgba(0,0,0,0.85);
+            pointer-events: auto;
+        }
 
-    section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 10% 0, rgba(255,255,255,0.14), transparent 55%),
-        linear-gradient(135deg, rgba(255,255,255,0.06), transparent 45%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--transition-slow);
-    }
-    section:hover::before {
-      opacity: 0.55;
-    }
-    section:hover {
-      background: rgba(15,23,42,0.42);
-      box-shadow: 0 28px 70px rgba(0,0,0,0.9);
-      transform: translateY(-2px);
-    }
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: #f9fafb;
+            text-decoration: none;
+            letter-spacing: 0.12em;
+        }
 
-    h1, h2 {
-      font-family: 'Merriweather', serif;
-      letter-spacing: 0.04em;
-    }
-    h2 {
-      font-size: clamp(2rem, 2.6vw, 2.4rem);
-      margin: 0 0 12px;
-    }
-    p {
-      margin: 0;
-      line-height: 1.6;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
+        .logo span {
+            background: linear-gradient(135deg, #eab308, #f97316);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
 
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      padding: 14px 24px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-    .navbar-inner {
-      width: 100%;
-      max-width: 1200px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.45);
-      background: rgba(15,23,42,0.55);
-      backdrop-filter: blur(26px) saturate(185%);
-      -webkit-backdrop-filter: blur(26px) saturate(185%);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      box-shadow: 0 24px 65px rgba(0,0,0,0.85);
-      transform: translateY(-40px);
-      opacity: 0;
-      pointer-events: auto;
-      animation: navDrop var(--transition-slow) 0.2s forwards;
-    }
-    @keyframes navDrop {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            position: relative;
+        }
 
-    .logo {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.6rem;
-      color: #f9fafb;
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      white-space: nowrap;
-      position: relative;
-    }
-    .logo span {
-      background: linear-gradient(135deg, #eab308, #f97316);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+        .nav-link {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            transition: color 0.3s;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      position: relative;
-    }
+        .nav-link.active { color: #f9fafb; }
 
-    .nav-link {
-      position: relative;
-      color: #9ca3af;
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      padding: 6px 2px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
-      opacity: 0.9;
-    }
-    .nav-link i {
-      font-size: 0.9rem;
-    }
-    .nav-link:hover,
-    .nav-link.active {
-      color: #f9fafb;
-      opacity: 1;
-    }
+        /* Main Content */
+        main {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 96px 16px 64px;
+        }
 
-    .nav-indicator {
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 56px;
-      height: 2px;
-      background: linear-gradient(90deg, #eab308, #f97316);
-      border-radius: 999px;
-      transform-origin: left;
-      transform: scaleX(0.3);
-      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), left 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
+        section {
+            margin: 72px auto;
+            padding: 48px 28px;
+            background: var(--glass);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(30px);
+            box-shadow: var(--shadow-soft);
+        }
 
-    /* Hero */
-    #home {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-      margin-top: 96px;
-      padding: 52px 40px;
-    }
-    .hero-copy {
-      position: relative;
-      z-index: 2;
-    }
+        h1, h2 { font-family: 'Merriweather', serif; }
 
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(250, 204, 21, 0.12);
-      border: 1px solid rgba(234, 179, 8, 0.78);
-      color: #fef3c7;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-bottom: 18px;
-      transform: translateY(8px);
-      opacity: 0;
-      animation: fadeUp var(--transition-slow) 0.25s forwards;
-    }
+        /* --- NEW UPLOAD BUTTON STYLES --- */
+        .upload-section {
+            margin: 20px 0 40px;
+            padding: 30px;
+            border: 2px dashed var(--border-glass);
+            border-radius: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
 
-    .hero-pill i {
-      font-size: 0.9rem;
-    }
+        .upload-section:hover {
+            border-color: var(--accent);
+            background: rgba(234, 179, 8, 0.05);
+        }
 
-    #home h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(3rem, 5vw, 4.2rem);
-      margin: 0 0 12px;
-      letter-spacing: 0.08em;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeUp var(--transition-slow) 0.35s forwards;
-    }
-    #home h1 span {
-      background: linear-gradient(120deg, #eab308, #f97316);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+        .upload-btn {
+            background: linear-gradient(135deg, #eab308, #f97316);
+            color: #000;
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            box-shadow: 0 10px 20px rgba(234, 179, 8, 0.2);
+            transition: transform 0.2s;
+        }
 
-    .hero-sub {
-      margin-bottom: 26px;
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 520px;
-      transform: translateY(24px);
-      opacity: 0;
-      animation: fadeUp var(--transition-slow) 0.45s forwards;
-    }
+        .upload-btn:hover { transform: scale(1.05); }
+        #file-input { display: none; }
 
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      margin-bottom: 26px;
-      font-size: 0.85rem;
-      color: var(--muted);
-      transform: translateY(28px);
-      opacity: 0;
-      animation: fadeUp var(--transition-slow) 0.55s forwards;
-    }
-    .hero-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.48);
-      border: 1px solid rgba(148,163,184,0.4);
-      color: #e5e7eb;
-      backdrop-filter: blur(20px);
-    }
-    .hero-meta i {
-      color: #eab308;
-    }
+        /* Gallery Grid */
+        .gallery-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
 
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-      transform: translateY(32px);
-      opacity: 0;
-      animation: fadeUp var(--transition-slow) 0.65s forwards;
-    }
+        .tab-btn {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid var(--border-glass);
+            color: var(--muted);
+            padding: 8px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
 
-    .cta-btn {
-      background: linear-gradient(135deg, #eab308, #f97316);
-      color: #111827;
-      font-weight: 700;
-      padding: 12px 24px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
-      transform-origin: center;
-      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.4s;
-    }
-    .cta-btn:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 26px 48px rgba(0,0,0,1);
-      filter: brightness(1.05);
-    }
+        .tab-btn.active {
+            background: rgba(234,179,8,0.2);
+            color: #fff;
+            border-color: var(--accent);
+        }
 
-    .cta-secondary {
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-size: 0.85rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      border: 1px solid rgba(148,163,184,0.55);
-      text-decoration: none;
-      color: #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(15,23,42,0.7);
-      backdrop-filter: blur(18px);
-      transition: background var(--transition-fast), transform var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
-    }
-    .cta-secondary:hover {
-      background: #f9fafb;
-      color: #111827;
-      border-color: #f9fafb;
-      transform: translateY(-2px);
-    }
+        .folder { display: none; }
+        .folder.active { display: block; }
 
-    /* circular hero orbit + image */
-    .hero-orbit {
-      position: relative;
-      width: min(360px, 90vw);
-      height: min(360px, 90vw);
-      margin: 0 auto;
-      border-radius: 50%;
-      border: 1px solid rgba(148,163,184,0.5);
-      background: radial-gradient(circle at 20% 10%, rgba(252,211,77,0.22), rgba(15,23,42,0.96));
-      overflow: hidden;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 26px 60px rgba(0,0,0,0.95);
-      transform: translateY(16px) scale(0.98);
-      opacity: 0;
-      animation: orbitReveal 1s 0.5s forwards ease-out;
-      backdrop-filter: blur(28px) saturate(185%);
-      -webkit-backdrop-filter: blur(28px) saturate(185%);
-    }
-    @keyframes orbitReveal {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
+        .folder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-    .hero-orbit::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: conic-gradient(from 180deg, rgba(252,211,77,0.3), transparent, rgba(252,211,77,0.14), transparent);
-      animation: spin 40s linear infinite;
-      opacity: 0.7;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
 
-    .hero-image-frame {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      border: none;
-      box-shadow: none;
-      transform: translateZ(0);
-    }
+        .gallery-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            aspect-ratio: 4/5;
+            background: #111;
+            transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);
+            cursor: pointer;
+        }
 
-    .hero-image-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.05);
-      transition: transform 8s ease-out;
-      display: block;
-    }
-    .hero-orbit:hover .hero-image-frame img {
-      transform: scale(1.12);
-    }
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s;
+        }
 
-    .hero-tag-badge {
-      position: absolute;
-      inset: auto auto 18px 50%;
-      transform: translateX(-50%);
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.92);
-      border: 1px solid rgba(148,163,184,0.55);
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #fef9c3;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(18px);
-    }
+        .gallery-card:hover img { transform: scale(1.1); }
 
-    /* Reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px) scale(0.99);
-      transition:
-        opacity var(--transition-slow),
-        transform var(--transition-slow),
-        filter var(--transition-slow);
-      filter: blur(6px);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
+        .gallery-meta {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            font-size: 0.75rem;
+            color: #fff;
+        }
 
-    /* About */
-    #about {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 28px;
-    }
-
-    .about-text p {
-      margin-top: 10px;
-      max-width: 540px;
-    }
-    .about-list {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 14px;
-      font-size: 0.85rem;
-    }
-    .about-item {
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(15,23,42,0.55);
-      border: 1px solid rgba(148,163,184,0.45);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      backdrop-filter: blur(20px);
-      color: #e5e7eb;
-    }
-    .about-item i {
-      color: #eab308;
-    }
-
-    .about-card {
-      border-radius: 20px;
-      padding: 16px 14px;
-      background: linear-gradient(145deg, rgba(24,24,27,0.98), rgba(55,65,81,0.92));
-      border: 1px solid rgba(148,163,184,0.7);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.95);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: flex-start;
-      justify-content: center;
-      color: #f9fafb;
-      position: relative;
-      overflow: hidden;
-    }
-    .about-card h3 {
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-    .about-card small {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.9;
-    }
-    .about-card span.big {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fde68a;
-    }
-    .about-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(250,250,250,0.18), transparent 55%);
-      mix-blend-mode: screen;
-      opacity: 0;
-      transition: opacity var(--transition-slow);
-    }
-    .about-card:hover::after {
-      opacity: 1;
-    }
-
-    /* Gallery - ENHANCED WITH FOLDERS */
-    #gallery {
-      padding-top: 40px;
-    }
-    #gallery h2 {
-      text-align: left;
-    }
-    #gallery > p {
-      text-align: left;
-      margin-bottom: 24px;
-      max-width: 600px;
-    }
-
-    /* Gallery Folder Tabs */
-    .gallery-tabs {
-      display: flex;
-      gap: 8px;
-      margin: 32px 0 24px;
-      padding: 12px 0;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.6);
-      border: 1px solid rgba(148,163,184,0.45);
-      backdrop-filter: blur(26px);
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .gallery-tabs::-webkit-scrollbar {
-      display: none;
-    }
-    .tab-btn {
-      all: unset;
-      padding: 10px 20px;
-      border-radius: 999px;
-      background: transparent;
-      color: #9ca3af;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all var(--transition-fast);
-      white-space: nowrap;
-      border: 1px solid transparent;
-    }
-    .tab-btn i {
-      font-size: 0.85rem;
-    }
-    .tab-btn:hover,
-    .tab-btn.active {
-      color: #f9fafb;
-      background: rgba(234,179,8,0.2);
-      border-color: rgba(234,179,8,0.6);
-      box-shadow: 0 8px 25px rgba(234,179,8,0.3);
-    }
-
-    .folders-grid {
-      position: relative;
-    }
-    .folder {
-      display: none;
-    }
-    .folder.active {
-      display: block;
-      animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .folder-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      padding: 16px 20px;
-      background: rgba(15,23,42,0.7);
-      border-radius: 16px;
-      border: 1px solid rgba(148,163,184,0.4);
-      backdrop-filter: blur(20px);
-    }
-    .folder-header h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      font-family: 'Merriweather', serif;
-      color: #f9fafb;
-    }
-    .folder-count {
-      font-size: 0.8rem;
-      color: #eab308;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 18px;
-    }
-
-    .gallery-card {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      background: rgba(15,23,42,0.5);
-      border: 1px solid rgba(148,163,184,0.45);
-      box-shadow: 0 22px 55px rgba(0,0,0,0.85);
-      transform: translateY(10px) scale(0.98);
-      transform-style: preserve-3d;
-      transition:
-        transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1),
-        box-shadow 0.5s cubic-bezier(0.2, 0.6, 0.2, 1),
-        border-color 0.4s,
-        background 0.4s;
-      cursor: pointer;
-      backdrop-filter: blur(26px) saturate(180%);
-      -webkit-backdrop-filter: blur(26px) saturate(180%);
-      text-decoration: none;
-    }
-
-    .gallery-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.05);
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s;
-      display: block;
-    }
-
-    .gallery-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top, rgba(252,211,77,0.45), transparent 55%);
-      opacity: 0;
-      mix-blend-mode: soft-light;
-      transition: opacity 0.6s ease-out;
-    }
-
-    .gallery-meta {
-      position: absolute;
-      inset: auto 12px 12px 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.8);
-      border: 1px solid rgba(148,163,184,0.55);
-      color: #f9fafb;
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: space-between;
-      backdrop-filter: blur(18px);
-    }
-
-    .gallery-card:hover {
-      transform: translateY(-8px) scale(1.02) rotate3d(1, 0.3, 0, -3deg);
-      box-shadow: 0 28px 70px rgba(0,0,0,1);
-      border-color: rgba(234,179,8,0.9);
-      background: rgba(15,23,42,0.6);
-    }
-    .gallery-card:hover img {
-      transform: scale(1.16);
-      filter: brightness(1.08) saturate(1.1);
-    }
-    .gallery-card:hover::before {
-      opacity: 0.7;
-    }
-
-    /* Contact */
-    #contact {
-      text-align: left;
-    }
-    #contact p {
-      margin-top: 8px;
-      max-width: 520px;
-    }
-
-    .contact-main {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 24px;
-      align-items: center;
-    }
-
-    .contact-details {
-      font-size: 0.95rem;
-      display: grid;
-      gap: 10px;
-    }
-    .contact-details a {
-      color: #fde68a;
-      text-decoration: none;
-    }
-    .contact-details span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #e5e7eb;
-    }
-
-    .contact-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    .contact-buttons a {
-      flex: 1 1 150px;
-      text-align: center;
-      padding: 10px 16px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid rgba(148,163,184,0.5);
-      background: rgba(15,23,42,0.6);
-      color: #e5e7eb;
-      backdrop-filter: blur(20px);
-      transition:
-        background var(--transition-fast),
-        color var(--transition-fast),
-        transform var(--transition-fast),
-        box-shadow var(--transition-fast),
-        border-color var(--transition-fast);
-    }
-    .contact-buttons a:hover {
-      background: #f9fafb;
-      color: #111827;
-      border-color: #f9fafb;
-      transform: translateY(-2px);
-      box-shadow: 0 20px 45px rgba(0,0,0,0.95);
-    }
-    .contact-buttons a.whatsapp {
-      background: rgba(34,197,94,0.96);
-      border-color: #22c55e;
-      color: #022c17;
-    }
-    .contact-buttons a.whatsapp:hover {
-      filter: brightness(1.05);
-    }
-
-    .contact-panel {
-      border-radius: 20px;
-      padding: 18px 16px;
-      background: var(--glass-strong);
-      border: 1px solid rgba(148,163,184,0.55);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.9);
-      font-size: 0.86rem;
-      backdrop-filter: blur(30px) saturate(180%);
-      -webkit-backdrop-filter: blur(30px) saturate(180%);
-      color: #e5e7eb;
-    }
-    .contact-panel h3 {
-      margin: 0 0 8px;
-      font-size: 0.96rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-    .contact-panel ul {
-      list-style: none;
-      padding: 0;
-      margin: 12px 0 0;
-      display: grid;
-      gap: 6px;
-    }
-    .contact-panel li {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .contact-panel i {
-      color: #111827;
-      background: rgba(250,204,21,0.95);
-      border-radius: 999px;
-      padding: 4px;
-      font-size: 0.75rem;
-    }
-
-    footer {
-      padding: 18px 16px 26px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #9ca3af;
-    }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      main {
-        padding-top: 96px;
-      }
-      #home {
-        grid-template-columns: minmax(0,1fr);
-        padding: 36px 22px 40px;
-      }
-      .hero-orbit {
-        order: -1;
-      }
-      #about {
-        grid-template-columns: minmax(0,1fr);
-        padding: 36px 22px 40px;
-      }
-      .contact-main {
-        grid-template-columns: minmax(0,1fr);
-      }
-      section {
-        padding: 32px 20px;
-        margin: 52px auto;
-      }
-      .navbar-inner {
-        padding-inline: 16px;
-      }
-      .nav-links {
-        gap: 10px;
-      }
-      .nav-link {
-        font-size: 0.78rem;
-        letter-spacing: 0.12em;
-      }
-      /* Responsive tabs */
-      .gallery-tabs {
-        gap: 6px;
-      }
-      .tab-btn {
-        padding: 8px 16px;
-        font-size: 0.78rem;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .nav-links {
-        display: none;
-      }
-      .navbar-inner {
-        justify-content: center;
-      }
-      #home {
-        margin-top: 72px;
-      }
-      .hero-cta {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .cta-btn, .cta-secondary {
-        width: 100%;
-        justify-content: center;
-      }
-      .gallery-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
-    }
-  </style>
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="navbar-inner">
-      <a href="#home" class="logo"><span>Dillu</span> Captures</a>
-      <div class="nav-links">
-        <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
-        <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> Portfolio</a>
-        <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
-        <a href="#contact" class="nav-link"><i class="fas fa-phone"></i> Contact</a>
-        <div class="nav-indicator"></div>
-      </div>
-    </div>
-  </nav>
-
-  <main>
-    <!-- Hero -->
-    <section id="home">
-      <div class="hero-copy">
-        <div class="hero-pill">
-          <i class="fas fa-bolt"></i>
-          Hyderabad based lifestyle & portrait photographer
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="#home" class="logo"><span>Dillu</span> Captures</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#gallery" class="nav-link">Portfolio</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
         </div>
-        <h1><span>Dillu Captures</span></h1>
-        <p class="hero-sub">
-          Bright, emotive, and timeless frames that turn fleeting instants into stories
-          your family will re‑live for years.
-        </p>
+    </nav>
 
-        <div class="hero-meta">
-          <span><i class="fas fa-baby"></i> Newborn & kids</span>
-          <span><i class="fas fa-heart"></i> Couples & portraits</span>
-          <span><i class="fas fa-calendar"></i> Events & milestones</span>
-        </div>
+    <main>
+        <section id="gallery">
+            <h2>Featured Stories</h2>
+            <p>Explore our recent sessions or upload your own photos to see how they look in our gallery style.</p>
 
-        <div class="hero-cta">
-          <a href="#gallery" class="cta-btn">
-            <i class="fas fa-camera-retro"></i> View portfolio
-          </a>
-          <a href="#contact" class="cta-secondary">
-            <i class="fas fa-message"></i> Book a session
-          </a>
-        </div>
-      </div>
+            <div class="upload-section">
+                <p style="margin-bottom: 15px; color: var(--muted);">Want to see your photos here?</p>
+                <label for="file-input" class="upload-btn">
+                    <i class="fas fa-cloud-upload-alt"></i> Upload Photos
+                </label>
+                <input type="file" id="file-input" accept="image/*" multiple />
+            </div>
 
-      <div class="hero-orbit">
-        <div class="hero-image-frame">
-          <img src="Images/IMG_1902.webp" alt="Newborn resting in loving hands">
-          <div class="hero-tag-badge">
-            <i class="fas fa-circle-dot"></i>
-            In frame • Little moments
-          </div>
-        </div>
-      </div>
-    </section>
+            <div class="gallery-tabs">
+                <button class="tab-btn active" data-folder="all">All</button>
+                <button class="tab-btn" data-folder="newborn">Newborn</button>
+                <button class="tab-btn" data-folder="kids">Kids</button>
+            </div>
 
-    <!-- About -->
-    <section id="about" class="reveal">
-      <div class="about-text">
-        <h2>About Dillu Captures</h2>
-        <p>
-          Every frame is crafted with a blend of patience, play, and precise timing so your photographs feel as real as the moment itself.
-        </p>
-        <div class="about-list">
-          <div class="about-item">
-            <i class="fas fa-baby-carriage"></i>
-            Newborn & kids sessions
-          </div>
-          <div class="about-item">
-            <i class="fas fa-users"></i>
-            Family & candid portraits
-          </div>
-          <div class="about-item">
-            <i class="fas fa-ring"></i>
-            Pre‑wedding & Haldi stories
-          </div>
-          <div class="about-item">
-            <i class="fas fa-landmark"></i>
-            Temple & outdoor shoots
-          </div>
-        </div>
-      </div>
+            <div class="folder active" data-folder="all">
+                <div class="folder-header">
+                    <h3>All Moments</h3>
+                    <span class="folder-count">3 photos</span>
+                </div>
+                <div class="gallery-grid" id="main-grid">
+                    <div class="gallery-card">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Sample">
+                        <div class="gallery-meta"><span><i class="fas fa-camera"></i> Landscape</span></div>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" alt="Sample">
+                        <div class="gallery-meta"><span><i class="fas fa-leaf"></i> Nature</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="about-card">
-        <small>Signature style</small>
-        <h3>Bright • Emotive • Clean</h3>
-        <span class="big">1000+</span>
-        <p>
-          Photographs captured across heartfelt sessions, from sleepy newborns to laughter‑filled evening walks.
-        </p>
-      </div>
-    </section>
+        <section id="contact">
+            <h2>Contact Dillu Captures</h2>
+            <p>Email: <a href="mailto:dillucapture@gmail.com" style="color: var(--accent);">dillucapture@gmail.com</a></p>
+        </section>
+    </main>
 
-    <!-- Gallery with Folders -->
-    <section id="gallery" class="reveal">
-      <h2>Featured stories</h2>
-      <p>
-        A small peek into the sessions that clients love most — from tiny toes and temple bells to evening rides and birthday giggles.
-      </p>
+    <script>
+        // --- UPLOAD LOGIC ---
+        const fileInput = document.getElementById('file-input');
+        const mainGrid = document.getElementById('main-grid');
 
-      <!-- Folder Tabs -->
-      <div class="gallery-tabs">
-        <button class="tab-btn active" data-folder="all">
-          <i class="fas fa-images"></i> All
-        </button>
-        <button class="tab-btn" data-folder="newborn">
-          <i class="fas fa-baby"></i> Newborn
-        </button>
-        <button class="tab-btn" data-folder="kids">
-          <i class="fas fa-child"></i> Kids
-        </button>
-        <button class="tab-btn" data-folder="haldi">
-          <i class="fas fa-heart"></i> Haldi
-        </button>
-        <button class="tab-btn" data-folder="temple">
-          <i class="fas fa-landmark"></i> Temple
-        </button>
-        <button class="tab-btn" data-folder="portrait">
-          <i class="fas fa-user"></i> Portrait
-        </button>
-      </div>
+        fileInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (!file.type.startsWith('image/')) continue;
 
-      <!-- Folders Grid -->
-      <div class="folders-grid">
-        <!-- All Folder -->
-        <div class="folder active" data-folder="all">
-          <div class="folder-header">
-            <h3><i class="fas fa-images"></i> All Stories</h3>
-            <span class="folder-count">6 photos</span>
-          </div>
-          <div class="gallery-grid">
-            <a class="gallery-card" href="Images/20240813114300_IMG_0855.webp" target="_blank" data-category="newborn">
-              <img src="Images/20240813114300_IMG_0855.webp" alt="Newborn wrapped and sleeping peacefully" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-baby"></i> Newborn</span>
-                <span>Soft morning light</span>
-              </div>
-            </a>
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    // Create new gallery card
+                    const card = document.createElement('div');
+                    card.className = 'gallery-card';
+                    
+                    card.innerHTML = `
+                        <img src="${event.target.result}" alt="Uploaded photo">
+                        <div class="gallery-meta">
+                            <span><i class="fas fa-check-circle"></i> Just Uploaded</span>
+                        </div>
+                    `;
 
-            <a class="gallery-card" href="Images/20240813112158_IMG_0822.webp" target="_blank" data-category="newborn">
-              <img src="Images/20240813112158_IMG_0822.webp" alt="Close-up of baby hand holding a finger" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-hand-holding-heart"></i> Details</span>
-                <span>Little fingers</span>
-              </div>
-            </a>
-
-            <a class="gallery-card" href="Images/IMG_1902.webp" target="_blank" data-category="kids">
-              <img src="Images/IMG_1902.webp" alt="Baby smiling while lying on soft blanket" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-child"></i> Kids</span>
-                <span>Golden hour smiles</span>
-              </div>
-            </a>
-
-            <a class="gallery-card" href="Images/Haldi.webp" target="_blank" data-category="haldi">
-              <img src="Images/Haldi.webp" alt="Haldi ceremony with couple smiling" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-heart"></i> Haldi</span>
-                <span>Pre‑wedding colour</span>
-              </div>
-            </a>
-
-            <a class="gallery-card" href="Images/WhatsApp Image 2025-06-23 at 4.48.52 PM.webp" target="_blank" data-category="temple">
-              <img src="Images/WhatsApp Image 2025-06-23 at 4.48.52 PM.webp" alt="Family walking at temple with golden light" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-landmark"></i> Temple</span>
-                <span>Quiet prayers</span>
-              </div>
-            </a>
-
-            <a class="gallery-card" href="Images/WhatsApp Image 2025-07-06 at 10.40.58 AM.webp" target="_blank" data-category="portrait">
-              <img src="Images/WhatsApp Image 2025-07-06 at 10.40.58 AM.webp" alt="Portrait with bike at Necklace Road in Hyderabad" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-motorcycle"></i> Portrait</span>
-                <span>Necklace Road vibes</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Newborn Folder -->
-        <div class="folder" data-folder="newborn">
-          <div class="folder-header">
-            <h3><i class="fas fa-baby"></i> Newborn Moments</h3>
-            <span class="folder-count">2 photos</span>
-          </div>
-          <div class="gallery-grid">
-            <a class="gallery-card" href="Images/20240813114300_IMG_0855.webp" target="_blank" data-category="newborn">
-              <img src="Images/20240813114300_IMG_0855.webp" alt="Newborn wrapped and sleeping peacefully" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-baby"></i> Newborn</span>
-                <span>Soft morning light</span>
-              </div>
-            </a>
-            <a class="gallery-card" href="Images/20240813112158_IMG_0822.webp" target="_blank" data-category="newborn">
-              <img src="Images/20240813112158_IMG_0822.webp" alt="Close-up of baby hand holding a finger" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-hand-holding-heart"></i> Details</span>
-                <span>Little fingers</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Kids Folder -->
-        <div class="folder" data-folder="kids">
-          <div class="folder-header">
-            <h3><i class="fas fa-child"></i> Kids & Family</h3>
-            <span class="folder-count">1 photo</span>
-          </div>
-          <div class="gallery-grid">
-            <a class="gallery-card" href="Images/IMG_1902.webp" target="_blank" data-category="kids">
-              <img src="Images/IMG_1902.webp" alt="Baby smiling while lying on soft blanket" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-child"></i> Kids</span>
-                <span>Golden hour smiles</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Haldi Folder -->
-        <div class="folder" data-folder="haldi">
-          <div class="folder-header">
-            <h3><i class="fas fa-heart"></i> Haldi Stories</h3>
-            <span class="folder-count">1 photo</span>
-          </div>
-          <div class="gallery-grid">
-            <a class="gallery-card" href="Images/Haldi.webp" target="_blank" data-category="haldi">
-              <img src="Images/Haldi.webp" alt="Haldi ceremony with couple smiling" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-heart"></i> Haldi</span>
-                <span>Pre‑wedding colour</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Temple Folder -->
-        <div class="folder" data-folder="temple">
-          <div class="folder-header">
-            <h3><i class="fas fa-landmark"></i> Temple Sessions</h3>
-            <span class="folder-count">1 photo</span>
-          </div>
-          <div class="gallery-grid">
-            <a class="gallery-card" href="Images/WhatsApp Image 2025-06-23 at 4.48.52 PM.webp" target="_blank" data-category="temple">
-              <img src="Images/WhatsApp Image 2025-06-23 at 4.48.52 PM.webp" alt="Family walking at temple with golden light" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-landmark"></i> Temple</span>
-                <span>Quiet prayers</span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Portrait Folder -->
-        <div class="folder" data-folder="portrait">
-          <div class="folder-header">
-            <h3><i class="fas fa-user"></i> Portrait Collection</h3>
-            <span class="folder-count">1 photo</span>
-          </div>
-          <div class="gallery-grid">
-            <a class="gallery-card" href="Images/WhatsApp Image 2025-07-06 at 10.40.58 AM.webp" target="_blank" data-category="portrait">
-              <img src="Images/WhatsApp Image 2025-07-06 at 10.40.58 AM.webp" alt="Portrait with bike at Necklace Road in Hyderabad" loading="lazy">
-              <div class="gallery-meta">
-                <span><i class="fas fa-motorcycle"></i> Portrait</span>
-                <span>Necklace Road vibes</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="reveal">
-      <h2>Let's plan your shoot</h2>
-      <p>
-        Share your dates, occasion, and a little about the people in front of the camera, and get a tailored session plan with simple, transparent pricing.
-      </p>
-
-      <div class="contact-main">
-        <div>
-          <div class="contact-details">
-            <span><i class="fas fa-envelope"></i> Email:
-              <a href="mailto:dillucapture@gmail.com">dillucapture@gmail.com</a>
-            </span>
-            <span><i class="fas fa-phone"></i> Phone:
-              <a href="tel:+919700034138">+91 9700034138</a>
-            </span>
-            <span><i class="fab fa-instagram"></i> Instagram:
-              <a href="https://www.instagram.com/dillu_captures/" target="_blank">@dillu_captures</a>
-            </span>
-          </div>
-
-          <div class="contact-buttons">
-            <a href="mailto:dillucapture@gmail.com"><i class="fas fa-paper-plane"></i> Email me</a>
-            <a href="tel:+919700034138"><i class="fas fa-phone"></i> Call now</a>
-            <a href="https://www.instagram.com/dillu_captures/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a class="whatsapp" href="https://wa.me/919700034138?text=Hi%20Dillu!" target="_blank">
-              <i class="fab fa-whatsapp"></i> WhatsApp</a>
-          </div>
-        </div>
-
-        <div class="contact-panel">
-          <h3>Session flow</h3>
-          <p>
-            A relaxed, guided experience from first message to final gallery, so you never have to worry about what to do with your hands.
-          </p>
-          <ul>
-            <li><i class="fas fa-sparkles"></i> Pre‑shoot call to understand your story</li>
-            <li><i class="fas fa-location-dot"></i> Location & outfit guidance</li>
-            <li><i class="fas fa-clock"></i> 60–120 minutes of easygoing shooting</li>
-            <li><i class="fas fa-images"></i> Curated, edited digital gallery</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>© 2025 Dillu Captures. All rights reserved.</footer>
-
-  <script>
-    // Navbar Navigation
-    const navLinks = document.querySelectorAll('.nav-link');
-    const indicator = document.querySelector('.nav-indicator');
-
-    function moveIndicator(link) {
-      const rect = link.getBoundingClientRect();
-      const containerRect = link.parentElement.getBoundingClientRect();
-      const left = rect.left - containerRect.left;
-      indicator.style.left = left + 'px';
-      indicator.style.width = rect.width + 'px';
-      indicator.style.transform = 'scaleX(1)';
-    }
-
-    navLinks.forEach(link => {
-      link.addEventListener('mouseenter', () => moveIndicator(link));
-      link.addEventListener('focus', () => moveIndicator(link));
-      link.addEventListener('click', () => {
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      });
-    });
-
-    window.addEventListener('load', () => {
-      const active = document.querySelector('.nav-link.active');
-      if (active) moveIndicator(active);
-    });
-
-    // Intersection Observer for sections and reveals
-    const sections = document.querySelectorAll('section[id]');
-    const revealEls = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const id = entry.target.getAttribute('id');
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          navLinks.forEach(link => {
-            const hrefId = link.getAttribute('href').slice(1);
-            if (hrefId === id) {
-              navLinks.forEach(l => l.classList.remove('active'));
-              link.classList.add('active');
-              moveIndicator(link);
+                    // Add to grid
+                    mainGrid.prepend(card);
+                    
+                    // Re-apply 3D effect to new card
+                    applyTiltEffect(card);
+                    updateFolderCounts();
+                };
+                reader.readAsDataURL(file);
             }
-          });
-        }
-      });
-    }, {
-      threshold: 0.25
-    });
-
-    sections.forEach(section => observer.observe(section));
-    revealEls.forEach(el => observer.observe(el));
-
-    // Gallery Card Hover Effects
-    const cards = document.querySelectorAll('.gallery-card');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const rotateX = ((y / rect.height) - 0.5) * -8;
-        const rotateY = ((x / rect.width) - 0.5) * 8;
-        card.style.transform =
-          `translateY(-8px) scale(1.03) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-
-    // Gallery Folder System
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const folders = document.querySelectorAll('.folder');
-
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const folderName = btn.dataset.folder;
-        
-        // Update active tab
-        tabBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        // Show selected folder
-        folders.forEach(folder => {
-          folder.classList.remove('active');
-          if (folder.dataset.folder === folderName) {
-            folder.classList.add('active');
-          }
         });
-        
-        // Update photo counts
+
+        // --- 3D HOVER EFFECT ---
+        function applyTiltEffect(card) {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const rotateX = ((y / rect.height) - 0.5) * -15;
+                const rotateY = ((x / rect.width) - 0.5) * 15;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        }
+
+        // Initialize tilt for existing cards
+        document.querySelectorAll('.gallery-card').forEach(applyTiltEffect);
+
+        // --- COUNTER UPDATE ---
+        function updateFolderCounts() {
+            const count = document.querySelectorAll('#main-grid .gallery-card').length;
+            document.querySelector('.folder-count').textContent = `${count} photo${count !== 1 ? 's' : ''}`;
+        }
+
+        // Initial count
         updateFolderCounts();
-      });
-    });
 
-    function updateFolderCounts() {
-      document.querySelectorAll('.folder-count').forEach(countEl => {
-        const folder = countEl.closest('.folder');
-        const photoCount = folder.querySelectorAll('.gallery-card').length;
-        countEl.textContent = `${photoCount} photo${photoCount !== 1 ? 's' : ''}`;
-      });
-    }
-
-    // Initialize counts on load
-    window.addEventListener('load', updateFolderCounts);
-  </script>
+        // --- TAB SWITCHING ---
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Note: Logic for filtering folders can be added here
+            });
+        });
+    </script>
 </body>
 </html>
-
-
