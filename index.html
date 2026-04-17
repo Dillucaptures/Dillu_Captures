@@ -15,16 +15,16 @@ body {
   color:#fff;
 }
 
-.nav {
+/* NAVBAR */
+.navbar {
   position:fixed;
   top:0;
   width:100%;
-  padding:15px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(10px);
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  padding:15px 30px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(12px);
   z-index:1000;
 }
 
@@ -34,40 +34,56 @@ body {
   color:#ffd700;
 }
 
-.contact-btn {
-  background:linear-gradient(45deg,#eab308,#f97316);
-  padding:10px 20px;
-  border-radius:20px;
+.nav-links a {
+  margin:0 10px;
   text-decoration:none;
-  color:#000;
-  font-weight:600;
+  color:#ccc;
+  font-size:14px;
 }
+.nav-links a:hover { color:#fff; }
 
 .admin-btn {
-  font-size:12px;
-  opacity:0.5;
+  margin-left:10px;
   cursor:pointer;
+  opacity:0.5;
 }
 
+/* MAIN */
 main {
   padding-top:90px;
   max-width:1200px;
   margin:auto;
 }
 
-.upload-box {
-  display:none;
-  text-align:center;
-  margin:30px 0;
+/* SECTIONS */
+section {
+  margin:80px 20px;
 }
 
+/* HERO */
+#home h1 {
+  font-size:3rem;
+  color:#ffd700;
+}
+#home p {
+  color:#aaa;
+}
+
+/* UPLOAD */
+.upload-box {
+  display:none;
+  margin:20px 0;
+}
 .upload-btn {
-  background:#ffd700;
+  background:linear-gradient(45deg,#eab308,#f97316);
   padding:10px 20px;
   border-radius:20px;
   cursor:pointer;
+  color:#000;
+  font-weight:bold;
 }
 
+/* GALLERY */
 .gallery {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -96,53 +112,112 @@ main {
   display:none;
   cursor:pointer;
 }
+
+/* ABOUT */
+#about p {
+  color:#ccc;
+  line-height:1.6;
+  max-width:600px;
+}
+
+/* CONTACT */
+#contact {
+  border-top:1px solid #333;
+  padding-top:30px;
+}
+
+.contact-btn {
+  display:inline-block;
+  margin-top:10px;
+  padding:10px 20px;
+  border-radius:20px;
+  background:linear-gradient(45deg,#eab308,#f97316);
+  color:#000;
+  text-decoration:none;
+}
+
+footer {
+  text-align:center;
+  color:#666;
+  margin:40px 0;
+}
 </style>
 </head>
 
 <body>
 
-<div class="nav">
+<div class="navbar">
   <div class="logo">Dillu Captures</div>
 
-  <div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#gallery">Portfolio</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
     <span class="admin-btn" id="adminBtn">⚙️</span>
-    <a href="https://wa.me/919700034138" class="contact-btn">Contact</a>
   </div>
 </div>
 
 <main>
 
-<h2>Gallery</h2>
+<!-- HOME -->
+<section id="home">
+  <h1>Dillu Captures</h1>
+  <p>Turning real moments into timeless memories you’ll cherish forever.</p>
+</section>
 
-<div class="upload-box" id="uploadBox">
-  <input type="file" id="fileInput" multiple>
-</div>
+<!-- GALLERY -->
+<section id="gallery">
+  <h2>Portfolio</h2>
 
-<div class="gallery" id="gallery"></div>
+  <div class="upload-box" id="uploadBox">
+    <input type="file" id="fileInput" multiple>
+  </div>
+
+  <div class="gallery" id="galleryGrid"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About</h2>
+  <p>
+    At Dillu Captures, we believe every moment has a story worth preserving. 
+    From newborn smiles to wedding rituals and candid portraits, we capture emotions 
+    in their purest form. Our approach is simple — natural light, real expressions, 
+    and timeless frames that feel as beautiful years later as they do today.
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: dillucapture@gmail.com</p>
+  <p>Phone: +91 9700034138</p>
+
+  <a href="https://wa.me/919700034138" class="contact-btn">WhatsApp</a>
+</section>
+
+<footer>
+© 2025 Dillu Captures
+</footer>
 
 </main>
 
 <script>
 
-// 🔐 CHANGE THIS PASSWORD
+// PASSWORD
 const ADMIN_PASSWORD = "dillu@123";
-
 let isAdmin = sessionStorage.getItem("admin") === "true";
 
 const uploadBox = document.getElementById("uploadBox");
-const gallery = document.getElementById("gallery");
+const galleryGrid = document.getElementById("galleryGrid");
 
-// Show admin UI if already unlocked
-if (isAdmin) {
-  uploadBox.style.display = "block";
-}
+if (isAdmin) uploadBox.style.display = "block";
 
-// Admin unlock
+// ADMIN LOGIN
 document.getElementById("adminBtn").onclick = () => {
   const pass = prompt("Enter admin password:");
-
   if (pass === ADMIN_PASSWORD) {
-    alert("Admin mode enabled");
     isAdmin = true;
     sessionStorage.setItem("admin", "true");
     uploadBox.style.display = "block";
@@ -152,12 +227,12 @@ document.getElementById("adminBtn").onclick = () => {
   }
 };
 
-// Load images (stored locally)
+// DATA
 let images = JSON.parse(localStorage.getItem("gallery") || "[]");
 
-// Render gallery
+// RENDER
 function render() {
-  gallery.innerHTML = "";
+  galleryGrid.innerHTML = "";
 
   images.forEach((img, index) => {
     const card = document.createElement("div");
@@ -168,13 +243,12 @@ function render() {
       <button class="delete">×</button>
     `;
 
-    const delBtn = card.querySelector(".delete");
+    const del = card.querySelector(".delete");
 
     if (isAdmin) {
-      delBtn.style.display = "block";
-
-      delBtn.onclick = () => {
-        if (confirm("Delete this photo?")) {
+      del.style.display = "block";
+      del.onclick = () => {
+        if (confirm("Delete photo?")) {
           images.splice(index,1);
           localStorage.setItem("gallery", JSON.stringify(images));
           render();
@@ -182,25 +256,23 @@ function render() {
       };
     }
 
-    gallery.appendChild(card);
+    galleryGrid.appendChild(card);
   });
 }
 
 render();
 
-// Upload images
+// UPLOAD
 document.getElementById("fileInput").addEventListener("change", function(e){
   const files = e.target.files;
 
   for (let file of files) {
     const reader = new FileReader();
-
     reader.onload = function(ev){
       images.unshift(ev.target.result);
       localStorage.setItem("gallery", JSON.stringify(images));
       render();
     };
-
     reader.readAsDataURL(file);
   }
 });
