@@ -25,7 +25,6 @@ nav{
   justify-content:center;
   z-index:1000;
 }
-
 nav div{
   margin-top:10px;
   display:flex;
@@ -36,14 +35,14 @@ nav div{
   backdrop-filter:blur(15px);
 }
 
+/* LINKS */
 a{
   color:#aaa;
   text-decoration:none;
-  font-size:14px;
 }
 a:hover{color:#fff}
 
-/* SECTIONS */
+/* SECTION */
 section{
   max-width:1100px;
   margin:110px auto;
@@ -55,36 +54,23 @@ section{
 }
 
 /* HERO */
-#home{
-  text-align:center;
-}
+#home{text-align:center;}
 #home h1{
   font-size:40px;
   background:linear-gradient(90deg,gold,orange);
   -webkit-background-clip:text;
   color:transparent;
 }
-#home p{
-  color:#ccc;
-}
 
 /* TABS */
-.tabs{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
+.tabs{display:flex;gap:10px;flex-wrap:wrap;}
 .tab{
   padding:8px 16px;
   border-radius:20px;
   background:#111;
   cursor:pointer;
 }
-.tab.active{
-  background:gold;
-  color:black;
-}
+.tab.active{background:gold;color:black}
 
 /* GRID */
 .grid{
@@ -95,9 +81,7 @@ section{
 }
 
 /* CARD */
-.card{
-  text-align:center;
-}
+.card{text-align:center;}
 .card img{
   width:100%;
   border-radius:15px;
@@ -118,6 +102,24 @@ section{
 .download{background:#2563eb;color:white}
 .addFolder{background:#22c55e;color:white}
 
+/* DROP ZONE */
+.drop{
+  border:2px dashed gold;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+/* PROGRESS */
+.progressBox{display:none;margin-top:10px;}
+.progressBar{
+  height:10px;
+  width:0%;
+  background:gold;
+  border-radius:10px;
+}
+
 /* CONTACT */
 .contact-icons{
   display:flex;
@@ -125,7 +127,6 @@ section{
   margin-top:15px;
   flex-wrap:wrap;
 }
-
 .contact-icons a{
   padding:10px 15px;
   border-radius:30px;
@@ -133,15 +134,12 @@ section{
   display:flex;
   gap:8px;
   align-items:center;
-  color:white;
-  transition:0.3s;
 }
 .contact-icons a:hover{
   background:gold;
   color:black;
 }
 
-/* MOBILE */
 @media(max-width:600px){
   .grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -150,7 +148,6 @@ section{
 
 <body>
 
-<!-- NAV -->
 <nav>
   <div>
     <a href="#home">Home</a>
@@ -160,17 +157,15 @@ section{
   </div>
 </nav>
 
-<!-- HOME -->
 <section id="home">
   <h1>Dillu Captures</h1>
   <p>Premium photography with emotional storytelling ✨</p>
 </section>
 
-<!-- GALLERY -->
 <section id="gallery">
   <h2>Gallery</h2>
 
-  <div style="display:flex;justify-content:space-between;align-items:center;">
+  <div style="display:flex;justify-content:space-between;">
     <div class="tabs" id="tabs"></div>
     <button class="btn addFolder" onclick="addFolder()">+ Folder</button>
   </div>
@@ -178,47 +173,29 @@ section{
   <div id="folders"></div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <h2>About</h2>
-  <p>
-    Dillu Captures specializes in newborn, kids, portraits and events photography.
-    We capture real emotions and turn them into timeless memories.
-  </p>
+  <p>Dillu Captures specializes in newborn, kids, portraits and events photography.</p>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
-
   <p><i class="fas fa-envelope"></i> Dillucapture@gmail.com</p>
   <p><i class="fas fa-phone"></i> +91 9700034138</p>
 
   <div class="contact-icons">
-    <a href="mailto:Dillucapture@gmail.com">
-      <i class="fas fa-envelope"></i> Email
-    </a>
-
-    <a href="tel:9700034138">
-      <i class="fas fa-phone"></i> Call
-    </a>
-
-    <a href="https://wa.me/919700034138" target="_blank">
-      <i class="fab fa-whatsapp"></i> WhatsApp
-    </a>
-
-    <a href="https://instagram.com" target="_blank">
-      <i class="fab fa-instagram"></i> Instagram
-    </a>
+    <a href="mailto:Dillucapture@gmail.com"><i class="fas fa-envelope"></i>Email</a>
+    <a href="tel:9700034138"><i class="fas fa-phone"></i>Call</a>
+    <a href="https://wa.me/919700034138"><i class="fab fa-whatsapp"></i>WhatsApp</a>
+    <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
   </div>
 </section>
 
 <script>
-const ADMIN_PASSWORD = "1234";
+const ADMIN_PASSWORD="1234";
 
-/* DATA */
-let data = JSON.parse(localStorage.getItem("galleryData")) || {
-  folders:{ All:[] },
+let data=JSON.parse(localStorage.getItem("galleryData"))||{
+  folders:{All:[]},
   active:"All"
 };
 
@@ -227,20 +204,19 @@ function save(){
 }
 
 function checkAdmin(){
-  let pass = prompt("Enter Admin Password");
-  return pass === ADMIN_PASSWORD;
+  return prompt("Enter Admin Password")===ADMIN_PASSWORD;
 }
 
-function downloadImage(base64,index){
-  const link=document.createElement("a");
-  link.href=base64;
-  link.download="dillu_"+index+".jpg";
-  link.click();
+function downloadImage(base64,i){
+  let a=document.createElement("a");
+  a.href=base64;
+  a.download="dillu_"+i+".jpg";
+  a.click();
 }
 
 function render(){
-  const tabs=document.getElementById("tabs");
-  const folders=document.getElementById("folders");
+  let tabs=document.getElementById("tabs");
+  let folders=document.getElementById("folders");
 
   tabs.innerHTML="";
   folders.innerHTML="";
@@ -257,7 +233,18 @@ function render(){
 
       container.innerHTML=`
         <h3>${name}</h3>
-        <button class="btn upload" onclick="uploadImage('${name}')">Upload</button>
+
+        <div class="drop" id="dropZone">
+          Drag & Drop Images OR 
+          <button class="btn upload" onclick="uploadImage('${name}')">Browse</button>
+        </div>
+
+        <div class="progressBox" id="progressBox">
+          <div style="background:#222;border-radius:10px;">
+            <div class="progressBar" id="progressBar"></div>
+          </div>
+          <small id="progressText"></small>
+        </div>
       `;
 
       let grid=document.createElement("div");
@@ -266,7 +253,6 @@ function render(){
       data.folders[name].forEach((img,i)=>{
         let card=document.createElement("div");
         card.className="card";
-
         card.innerHTML=`
           <img src="${img}">
           <div>
@@ -279,54 +265,88 @@ function render(){
 
       container.appendChild(grid);
       folders.appendChild(container);
+
+      setupDragDrop(name);
     }
   });
 }
 
-/* UPLOAD */
+function setupDragDrop(folder){
+  let drop=document.getElementById("dropZone");
+
+  drop.ondragover=e=>{
+    e.preventDefault();
+    drop.style.background="rgba(255,215,0,0.1)";
+  };
+
+  drop.ondragleave=()=>drop.style.background="transparent";
+
+  drop.ondrop=e=>{
+    e.preventDefault();
+    drop.style.background="transparent";
+    if(!checkAdmin()) return alert("Wrong password");
+    handleFiles(e.dataTransfer.files,folder);
+  };
+}
+
 function uploadImage(folder){
   if(!checkAdmin()) return alert("Wrong password");
 
   let input=document.createElement("input");
   input.type="file";
+  input.multiple=true;
   input.accept="image/*";
 
-  input.onchange=e=>{
-    let file=e.target.files[0];
-    let reader=new FileReader();
-
-    reader.onload=function(){
-      data.folders[folder].push(reader.result);
-      save();
-      render();
-    };
-
-    reader.readAsDataURL(file);
-  };
-
+  input.onchange=e=>handleFiles(e.target.files,folder);
   input.click();
 }
 
-/* DELETE */
-function deleteImage(folder,index){
+function handleFiles(files,folder){
+  let bar=document.getElementById("progressBar");
+  let box=document.getElementById("progressBox");
+  let text=document.getElementById("progressText");
+
+  box.style.display="block";
+
+  let total=files.length;
+  let count=0;
+
+  Array.from(files).forEach(file=>{
+    let reader=new FileReader();
+
+    reader.onload=()=>{
+      data.folders[folder].push(reader.result);
+      count++;
+
+      let percent=Math.round((count/total)*100);
+      bar.style.width=percent+"%";
+      text.innerText=`Uploading ${count}/${total}`;
+
+      if(count===total){
+        save();
+        render();
+      }
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+function deleteImage(folder,i){
   if(!checkAdmin()) return alert("Wrong password");
 
-  data.folders[folder].splice(index,1);
+  data.folders[folder].splice(i,1);
   save();
   render();
 }
 
-/* ADD FOLDER */
 function addFolder(){
   if(!checkAdmin()) return alert("Wrong password");
 
   let name=prompt("Folder name?");
   if(!name) return;
 
-  if(data.folders[name]){
-    alert("Folder exists");
-    return;
-  }
+  if(data.folders[name]) return alert("Exists");
 
   data.folders[name]=[];
   data.active=name;
