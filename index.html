@@ -1,141 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dillu Captures</title>
+<!-- ONLY GALLERY SECTION UPDATED (replace your gallery section with this) -->
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<section id="gallery" class="reveal">
+  <h2>Featured stories</h2>
+  <p>
+    A small peek into the sessions that clients love most.
+  </p>
 
-<style>
-body{margin:0;font-family:Montserrat;background:#000;color:#fff}
-.glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);border-radius:20px;padding:20px}
-nav{position:fixed;width:100%;top:0;text-align:center}
-nav .glass{display:inline-block;margin:10px}
-section{margin:100px auto;max-width:1100px}
-.tabs{display:flex;gap:10px;flex-wrap:wrap}
-.tab{padding:8px 15px;background:#222;border-radius:20px;cursor:pointer}
-.tab.active{background:gold;color:black}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:15px}
-.card img{width:100%;border-radius:10px}
-.btn{padding:5px 10px;border:none;border-radius:10px;margin:3px;cursor:pointer}
-.upload{background:gold;color:black}
-.delete{background:red;color:white}
-.addFolder{background:green;color:white}
-</style>
-</head>
+  <!-- Tabs -->
+  <div class="gallery-tabs">
+    <button class="tab-btn active" data-folder="all">All</button>
+    <button class="tab-btn" data-folder="newborn">Newborn</button>
+    <button class="tab-btn" data-folder="kids">Kids</button>
+    <button class="tab-btn" data-folder="birthday">Birthday</button>
+  </div>
 
-<body>
+  <div class="folders-grid">
 
-<nav>
-<div class="glass">
-<a href="#home">Home</a>
-<a href="#gallery">Gallery</a>
-</div>
-</nav>
+    <!-- ALL -->
+    <div class="folder active" data-folder="all">
+      <div class="folder-header">
+        <h3>All Photos</h3>
+        <span class="folder-count">0 photos</span>
+      </div>
 
-<section id="home" class="glass">
-<h1>Dillu Captures</h1>
+      <div class="gallery-grid">
+
+        <!-- Newborn -->
+        <a class="gallery-card" href="Images/baby1.webp" target="_blank">
+          <img src="Images/baby1.webp">
+        </a>
+
+        <a class="gallery-card" href="Images/baby2.webp" target="_blank">
+          <img src="Images/baby2.webp">
+        </a>
+
+        <!-- Kids -->
+        <a class="gallery-card" href="Images/kid1.webp" target="_blank">
+          <img src="Images/kid1.webp">
+        </a>
+
+        <!-- Birthday -->
+        <a class="gallery-card" href="Images/birthday1.webp" target="_blank">
+          <img src="Images/birthday1.webp">
+        </a>
+
+        <a class="gallery-card" href="Images/birthday2.webp" target="_blank">
+          <img src="Images/birthday2.webp">
+        </a>
+
+      </div>
+    </div>
+
+    <!-- NEWBORN -->
+    <div class="folder" data-folder="newborn">
+      <div class="folder-header">
+        <h3>Newborn</h3>
+        <span class="folder-count">0 photos</span>
+      </div>
+
+      <div class="gallery-grid">
+        <a class="gallery-card" href="Images/baby1.webp" target="_blank">
+          <img src="Images/baby1.webp">
+        </a>
+
+        <a class="gallery-card" href="Images/baby2.webp" target="_blank">
+          <img src="Images/baby2.webp">
+        </a>
+      </div>
+    </div>
+
+    <!-- KIDS -->
+    <div class="folder" data-folder="kids">
+      <div class="folder-header">
+        <h3>Kids</h3>
+        <span class="folder-count">0 photos</span>
+      </div>
+
+      <div class="gallery-grid">
+        <a class="gallery-card" href="Images/kid1.webp" target="_blank">
+          <img src="Images/kid1.webp">
+        </a>
+      </div>
+    </div>
+
+    <!-- BIRTHDAY (NEW) -->
+    <div class="folder" data-folder="birthday">
+      <div class="folder-header">
+        <h3>Birthday Shoots</h3>
+        <span class="folder-count">0 photos</span>
+      </div>
+
+      <div class="gallery-grid">
+
+        <a class="gallery-card" href="Images/birthday1.webp" target="_blank">
+          <img src="Images/birthday1.webp">
+        </a>
+
+        <a class="gallery-card" href="Images/birthday2.webp" target="_blank">
+          <img src="Images/birthday2.webp">
+        </a>
+
+      </div>
+    </div>
+
+  </div>
 </section>
-
-<section id="gallery" class="glass">
-<h2>Gallery</h2>
-
-<div style="display:flex;justify-content:space-between;">
-<div class="tabs" id="tabs"></div>
-<button class="btn addFolder" onclick="addFolder()">+ Folder</button>
-</div>
-
-<div id="folders"></div>
-</section>
-
-<script>
-const ADMIN_PASSWORD="1234";
-
-let data=JSON.parse(localStorage.getItem("galleryData"))||{
-folders:{All:[]},active:"All"};
-
-function save(){localStorage.setItem("galleryData",JSON.stringify(data));}
-function checkAdmin(){return prompt("Password")===ADMIN_PASSWORD;}
-
-function render(){
-let tabs=document.getElementById("tabs");
-let folders=document.getElementById("folders");
-
-tabs.innerHTML="";folders.innerHTML="";
-
-Object.keys(data.folders).forEach(name=>{
-let tab=document.createElement("div");
-tab.className="tab "+(data.active===name?"active":"");
-tab.innerText=name;
-tab.onclick=()=>{data.active=name;render()};
-tabs.appendChild(tab);
-
-if(data.active===name){
-let box=document.createElement("div");
-box.innerHTML=`
-<h3>${name}</h3>
-<button class="btn upload" onclick="uploadImage('${name}')">Upload</button>
-`;
-
-let grid=document.createElement("div");
-grid.className="grid";
-
-data.folders[name].forEach((img,i)=>{
-let card=document.createElement("div");
-card.className="card";
-card.innerHTML=`
-<img src="${img}">
-<button class="btn delete" onclick="deleteImage('${name}',${i})">Delete</button>
-`;
-grid.appendChild(card);
-});
-
-box.appendChild(grid);
-folders.appendChild(box);
-}
-});
-}
-
-function uploadImage(folder){
-if(!checkAdmin())return;
-let input=document.createElement("input");
-input.type="file";input.multiple=true;
-input.onchange=e=>{
-Array.from(e.target.files).forEach(file=>{
-let reader=new FileReader();
-reader.onload=ev=>{
-data.folders[folder].push(ev.target.result);
-if(folder!=="All") data.folders["All"].push(ev.target.result);
-save();render();
-};
-reader.readAsDataURL(file);
-});
-};
-input.click();
-}
-
-function deleteImage(folder,i){
-if(!checkAdmin())return;
-let img=data.folders[folder][i];
-Object.keys(data.folders).forEach(f=>{
-data.folders[f]=data.folders[f].filter(x=>x!==img);
-});
-save();render();
-}
-
-function addFolder(){
-if(!checkAdmin())return;
-let name=prompt("Folder name");
-if(!name)return;
-data.folders[name]=[];
-data.active=name;
-save();render();
-}
-
-render();
-</script>
-
-</body>
-</html>
