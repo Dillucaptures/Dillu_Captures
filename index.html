@@ -2,211 +2,283 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dillu Captures</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-body { background:#000; color:white; font-family:sans-serif; }
-.gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:15px; }
-.gallery-card { position:relative; }
-.gallery-card img { width:100%; border-radius:10px; }
-.gallery-meta { position:absolute; bottom:10px; left:10px; right:10px; display:flex; justify-content:space-between; }
-.folder { display:none; }
-.folder.active { display:block; }
-.tab-btn { margin:5px; padding:10px; cursor:pointer; }
-.tab-btn.active { background:gold; color:black; }
-.cta-btn, .cta-secondary { padding:8px 12px; cursor:pointer; margin:5px; }
+body{
+  margin:0;
+  font-family:Montserrat;
+  background:#000;
+  color:#fff;
+}
+
+/* GLASS UI */
+.glass{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:20px;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:15px;
+  display:flex;
+  justify-content:center;
+}
+nav div{
+  display:flex;
+  gap:20px;
+}
+a{
+  color:#aaa;
+  text-decoration:none;
+}
+a:hover{color:#fff}
+
+/* SECTIONS */
+section{
+  max-width:1100px;
+  margin:100px auto;
+  padding:20px;
+}
+
+/* GALLERY */
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+.tab{
+  padding:8px 15px;
+  border-radius:20px;
+  cursor:pointer;
+  background:#111;
+}
+.tab.active{background:gold;color:black}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.card{
+  position:relative;
+  text-align:center;
+}
+.card img{
+  width:100%;
+  border-radius:15px;
+}
+
+/* BUTTONS */
+.btn{
+  padding:6px 10px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  margin:5px;
+  font-size:12px;
+}
+
+.upload{background:gold;color:black}
+.delete{background:red;color:white}
+.download{background:#2563eb;color:white}
+.addFolder{background:green;color:white}
+
+.top-actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* CONTACT */
+.contact a{color:gold}
+
+/* MOBILE */
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 
 <body>
 
-<h2>Gallery</h2>
+<nav>
+  <div class="glass">
+    <a href="#home">Home</a>
+    <a href="#gallery">Portfolio</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-<div class="gallery-tabs">
-<button class="tab-btn active" data-folder="all">All</button>
-<button class="tab-btn" data-folder="kids">Kids</button>
-</div>
+<section id="home" class="glass">
+  <h1>Dillu Captures</h1>
+  <p>Premium photography with emotional storytelling.</p>
+</section>
 
-<div id="gallery">
+<section id="gallery" class="glass">
+  <h2>Gallery</h2>
 
-<div class="folders-grid">
+  <div class="top-actions">
+    <div class="tabs" id="tabs"></div>
+    <button class="btn addFolder" onclick="addFolder()">+ Folder</button>
+  </div>
 
-<!-- ALL -->
-<div class="folder active" data-folder="all">
-<div class="folder-header">
-<h3>All</h3>
-<span class="folder-count"></span>
-</div>
-<div class="gallery-grid">
-<a class="gallery-card">
-<img src="https://via.placeholder.com/300">
-<div class="gallery-meta"><span>Sample</span></div>
-</a>
-</div>
-</div>
+  <div id="folders"></div>
+</section>
 
-<!-- KIDS -->
-<div class="folder" data-folder="kids">
-<div class="folder-header">
-<h3>Kids</h3>
-<span class="folder-count"></span>
-</div>
-<div class="gallery-grid"></div>
-</div>
+<section id="about" class="glass">
+  <h2>About</h2>
+  <p>Professional photographer capturing real emotions.</p>
+</section>
 
-</div>
-</div>
+<section id="contact" class="glass contact">
+  <h2>Contact</h2>
+  <p>Email: <a href="#">dillucapture@gmail.com</a></p>
+  <p>Phone: <a href="#">+91 9700034138</a></p>
+</section>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-
 const ADMIN_PASSWORD = "1234";
 
-function askPassword() {
-  return prompt("Enter Admin Password") === ADMIN_PASSWORD;
+/* DATA */
+let data = JSON.parse(localStorage.getItem("galleryData")) || {
+  folders:{ All:[] },
+  active:"All"
+};
+
+/* SAVE */
+function save(){
+  localStorage.setItem("galleryData",JSON.stringify(data));
 }
 
-// ------------------ TABS ------------------
-function setupTabs() {
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.onclick = () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      document.querySelectorAll('.folder').forEach(f => {
-        f.classList.toggle('active', f.dataset.folder === btn.dataset.folder);
-      });
-    };
-  });
-}
-setupTabs();
-
-// ------------------ DELETE ------------------
-function addDelete(card) {
-  const meta = card.querySelector(".gallery-meta");
-
-  const btn = document.createElement("button");
-  btn.textContent = "Delete";
-  btn.style.cssText = "background:red;color:white;border:none;padding:4px;border-radius:5px;";
-
-  btn.onclick = (e) => {
-    e.preventDefault();
-    if (!askPassword()) return alert("Wrong password");
-    card.remove();
-    updateCounts();
-  };
-
-  meta.appendChild(btn);
+/* PASSWORD CHECK */
+function checkAdmin(){
+  let pass = prompt("Enter Admin Password");
+  return pass === ADMIN_PASSWORD;
 }
 
-document.querySelectorAll(".gallery-card").forEach(addDelete);
-
-// ------------------ UPLOAD ------------------
-function setupUpload() {
-  document.querySelectorAll('.folder-header').forEach(header => {
-
-    const btn = document.createElement("button");
-    btn.textContent = "Upload";
-    btn.className = "cta-secondary";
-
-    btn.onclick = () => {
-      if (!askPassword()) return alert("Wrong password");
-
-      const input = document.createElement("input");
-      input.type = "file";
-      input.multiple = true;
-      input.accept = "image/*";
-
-      input.onchange = e => {
-        const grid = header.parentElement.querySelector(".gallery-grid");
-
-        [...e.target.files].forEach(file => {
-          const reader = new FileReader();
-
-          reader.onload = ev => {
-            const card = document.createElement("a");
-            card.className = "gallery-card";
-
-            card.innerHTML = `
-              <img src="${ev.target.result}">
-              <div class="gallery-meta"><span>New</span></div>
-            `;
-
-            addDelete(card);
-            grid.appendChild(card);
-            updateCounts();
-          };
-
-          reader.readAsDataURL(file);
-        });
-      };
-
-      input.click();
-    };
-
-    header.appendChild(btn);
-  });
+/* DOWNLOAD FUNCTION */
+function downloadImage(base64, index){
+  const link = document.createElement("a");
+  link.href = base64;
+  link.download = "dillu_capture_" + index + ".jpg";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
-setupUpload();
 
-// ------------------ ADD FOLDER ------------------
-function setupAddFolder() {
-  const btn = document.createElement("button");
-  btn.textContent = "Add Folder";
-  btn.className = "cta-btn";
+/* RENDER */
+function render(){
+  const tabs = document.getElementById("tabs");
+  const folders = document.getElementById("folders");
 
-  document.body.prepend(btn);
+  tabs.innerHTML="";
+  folders.innerHTML="";
 
-  btn.onclick = () => {
-    if (!askPassword()) return alert("Wrong password");
+  Object.keys(data.folders).forEach(name=>{
+    let tab=document.createElement("div");
+    tab.className="tab "+(data.active===name?"active":"");
+    tab.innerText=name;
+    tab.onclick=()=>{data.active=name;render();}
+    tabs.appendChild(tab);
 
-    const name = prompt("Folder name");
-    if (!name) return;
+    if(data.active===name){
+      let container=document.createElement("div");
 
-    const id = name.toLowerCase().replace(/\s+/g,'-');
-
-    // tab
-    const tab = document.createElement("button");
-    tab.className = "tab-btn";
-    tab.dataset.folder = id;
-    tab.textContent = name;
-    document.querySelector(".gallery-tabs").appendChild(tab);
-
-    // folder
-    const folder = document.createElement("div");
-    folder.className = "folder";
-    folder.dataset.folder = id;
-
-    folder.innerHTML = `
-      <div class="folder-header">
+      let header=document.createElement("div");
+      header.innerHTML=`
         <h3>${name}</h3>
-        <span class="folder-count"></span>
-      </div>
-      <div class="gallery-grid"></div>
-    `;
+        <button class="btn upload" onclick="uploadImage('${name}')">Upload</button>
+      `;
+      container.appendChild(header);
 
-    document.querySelector(".folders-grid").appendChild(folder);
+      let grid=document.createElement("div");
+      grid.className="grid";
 
-    setupTabs();
-    setupUpload();
-  };
-}
-setupAddFolder();
+      data.folders[name].forEach((img,i)=>{
+        let card=document.createElement("div");
+        card.className="card";
 
-// ------------------ COUNT ------------------
-function updateCounts() {
-  document.querySelectorAll('.folder').forEach(folder => {
-    const count = folder.querySelectorAll('.gallery-card').length;
-    folder.querySelector('.folder-count').textContent =
-      `${count} photo${count !== 1 ? 's' : ''}`;
+        card.innerHTML=`
+          <img src="${img}">
+          <div>
+            <button class="btn download" onclick="downloadImage('${img}',${i})">Download</button>
+            <button class="btn delete" onclick="deleteImage('${name}',${i})">Delete</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      container.appendChild(grid);
+      folders.appendChild(container);
+    }
   });
 }
-updateCounts();
 
-});
+/* UPLOAD */
+function uploadImage(folder){
+  if(!checkAdmin()) return alert("Wrong password");
+
+  let input=document.createElement("input");
+  input.type="file";
+  input.accept="image/*";
+
+  input.onchange=e=>{
+    let file=e.target.files[0];
+    let reader=new FileReader();
+
+    reader.onload=function(){
+      data.folders[folder].push(reader.result);
+      save();
+      render();
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  input.click();
+}
+
+/* DELETE */
+function deleteImage(folder,index){
+  if(!checkAdmin()) return alert("Wrong password");
+
+  data.folders[folder].splice(index,1);
+  save();
+  render();
+}
+
+/* ADD FOLDER */
+function addFolder(){
+  if(!checkAdmin()) return alert("Wrong password");
+
+  let name=prompt("Folder name?");
+  if(!name) return;
+
+  if(data.folders[name]){
+    alert("Folder exists");
+    return;
+  }
+
+  data.folders[name]=[];
+  data.active=name;
+  save();
+  render();
+}
+
+/* INIT */
+render();
 </script>
 
 </body>
