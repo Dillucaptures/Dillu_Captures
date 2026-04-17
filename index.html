@@ -1,282 +1,129 @@
+<!-- FULL UPDATED CODE WITH ADMIN PASSWORD, UPLOAD, DELETE, FOLDER-WISE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dillu Captures</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Dancing+Script&display=swap" rel="stylesheet">
+<title>Dillu Captures Admin Enabled</title>
 
 <style>
-body {
-  margin:0;
-  font-family:Montserrat;
-  background:#000;
-  color:#fff;
-}
-
-/* NAVBAR */
-.navbar {
-  position:fixed;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:15px 30px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(12px);
-  z-index:1000;
-}
-
-.logo {
-  font-family:'Dancing Script';
-  font-size:1.8rem;
-  color:#ffd700;
-}
-
-.nav-links a {
-  margin:0 10px;
-  text-decoration:none;
-  color:#ccc;
-  font-size:14px;
-}
-.nav-links a:hover { color:#fff; }
-
-.admin-btn {
-  margin-left:10px;
-  cursor:pointer;
-  opacity:0.5;
-}
-
-/* MAIN */
-main {
-  padding-top:90px;
-  max-width:1200px;
-  margin:auto;
-}
-
-/* SECTIONS */
-section {
-  margin:80px 20px;
-}
-
-/* HERO */
-#home h1 {
-  font-size:3rem;
-  color:#ffd700;
-}
-#home p {
-  color:#aaa;
-}
-
-/* UPLOAD */
-.upload-box {
-  display:none;
-  margin:20px 0;
-}
-.upload-btn {
-  background:linear-gradient(45deg,#eab308,#f97316);
-  padding:10px 20px;
-  border-radius:20px;
-  cursor:pointer;
-  color:#000;
-  font-weight:bold;
-}
-
-/* GALLERY */
-.gallery {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
-.card {
-  position:relative;
-}
-
-.card img {
-  width:100%;
-  border-radius:15px;
-}
-
-.delete {
-  position:absolute;
-  top:10px;
-  right:10px;
-  background:red;
-  border:none;
-  color:#fff;
-  border-radius:50%;
-  width:30px;
-  height:30px;
-  display:none;
-  cursor:pointer;
-}
-
-/* ABOUT */
-#about p {
-  color:#ccc;
-  line-height:1.6;
-  max-width:600px;
-}
-
-/* CONTACT */
-#contact {
-  border-top:1px solid #333;
-  padding-top:30px;
-}
-
-.contact-btn {
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 20px;
-  border-radius:20px;
-  background:linear-gradient(45deg,#eab308,#f97316);
-  color:#000;
-  text-decoration:none;
-}
-
-footer {
-  text-align:center;
-  color:#666;
-  margin:40px 0;
-}
+body{background:#000;color:#fff;font-family:sans-serif;text-align:center}
+button{padding:8px 14px;margin:6px;border:none;border-radius:6px;cursor:pointer}
+.upload-btn{background:#eab308;color:#000}
+.delete-btn{background:red;color:#fff;position:absolute;top:5px;right:5px}
+.gallery{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.card{position:relative}
+img{width:180px;height:120px;object-fit:cover;border-radius:8px}
 </style>
 </head>
 
 <body>
+<h1>Dillu Captures (Admin Control)</h1>
 
-<div class="navbar">
-  <div class="logo">Dillu Captures</div>
+<!-- FOLDERS -->
+<div id="folders">
+  <h2>Newborn</h2>
+  <button class="upload-btn" onclick="uploadImage('newborn')">Upload</button>
+  <div class="gallery" id="newborn"></div>
 
-  <div class="nav-links">
-    <a href="#home">Home</a>
-    <a href="#gallery">Portfolio</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <span class="admin-btn" id="adminBtn">⚙️</span>
-  </div>
+  <h2>Kids</h2>
+  <button class="upload-btn" onclick="uploadImage('kids')">Upload</button>
+  <div class="gallery" id="kids"></div>
+
+  <h2>Haldi</h2>
+  <button class="upload-btn" onclick="uploadImage('haldi')">Upload</button>
+  <div class="gallery" id="haldi"></div>
+
+  <h2>Temple</h2>
+  <button class="upload-btn" onclick="uploadImage('temple')">Upload</button>
+  <div class="gallery" id="temple"></div>
+
+  <h2>Portrait</h2>
+  <button class="upload-btn" onclick="uploadImage('portrait')">Upload</button>
+  <div class="gallery" id="portrait"></div>
 </div>
 
-<main>
-
-<!-- HOME -->
-<section id="home">
-  <h1>Dillu Captures</h1>
-  <p>Turning real moments into timeless memories you’ll cherish forever.</p>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-  <h2>Portfolio</h2>
-
-  <div class="upload-box" id="uploadBox">
-    <input type="file" id="fileInput" multiple>
-  </div>
-
-  <div class="gallery" id="galleryGrid"></div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <h2>About</h2>
-  <p>
-    At Dillu Captures, we believe every moment has a story worth preserving. 
-    From newborn smiles to wedding rituals and candid portraits, we capture emotions 
-    in their purest form. Our approach is simple — natural light, real expressions, 
-    and timeless frames that feel as beautiful years later as they do today.
-  </p>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Email: dillucapture@gmail.com</p>
-  <p>Phone: +91 9700034138</p>
-
-  <a href="https://wa.me/919700034138" class="contact-btn">WhatsApp</a>
-</section>
-
-<footer>
-© 2025 Dillu Captures
-</footer>
-
-</main>
-
 <script>
+const ADMIN_PASSWORD = "1234"; // CHANGE THIS
 
-// PASSWORD
-const ADMIN_PASSWORD = "dillu@123";
-let isAdmin = sessionStorage.getItem("admin") === "true";
+function checkPassword(){
+  const pass = prompt("Enter Admin Password:");
+  return pass === ADMIN_PASSWORD;
+}
 
-const uploadBox = document.getElementById("uploadBox");
-const galleryGrid = document.getElementById("galleryGrid");
-
-if (isAdmin) uploadBox.style.display = "block";
-
-// ADMIN LOGIN
-document.getElementById("adminBtn").onclick = () => {
-  const pass = prompt("Enter admin password:");
-  if (pass === ADMIN_PASSWORD) {
-    isAdmin = true;
-    sessionStorage.setItem("admin", "true");
-    uploadBox.style.display = "block";
-    render();
-  } else {
-    alert("Wrong password");
+function uploadImage(folder){
+  if(!checkPassword()){
+    alert("Wrong Password");
+    return;
   }
-};
 
-// DATA
-let images = JSON.parse(localStorage.getItem("gallery") || "[]");
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
 
-// RENDER
-function render() {
-  galleryGrid.innerHTML = "";
+  input.onchange = e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
 
-  images.forEach((img, index) => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <img src="${img}">
-      <button class="delete">×</button>
-    `;
-
-    const del = card.querySelector(".delete");
-
-    if (isAdmin) {
-      del.style.display = "block";
-      del.onclick = () => {
-        if (confirm("Delete photo?")) {
-          images.splice(index,1);
-          localStorage.setItem("gallery", JSON.stringify(images));
-          render();
-        }
-      };
+    reader.onload = function(event){
+      const imgSrc = event.target.result;
+      addImageToFolder(folder, imgSrc);
+      saveToLocal(folder, imgSrc);
     }
 
-    galleryGrid.appendChild(card);
+    reader.readAsDataURL(file);
+  }
+
+  input.click();
+}
+
+function addImageToFolder(folder, src){
+  const container = document.getElementById(folder);
+
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const img = document.createElement('img');
+  img.src = src;
+
+  const delBtn = document.createElement('button');
+  delBtn.innerText = 'X';
+  delBtn.className = 'delete-btn';
+
+  delBtn.onclick = () => {
+    if(!checkPassword()){
+      alert("Wrong Password");
+      return;
+    }
+    card.remove();
+    removeFromLocal(folder, src);
+  }
+
+  card.appendChild(img);
+  card.appendChild(delBtn);
+  container.appendChild(card);
+}
+
+function saveToLocal(folder, src){
+  let data = JSON.parse(localStorage.getItem(folder)) || [];
+  data.push(src);
+  localStorage.setItem(folder, JSON.stringify(data));
+}
+
+function removeFromLocal(folder, src){
+  let data = JSON.parse(localStorage.getItem(folder)) || [];
+  data = data.filter(img => img !== src);
+  localStorage.setItem(folder, JSON.stringify(data));
+}
+
+function loadImages(){
+  ['newborn','kids','haldi','temple','portrait'].forEach(folder => {
+    let data = JSON.parse(localStorage.getItem(folder)) || [];
+    data.forEach(src => addImageToFolder(folder, src));
   });
 }
 
-render();
-
-// UPLOAD
-document.getElementById("fileInput").addEventListener("change", function(e){
-  const files = e.target.files;
-
-  for (let file of files) {
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      images.unshift(ev.target.result);
-      localStorage.setItem("gallery", JSON.stringify(images));
-      render();
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
+loadImages();
 </script>
 
 </body>
