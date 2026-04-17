@@ -9,68 +9,97 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
+
+/* 🌌 BACKGROUND */
 body{
   margin:0;
   font-family:Montserrat;
-  background:linear-gradient(135deg,#000,#020617);
   color:#fff;
+  background: radial-gradient(circle at 20% 20%, #0f172a, #000);
+  overflow-x:hidden;
+}
+
+/* glowing gradient blobs */
+body::before{
+  content:"";
+  position:fixed;
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(255,215,0,0.15), transparent);
+  top:-100px; left:-100px;
+  filter:blur(120px);
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(59,130,246,0.15), transparent);
+  bottom:-100px; right:-100px;
+  filter:blur(120px);
+}
+
+/* 🍏 GLASS */
+.glass{
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(30px) saturate(160%);
+  -webkit-backdrop-filter:blur(30px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:25px;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.15),
+    0 20px 60px rgba(0,0,0,0.7);
 }
 
 /* NAV */
 nav{
   position:fixed;
-  top:0;
   width:100%;
   display:flex;
   justify-content:center;
   z-index:1000;
 }
-nav div{
-  margin-top:10px;
+nav .glass{
+  margin-top:12px;
+  padding:12px 25px;
   display:flex;
   gap:25px;
-  padding:12px 25px;
   border-radius:50px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(15px);
 }
 
 /* LINKS */
-a{
-  color:#aaa;
-  text-decoration:none;
-}
+a{color:#aaa;text-decoration:none}
 a:hover{color:#fff}
 
 /* SECTION */
 section{
   max-width:1100px;
-  margin:110px auto;
-  padding:25px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.1);
+  margin:120px auto;
+  padding:30px;
 }
 
 /* HERO */
-#home{text-align:center;}
+#home{text-align:center}
 #home h1{
-  font-size:40px;
-  background:linear-gradient(90deg,gold,orange);
+  font-size:48px;
+  background:linear-gradient(90deg,gold,#f97316);
   -webkit-background-clip:text;
   color:transparent;
 }
+#home p{color:#ccc}
 
 /* TABS */
-.tabs{display:flex;gap:10px;flex-wrap:wrap;}
+.tabs{display:flex;gap:10px;flex-wrap:wrap}
 .tab{
-  padding:8px 16px;
-  border-radius:20px;
-  background:#111;
+  padding:8px 18px;
+  border-radius:30px;
   cursor:pointer;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
 }
-.tab.active{background:gold;color:black}
+.tab.active{
+  background:linear-gradient(135deg,gold,orange);
+  color:black;
+}
 
 /* GRID */
 .grid{
@@ -81,75 +110,84 @@ section{
 }
 
 /* CARD */
-.card{text-align:center;}
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  transition:0.4s;
+}
 .card img{
   width:100%;
-  border-radius:15px;
+  border-radius:20px;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.03);
 }
 
-/* BUTTONS */
+/* BUTTON */
 .btn{
-  padding:6px 10px;
+  padding:6px 12px;
   border:none;
   border-radius:20px;
   cursor:pointer;
-  margin:5px;
   font-size:12px;
+  margin:4px;
 }
 
-.upload{background:gold;color:black}
-.delete{background:red;color:white}
-.download{background:#2563eb;color:white}
-.addFolder{background:#22c55e;color:white}
+.upload{background:linear-gradient(135deg,gold,orange);color:black}
+.delete{background:linear-gradient(135deg,#ef4444,#dc2626);color:white}
+.download{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:white}
+.addFolder{background:linear-gradient(135deg,#22c55e,#16a34a);color:white}
 
 /* DROP ZONE */
 .drop{
-  border:2px dashed gold;
-  padding:20px;
-  border-radius:15px;
+  padding:25px;
+  border-radius:20px;
+  border:1px dashed rgba(255,255,255,0.3);
   text-align:center;
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 
 /* PROGRESS */
-.progressBox{display:none;margin-top:10px;}
+.progressBox{display:none;margin-top:10px}
 .progressBar{
   height:10px;
   width:0%;
-  background:gold;
   border-radius:10px;
+  background:linear-gradient(90deg,gold,orange);
 }
 
 /* CONTACT */
 .contact-icons{
   display:flex;
   gap:15px;
-  margin-top:15px;
   flex-wrap:wrap;
 }
 .contact-icons a{
-  padding:10px 15px;
+  padding:10px 16px;
   border-radius:30px;
-  background:rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.05);
   display:flex;
   gap:8px;
   align-items:center;
 }
 .contact-icons a:hover{
-  background:gold;
+  background:linear-gradient(135deg,gold,orange);
   color:black;
 }
 
+/* MOBILE */
 @media(max-width:600px){
   .grid{grid-template-columns:repeat(2,1fr)}
 }
+
 </style>
 </head>
 
 <body>
 
 <nav>
-  <div>
+  <div class="glass">
     <a href="#home">Home</a>
     <a href="#gallery">Portfolio</a>
     <a href="#about">About</a>
@@ -157,12 +195,12 @@ section{
   </div>
 </nav>
 
-<section id="home">
+<section id="home" class="glass">
   <h1>Dillu Captures</h1>
   <p>Premium photography with emotional storytelling ✨</p>
 </section>
 
-<section id="gallery">
+<section id="gallery" class="glass">
   <h2>Gallery</h2>
 
   <div style="display:flex;justify-content:space-between;">
@@ -173,12 +211,12 @@ section{
   <div id="folders"></div>
 </section>
 
-<section id="about">
+<section id="about" class="glass">
   <h2>About</h2>
-  <p>Dillu Captures specializes in newborn, kids, portraits and events photography.</p>
+  <p>Dillu Captures specializes in emotional, premium photography experiences.</p>
 </section>
 
-<section id="contact">
+<section id="contact" class="glass">
   <h2>Contact</h2>
   <p><i class="fas fa-envelope"></i> Dillucapture@gmail.com</p>
   <p><i class="fas fa-phone"></i> +91 9700034138</p>
@@ -199,20 +237,8 @@ let data=JSON.parse(localStorage.getItem("galleryData"))||{
   active:"All"
 };
 
-function save(){
-  localStorage.setItem("galleryData",JSON.stringify(data));
-}
-
-function checkAdmin(){
-  return prompt("Enter Admin Password")===ADMIN_PASSWORD;
-}
-
-function downloadImage(base64,i){
-  let a=document.createElement("a");
-  a.href=base64;
-  a.download="dillu_"+i+".jpg";
-  a.click();
-}
+function save(){localStorage.setItem("galleryData",JSON.stringify(data));}
+function checkAdmin(){return prompt("Admin Password")==ADMIN_PASSWORD;}
 
 function render(){
   let tabs=document.getElementById("tabs");
@@ -233,14 +259,14 @@ function render(){
 
       container.innerHTML=`
         <h3>${name}</h3>
-
         <div class="drop" id="dropZone">
-          Drag & Drop Images OR 
+          Drag & Drop Images
+          <br><br>
           <button class="btn upload" onclick="uploadImage('${name}')">Browse</button>
         </div>
 
         <div class="progressBox" id="progressBox">
-          <div style="background:#222;border-radius:10px;">
+          <div style="background:#111;border-radius:10px;">
             <div class="progressBar" id="progressBar"></div>
           </div>
           <small id="progressText"></small>
@@ -271,14 +297,17 @@ function render(){
   });
 }
 
+function downloadImage(img,i){
+  let a=document.createElement("a");
+  a.href=img;
+  a.download="photo_"+i+".jpg";
+  a.click();
+}
+
 function setupDragDrop(folder){
   let drop=document.getElementById("dropZone");
 
-  drop.ondragover=e=>{
-    e.preventDefault();
-    drop.style.background="rgba(255,215,0,0.1)";
-  };
-
+  drop.ondragover=e=>{e.preventDefault();drop.style.background="rgba(255,255,255,0.1)";}
   drop.ondragleave=()=>drop.style.background="transparent";
 
   drop.ondrop=e=>{
@@ -295,7 +324,6 @@ function uploadImage(folder){
   let input=document.createElement("input");
   input.type="file";
   input.multiple=true;
-  input.accept="image/*";
 
   input.onchange=e=>handleFiles(e.target.files,folder);
   input.click();
@@ -308,18 +336,14 @@ function handleFiles(files,folder){
 
   box.style.display="block";
 
-  let total=files.length;
-  let count=0;
+  let total=files.length,count=0;
 
   Array.from(files).forEach(file=>{
     let reader=new FileReader();
-
     reader.onload=()=>{
       data.folders[folder].push(reader.result);
       count++;
-
-      let percent=Math.round((count/total)*100);
-      bar.style.width=percent+"%";
+      bar.style.width=(count/total*100)+"%";
       text.innerText=`Uploading ${count}/${total}`;
 
       if(count===total){
@@ -327,14 +351,12 @@ function handleFiles(files,folder){
         render();
       }
     };
-
     reader.readAsDataURL(file);
   });
 }
 
 function deleteImage(folder,i){
   if(!checkAdmin()) return alert("Wrong password");
-
   data.folders[folder].splice(i,1);
   save();
   render();
