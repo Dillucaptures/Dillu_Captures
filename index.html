@@ -1,5 +1,38 @@
-<!-- ONLY GALLERY SECTION UPDATED (replace your gallery section with this) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Dillu Captures | Visual Storyteller</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<style>
+/* (YOUR FULL CSS UNCHANGED — kept same) */
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="#home" class="logo"><span>Dillu</span> Captures</a>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+      <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> Portfolio</a>
+      <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
+      <a href="#contact" class="nav-link"><i class="fas fa-phone"></i> Contact</a>
+      <div class="nav-indicator"></div>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO + ABOUT SAME (UNCHANGED) -->
+
+<!-- ===================== UPDATED GALLERY ===================== -->
 <section id="gallery" class="reveal">
   <h2>Featured stories</h2>
   <p>
@@ -83,7 +116,7 @@
       </div>
     </div>
 
-    <!-- BIRTHDAY (NEW) -->
+    <!-- BIRTHDAY -->
     <div class="folder" data-folder="birthday">
       <div class="folder-header">
         <h3>Birthday Shoots</h3>
@@ -91,7 +124,6 @@
       </div>
 
       <div class="gallery-grid">
-
         <a class="gallery-card" href="Images/birthday1.webp" target="_blank">
           <img src="Images/birthday1.webp">
         </a>
@@ -99,9 +131,54 @@
         <a class="gallery-card" href="Images/birthday2.webp" target="_blank">
           <img src="Images/birthday2.webp">
         </a>
-
       </div>
     </div>
 
   </div>
 </section>
+<!-- ===================== END UPDATED GALLERY ===================== -->
+
+<!-- CONTACT SAME -->
+
+</main>
+
+<footer>© 2025 Dillu Captures. All rights reserved.</footer>
+
+<script>
+/* KEEP YOUR EXISTING JS */
+
+/* Gallery Folder System (works same) */
+const tabBtns = document.querySelectorAll('.tab-btn');
+const folders = document.querySelectorAll('.folder');
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const folderName = btn.dataset.folder;
+
+    tabBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    folders.forEach(folder => {
+      folder.classList.remove('active');
+      if (folder.dataset.folder === folderName) {
+        folder.classList.add('active');
+      }
+    });
+
+    updateFolderCounts();
+  });
+});
+
+function updateFolderCounts() {
+  document.querySelectorAll('.folder-count').forEach(countEl => {
+    const folder = countEl.closest('.folder');
+    const photoCount = folder.querySelectorAll('.gallery-card').length;
+    countEl.textContent = `${photoCount} photo${photoCount !== 1 ? 's' : ''}`;
+  });
+}
+
+window.addEventListener('load', updateFolderCounts);
+</script>
+
+</body>
+</html>
