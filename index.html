@@ -1,183 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Dillu Captures | Visual Storyteller</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dillu Captures</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <style>
-/* (YOUR FULL CSS UNCHANGED — kept same) */
+body { margin:0; font-family:Montserrat; background:#000; color:#fff; }
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:15px; }
+.gallery-card img { width:100%; border-radius:12px; }
+.tab-btn { margin:5px; padding:10px; cursor:pointer; background:#222; border:none; color:#fff; }
+.tab-btn.active { background:#eab308; color:#000; }
+.folder { display:none; }
+.folder.active { display:block; }
 </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-  <div class="navbar-inner">
-    <a href="#home" class="logo"><span>Dillu</span> Captures</a>
-    <div class="nav-links">
-      <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
-      <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> Portfolio</a>
-      <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
-      <a href="#contact" class="nav-link"><i class="fas fa-phone"></i> Contact</a>
-      <div class="nav-indicator"></div>
-    </div>
-  </div>
-</nav>
+<h1 style="text-align:center;">Dillu Captures</h1>
 
-<main>
+<div style="text-align:center;">
+<button class="tab-btn active" data-folder="all">All</button>
+<button class="tab-btn" data-folder="newborn">Newborn</button>
+<button class="tab-btn" data-folder="kids">Kids</button>
+<button class="tab-btn" data-folder="haldi">Haldi</button>
+<button class="tab-btn" data-folder="temple">Temple</button>
+<button class="tab-btn" data-folder="portrait">Portrait</button>
+</div>
 
-<!-- HERO + ABOUT SAME (UNCHANGED) -->
-
-<!-- ===================== UPDATED GALLERY ===================== -->
-<section id="gallery" class="reveal">
-  <h2>Featured stories</h2>
-  <p>
-    A small peek into the sessions that clients love most.
-  </p>
-
-  <!-- Tabs -->
-  <div class="gallery-tabs">
-    <button class="tab-btn active" data-folder="all">All</button>
-    <button class="tab-btn" data-folder="newborn">Newborn</button>
-    <button class="tab-btn" data-folder="kids">Kids</button>
-    <button class="tab-btn" data-folder="birthday">Birthday</button>
-  </div>
-
-  <div class="folders-grid">
-
-    <!-- ALL -->
-    <div class="folder active" data-folder="all">
-      <div class="folder-header">
-        <h3>All Photos</h3>
-        <span class="folder-count">0 photos</span>
-      </div>
-
-      <div class="gallery-grid">
-
-        <!-- Newborn -->
-        <a class="gallery-card" href="Images/baby1.webp" target="_blank">
-          <img src="Images/baby1.webp">
-        </a>
-
-        <a class="gallery-card" href="Images/baby2.webp" target="_blank">
-          <img src="Images/baby2.webp">
-        </a>
-
-        <!-- Kids -->
-        <a class="gallery-card" href="Images/kid1.webp" target="_blank">
-          <img src="Images/kid1.webp">
-        </a>
-
-        <!-- Birthday -->
-        <a class="gallery-card" href="Images/birthday1.webp" target="_blank">
-          <img src="Images/birthday1.webp">
-        </a>
-
-        <a class="gallery-card" href="Images/birthday2.webp" target="_blank">
-          <img src="Images/birthday2.webp">
-        </a>
-
-      </div>
-    </div>
-
-    <!-- NEWBORN -->
-    <div class="folder" data-folder="newborn">
-      <div class="folder-header">
-        <h3>Newborn</h3>
-        <span class="folder-count">0 photos</span>
-      </div>
-
-      <div class="gallery-grid">
-        <a class="gallery-card" href="Images/baby1.webp" target="_blank">
-          <img src="Images/baby1.webp">
-        </a>
-
-        <a class="gallery-card" href="Images/baby2.webp" target="_blank">
-          <img src="Images/baby2.webp">
-        </a>
-      </div>
-    </div>
-
-    <!-- KIDS -->
-    <div class="folder" data-folder="kids">
-      <div class="folder-header">
-        <h3>Kids</h3>
-        <span class="folder-count">0 photos</span>
-      </div>
-
-      <div class="gallery-grid">
-        <a class="gallery-card" href="Images/kid1.webp" target="_blank">
-          <img src="Images/kid1.webp">
-        </a>
-      </div>
-    </div>
-
-    <!-- BIRTHDAY -->
-    <div class="folder" data-folder="birthday">
-      <div class="folder-header">
-        <h3>Birthday Shoots</h3>
-        <span class="folder-count">0 photos</span>
-      </div>
-
-      <div class="gallery-grid">
-        <a class="gallery-card" href="Images/birthday1.webp" target="_blank">
-          <img src="Images/birthday1.webp">
-        </a>
-
-        <a class="gallery-card" href="Images/birthday2.webp" target="_blank">
-          <img src="Images/birthday2.webp">
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-<!-- ===================== END UPDATED GALLERY ===================== -->
-
-<!-- CONTACT SAME -->
-
-</main>
-
-<footer>© 2025 Dillu Captures. All rights reserved.</footer>
+<div class="folders-grid"></div>
 
 <script>
-/* KEEP YOUR EXISTING JS */
+const container = document.querySelector('.folders-grid');
 
-/* Gallery Folder System (works same) */
-const tabBtns = document.querySelectorAll('.tab-btn');
-const folders = document.querySelectorAll('.folder');
+async function loadImages() {
+  const res = await fetch('/api/images');
+  const images = await res.json();
 
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const folderName = btn.dataset.folder;
+  const categories = ['all','newborn','kids','haldi','temple','portrait'];
 
-    tabBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  container.innerHTML = '';
 
-    folders.forEach(folder => {
-      folder.classList.remove('active');
-      if (folder.dataset.folder === folderName) {
-        folder.classList.add('active');
-      }
-    });
+  categories.forEach(cat => {
+    const folder = document.createElement('div');
+    folder.className = 'folder ' + (cat==='all' ? 'active':'');
+    folder.dataset.folder = cat;
 
-    updateFolderCounts();
+    const filtered = cat==='all'
+      ? images
+      : images.filter(img => img.category === cat);
+
+    folder.innerHTML = `
+      <h2>${cat.toUpperCase()} (${filtered.length})</h2>
+      <div class="gallery-grid">
+        ${filtered.map(img => `
+          <div class="gallery-card">
+            <img src="${img.src}" loading="lazy">
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    container.appendChild(folder);
   });
-});
 
-function updateFolderCounts() {
-  document.querySelectorAll('.folder-count').forEach(countEl => {
-    const folder = countEl.closest('.folder');
-    const photoCount = folder.querySelectorAll('.gallery-card').length;
-    countEl.textContent = `${photoCount} photo${photoCount !== 1 ? 's' : ''}`;
+  initTabs();
+}
+
+function initTabs() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  const folders = document.querySelectorAll('.folder');
+
+  tabs.forEach(tab => {
+    tab.onclick = () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      folders.forEach(f => {
+        f.classList.toggle(
+          'active',
+          f.dataset.folder === tab.dataset.folder
+        );
+      });
+    };
   });
 }
 
-window.addEventListener('load', updateFolderCounts);
+window.onload = loadImages;
 </script>
 
 </body>
