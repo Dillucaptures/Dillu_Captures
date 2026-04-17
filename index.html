@@ -6,22 +6,14 @@
 <title>Dillu Captures</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 body{
   margin:0;
   font-family:Montserrat;
-  background:#000;
+  background:linear-gradient(135deg,#000,#020617);
   color:#fff;
-}
-
-/* GLASS UI */
-.glass{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:20px;
-  padding:20px;
 }
 
 /* NAV */
@@ -29,49 +21,81 @@ nav{
   position:fixed;
   top:0;
   width:100%;
-  padding:15px;
   display:flex;
   justify-content:center;
+  z-index:1000;
 }
+
 nav div{
+  margin-top:10px;
   display:flex;
-  gap:20px;
+  gap:25px;
+  padding:12px 25px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
 }
+
 a{
   color:#aaa;
   text-decoration:none;
+  font-size:14px;
 }
 a:hover{color:#fff}
 
 /* SECTIONS */
 section{
   max-width:1100px;
-  margin:100px auto;
-  padding:20px;
+  margin:110px auto;
+  padding:25px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.1);
 }
 
-/* GALLERY */
+/* HERO */
+#home{
+  text-align:center;
+}
+#home h1{
+  font-size:40px;
+  background:linear-gradient(90deg,gold,orange);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+#home p{
+  color:#ccc;
+}
+
+/* TABS */
 .tabs{
   display:flex;
   gap:10px;
-  margin-bottom:20px;
+  flex-wrap:wrap;
 }
-.tab{
-  padding:8px 15px;
-  border-radius:20px;
-  cursor:pointer;
-  background:#111;
-}
-.tab.active{background:gold;color:black}
 
+.tab{
+  padding:8px 16px;
+  border-radius:20px;
+  background:#111;
+  cursor:pointer;
+}
+.tab.active{
+  background:gold;
+  color:black;
+}
+
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:15px;
+  margin-top:15px;
 }
 
+/* CARD */
 .card{
-  position:relative;
   text-align:center;
 }
 .card img{
@@ -92,16 +116,30 @@ section{
 .upload{background:gold;color:black}
 .delete{background:red;color:white}
 .download{background:#2563eb;color:white}
-.addFolder{background:green;color:white}
-
-.top-actions{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+.addFolder{background:#22c55e;color:white}
 
 /* CONTACT */
-.contact a{color:gold}
+.contact-icons{
+  display:flex;
+  gap:15px;
+  margin-top:15px;
+  flex-wrap:wrap;
+}
+
+.contact-icons a{
+  padding:10px 15px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.08);
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:white;
+  transition:0.3s;
+}
+.contact-icons a:hover{
+  background:gold;
+  color:black;
+}
 
 /* MOBILE */
 @media(max-width:600px){
@@ -112,8 +150,9 @@ section{
 
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="glass">
+  <div>
     <a href="#home">Home</a>
     <a href="#gallery">Portfolio</a>
     <a href="#about">About</a>
@@ -121,15 +160,17 @@ section{
   </div>
 </nav>
 
-<section id="home" class="glass">
+<!-- HOME -->
+<section id="home">
   <h1>Dillu Captures</h1>
-  <p>Premium photography with emotional storytelling.</p>
+  <p>Premium photography with emotional storytelling ✨</p>
 </section>
 
-<section id="gallery" class="glass">
+<!-- GALLERY -->
+<section id="gallery">
   <h2>Gallery</h2>
 
-  <div class="top-actions">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
     <div class="tabs" id="tabs"></div>
     <button class="btn addFolder" onclick="addFolder()">+ Folder</button>
   </div>
@@ -137,15 +178,39 @@ section{
   <div id="folders"></div>
 </section>
 
-<section id="about" class="glass">
+<!-- ABOUT -->
+<section id="about">
   <h2>About</h2>
-  <p>Professional photographer capturing real emotions.</p>
+  <p>
+    Dillu Captures specializes in newborn, kids, portraits and events photography.
+    We capture real emotions and turn them into timeless memories.
+  </p>
 </section>
 
-<section id="contact" class="glass contact">
+<!-- CONTACT -->
+<section id="contact">
   <h2>Contact</h2>
-  <p>Email: <a href="#">dillucapture@gmail.com</a></p>
-  <p>Phone: <a href="#">+91 9700034138</a></p>
+
+  <p><i class="fas fa-envelope"></i> Dillucapture@gmail.com</p>
+  <p><i class="fas fa-phone"></i> +91 9700034138</p>
+
+  <div class="contact-icons">
+    <a href="mailto:Dillucapture@gmail.com">
+      <i class="fas fa-envelope"></i> Email
+    </a>
+
+    <a href="tel:9700034138">
+      <i class="fas fa-phone"></i> Call
+    </a>
+
+    <a href="https://wa.me/919700034138" target="_blank">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+
+    <a href="https://instagram.com" target="_blank">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+  </div>
 </section>
 
 <script>
@@ -157,31 +222,25 @@ let data = JSON.parse(localStorage.getItem("galleryData")) || {
   active:"All"
 };
 
-/* SAVE */
 function save(){
   localStorage.setItem("galleryData",JSON.stringify(data));
 }
 
-/* PASSWORD CHECK */
 function checkAdmin(){
   let pass = prompt("Enter Admin Password");
   return pass === ADMIN_PASSWORD;
 }
 
-/* DOWNLOAD FUNCTION */
-function downloadImage(base64, index){
-  const link = document.createElement("a");
-  link.href = base64;
-  link.download = "dillu_capture_" + index + ".jpg";
-  document.body.appendChild(link);
+function downloadImage(base64,index){
+  const link=document.createElement("a");
+  link.href=base64;
+  link.download="dillu_"+index+".jpg";
   link.click();
-  document.body.removeChild(link);
 }
 
-/* RENDER */
 function render(){
-  const tabs = document.getElementById("tabs");
-  const folders = document.getElementById("folders");
+  const tabs=document.getElementById("tabs");
+  const folders=document.getElementById("folders");
 
   tabs.innerHTML="";
   folders.innerHTML="";
@@ -196,12 +255,10 @@ function render(){
     if(data.active===name){
       let container=document.createElement("div");
 
-      let header=document.createElement("div");
-      header.innerHTML=`
+      container.innerHTML=`
         <h3>${name}</h3>
         <button class="btn upload" onclick="uploadImage('${name}')">Upload</button>
       `;
-      container.appendChild(header);
 
       let grid=document.createElement("div");
       grid.className="grid";
@@ -277,7 +334,6 @@ function addFolder(){
   render();
 }
 
-/* INIT */
 render();
 </script>
 
