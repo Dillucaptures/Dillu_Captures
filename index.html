@@ -3,301 +3,267 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dillu Captures | Premium Photography Studio</title>
+<title>Dillu Captures | Photography</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merriweather:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <style>
-/* ===== GLOBAL ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:Montserrat;
-  color:#f5f5f5;
   background:#050505;
+  color:#fff;
   overflow-x:hidden;
 }
 
-/* ===== BACKGROUND ANIMATION ===== */
-body::before,
-body::after{
+/* ===== Premium Background ===== */
+body::before{
   content:"";
   position:fixed;
-  inset:-200px;
-  z-index:-1;
-  background: radial-gradient(circle at 20% 20%, rgba(212,175,55,0.15), transparent 40%),
-              radial-gradient(circle at 80% 80%, rgba(120,119,198,0.12), transparent 45%),
-              radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 60%);
-  animation: floatBg 18s ease-in-out infinite alternate;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,200,80,0.15), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,100,100,0.12), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(100,150,255,0.10), transparent 50%);
   filter: blur(60px);
+  z-index:-1;
 }
 
-body::after{
-  animation: floatBg2 22s ease-in-out infinite alternate;
-}
-
-@keyframes floatBg{
-  0%{transform:translate(0,0) scale(1);}
-  100%{transform:translate(-40px,30px) scale(1.1);}
-}
-
-@keyframes floatBg2{
-  0%{transform:translate(0,0);}
-  100%{transform:translate(50px,-30px);}
-}
-
-/* ===== NAV ===== */
+/* NAV */
 nav{
   position:fixed;
-  top:0;
-  width:100%;
+  top:0;left:0;right:0;
+  padding:15px 30px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 8%;
   background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(12px);
   z-index:1000;
-  border-bottom:1px solid rgba(255,255,255,0.05);
 }
-
 .logo{
-  font-family:"Playfair Display";
-  font-size:22px;
-  letter-spacing:3px;
-  color:#d4af37;
+  font-family:Dancing Script;
+  font-size:26px;
+  color:#f5c542;
 }
-
 nav a{
-  margin-left:20px;
-  text-decoration:none;
   color:#aaa;
-  font-size:12px;
-  letter-spacing:2px;
-  transition:0.3s;
+  margin:0 12px;
+  text-decoration:none;
+  font-size:13px;
+  text-transform:uppercase;
 }
+nav a:hover{color:#fff}
 
-nav a:hover{
-  color:#fff;
-}
-
-/* ===== HERO ===== */
+/* HERO */
 .hero{
   height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   text-align:center;
-  position:relative;
-  padding:0 20px;
+  flex-direction:column;
+  padding:20px;
 }
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  animation: fadeUp 1.5s ease;
-}
-
 .hero h1{
-  font-family:"Playfair Display";
+  font-family:Dancing Script;
   font-size:60px;
-  letter-spacing:3px;
+  color:#f5c542;
 }
-
 .hero p{
-  margin-top:15px;
-  color:#aaa;
-  font-size:14px;
-  letter-spacing:2px;
+  max-width:600px;
+  color:#bbb;
+  margin-top:10px;
 }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* ===== SECTIONS ===== */
+/* SECTIONS */
 section{
-  padding:100px 10%;
+  padding:80px 10%;
 }
 
-/* ===== ABOUT ===== */
-.about h2,
-.gallery-title,
-.contact h2{
-  font-family:"Playfair Display";
-  font-size:38px;
+/* TITLE */
+h2{
+  font-size:28px;
   margin-bottom:20px;
+  color:#fff;
 }
 
-.about p{
-  color:#aaa;
-  max-width:800px;
-  line-height:1.8;
+/* FILTER BUTTONS */
+.filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
 }
-
-/* ===== GALLERY ===== */
-.gallery-title{
-  margin-bottom:30px;
-}
-
-.gallery{
-  column-count:3;
-  column-gap:15px;
-}
-
-.gallery img{
-  width:100%;
-  margin-bottom:15px;
-  border-radius:16px;
+.filters button{
+  padding:10px 18px;
+  border:1px solid #444;
+  background:transparent;
+  color:#ccc;
   cursor:pointer;
-  transition:0.5s;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
-}
-
-.gallery img:hover{
-  transform:scale(1.04);
-  filter:brightness(1.1);
-}
-
-/* ===== CONTACT ===== */
-.contact{
-  text-align:center;
-}
-
-.contact p{
-  color:#aaa;
-}
-
-.btn{
-  display:inline-block;
-  margin-top:25px;
-  padding:14px 30px;
-  border:1px solid #d4af37;
-  color:#d4af37;
-  text-decoration:none;
-  letter-spacing:2px;
-  transition:0.4s;
   border-radius:30px;
+  transition:0.3s;
 }
-
-.btn:hover{
-  background:#d4af37;
+.filters button.active,
+.filters button:hover{
+  background:#f5c542;
   color:#000;
 }
 
-/* ===== LIGHTBOX ===== */
-#lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:15px;
+  transition:0.4s;
+}
+.card img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  transition:0.6s;
+}
+.card:hover img{
+  transform:scale(1.1);
+}
+.overlay{
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  background:rgba(0,0,0,0.6);
+  padding:5px 10px;
+  font-size:12px;
+  border-radius:20px;
 }
 
-#lightbox img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:12px;
+/* CONTACT */
+.contact{
+  text-align:center;
+  color:#aaa;
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){
-  .gallery{column-count:2;}
-  .hero h1{font-size:40px;}
-}
-
-@media(max-width:600px){
-  .gallery{column-count:1;}
-  nav{flex-direction:column;gap:10px;}
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  color:#666;
+  font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="logo">DILLU CAPTURES</div>
+  <div class="logo">Dillu Captures</div>
   <div>
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-    <a href="#gallery">GALLERY</a>
-    <a href="#contact">CONTACT</a>
+    <a href="#home">Home</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero" id="home">
-  <div class="hero-content">
-    <h1>Capturing Emotions</h1>
-    <p>Portrait • Kids • Events • Lifestyle Photography</p>
-  </div>
+  <h1>Dillu Captures</h1>
+  <p>Luxury photography for timeless memories — Kids, Weddings, Portraits, and lifestyle storytelling.</p>
 </div>
 
-<!-- ABOUT -->
-<section id="about" class="about">
-  <h2>About Studio</h2>
-  <p>
-    Dillu Captures is a premium photography studio focused on storytelling through light, emotion, and cinematic framing.
-    We don’t just take photos — we preserve feelings, moments, and timeless memories.
-  </p>
-</section>
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2>Portfolio</h2>
 
-<!-- GALLERY -->
-<section id="gallery">
-  <div class="gallery-title">Portfolio</div>
+  <!-- FILTERS -->
+  <div class="filters">
+    <button class="active" onclick="filter('all')">All</button>
+    <button onclick="filter('kids')">Kids</button>
+    <button onclick="filter('haldi')">Haldi</button>
+    <button onclick="filter('outdoor')">Outdoor</button>
+    <button onclick="filter('bikes')">Bikes & Cars</button>
+    <button onclick="filter('portraits')">Portraits</button>
+  </div>
 
+  <!-- GALLERY -->
   <div class="gallery">
-    <img src="Images/kids/1.webp">
-    <img src="Images/kids/2.webp">
-    <img src="Images/haldi/1.webp">
-    <img src="Images/haldi/2.webp">
-    <img src="Images/street/1.webp">
-    <img src="Images/bikes/1.webp">
-    <img src="Images/maternity/1.webp">
-    <img src="Images/kids/3.webp">
-    <img src="Images/haldi/3.webp">
+
+    <!-- KIDS -->
+    <div class="card kids">
+      <img src="Images/kids/1.jpg">
+      <div class="overlay">Kids</div>
+    </div>
+    <div class="card kids">
+      <img src="Images/kids/2.jpg">
+      <div class="overlay">Kids</div>
+    </div>
+
+    <!-- HALDI -->
+    <div class="card haldi">
+      <img src="Images/haldi/1.jpg">
+      <div class="overlay">Haldi</div>
+    </div>
+    <div class="card haldi">
+      <img src="Images/haldi/2.jpg">
+      <div class="overlay">Haldi</div>
+    </div>
+
+    <!-- OUTDOOR -->
+    <div class="card outdoor">
+      <img src="Images/outdoor/1.jpg">
+      <div class="overlay">Outdoor</div>
+    </div>
+    <div class="card outdoor">
+      <img src="Images/outdoor/2.jpg">
+      <div class="overlay">Outdoor</div>
+    </div>
+
+    <!-- BIKES -->
+    <div class="card bikes">
+      <img src="Images/bikes/1.jpg">
+      <div class="overlay">Bikes</div>
+    </div>
+
+    <!-- PORTRAITS -->
+    <div class="card portraits">
+      <img src="Images/portraits/1.jpg">
+      <div class="overlay">Portrait</div>
+    </div>
+
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="contact">
-  <h2>Let’s Create Something Beautiful</h2>
-  <p>Book your session today and turn your moments into timeless memories.</p>
-
-  <a class="btn" href="https://wa.me/919700034138">BOOK ON WHATSAPP</a>
+  <h2>Contact</h2>
+  <p>Email: dillucapture@gmail.com</p>
+  <p>Phone: +91 9700034138</p>
 </section>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="this.style.display='none'">
-  <img id="lightbox-img">
-</div>
+<footer>
+  © 2026 Dillu Captures | All Rights Reserved
+</footer>
 
 <script>
-const imgs = document.querySelectorAll(".gallery img");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
+function filter(category){
+  let cards = document.querySelectorAll('.card');
+  let buttons = document.querySelectorAll('.filters button');
 
-imgs.forEach(img=>{
-  img.addEventListener("click",()=>{
-    lightbox.style.display="flex";
-    lightboxImg.src = img.src;
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  cards.forEach(card=>{
+    if(category === 'all'){
+      card.style.display = "block";
+    } else {
+      card.style.display = card.classList.contains(category) ? "block" : "none";
+    }
   });
-});
+}
 </script>
 
 </body>
