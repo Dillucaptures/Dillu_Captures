@@ -9,7 +9,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:Montserrat;
   background:#050505;
@@ -17,44 +23,69 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== Premium Background ===== */
+/* ===== iOS STYLE PREMIUM BACKGROUND ===== */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,200,80,0.15), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,100,100,0.12), transparent 45%),
-    radial-gradient(circle at 50% 100%, rgba(100,150,255,0.10), transparent 50%);
-  filter: blur(60px);
+    radial-gradient(circle at 20% 20%, rgba(255,200,80,0.18), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(120,160,255,0.14), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(255,120,120,0.10), transparent 50%);
+  filter: blur(80px);
   z-index:-1;
+  animation: floatBg 12s ease-in-out infinite alternate;
 }
 
-/* NAV */
+@keyframes floatBg{
+  from{transform:scale(1) translateY(0px);}
+  to{transform:scale(1.1) translateY(20px);}
+}
+
+/* ===== NAV (iOS GLASS STYLE) ===== */
 nav{
   position:fixed;
-  top:0;left:0;right:0;
-  padding:15px 30px;
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  max-width:1100px;
+  padding:14px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(12px);
+
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:18px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
   z-index:1000;
 }
+
 .logo{
   font-family:Dancing Script;
-  font-size:26px;
+  font-size:24px;
   color:#f5c542;
 }
+
+/* NAV LINKS */
 nav a{
-  color:#aaa;
-  margin:0 12px;
+  color:#ccc;
+  margin:0 10px;
   text-decoration:none;
-  font-size:13px;
+  font-size:12px;
   text-transform:uppercase;
+  letter-spacing:1px;
+  padding:6px 10px;
+  border-radius:10px;
+  transition:0.3s;
 }
-nav a:hover{color:#fff}
+
+nav a:hover{
+  background:rgba(255,255,255,0.1);
+  color:#fff;
+}
 
 /* HERO */
 .hero{
@@ -66,11 +97,13 @@ nav a:hover{color:#fff}
   flex-direction:column;
   padding:20px;
 }
+
 .hero h1{
   font-family:Dancing Script;
-  font-size:60px;
+  font-size:65px;
   color:#f5c542;
 }
+
 .hero p{
   max-width:600px;
   color:#bbb;
@@ -82,11 +115,25 @@ section{
   padding:80px 10%;
 }
 
-/* TITLE */
-h2{
+/* ABOUT (NEW PREMIUM SECTION) */
+.about{
+  margin-top:60px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
+  backdrop-filter:blur(20px);
+  padding:40px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+
+.about h2{
   font-size:28px;
-  margin-bottom:20px;
-  color:#fff;
+  margin-bottom:15px;
+}
+
+.about p{
+  color:#bbb;
+  line-height:1.7;
 }
 
 /* FILTER BUTTONS */
@@ -96,15 +143,18 @@ h2{
   flex-wrap:wrap;
   margin-bottom:25px;
 }
+
 .filters button{
   padding:10px 18px;
-  border:1px solid #444;
-  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.05);
   color:#ccc;
   cursor:pointer;
   border-radius:30px;
   transition:0.3s;
+  backdrop-filter:blur(10px);
 }
+
 .filters button.active,
 .filters button:hover{
   background:#f5c542;
@@ -117,27 +167,33 @@ h2{
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:15px;
 }
+
 .card{
   position:relative;
   overflow:hidden;
-  border-radius:15px;
+  border-radius:18px;
   transition:0.4s;
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
 }
+
 .card img{
   width:100%;
   height:260px;
   object-fit:cover;
   transition:0.6s;
 }
+
 .card:hover img{
   transform:scale(1.1);
 }
+
 .overlay{
   position:absolute;
   bottom:10px;
   left:10px;
   background:rgba(0,0,0,0.6);
-  padding:5px 10px;
+  padding:6px 12px;
   font-size:12px;
   border-radius:20px;
 }
@@ -160,10 +216,12 @@ footer{
 
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
     <a href="#home">Home</a>
+    <a href="#about">About</a>
     <a href="#portfolio">Portfolio</a>
     <a href="#contact">Contact</a>
   </div>
@@ -174,6 +232,20 @@ footer{
   <h1>Dillu Captures</h1>
   <p>Luxury photography for timeless memories — Kids, Weddings, Portraits, and lifestyle storytelling.</p>
 </div>
+
+<!-- ABOUT SECTION (NEW) -->
+<section id="about">
+  <div class="about">
+    <h2>About Dillu Captures</h2>
+    <p>
+      I am a passionate photographer focused on capturing real emotions, natural light, and cinematic storytelling.
+      Every shoot is designed to feel relaxed, personal, and artistic — not forced.
+      <br><br>
+      From kids’ innocence to wedding emotions, every frame is crafted with attention to detail, mood, and authenticity.
+      My goal is simple: turn your moments into timeless visual memories.
+    </p>
+  </div>
+</section>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
@@ -192,43 +264,26 @@ footer{
   <!-- GALLERY -->
   <div class="gallery">
 
-    <!-- KIDS -->
     <div class="card kids">
       <img src="Images/kids/1.jpg">
       <div class="overlay">Kids</div>
     </div>
-    <div class="card kids">
-      <img src="Images/kids/2.jpg">
-      <div class="overlay">Kids</div>
-    </div>
 
-    <!-- HALDI -->
     <div class="card haldi">
       <img src="Images/haldi/1.jpg">
       <div class="overlay">Haldi</div>
     </div>
-    <div class="card haldi">
-      <img src="Images/haldi/2.jpg">
-      <div class="overlay">Haldi</div>
-    </div>
 
-    <!-- OUTDOOR -->
     <div class="card outdoor">
       <img src="Images/outdoor/1.jpg">
       <div class="overlay">Outdoor</div>
     </div>
-    <div class="card outdoor">
-      <img src="Images/outdoor/2.jpg">
-      <div class="overlay">Outdoor</div>
-    </div>
 
-    <!-- BIKES -->
     <div class="card bikes">
       <img src="Images/bikes/1.jpg">
       <div class="overlay">Bikes</div>
     </div>
 
-    <!-- PORTRAITS -->
     <div class="card portraits">
       <img src="Images/portraits/1.jpg">
       <div class="overlay">Portrait</div>
