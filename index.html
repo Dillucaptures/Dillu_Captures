@@ -45,24 +45,18 @@ body{
   position:relative;
   font-family:"Dancing Script";
   font-size:40px;
-  letter-spacing:1px;
 }
 
-/* dark base text */
-.brand-bg{
-  color:#222;
-}
+.brand-bg{ color:#222; }
 
-/* gold fill text */
 .brand-fill{
   position:absolute;
   top:0;
   left:0;
   width:0%;
-  white-space:nowrap;
   overflow:hidden;
+  white-space:nowrap;
   color:gold;
-  text-shadow:0 0 20px rgba(255,215,0,0.4);
 }
 
 /* loading bar */
@@ -73,7 +67,6 @@ body{
   border-radius:50px;
   margin-top:25px;
   overflow:hidden;
-  border:1px solid rgba(0,255,100,0.2);
 }
 
 .load-bar span{
@@ -81,17 +74,9 @@ body{
   height:100%;
   width:0%;
   background:linear-gradient(90deg,#00ff66,#00cc55);
-  box-shadow:0 0 15px #00ff66;
 }
 
-/* percentage */
-.percent{
-  font-size:12px;
-  color:#aaa;
-  margin-top:10px;
-}
-
-/* ================= NAV ================= */
+/* NAV */
 nav{
   position:fixed;
   top:20px;
@@ -105,7 +90,6 @@ nav{
   padding:14px 20px;
   border-radius:18px;
   background:rgba(255,255,255,0.06);
-  border:1px solid rgba(245,197,66,0.15);
   backdrop-filter:blur(22px);
   z-index:1000;
 }
@@ -123,7 +107,6 @@ nav a{
   font-size:12px;
   padding:6px 10px;
   border-radius:10px;
-  transition:0.3s;
 }
 
 nav a:hover,
@@ -153,14 +136,6 @@ section{
   padding:100px 10%;
 }
 
-/* ABOUT */
-.about-box{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(245,197,66,0.15);
-  padding:30px;
-  border-radius:20px;
-}
-
 /* FOLDERS */
 .folders{
   display:grid;
@@ -175,8 +150,8 @@ section{
   padding:40px;
   text-align:center;
   border-radius:16px;
-  transition:0.4s;
   cursor:pointer;
+  transition:0.4s;
 }
 
 .folder:hover{
@@ -189,7 +164,8 @@ section{
   display:none;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:18px;
-  margin-top:30px;
+  margin-top:20px;
+  margin-bottom:40px;
 }
 
 .gallery.active{
@@ -238,22 +214,13 @@ section{
   background:#f5c542;
   color:#000;
 }
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px;
-  color:#666;
-  font-size:12px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOADER ================= -->
+<!-- LOADER -->
 <div class="loader" id="loader">
-
   <div class="brand-wrap">
     <div class="brand-bg">Dillu Captures</div>
     <div class="brand-fill" id="fillText">Dillu Captures</div>
@@ -262,113 +229,101 @@ footer{
   <div class="load-bar">
     <span id="bar"></span>
   </div>
-
-  <div class="percent" id="percent">Loading 0%</div>
 </div>
 
 <!-- NAV -->
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
-    <a onclick="scrollToSec('home',this)" class="active">Home</a>
-    <a onclick="scrollToSec('about',this)">About</a>
-    <a onclick="scrollToSec('portfolio',this)">Portfolio</a>
-    <a onclick="scrollToSec('contact',this)">Contact</a>
+    <a class="active">Home</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<div class="hero" id="home">
+<div class="hero">
   <h1>Dillu Captures</h1>
-  <p>Luxury cinematic photography capturing emotion</p>
 </div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-box">
-    <h2>About Me</h2>
-    <p>We capture cinematic wedding & portrait moments with emotion and light.</p>
-  </div>
-</section>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
+
   <h2>Folders</h2>
 
   <div class="folders">
-    <div class="folder" onclick="openFolder('kids')">📸 Kids Shoot</div>
-    <div class="folder" onclick="openFolder('haldi')">🌼 Haldi Shoot</div>
-    <div class="folder" onclick="openFolder('outdoor')">🌿 Outdoor Shoot</div>
-    <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
+
+    <div class="folder" onclick="openFolder('kids',this)">📸 Kids Shoot</div>
+    <div class="folder" onclick="openFolder('haldi',this)">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="openFolder('outdoor',this)">🌿 Outdoor Shoot</div>
+    <div class="folder" onclick="openFolder('wedding',this)">💍 Wedding Shoot</div>
+
   </div>
 
+  <!-- KIDS -->
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/kids/1.jpg"></div>
+    <div class="card"><img src="Images/kids/2.jpg"></div>
   </div>
 
+  <!-- HALDI -->
   <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
+    <div class="card"><img src="Images/haldi/2.jpg"></div>
   </div>
 
+  <!-- OUTDOOR -->
   <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
+    <div class="card"><img src="Images/outdoor/2.jpg"></div>
   </div>
 
+  <!-- WEDDING -->
   <div class="gallery" id="wedding">
     <div class="card"><img src="Images/wedding/1.jpg"></div>
+    <div class="card"><img src="Images/wedding/2.jpg"></div>
   </div>
+
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <h2>Contact</h2>
-  <p>dillucapture@gmail.com | +91 9700034138</p>
-</section>
-
-<!-- CONTACT BAR -->
 <div class="contact-bar">
   <a href="tel:+919700034138">📞 Call</a>
   <a href="https://wa.me/919700034138">💬 WhatsApp</a>
   <a href="https://instagram.com/">📸 Instagram</a>
-  <a href="mailto:dillucapture@gmail.com">✉ Gmail</a>
 </div>
-
-<footer>© 2026 Dillu Captures</footer>
 
 <script>
 
 /* LOADER */
-let i = 0;
-let bar = document.getElementById("bar");
-let percent = document.getElementById("percent");
-let fill = document.getElementById("fillText");
+let i=0;
+let bar=document.getElementById("bar");
+let fill=document.getElementById("fillText");
 
-let load = setInterval(()=>{
+let load=setInterval(()=>{
   i++;
+  bar.style.width=i+"%";
+  fill.style.width=i+"%";
 
-  bar.style.width = i + "%";
-  percent.innerText = "Loading " + i + "%";
-
-  // TEXT FILL EFFECT
-  fill.style.width = i + "%";
-
-  if(i >= 100){
+  if(i>=100){
     clearInterval(load);
     document.getElementById("loader").classList.add("hide");
   }
 },20);
 
-/* NAV */
-function scrollToSec(id,el){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
-  el.classList.add("active");
-}
+/* OPEN FOLDER BELOW CLICK */
+function openFolder(id,el){
 
-/* FOLDERS */
-function openFolder(id){
-  document.querySelectorAll(".gallery").forEach(g=>g.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".gallery").forEach(g=>{
+    g.classList.remove("active");
+  });
+
+  let target=document.getElementById(id);
+  target.classList.add("active");
+
+  // move gallery directly under clicked folder
+  el.insertAdjacentElement("afterend",target);
+
+  // scroll smoothly
+  target.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 </script>
