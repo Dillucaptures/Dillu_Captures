@@ -26,7 +26,7 @@ body{
 .loader{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle at center,#0a0a0a,#000);
+  background:radial-gradient(circle at center,#0b0b0b,#000);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -39,6 +39,7 @@ body{
   pointer-events:none;
 }
 
+/* loader content */
 .loader-box{
   text-align:center;
   animation:fadeUp 1s ease;
@@ -49,11 +50,50 @@ body{
   to{opacity:1; transform:translateY(0);}
 }
 
-/* SONY CAMERA IMAGE */
-.loader-box img{
-  width:140px;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,0.9));
-  animation:float 2.2s ease-in-out infinite;
+/* ================= CAMERA (ANIMATED SVG STYLE) ================= */
+.camera{
+  width:150px;
+  height:110px;
+  margin:auto;
+  position:relative;
+  animation:float 2.5s ease-in-out infinite;
+}
+
+/* camera body */
+.camera-body{
+  width:150px;
+  height:90px;
+  background:linear-gradient(145deg,#1c1c1c,#0a0a0a);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:16px;
+  position:relative;
+  box-shadow:0 20px 40px rgba(0,0,0,0.8);
+}
+
+/* lens */
+.lens{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:radial-gradient(circle,#111,#000);
+  border:3px solid #00ff88;
+  position:absolute;
+  top:22px;
+  left:52px;
+  box-shadow:0 0 25px rgba(0,255,136,0.5);
+  animation:pulse 1.8s infinite;
+}
+
+/* top flash */
+.flash{
+  width:40px;
+  height:10px;
+  background:#222;
+  position:absolute;
+  top:-10px;
+  left:55px;
+  border-radius:4px;
+  border:1px solid rgba(255,255,255,0.1);
 }
 
 @keyframes float{
@@ -62,24 +102,31 @@ body{
   100%{transform:translateY(0);}
 }
 
+@keyframes pulse{
+  0%{transform:scale(0.95); opacity:0.6;}
+  50%{transform:scale(1.1); opacity:1;}
+  100%{transform:scale(0.95); opacity:0.6;}
+}
+
+/* ================= TITLE ================= */
 .loader-title{
   font-family:Dancing Script;
   font-size:32px;
-  color:#f5c542;
-  margin-top:10px;
+  color:#00ff88;
+  margin-top:12px;
   letter-spacing:1px;
+  text-shadow:0 0 20px rgba(0,255,136,0.4);
 }
 
 /* ================= PREMIUM LOADING BAR ================= */
 .loading-bar{
-  width:260px;
+  width:280px;
   height:6px;
   background:rgba(255,255,255,0.08);
   border-radius:50px;
   margin:22px auto 10px;
   overflow:hidden;
   position:relative;
-  box-shadow:inset 0 0 10px rgba(0,0,0,0.5);
 }
 
 /* glow track */
@@ -87,9 +134,8 @@ body{
   content:"";
   position:absolute;
   inset:-2px;
-  border-radius:50px;
   background:linear-gradient(90deg,transparent,#00ff88,transparent);
-  opacity:0.3;
+  opacity:0.25;
   filter:blur(8px);
 }
 
@@ -97,16 +143,16 @@ body{
 .progress{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#00ff88,#00c3ff);
+  background:linear-gradient(90deg,#00ff88,#00c853);
   border-radius:50px;
   transition:0.25s ease;
-  box-shadow:0 0 15px rgba(0,255,136,0.6);
+  box-shadow:0 0 20px rgba(0,255,136,0.6);
 }
 
+/* text */
 #loading-text{
   font-size:12px;
   color:#aaa;
-  margin-top:8px;
 }
 
 /* ================= BACKGROUND ================= */
@@ -114,11 +160,10 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:
-    url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80")
-    center/cover no-repeat;
+  background:url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80")
+  center/cover no-repeat;
   opacity:0.10;
-  filter: blur(2px);
+  filter:blur(2px);
   z-index:-3;
 }
 
@@ -130,7 +175,7 @@ body::after{
     radial-gradient(circle at 20% 20%, rgba(255,200,100,0.20), transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(120,160,255,0.15), transparent 45%),
     radial-gradient(circle at 50% 100%, rgba(255,80,120,0.12), transparent 55%);
-  filter: blur(80px);
+  filter:blur(80px);
   z-index:-2;
 }
 
@@ -156,20 +201,7 @@ nav{
 .logo{
   font-family:Dancing Script;
   font-size:26px;
-  color:#f5c542;
-}
-
-nav a{
-  color:#bbb;
-  text-decoration:none;
-  margin:0 10px;
-  font-size:12px;
-  cursor:pointer;
-}
-
-nav a:hover,
-nav a.active{
-  color:#fff;
+  color:#00ff88;
 }
 
 /* HERO */
@@ -180,19 +212,12 @@ nav a.active{
   justify-content:center;
   align-items:center;
   text-align:center;
-  opacity:0;
-  transform:scale(1.05);
-  animation:fadeIn 1.5s ease forwards;
-}
-
-@keyframes fadeIn{
-  to{opacity:1; transform:scale(1);}
 }
 
 .hero h1{
   font-family:Dancing Script;
   font-size:72px;
-  color:#f5c542;
+  color:#00ff88;
 }
 
 /* SECTIONS */
@@ -206,14 +231,6 @@ section{
 section.show{
   opacity:1;
   transform:translateY(0);
-}
-
-/* ABOUT */
-.about{
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:20px;
-  padding:40px;
 }
 
 /* GALLERY */
@@ -245,11 +262,6 @@ section.show{
 
 .card:hover img{
   transform:scale(1.12);
-}
-
-/* CONTACT */
-.contact{
-  text-align:center;
 }
 
 /* CONTACT BAR */
@@ -291,12 +303,15 @@ footer{
 
 <body>
 
-<!-- ================= LOADER ================= -->
+<!-- LOADER -->
 <div class="loader" id="loader">
   <div class="loader-box">
 
-    <!-- SONY CAMERA IMAGE -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Sony_a7III.jpg" alt="Sony Camera">
+    <div class="camera">
+      <div class="camera-body"></div>
+      <div class="lens"></div>
+      <div class="flash"></div>
+    </div>
 
     <div class="loader-title">Dillu Captures</div>
 
@@ -310,39 +325,18 @@ footer{
 
 <nav>
   <div class="logo">Dillu Captures</div>
-  <div>
-    <a onclick="goTo('home', this)" class="active">Home</a>
-    <a onclick="goTo('about', this)">About</a>
-    <a onclick="goTo('portfolio', this)">Portfolio</a>
-    <a onclick="goTo('contact', this)">Contact</a>
-  </div>
 </nav>
 
-<div class="hero" id="home">
+<div class="hero">
   <h1>Dillu Captures</h1>
-  <p>Luxury cinematic photography capturing emotion and timeless memories.</p>
+  <p>Luxury cinematic photography capturing emotion</p>
 </div>
 
-<section id="about">
-  <div class="about">
-    <h2>About Me</h2>
-    <p>Cinematic storytelling through light and emotion.</p>
-  </div>
-</section>
-
-<section id="portfolio">
-  <h2>Portfolio</h2>
+<section>
   <div class="gallery">
     <div class="card"><img src="Images/kids/1.jpg"></div>
     <div class="card"><img src="Images/haldi/1.jpg"></div>
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="contact">
-    <h2>Contact</h2>
-    <p>dillucapture@gmail.com | +91 9700034138</p>
   </div>
 </section>
 
@@ -357,6 +351,7 @@ footer{
 
 <script>
 
+/* LOADER */
 let progress = 0;
 let bar = document.getElementById("progress");
 let text = document.getElementById("loading-text");
@@ -370,16 +365,11 @@ let load = setInterval(()=>{
     clearInterval(load);
     setTimeout(()=>{
       document.getElementById("loader").classList.add("hidden");
-    },500);
+    },600);
   }
 },18);
 
-function goTo(id, el){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
-  el.classList.add("active");
-}
-
+/* SCROLL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
