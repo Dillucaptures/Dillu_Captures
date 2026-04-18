@@ -49,7 +49,7 @@ body{
   to{opacity:1; transform:translateY(0);}
 }
 
-/* ================= CAMERA ================= */
+/* CAMERA */
 .camera{
   width:150px;
   height:110px;
@@ -104,17 +104,14 @@ body{
   100%{transform:scale(0.95); opacity:0.6;}
 }
 
-/* ================= TITLE ================= */
 .loader-title{
   font-family:Dancing Script;
   font-size:32px;
   color:#f5c542;
   margin-top:12px;
-  letter-spacing:1px;
-  text-shadow:0 0 20px rgba(245,197,66,0.4);
 }
 
-/* ================= GOLD LOADING BAR ================= */
+/* LOADING BAR */
 .loading-bar{
   width:280px;
   height:6px;
@@ -122,7 +119,6 @@ body{
   border-radius:50px;
   margin:22px auto 10px;
   overflow:hidden;
-  position:relative;
 }
 
 .loading-bar::before{
@@ -140,7 +136,6 @@ body{
   background:linear-gradient(90deg,#f5c542,#ffdd77);
   border-radius:50px;
   transition:0.25s ease;
-  box-shadow:0 0 20px rgba(245,197,66,0.6);
 }
 
 #loading-text{
@@ -148,7 +143,7 @@ body{
   color:#aaa;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 body::before{
   content:"";
   position:fixed;
@@ -194,6 +189,23 @@ nav{
 .logo{
   font-family:Dancing Script;
   font-size:26px;
+  color:#f5c542;
+}
+
+nav .links a{
+  color:#bbb;
+  text-decoration:none;
+  margin:0 10px;
+  font-size:12px;
+  cursor:pointer;
+  padding:6px 10px;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+nav .links a:hover,
+nav .links a.active{
+  background:rgba(245,197,66,0.2);
   color:#f5c542;
 }
 
@@ -316,21 +328,37 @@ footer{
   </div>
 </div>
 
+<!-- NAV -->
 <nav>
   <div class="logo">Dillu Captures</div>
+
+  <div class="links">
+    <a onclick="goTo('home',this)" class="active">Home</a>
+    <a onclick="goTo('about',this)">About</a>
+    <a onclick="goTo('portfolio',this)">Portfolio</a>
+    <a onclick="goTo('contact',this)">Contact</a>
+  </div>
 </nav>
 
-<div class="hero">
+<div class="hero" id="home">
   <h1>Dillu Captures</h1>
   <p>Luxury cinematic photography capturing emotion</p>
 </div>
 
-<section>
+<section id="about">
+  <h2>About</h2>
+</section>
+
+<section id="portfolio">
   <div class="gallery">
     <div class="card"><img src="Images/kids/1.jpg"></div>
     <div class="card"><img src="Images/haldi/1.jpg"></div>
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
   </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
 </section>
 
 <div class="contact-bar">
@@ -344,6 +372,7 @@ footer{
 
 <script>
 
+/* LOADER */
 let progress = 0;
 let bar = document.getElementById("progress");
 let text = document.getElementById("loading-text");
@@ -355,12 +384,18 @@ let load = setInterval(()=>{
 
   if(progress >= 100){
     clearInterval(load);
-    setTimeout(()=>{
-      document.getElementById("loader").classList.add("hidden");
-    },600);
+    document.getElementById("loader").classList.add("hidden");
   }
 },18);
 
+/* NAV */
+function goTo(id, el){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
+  el.classList.add("active");
+}
+
+/* SCROLL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
