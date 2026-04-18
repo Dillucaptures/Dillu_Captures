@@ -39,7 +39,6 @@ body{
   pointer-events:none;
 }
 
-/* loader content */
 .loader-box{
   text-align:center;
   animation:fadeUp 1s ease;
@@ -50,7 +49,7 @@ body{
   to{opacity:1; transform:translateY(0);}
 }
 
-/* ================= CAMERA (ANIMATED SVG STYLE) ================= */
+/* ================= CAMERA ================= */
 .camera{
   width:150px;
   height:110px;
@@ -59,32 +58,29 @@ body{
   animation:float 2.5s ease-in-out infinite;
 }
 
-/* camera body */
 .camera-body{
   width:150px;
   height:90px;
   background:linear-gradient(145deg,#1c1c1c,#0a0a0a);
-  border:1px solid rgba(255,255,255,0.15);
+  border:1px solid rgba(245,197,66,0.25);
   border-radius:16px;
   position:relative;
   box-shadow:0 20px 40px rgba(0,0,0,0.8);
 }
 
-/* lens */
 .lens{
   width:45px;
   height:45px;
   border-radius:50%;
   background:radial-gradient(circle,#111,#000);
-  border:3px solid #00ff88;
+  border:3px solid #f5c542;
   position:absolute;
   top:22px;
   left:52px;
-  box-shadow:0 0 25px rgba(0,255,136,0.5);
+  box-shadow:0 0 25px rgba(245,197,66,0.6);
   animation:pulse 1.8s infinite;
 }
 
-/* top flash */
 .flash{
   width:40px;
   height:10px;
@@ -93,7 +89,7 @@ body{
   top:-10px;
   left:55px;
   border-radius:4px;
-  border:1px solid rgba(255,255,255,0.1);
+  border:1px solid rgba(245,197,66,0.2);
 }
 
 @keyframes float{
@@ -112,13 +108,13 @@ body{
 .loader-title{
   font-family:Dancing Script;
   font-size:32px;
-  color:#00ff88;
+  color:#f5c542;
   margin-top:12px;
   letter-spacing:1px;
-  text-shadow:0 0 20px rgba(0,255,136,0.4);
+  text-shadow:0 0 20px rgba(245,197,66,0.4);
 }
 
-/* ================= PREMIUM LOADING BAR ================= */
+/* ================= GOLD LOADING BAR ================= */
 .loading-bar{
   width:280px;
   height:6px;
@@ -129,27 +125,24 @@ body{
   position:relative;
 }
 
-/* glow track */
 .loading-bar::before{
   content:"";
   position:absolute;
   inset:-2px;
-  background:linear-gradient(90deg,transparent,#00ff88,transparent);
+  background:linear-gradient(90deg,transparent,#f5c542,transparent);
   opacity:0.25;
   filter:blur(8px);
 }
 
-/* progress */
 .progress{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#00ff88,#00c853);
+  background:linear-gradient(90deg,#f5c542,#ffdd77);
   border-radius:50px;
   transition:0.25s ease;
-  box-shadow:0 0 20px rgba(0,255,136,0.6);
+  box-shadow:0 0 20px rgba(245,197,66,0.6);
 }
 
-/* text */
 #loading-text{
   font-size:12px;
   color:#aaa;
@@ -172,9 +165,9 @@ body::after{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,200,100,0.20), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(120,160,255,0.15), transparent 45%),
-    radial-gradient(circle at 50% 100%, rgba(255,80,120,0.12), transparent 55%);
+    radial-gradient(circle at 20% 20%, rgba(245,197,66,0.20), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(245,197,66,0.10), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(255,200,120,0.10), transparent 55%);
   filter:blur(80px);
   z-index:-2;
 }
@@ -193,7 +186,7 @@ nav{
   padding:14px 20px;
   border-radius:18px;
   background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
+  border:1px solid rgba(245,197,66,0.15);
   backdrop-filter:blur(22px);
   z-index:1000;
 }
@@ -201,7 +194,7 @@ nav{
 .logo{
   font-family:Dancing Script;
   font-size:26px;
-  color:#00ff88;
+  color:#f5c542;
 }
 
 /* HERO */
@@ -217,7 +210,7 @@ nav{
 .hero h1{
   font-family:Dancing Script;
   font-size:72px;
-  color:#00ff88;
+  color:#f5c542;
 }
 
 /* SECTIONS */
@@ -287,7 +280,7 @@ section.show{
 }
 
 .contact-bar a:hover{
-  background:#00ff88;
+  background:#f5c542;
   color:#000;
 }
 
@@ -351,7 +344,6 @@ footer{
 
 <script>
 
-/* LOADER */
 let progress = 0;
 let bar = document.getElementById("progress");
 let text = document.getElementById("loading-text");
@@ -369,7 +361,6 @@ let load = setInterval(()=>{
   }
 },18);
 
-/* SCROLL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
