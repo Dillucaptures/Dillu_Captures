@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dillu Captures | Photography</title>
+<title>Dillu Captures | Premium Photography</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -22,53 +22,26 @@ body{
   overflow-x:hidden;
 }
 
-/* =======================================================
-   🌟 PREMIUM CINEMATIC PHOTOGRAPHY BACKGROUND (NEW)
-======================================================= */
-
-/* Soft luxury gradient atmosphere */
+/* ===== CINEMATIC BACKGROUND ===== */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,200,100,0.16), transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(120,160,255,0.12), transparent 50%),
-    radial-gradient(circle at 50% 100%, rgba(255,120,120,0.10), transparent 55%);
+    radial-gradient(circle at 20% 20%, rgba(255,200,100,0.18), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(100,150,255,0.12), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(255,100,120,0.10), transparent 50%);
   filter: blur(90px);
-  z-index:-2;
-  animation: floatBg 14s ease-in-out infinite alternate;
-}
-
-/* CAMERA SILHOUETTE BACKGROUND (NEW PREMIUM LAYER) */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1600&q=80");
-  background-size:cover;
-  background-position:center;
-  opacity:0.08;
-  filter:blur(2px) contrast(1.1);
-  z-index:-3;
-  transform:scale(1.1);
-}
-
-/* extra dark overlay for readability */
-.overlay-bg{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.65);
+  animation: floatBg 12s ease-in-out infinite alternate;
   z-index:-1;
 }
 
-/* floating motion */
 @keyframes floatBg{
-  from{transform:scale(1) translateY(0px);}
-  to{transform:scale(1.1) translateY(25px);}
+  from{transform:scale(1);}
+  to{transform:scale(1.1) translateY(20px);}
 }
 
-/* ===== GLASS NAVBAR ===== */
+/* ===== GLASS NAVBAR (APPLE STYLE) ===== */
 nav{
   position:fixed;
   top:20px;
@@ -86,8 +59,17 @@ nav{
   border:1px solid rgba(255,255,255,0.12);
   backdrop-filter:blur(20px);
   border-radius:18px;
+
   box-shadow:0 20px 60px rgba(0,0,0,0.6);
   z-index:1000;
+
+  opacity:0;
+  transform:translate(-50%, -20px);
+  animation:navIn 1s ease forwards;
+}
+
+@keyframes navIn{
+  to{opacity:1; transform:translate(-50%,0);}
 }
 
 .logo{
@@ -102,9 +84,9 @@ nav a{
   margin:0 10px;
   font-size:12px;
   letter-spacing:1px;
+  transition:0.3s;
   padding:6px 10px;
   border-radius:10px;
-  transition:0.3s;
 }
 
 nav a:hover{
@@ -112,7 +94,7 @@ nav a:hover{
   color:#fff;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
   height:100vh;
   display:flex;
@@ -120,13 +102,21 @@ nav a:hover{
   justify-content:center;
   align-items:center;
   text-align:center;
+  padding:20px;
+
+  opacity:0;
+  transform:translateY(40px);
+  animation:heroIn 1.2s ease forwards;
+}
+
+@keyframes heroIn{
+  to{opacity:1; transform:translateY(0);}
 }
 
 .hero h1{
   font-family:Dancing Script;
   font-size:70px;
   color:#f5c542;
-  text-shadow:0 10px 40px rgba(0,0,0,0.8);
 }
 
 .hero p{
@@ -135,13 +125,16 @@ nav a:hover{
   color:#aaa;
 }
 
-/* SECTIONS */
+/* ===== SECTION SYSTEM (FRAMER STYLE) ===== */
 section{
   padding:100px 10%;
 }
 
-/* ABOUT */
+/* ===== ABOUT ===== */
 .about{
+  opacity:0;
+  transform:translateY(60px);
+  transition:1s ease;
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.12);
   backdrop-filter:blur(20px);
@@ -149,7 +142,17 @@ section{
   padding:40px;
 }
 
-/* FILTERS */
+.about.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.about h2{
+  font-size:28px;
+  margin-bottom:15px;
+}
+
+/* ===== FILTERS ===== */
 .filters{
   display:flex;
   gap:10px;
@@ -174,7 +177,7 @@ section{
   color:#000;
 }
 
-/* GALLERY */
+/* ===== GALLERY ===== */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -185,27 +188,50 @@ section{
   border-radius:18px;
   overflow:hidden;
   position:relative;
+  transform:translateY(50px);
+  opacity:0;
+  transition:0.8s ease;
+}
+
+.card.show{
+  transform:translateY(0);
+  opacity:1;
 }
 
 .card img{
   width:100%;
   height:270px;
   object-fit:cover;
-  transition:0.6s;
+  transition:0.6s ease;
 }
 
+/* Apple-style depth hover */
 .card:hover img{
   transform:scale(1.1);
   filter:brightness(1.1);
 }
 
-/* CONTACT */
-.contact{
-  text-align:center;
-  opacity:0.9;
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.6), transparent);
 }
 
-/* FOOTER */
+/* ===== CONTACT ===== */
+.contact{
+  text-align:center;
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s ease;
+}
+
+.contact.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
   padding:30px;
@@ -217,8 +243,6 @@ footer{
 
 <body>
 
-<div class="overlay-bg"></div>
-
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
@@ -229,22 +253,27 @@ footer{
   </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero" id="home">
   <h1>Dillu Captures</h1>
-  <p>Luxury cinematic photography with emotion, light, and storytelling.</p>
+  <p>Luxury cinematic photography capturing emotions, light, and timeless memories.</p>
 </div>
 
+<!-- ABOUT -->
 <section id="about">
-  <div class="about">
+  <div class="about reveal">
     <h2>About Me</h2>
     <p>
-      I capture real emotions and cinematic moments that feel timeless.
-      Every frame is crafted with light, mood, and storytelling — not just photography, but visual art.
+      I am a passionate photographer who focuses on cinematic storytelling.
+      Every image is crafted with emotion, natural light, and a luxury feel.
+      My goal is to turn real moments into timeless art.
     </p>
   </div>
 </section>
 
+<!-- PORTFOLIO -->
 <section id="portfolio">
+
   <h2>Portfolio</h2>
 
   <div class="filters">
@@ -257,17 +286,22 @@ footer{
   </div>
 
   <div class="gallery">
+
     <div class="card kids"><img src="Images/kids/1.jpg"></div>
     <div class="card haldi"><img src="Images/haldi/1.jpg"></div>
     <div class="card outdoor"><img src="Images/outdoor/1.jpg"></div>
     <div class="card bikes"><img src="Images/bikes/1.jpg"></div>
     <div class="card portraits"><img src="Images/portraits/1.jpg"></div>
+
   </div>
 </section>
 
-<section id="contact" class="contact">
-  <h2>Contact</h2>
-  <p>dillucapture@gmail.com | +91 9700034138</p>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact reveal">
+    <h2>Contact</h2>
+    <p>dillucapture@gmail.com | +91 9700034138</p>
+  </div>
 </section>
 
 <footer>
@@ -277,10 +311,28 @@ footer{
 <script>
 function filter(cat){
   let cards=document.querySelectorAll('.card');
+  let btns=document.querySelectorAll('.filters button');
+
+  btns.forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+
   cards.forEach(c=>{
-    c.style.display = (cat==='all'||c.classList.contains(cat)) ? "block":"none";
+    c.style.display = (cat==='all' || c.classList.contains(cat)) ? "block":"none";
   });
 }
+
+/* ===== SCROLL REVEAL (FRAMER STYLE) ===== */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+},{threshold:0.15});
+
+document.querySelectorAll('.about, .card, .contact').forEach(el=>{
+  observer.observe(el);
+});
 </script>
 
 </body>
