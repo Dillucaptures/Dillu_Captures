@@ -22,64 +22,10 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= LOADER ================= */
-.loader{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle at center,#0a0a0a,#000);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  z-index:99999;
-}
-
-.loader.hide{
-  opacity:0;
-  pointer-events:none;
-  transition:1s ease;
-}
-
-/* BRAND LOADING TEXT */
-.brand-wrap{
-  position:relative;
-  font-family:"Dancing Script";
-  font-size:40px;
-}
-
-.brand-bg{ color:#222; }
-
-.brand-fill{
-  position:absolute;
-  top:0;
-  left:0;
-  width:0%;
-  overflow:hidden;
-  white-space:nowrap;
-  color:gold;
-}
-
-/* loading bar */
-.load-bar{
-  width:260px;
-  height:6px;
-  background:#111;
-  border-radius:50px;
-  margin-top:25px;
-  overflow:hidden;
-}
-
-.load-bar span{
-  display:block;
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#00ff66,#00cc55);
-}
-
-/* NAV */
+/* ================= NAV (FIXED + BLUR APPLE STYLE) ================= */
 nav{
   position:fixed;
-  top:20px;
+  top:15px;
   left:50%;
   transform:translateX(-50%);
   width:92%;
@@ -89,8 +35,9 @@ nav{
   align-items:center;
   padding:14px 20px;
   border-radius:18px;
-  background:rgba(255,255,255,0.06);
-  backdrop-filter:blur(22px);
+  background:rgba(20,20,20,0.55);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(245,197,66,0.2);
   z-index:1000;
 }
 
@@ -107,6 +54,7 @@ nav a{
   font-size:12px;
   padding:6px 10px;
   border-radius:10px;
+  transition:0.3s;
 }
 
 nav a:hover,
@@ -133,7 +81,7 @@ nav a.active{
 
 /* SECTION */
 section{
-  padding:100px 10%;
+  padding:120px 10% 80px;
 }
 
 /* FOLDERS */
@@ -159,13 +107,13 @@ section{
   background:rgba(245,197,66,0.1);
 }
 
-/* GALLERY */
+/* IMPORTANT FIX: gallery ALWAYS BELOW */
 .gallery{
   display:none;
+  width:100%;
+  margin-top:20px;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:18px;
-  margin-top:20px;
-  margin-bottom:40px;
 }
 
 .gallery.active{
@@ -219,23 +167,14 @@ section{
 
 <body>
 
-<!-- LOADER -->
-<div class="loader" id="loader">
-  <div class="brand-wrap">
-    <div class="brand-bg">Dillu Captures</div>
-    <div class="brand-fill" id="fillText">Dillu Captures</div>
-  </div>
-
-  <div class="load-bar">
-    <span id="bar"></span>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
     <a class="active">Home</a>
+    <a>About</a>
+    <a>Portfolio</a>
+    <a>Contact</a>
   </div>
 </nav>
 
@@ -245,38 +184,35 @@ section{
 </div>
 
 <!-- PORTFOLIO -->
-<section id="portfolio">
+<section>
 
   <h2>Folders</h2>
 
   <div class="folders">
 
-    <div class="folder" onclick="openFolder('kids',this)">📸 Kids Shoot</div>
-    <div class="folder" onclick="openFolder('haldi',this)">🌼 Haldi Shoot</div>
-    <div class="folder" onclick="openFolder('outdoor',this)">🌿 Outdoor Shoot</div>
-    <div class="folder" onclick="openFolder('wedding',this)">💍 Wedding Shoot</div>
+    <div class="folder" onclick="openFolder('kids')">📸 Kids Shoot</div>
+    <div class="folder" onclick="openFolder('haldi')">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="openFolder('outdoor')">🌿 Outdoor Shoot</div>
+    <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
 
   </div>
 
-  <!-- KIDS -->
+  <!-- GALLERIES (stay BELOW properly) -->
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/kids/1.jpg"></div>
     <div class="card"><img src="Images/kids/2.jpg"></div>
   </div>
 
-  <!-- HALDI -->
   <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
     <div class="card"><img src="Images/haldi/2.jpg"></div>
   </div>
 
-  <!-- OUTDOOR -->
   <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
     <div class="card"><img src="Images/outdoor/2.jpg"></div>
   </div>
 
-  <!-- WEDDING -->
   <div class="gallery" id="wedding">
     <div class="card"><img src="Images/wedding/1.jpg"></div>
     <div class="card"><img src="Images/wedding/2.jpg"></div>
@@ -293,37 +229,18 @@ section{
 
 <script>
 
-/* LOADER */
-let i=0;
-let bar=document.getElementById("bar");
-let fill=document.getElementById("fillText");
-
-let load=setInterval(()=>{
-  i++;
-  bar.style.width=i+"%";
-  fill.style.width=i+"%";
-
-  if(i>=100){
-    clearInterval(load);
-    document.getElementById("loader").classList.add("hide");
-  }
-},20);
-
-/* OPEN FOLDER BELOW CLICK */
-function openFolder(id,el){
+/* ONLY ONE OPEN AT A TIME */
+function openFolder(id){
 
   document.querySelectorAll(".gallery").forEach(g=>{
     g.classList.remove("active");
   });
 
-  let target=document.getElementById(id);
-  target.classList.add("active");
+  const el = document.getElementById(id);
+  el.classList.add("active");
 
-  // move gallery directly under clicked folder
-  el.insertAdjacentElement("afterend",target);
-
-  // scroll smoothly
-  target.scrollIntoView({behavior:"smooth",block:"start"});
+  // ensures ALWAYS below in layout
+  el.scrollIntoView({behavior:"smooth", block:"start"});
 }
 
 </script>
