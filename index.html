@@ -39,69 +39,37 @@ body{
   pointer-events:none;
 }
 
-.loader-content{
+/* loader card */
+.loader-box{
   text-align:center;
 }
 
-/* camera */
-.camera{
-  width:80px;
-  height:60px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:12px;
-  margin:0 auto;
-  position:relative;
-  animation:floatCam 2s ease-in-out infinite;
+/* REAL CAMERA IMAGE */
+.loader-box img{
+  width:120px;
+  filter:drop-shadow(0 10px 30px rgba(0,0,0,0.8));
+  animation:float 2s ease-in-out infinite;
 }
 
-.camera::before{
-  content:"";
-  position:absolute;
-  top:-10px;
-  left:20px;
-  width:40px;
-  height:10px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:6px;
-}
-
-.lens{
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  border:2px solid #f5c542;
-  position:absolute;
-  top:18px;
-  left:28px;
-  animation:pulseLens 1.5s infinite;
-}
-
-@keyframes floatCam{
+@keyframes float{
   0%{transform:translateY(0);}
   50%{transform:translateY(-10px);}
   100%{transform:translateY(0);}
 }
 
-@keyframes pulseLens{
-  0%{transform:scale(0.9); opacity:0.5;}
-  50%{transform:scale(1.2); opacity:1;}
-  100%{transform:scale(0.9); opacity:0.5;}
-}
-
-.loader h1{
-  margin-top:20px;
+.loader-title{
   font-family:Dancing Script;
+  font-size:30px;
   color:#f5c542;
-  font-size:28px;
+  margin-top:10px;
 }
 
+/* LOADING BAR */
 .loading-bar{
-  width:220px;
-  height:4px;
-  background:rgba(255,255,255,0.1);
-  border-radius:10px;
+  width:240px;
+  height:5px;
+  background:rgba(255,255,255,0.08);
+  border-radius:50px;
   margin:20px auto 10px;
   overflow:hidden;
 }
@@ -109,8 +77,9 @@ body{
 .progress{
   height:100%;
   width:0%;
-  background:#f5c542;
+  background:#00ff66; /* GREEN APPLE STYLE */
   transition:0.2s;
+  border-radius:50px;
 }
 
 #loading-text{
@@ -143,7 +112,7 @@ body::after{
   z-index:-2;
 }
 
-/* ================= NAV ================= */
+/* NAV */
 nav{
   position:fixed;
   top:20px;
@@ -181,7 +150,7 @@ nav a.active{
   color:#fff;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero{
   height:100vh;
   display:flex;
@@ -204,7 +173,7 @@ nav a.active{
   color:#f5c542;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 section{
   padding:100px 10%;
   opacity:0;
@@ -217,7 +186,7 @@ section.show{
   transform:translateY(0);
 }
 
-/* ================= ABOUT ================= */
+/* ABOUT */
 .about{
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.12);
@@ -225,7 +194,7 @@ section.show{
   padding:40px;
 }
 
-/* ================= GALLERY ================= */
+/* GALLERY */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -256,12 +225,12 @@ section.show{
   transform:scale(1.12);
 }
 
-/* ================= CONTACT ================= */
+/* CONTACT */
 .contact{
   text-align:center;
 }
 
-/* ================= CONTACT BAR ================= */
+/* CONTACT BAR */
 .contact-bar{
   position:fixed;
   bottom:20px;
@@ -284,11 +253,11 @@ section.show{
 }
 
 .contact-bar a:hover{
-  background:#f5c542;
+  background:#00ff66;
   color:#000;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
   text-align:center;
   padding:30px;
@@ -300,16 +269,19 @@ footer{
 
 <body>
 
-<!-- LOADER -->
+<!-- ================= LOADER ================= -->
 <div class="loader" id="loader">
-  <div class="loader-content">
-    <div class="camera">
-      <div class="lens"></div>
-    </div>
-    <h1>Dillu Captures</h1>
+  <div class="loader-box">
+
+    <!-- REAL CAMERA IMAGE -->
+    <img src="https://cdn-icons-png.flaticon.com/512/1042/1042390.png" alt="camera">
+
+    <div class="loader-title">Dillu Captures</div>
+
     <div class="loading-bar">
       <div class="progress" id="progress"></div>
     </div>
+
     <p id="loading-text">Loading 0%</p>
   </div>
 </div>
@@ -332,7 +304,7 @@ footer{
 <section id="about">
   <div class="about">
     <h2>About Me</h2>
-    <p>Cinematic photography with storytelling light and emotion.</p>
+    <p>Cinematic storytelling through light and emotion.</p>
   </div>
 </section>
 
@@ -363,7 +335,7 @@ footer{
 
 <script>
 
-/* LOADER ANIMATION */
+/* LOADER */
 let progress = 0;
 let bar = document.getElementById("progress");
 let text = document.getElementById("loading-text");
@@ -388,7 +360,7 @@ function goTo(id, el){
   el.classList.add("active");
 }
 
-/* SCROLL REVEAL */
+/* SCROLL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
