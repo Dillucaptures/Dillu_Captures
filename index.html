@@ -22,7 +22,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= NAV ================= */
+/* NAV */
 nav{
   position:fixed;
   top:20px;
@@ -57,7 +57,8 @@ nav a{
   transition:0.3s;
 }
 
-nav a:hover{
+nav a:hover,
+nav a.active{
   background:rgba(245,197,66,0.2);
   color:#f5c542;
 }
@@ -91,7 +92,7 @@ section{
   border-radius:20px;
 }
 
-/* ================= FOLDERS ================= */
+/* FOLDERS */
 .folders{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -107,6 +108,7 @@ section{
   border-radius:16px;
   transition:0.4s;
   cursor:pointer;
+  user-select:none;
 }
 
 .folder:hover{
@@ -116,10 +118,14 @@ section{
 
 /* GALLERY */
 .gallery{
-  display:grid;
+  display:none;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:18px;
   margin-top:30px;
+}
+
+.gallery.active{
+  display:grid;
 }
 
 .card{
@@ -138,7 +144,7 @@ section{
   transform:scale(1.12);
 }
 
-/* ================= CONTACT BAR ================= */
+/* CONTACT BAR */
 .contact-bar{
   position:fixed;
   bottom:20px;
@@ -150,7 +156,6 @@ section{
   border-radius:50px;
   padding:12px;
   backdrop-filter:blur(20px);
-  z-index:1000;
 }
 
 .contact-bar a{
@@ -181,12 +186,11 @@ footer{
 <!-- NAV -->
 <nav>
   <div class="logo">Dillu Captures</div>
-
   <div>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact">Contact</a>
+    <a onclick="scrollToSec('home',this)" class="active">Home</a>
+    <a onclick="scrollToSec('about',this)">About</a>
+    <a onclick="scrollToSec('portfolio',this)">Portfolio</a>
+    <a onclick="scrollToSec('contact',this)">Contact</a>
   </div>
 </nav>
 
@@ -204,21 +208,44 @@ footer{
   </div>
 </section>
 
-<!-- FOLDERS -->
+<!-- PORTFOLIO -->
 <section id="portfolio">
   <h2>Folders</h2>
 
+  <!-- FOLDERS -->
   <div class="folders">
-    <div class="folder">📸 Kids Shoot</div>
-    <div class="folder">🌼 Haldi Shoot</div>
-    <div class="folder">🌿 Outdoor Shoot</div>
-    <div class="folder">💍 Wedding Shoot</div>
+    <div class="folder" onclick="openFolder('kids')">📸 Kids Shoot</div>
+    <div class="folder" onclick="openFolder('haldi')">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="openFolder('outdoor')">🌿 Outdoor Shoot</div>
+    <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
   </div>
 
-  <div class="gallery">
+  <!-- KIDS -->
+  <div class="gallery" id="kids">
     <div class="card"><img src="Images/kids/1.jpg"></div>
+    <div class="card"><img src="Images/kids/2.jpg"></div>
+    <div class="card"><img src="Images/kids/3.jpg"></div>
+  </div>
+
+  <!-- HALDI -->
+  <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
+    <div class="card"><img src="Images/haldi/2.jpg"></div>
+    <div class="card"><img src="Images/haldi/3.jpg"></div>
+  </div>
+
+  <!-- OUTDOOR -->
+  <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
+    <div class="card"><img src="Images/outdoor/2.jpg"></div>
+    <div class="card"><img src="Images/outdoor/3.jpg"></div>
+  </div>
+
+  <!-- WEDDING -->
+  <div class="gallery" id="wedding">
+    <div class="card"><img src="Images/wedding/1.jpg"></div>
+    <div class="card"><img src="Images/wedding/2.jpg"></div>
+    <div class="card"><img src="Images/wedding/3.jpg"></div>
   </div>
 </section>
 
@@ -236,8 +263,29 @@ footer{
   <a href="mailto:dillucapture@gmail.com">✉ Gmail</a>
 </div>
 
-<!-- FOOTER -->
 <footer>© 2026 Dillu Captures</footer>
+
+<script>
+
+/* NAV SCROLL */
+function scrollToSec(id, el){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
+  el.classList.add("active");
+}
+
+/* OPEN FOLDER SYSTEM */
+function openFolder(id){
+  document.querySelectorAll(".gallery").forEach(g=>{
+    g.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.getElementById("portfolio").scrollIntoView({behavior:"smooth"});
+}
+
+</script>
 
 </body>
 </html>
