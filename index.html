@@ -22,7 +22,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= NAV (FIXED + BLUR APPLE STYLE) ================= */
+/* ================= NAV ================= */
 nav{
   position:fixed;
   top:15px;
@@ -35,7 +35,7 @@ nav{
   align-items:center;
   padding:14px 20px;
   border-radius:18px;
-  background:rgba(20,20,20,0.55);
+  background:rgba(20,20,20,0.6);
   backdrop-filter:blur(18px);
   border:1px solid rgba(245,197,66,0.2);
   z-index:1000;
@@ -55,6 +55,7 @@ nav a{
   padding:6px 10px;
   border-radius:10px;
   transition:0.3s;
+  cursor:pointer;
 }
 
 nav a:hover,
@@ -84,6 +85,14 @@ section{
   padding:120px 10% 80px;
 }
 
+/* ABOUT */
+.about-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(245,197,66,0.2);
+  padding:30px;
+  border-radius:18px;
+}
+
 /* FOLDERS */
 .folders{
   display:grid;
@@ -107,7 +116,7 @@ section{
   background:rgba(245,197,66,0.1);
 }
 
-/* IMPORTANT FIX: gallery ALWAYS BELOW */
+/* GALLERY */
 .gallery{
   display:none;
   width:100%;
@@ -156,6 +165,7 @@ section{
   font-size:12px;
   padding:10px 14px;
   border-radius:30px;
+  transition:0.3s;
 }
 
 .contact-bar a:hover{
@@ -171,33 +181,40 @@ section{
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
-    <a class="active">Home</a>
-    <a>About</a>
-    <a>Portfolio</a>
-    <a>Contact</a>
+    <a onclick="goTo('home',this)" class="active">Home</a>
+    <a onclick="goTo('about',this)">About</a>
+    <a onclick="goTo('portfolio',this)">Portfolio</a>
+    <a onclick="goTo('contact',this)">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="home">
   <h1>Dillu Captures</h1>
 </div>
 
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-box">
+    <h2>About Us</h2>
+    <p>
+      We capture cinematic wedding, kids, and outdoor photography with premium editing style and emotional storytelling.
+    </p>
+  </div>
+</section>
+
 <!-- PORTFOLIO -->
-<section>
+<section id="portfolio">
 
   <h2>Folders</h2>
 
   <div class="folders">
-
     <div class="folder" onclick="openFolder('kids')">📸 Kids Shoot</div>
     <div class="folder" onclick="openFolder('haldi')">🌼 Haldi Shoot</div>
     <div class="folder" onclick="openFolder('outdoor')">🌿 Outdoor Shoot</div>
     <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
-
   </div>
 
-  <!-- GALLERIES (stay BELOW properly) -->
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/kids/1.jpg"></div>
     <div class="card"><img src="Images/kids/2.jpg"></div>
@@ -221,26 +238,35 @@ section{
 </section>
 
 <!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: dillucapture@gmail.com</p>
+</section>
+
+<!-- CONTACT BAR -->
 <div class="contact-bar">
   <a href="tel:+919700034138">📞 Call</a>
   <a href="https://wa.me/919700034138">💬 WhatsApp</a>
   <a href="https://instagram.com/">📸 Instagram</a>
+  <a href="mailto:dillucapture@gmail.com">✉ Gmail</a>
 </div>
 
 <script>
 
-/* ONLY ONE OPEN AT A TIME */
-function openFolder(id){
+/* NAV SCROLL */
+function goTo(id,el){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
+  el.classList.add("active");
+}
 
+/* FOLDERS */
+function openFolder(id){
   document.querySelectorAll(".gallery").forEach(g=>{
     g.classList.remove("active");
   });
 
-  const el = document.getElementById(id);
-  el.classList.add("active");
-
-  // ensures ALWAYS below in layout
-  el.scrollIntoView({behavior:"smooth", block:"start"});
+  document.getElementById(id).classList.add("active");
 }
 
 </script>
