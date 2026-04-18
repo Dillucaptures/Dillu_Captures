@@ -21,7 +21,7 @@ body{
   overflow-x:hidden;
 }
 
-/* CINEMATIC BACKGROUND */
+/* BACKGROUND */
 body::before{
   content:"";
   position:fixed;
@@ -95,15 +95,13 @@ nav a.active{
   font-family:Dancing Script;
   font-size:72px;
   color:#f5c542;
-  margin-bottom:10px;
 }
 
 .hero p{
-  font-size:16px;
   color:#ddd;
 }
 
-/* SECTIONS */
+/* SECTION */
 section{
   padding:120px 10% 80px;
 }
@@ -116,7 +114,6 @@ h2{
 /* ABOUT */
 .about-box{
   background:rgba(0,0,0,0.5);
-  border:1px solid rgba(245,197,66,0.2);
   padding:25px;
   border-radius:16px;
 }
@@ -126,40 +123,57 @@ h2{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
-  margin-top:20px;
 }
 
 .folder{
   background:rgba(255,255,255,0.06);
-  border:1px solid rgba(245,197,66,0.2);
   padding:35px;
   text-align:center;
   border-radius:16px;
   cursor:pointer;
 }
 
-/* GALLERY */
+/* 🔥 AUTO FIT GALLERY (NO FIXED SHAPE) */
 .gallery{
   display:none;
   margin-top:25px;
-  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-  gap:14px;
+  column-count:5;   /* 5 ROW FEEL */
+  column-gap:12px;
 }
 
 .gallery.active{
-  display:grid;
+  display:block;
 }
 
 .card{
-  aspect-ratio:4/3;
+  break-inside:avoid;
+  margin-bottom:12px;
   border-radius:14px;
   overflow:hidden;
+  cursor:pointer;
 }
 
 .card img{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:auto;   /* AUTO SIZE */
+  display:block;
+}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
 }
 
 /* CONTACT */
@@ -171,22 +185,18 @@ h2{
 
 .contact-btn{
   display:flex;
-  align-items:center;
   justify-content:center;
-  gap:10px;
   padding:15px;
   border-radius:14px;
-  text-decoration:none;
   background:rgba(0,0,0,0.5);
-  border:1px solid rgba(245,197,66,0.2);
   color:#fff;
+  text-decoration:none;
 }
 
 /* FOOTER */
 footer{
   text-align:center;
   padding:30px;
-  color:#aaa;
 }
 </style>
 </head>
@@ -210,9 +220,7 @@ footer{
 
 <section id="about">
   <h2>About</h2>
-  <div class="about-box">
-    Premium cinematic photography studio.
-  </div>
+  <div class="about-box">Premium cinematic photography studio.</div>
 </section>
 
 <section id="portfolio">
@@ -227,63 +235,14 @@ footer{
     <div class="folder" onclick="toggleFolder('pets')">🐾 Pets & Animals</div>
   </div>
 
+  <!-- KEEP YOUR IMAGES SAME -->
   <div class="gallery" id="kids">
-    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-  </div>
-
-  <div class="gallery" id="outdoor">
-    <div class="card"><img src="Images/outdoor/1.jpg"></div>
+    <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
   </div>
 
   <div class="gallery" id="cars">
-    <div class="card"><img src="Images/Cars&Bikes/20220920163531_IMG_2265.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920163547_IMG_2273.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920163653_IMG_2277.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920163706_IMG_2279 (2).jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920164140_IMG_2296.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920164910_IMG_2303.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220921172234_IMG_2442.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220921173843_IMG_2474.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221117131822_IMG_3322.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221117133706_IMG_3370.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122140951_IMG_3525.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141159_IMG_3529.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141437_IMG_3538.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141456_IMG_3539.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141859_IMG_3551.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141903_IMG_3552.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141911_IMG_3554.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20230208141838_IMG_5027.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20240122144322_IMG_9241.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20240122144455_IMG_9254.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/241496186_219299540174038_5154124177478257245_n.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/327604064_132846919651142_2243755515612500347_n.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/IMG_6597.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/IMG_6611.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/Snapinsta.app_307835994_1124218248523146_7846878109889793579_n_1080.jpg"></div>
-  </div>
-
-  <div class="gallery" id="haldi">
-    <div class="card"><img src="Images/Haldi/IMG_3059.webp"></div>
-    <div class="card"><img src="Images/Haldi/IMG_2577.webp"></div>
-    <div class="card"><img src="Images/Haldi/IMG_2562.webp"></div>
-    <div class="card"><img src="Images/haldi/5.jpg"></div>
-  </div>
-
-  <!-- NEW -->
-  <div class="gallery" id="temples">
-    <div class="card"><img src="Images/temples/1.jpg"></div>
-  </div>
-
-  <!-- NEW -->
-  <div class="gallery" id="pets">
-    <div class="card"><img src="Images/pets/1.jpg"></div>
+    <div class="card"><img src="Images/Cars&Bikes/20220920163531_IMG_2265.jpg" onclick="openImg(this)"></div>
   </div>
 
 </section>
@@ -294,13 +253,19 @@ footer{
     <a class="contact-btn" href="tel:+919700034138">📞 Call</a>
     <a class="contact-btn" href="https://wa.me/919700034138">💬 WhatsApp</a>
     <a class="contact-btn" href="mailto:dillucapture@gmail.com">✉ Gmail</a>
-    <a class="contact-btn" href="https://instagram.com/">📸 Instagram</a>
+    <a class="contact-btn" href="#">📸 Instagram</a>
   </div>
 </section>
 
 <footer>© 2026 Dillu Captures</footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeImg()">
+  <img id="lightImg">
+</div>
+
 <script>
+
 function go(id,el){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
@@ -308,15 +273,26 @@ function go(id,el){
 }
 
 function toggleFolder(id){
-  let el = document.getElementById(id);
+  let el=document.getElementById(id);
   if(el.classList.contains("active")){
     el.classList.remove("active");
   }else{
     document.querySelectorAll(".gallery").forEach(g=>g.classList.remove("active"));
     el.classList.add("active");
-    el.scrollIntoView({behavior:"smooth"});
   }
 }
+
+/* IMAGE OPEN */
+function openImg(img){
+  document.getElementById("lightbox").style.display="flex";
+  document.getElementById("lightImg").src=img.src;
+}
+
+/* CLOSE */
+function closeImg(){
+  document.getElementById("lightbox").style.display="none";
+}
+
 </script>
 
 </body>
