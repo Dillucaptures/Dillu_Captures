@@ -84,8 +84,8 @@ section{
 }
 
 h2{
-  margin-bottom:20px;
   color:#f5c542;
+  margin-bottom:20px;
 }
 
 /* ABOUT */
@@ -119,7 +119,7 @@ h2{
   background:rgba(245,197,66,0.1);
 }
 
-/* IMPORTANT: gallery stays BELOW folder */
+/* GALLERY */
 .gallery{
   display:none;
   width:100%;
@@ -141,25 +141,37 @@ h2{
   width:100%;
   height:270px;
   object-fit:cover;
-  transition:0.5s;
 }
 
-.card:hover img{
-  transform:scale(1.1);
+/* CONTACT BUTTONS */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
 }
 
-/* CONTACT SECTION */
-.contact-box{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(245,197,66,0.15);
-  padding:25px;
-  border-radius:16px;
-  line-height:1.8;
-}
-
-.contact-box a{
-  color:#f5c542;
+.contact-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:15px;
+  border-radius:14px;
   text-decoration:none;
+  font-weight:500;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(245,197,66,0.2);
+  color:#fff;
+  transition:0.3s;
+}
+
+.contact-btn:hover{
+  background:rgba(245,197,66,0.15);
+  transform:translateY(-5px);
+}
+
+.contact-btn span{
+  font-size:18px;
 }
 
 /* FOOTER */
@@ -210,37 +222,45 @@ footer{
     <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
   </div>
 
-  <!-- BELOW FOLDERS -->
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/kids/1.jpg"></div>
-    <div class="card"><img src="Images/kids/2.jpg"></div>
   </div>
 
   <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
-    <div class="card"><img src="Images/haldi/2.jpg"></div>
   </div>
 
   <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
-    <div class="card"><img src="Images/outdoor/2.jpg"></div>
   </div>
 
   <div class="gallery" id="wedding">
     <div class="card"><img src="Images/wedding/1.jpg"></div>
-    <div class="card"><img src="Images/wedding/2.jpg"></div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <h2>Contact</h2>
+  <h2>Contact Me</h2>
 
-  <div class="contact-box">
-    📞 Phone: <a href="tel:+919700034138">+91 9700034138</a><br>
-    💬 WhatsApp: <a href="https://wa.me/919700034138">Chat Now</a><br>
-    📸 Instagram: <a href="https://instagram.com/">Visit Profile</a><br>
-    ✉ Gmail: <a href="mailto:dillucapture@gmail.com">Send Mail</a>
+  <div class="contact-grid">
+
+    <a class="contact-btn" href="tel:+919700034138">
+      <span>📞</span> Call Now
+    </a>
+
+    <a class="contact-btn" href="https://wa.me/919700034138" target="_blank">
+      <span>💬</span> WhatsApp
+    </a>
+
+    <a class="contact-btn" href="mailto:dillucapture@gmail.com">
+      <span>✉️</span> Gmail
+    </a>
+
+    <a class="contact-btn" href="https://instagram.com/" target="_blank">
+      <span>📸</span> Instagram
+    </a>
+
   </div>
 </section>
 
@@ -248,25 +268,16 @@ footer{
 
 <script>
 
-/* NAV */
 function go(id,el){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
   el.classList.add("active");
 }
 
-/* FOLDER OPEN BELOW */
 function openFolder(id){
-
-  document.querySelectorAll(".gallery").forEach(g=>{
-    g.classList.remove("active");
-  });
-
-  let el = document.getElementById(id);
-  el.classList.add("active");
-
-  // ALWAYS appears BELOW folder
-  el.scrollIntoView({behavior:"smooth", block:"start"});
+  document.querySelectorAll(".gallery").forEach(g=>g.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.getElementById(id).scrollIntoView({behavior:"smooth", block:"start"});
 }
 
 </script>
