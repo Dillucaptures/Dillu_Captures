@@ -41,9 +41,15 @@ body{
 
 .loader-box{
   text-align:center;
+  animation:fadeUp 1s ease;
 }
 
-/* CAMERA */
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ================= CAMERA ================= */
 .camera{
   width:150px;
   height:110px;
@@ -59,6 +65,7 @@ body{
   border:1px solid rgba(245,197,66,0.25);
   border-radius:16px;
   position:relative;
+  box-shadow:0 20px 40px rgba(0,0,0,0.8);
 }
 
 .lens{
@@ -97,14 +104,17 @@ body{
   100%{transform:scale(0.95); opacity:0.6;}
 }
 
+/* ================= TITLE ================= */
 .loader-title{
   font-family:Dancing Script;
   font-size:32px;
   color:#f5c542;
   margin-top:12px;
+  letter-spacing:1px;
+  text-shadow:0 0 20px rgba(245,197,66,0.4);
 }
 
-/* LOADING BAR */
+/* ================= GOLD LOADING BAR ================= */
 .loading-bar{
   width:280px;
   height:6px;
@@ -130,6 +140,7 @@ body{
   background:linear-gradient(90deg,#f5c542,#ffdd77);
   border-radius:50px;
   transition:0.25s ease;
+  box-shadow:0 0 20px rgba(245,197,66,0.6);
 }
 
 #loading-text{
@@ -161,7 +172,7 @@ body::after{
   z-index:-2;
 }
 
-/* ================= APPLE STYLE NAV ================= */
+/* NAV */
 nav{
   position:fixed;
   top:20px;
@@ -174,41 +185,15 @@ nav{
   align-items:center;
   padding:14px 20px;
   border-radius:18px;
-
-  background:rgba(20,20,20,0.35);
+  background:rgba(255,255,255,0.06);
   border:1px solid rgba(245,197,66,0.15);
-  backdrop-filter:blur(18px);
-
-  transition:0.4s ease;
+  backdrop-filter:blur(22px);
   z-index:1000;
-}
-
-/* SCROLL EFFECT (APPLE STYLE) */
-nav.scrolled{
-  background:rgba(10,10,10,0.75);
-  backdrop-filter:blur(30px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
 .logo{
   font-family:Dancing Script;
   font-size:26px;
-  color:#f5c542;
-}
-
-nav .links a{
-  color:#bbb;
-  text-decoration:none;
-  margin:0 10px;
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:10px;
-  transition:0.3s;
-}
-
-nav .links a:hover,
-nav .links a.active{
-  background:rgba(245,197,66,0.2);
   color:#f5c542;
 }
 
@@ -299,6 +284,7 @@ section.show{
   color:#000;
 }
 
+/* FOOTER */
 footer{
   text-align:center;
   padding:30px;
@@ -313,6 +299,7 @@ footer{
 <!-- LOADER -->
 <div class="loader" id="loader">
   <div class="loader-box">
+
     <div class="camera">
       <div class="camera-body"></div>
       <div class="lens"></div>
@@ -329,22 +316,16 @@ footer{
   </div>
 </div>
 
-<!-- NAV -->
-<nav id="navbar">
+<nav>
   <div class="logo">Dillu Captures</div>
-  <div class="links">
-    <a onclick="goTo('home',this)" class="active">Home</a>
-    <a onclick="goTo('about',this)">About</a>
-    <a onclick="goTo('portfolio',this)">Portfolio</a>
-    <a onclick="goTo('contact',this)">Contact</a>
-  </div>
 </nav>
 
-<div class="hero" id="home">
+<div class="hero">
   <h1>Dillu Captures</h1>
+  <p>Luxury cinematic photography capturing emotion</p>
 </div>
 
-<section id="portfolio">
+<section>
   <div class="gallery">
     <div class="card"><img src="Images/kids/1.jpg"></div>
     <div class="card"><img src="Images/haldi/1.jpg"></div>
@@ -356,13 +337,13 @@ footer{
   <a href="tel:+919700034138">📞 Call</a>
   <a href="https://wa.me/919700034138">💬 WhatsApp</a>
   <a href="https://instagram.com/">📸 Instagram</a>
+  <a href="mailto:dillucapture@gmail.com">✉ Mail</a>
 </div>
 
 <footer>© 2026 Dillu Captures</footer>
 
 <script>
 
-/* LOADER */
 let progress = 0;
 let bar = document.getElementById("progress");
 let text = document.getElementById("loading-text");
@@ -374,28 +355,12 @@ let load = setInterval(()=>{
 
   if(progress >= 100){
     clearInterval(load);
-    document.getElementById("loader").classList.add("hidden");
+    setTimeout(()=>{
+      document.getElementById("loader").classList.add("hidden");
+    },600);
   }
 },18);
 
-/* NAV SCROLL APPLE EFFECT */
-window.addEventListener("scroll",()=>{
-  let nav = document.getElementById("navbar");
-  if(window.scrollY > 50){
-    nav.classList.add("scrolled");
-  }else{
-    nav.classList.remove("scrolled");
-  }
-});
-
-/* NAV SCROLL TO SECTION */
-function goTo(id, el){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-  document.querySelectorAll("nav .links a").forEach(a=>a.classList.remove("active"));
-  el.classList.add("active");
-}
-
-/* SCROLL ANIMATION */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
