@@ -102,15 +102,6 @@ nav a.active{
   align-items:center;
   text-align:center;
   padding:20px;
-
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
-}
-
-.hero.show{
-  opacity:1;
-  transform:translateY(0);
 }
 
 .hero h1{
@@ -208,6 +199,47 @@ footer{
   color:#666;
   font-size:12px;
 }
+
+/* ================= BOTTOM CONTACT BAR (NEW PREMIUM UI) ================= */
+.contact-bar{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+
+  display:flex;
+  gap:12px;
+
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(20px);
+
+  padding:12px 14px;
+  border-radius:50px;
+
+  z-index:2000;
+}
+
+.contact-bar a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  padding:10px 14px;
+  border-radius:30px;
+
+  color:#ddd;
+  text-decoration:none;
+  font-size:12px;
+
+  transition:0.3s;
+}
+
+.contact-bar a:hover{
+  background:#f5c542;
+  color:#000;
+  transform:translateY(-2px);
+}
 </style>
 </head>
 
@@ -269,20 +301,32 @@ footer{
   </div>
 </section>
 
+<!-- ================= CONTACT BAR (NEW) ================= -->
+<div class="contact-bar">
+
+  <a href="tel:+919700034138">📞 Call</a>
+
+  <a href="https://wa.me/919700034138" target="_blank">💬 WhatsApp</a>
+
+  <a href="https://instagram.com/" target="_blank">📸 Instagram</a>
+
+  <a href="mailto:dillucapture@gmail.com">✉ Mail</a>
+
+</div>
+
 <footer>© 2026 Dillu Captures</footer>
 
 <script>
 
-/* ================= SMOOTH NAV SCROLL + ACTIVE ================= */
+/* NAV SCROLL */
 function goTo(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
-
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
   event.target.classList.add("active");
 }
 
-/* ================= SCROLL REVEAL (FRAMER STYLE) ================= */
-const observer = new IntersectionObserver(entries=>{
+/* REVEAL */
+const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add("show");
@@ -290,11 +334,11 @@ const observer = new IntersectionObserver(entries=>{
   });
 },{threshold:0.15});
 
-document.querySelectorAll(".hero, section, .card").forEach(el=>{
+document.querySelectorAll("section,.card").forEach(el=>{
   observer.observe(el);
 });
 
-/* ================= FILTER ================= */
+/* FILTER */
 function filter(cat){
   let cards=document.querySelectorAll('.card');
   let btns=document.querySelectorAll('.filters button');
@@ -306,6 +350,7 @@ function filter(cat){
     c.style.display=(cat==='all'||c.classList.contains(cat))?"block":"none";
   });
 }
+
 </script>
 
 </body>
