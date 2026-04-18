@@ -22,14 +22,14 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= PREMIUM CAMERA BACKGROUND ================= */
+/* ================= BACKGROUND ================= */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:
     url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
-  opacity:0.12;
+  opacity:0.10;
   filter: blur(2px);
   z-index:-3;
 }
@@ -102,15 +102,6 @@ nav a.active{
   align-items:center;
   text-align:center;
   padding:20px;
-
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
-}
-
-.hero.show{
-  opacity:1;
-  transform:translateY(0);
 }
 
 .hero h1{
@@ -209,7 +200,7 @@ footer{
   font-size:12px;
 }
 
-/* ================= BOTTOM CONTACT BAR ================= */
+/* ================= CONTACT BAR ================= */
 .contact-bar{
   position:fixed;
   bottom:20px;
@@ -257,10 +248,10 @@ footer{
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
-    <a onclick="goTo('home')" class="active">Home</a>
-    <a onclick="goTo('about')">About</a>
-    <a onclick="goTo('portfolio')">Portfolio</a>
-    <a onclick="goTo('contact')">Contact</a>
+    <a onclick="goTo('home', this)" class="active">Home</a>
+    <a onclick="goTo('about', this)">About</a>
+    <a onclick="goTo('portfolio', this)">Portfolio</a>
+    <a onclick="goTo('contact', this)">Contact</a>
   </div>
 </nav>
 
@@ -312,21 +303,24 @@ footer{
 
 <!-- CONTACT BAR -->
 <div class="contact-bar">
+
   <a href="tel:+919700034138">📞 Call</a>
   <a href="https://wa.me/919700034138" target="_blank">💬 WhatsApp</a>
   <a href="https://instagram.com/" target="_blank">📸 Instagram</a>
   <a href="mailto:dillucapture@gmail.com">✉ Mail</a>
+
 </div>
 
 <footer>© 2026 Dillu Captures</footer>
 
 <script>
 
-/* NAV SCROLL FIX */
-function goTo(id){
+/* NAV SCROLL FIXED */
+function goTo(id, el){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
+
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
-  event.target.classList.add("active");
+  el.classList.add("active");
 }
 
 /* SCROLL REVEAL */
@@ -338,7 +332,7 @@ const observer=new IntersectionObserver(entries=>{
   });
 },{threshold:0.15});
 
-document.querySelectorAll("section,.hero,.card").forEach(el=>{
+document.querySelectorAll("section,.card").forEach(el=>{
   observer.observe(el);
 });
 
