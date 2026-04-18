@@ -101,7 +101,6 @@ nav a.active{
 .hero p{
   font-size:16px;
   color:#ddd;
-  opacity:0.9;
 }
 
 /* SECTIONS */
@@ -120,7 +119,6 @@ h2{
   border:1px solid rgba(245,197,66,0.2);
   padding:25px;
   border-radius:16px;
-  backdrop-filter:blur(10px);
 }
 
 /* FOLDERS */
@@ -138,12 +136,6 @@ h2{
   text-align:center;
   border-radius:16px;
   cursor:pointer;
-  transition:0.3s;
-}
-
-.folder:hover{
-  transform:translateY(-6px);
-  background:rgba(245,197,66,0.1);
 }
 
 /* GALLERY */
@@ -158,10 +150,8 @@ h2{
   display:grid;
 }
 
-/* FIXED RECTANGLE SHAPE */
 .card{
-  width:100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio:4/3;
   border-radius:14px;
   overflow:hidden;
 }
@@ -170,11 +160,6 @@ h2{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:0.5s;
-}
-
-.card:hover img{
-  transform:scale(1.08);
 }
 
 /* CONTACT */
@@ -195,13 +180,6 @@ h2{
   background:rgba(0,0,0,0.5);
   border:1px solid rgba(245,197,66,0.2);
   color:#fff;
-  backdrop-filter:blur(10px);
-  transition:0.3s;
-}
-
-.contact-btn:hover{
-  background:rgba(245,197,66,0.15);
-  transform:translateY(-5px);
 }
 
 /* FOOTER */
@@ -209,14 +187,12 @@ footer{
   text-align:center;
   padding:30px;
   color:#aaa;
-  font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
@@ -227,61 +203,60 @@ footer{
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero" id="home">
   <h1>Dillu Captures</h1>
   <p>"Preserving the beauty of a moment."</p>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
   <h2>About</h2>
   <div class="about-box">
-    Premium cinematic wedding, kids, haldi & outdoor photography studio.
+    Premium cinematic photography studio.
   </div>
 </section>
 
-<!-- PORTFOLIO -->
 <section id="portfolio">
   <h2>Folders</h2>
 
   <div class="folders">
     <div class="folder" onclick="toggleFolder('kids')">📸 Kids Shoot</div>
-    <div class="folder" onclick="toggleFolder('outdoor')">🌿 Outdoor Shoot</div>
+    <div class="folder" onclick="toggleFolder('outdoor')">🤰 Maternity Shoots</div>
     <div class="folder" onclick="toggleFolder('cars')">🚗 Cars & Bike</div>
     <div class="folder" onclick="toggleFolder('haldi')">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="toggleFolder('temples')">🛕 Temples & Culture</div>
+    <div class="folder" onclick="toggleFolder('pets')">🐾 Pets & Animals</div>
   </div>
 
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/NEWBORN/1.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/2.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/3.webp"></div>
   </div>
 
   <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
-    <div class="card"><img src="Images/outdoor/2.jpg"></div>
-    <div class="card"><img src="Images/outdoor/3.jpg"></div>
   </div>
 
   <div class="gallery" id="cars">
     <div class="card"><img src="Images/cars/1.jpg"></div>
-    <div class="card"><img src="Images/cars/2.jpg"></div>
-    <div class="card"><img src="Images/cars/3.jpg"></div>
   </div>
 
-    <div class="gallery" id="haldi">
+  <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
-    <div class="card"><img src="Images/haldi/2.jpg"></div>
-    <div class="card"><img src="Images/haldi/3.jpg"></div>
+  </div>
+
+  <!-- NEW -->
+  <div class="gallery" id="temples">
+    <div class="card"><img src="Images/temples/1.jpg"></div>
+  </div>
+
+  <!-- NEW -->
+  <div class="gallery" id="pets">
+    <div class="card"><img src="Images/pets/1.jpg"></div>
   </div>
 
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
-
   <div class="contact-grid">
     <a class="contact-btn" href="tel:+919700034138">📞 Call</a>
     <a class="contact-btn" href="https://wa.me/919700034138">💬 WhatsApp</a>
@@ -293,26 +268,22 @@ footer{
 <footer>© 2026 Dillu Captures</footer>
 
 <script>
-
 function go(id,el){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
   el.classList.add("active");
 }
 
-/* TOGGLE OPEN + CLOSE */
 function toggleFolder(id){
   let el = document.getElementById(id);
-
   if(el.classList.contains("active")){
-    el.classList.remove("active"); // CLOSE
+    el.classList.remove("active");
   }else{
     document.querySelectorAll(".gallery").forEach(g=>g.classList.remove("active"));
-    el.classList.add("active"); // OPEN
-    el.scrollIntoView({behavior:"smooth", block:"start"});
+    el.classList.add("active");
+    el.scrollIntoView({behavior:"smooth"});
   }
 }
-
 </script>
 
 </body>
