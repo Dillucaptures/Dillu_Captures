@@ -22,18 +22,30 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== CINEMATIC BACKGROUND ===== */
+/* ================= PREMIUM CAMERA BACKGROUND ================= */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,200,100,0.18), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(100,150,255,0.12), transparent 45%),
-    radial-gradient(circle at 50% 100%, rgba(255,100,120,0.10), transparent 50%);
-  filter: blur(90px);
-  animation: floatBg 12s ease-in-out infinite alternate;
-  z-index:-1;
+    url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+  opacity:0.10;
+  filter: blur(2px) contrast(1.1);
+  z-index:-3;
+}
+
+/* cinematic color glow overlay */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,200,100,0.20), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(120,160,255,0.15), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(255,80,120,0.12), transparent 55%);
+  filter: blur(80px);
+  z-index:-2;
+  animation: floatBg 10s ease-in-out infinite alternate;
 }
 
 @keyframes floatBg{
@@ -41,7 +53,7 @@ body::before{
   to{transform:scale(1.1) translateY(20px);}
 }
 
-/* ===== GLASS NAVBAR (APPLE STYLE) ===== */
+/* ================= GLASS NAV ================= */
 nav{
   position:fixed;
   top:20px;
@@ -49,27 +61,19 @@ nav{
   transform:translateX(-50%);
   width:92%;
   max-width:1100px;
-  padding:14px 20px;
 
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.12);
-  backdrop-filter:blur(20px);
+  padding:14px 20px;
   border-radius:18px;
 
-  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(22px);
+
   z-index:1000;
-
-  opacity:0;
-  transform:translate(-50%, -20px);
-  animation:navIn 1s ease forwards;
-}
-
-@keyframes navIn{
-  to{opacity:1; transform:translate(-50%,0);}
 }
 
 .logo{
@@ -84,9 +88,9 @@ nav a{
   margin:0 10px;
   font-size:12px;
   letter-spacing:1px;
-  transition:0.3s;
   padding:6px 10px;
   border-radius:10px;
+  transition:0.3s;
 }
 
 nav a:hover{
@@ -94,7 +98,7 @@ nav a:hover{
   color:#fff;
 }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .hero{
   height:100vh;
   display:flex;
@@ -103,48 +107,42 @@ nav a:hover{
   align-items:center;
   text-align:center;
   padding:20px;
-
-  opacity:0;
-  transform:translateY(40px);
-  animation:heroIn 1.2s ease forwards;
-}
-
-@keyframes heroIn{
-  to{opacity:1; transform:translateY(0);}
 }
 
 .hero h1{
   font-family:Dancing Script;
-  font-size:70px;
+  font-size:72px;
   color:#f5c542;
+  text-shadow:0 10px 40px rgba(0,0,0,0.8);
 }
 
 .hero p{
-  max-width:600px;
+  max-width:650px;
   margin-top:10px;
-  color:#aaa;
+  color:#bbb;
+  line-height:1.6;
 }
 
-/* ===== SECTION SYSTEM (FRAMER STYLE) ===== */
+/* ================= SECTIONS ================= */
 section{
   padding:100px 10%;
 }
 
-/* ===== ABOUT ===== */
+/* ================= ABOUT GLASS ================= */
 .about{
-  opacity:0;
-  transform:translateY(60px);
-  transition:1s ease;
-  background:rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.12);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(18px);
   border-radius:20px;
   padding:40px;
+  transform:translateY(40px);
+  opacity:0;
+  transition:1s ease;
 }
 
 .about.show{
-  opacity:1;
   transform:translateY(0);
+  opacity:1;
 }
 
 .about h2{
@@ -152,7 +150,7 @@ section{
   margin-bottom:15px;
 }
 
-/* ===== FILTERS ===== */
+/* ================= FILTERS ================= */
 .filters{
   display:flex;
   gap:10px;
@@ -177,7 +175,7 @@ section{
   color:#000;
 }
 
-/* ===== GALLERY ===== */
+/* ================= GALLERY ================= */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -188,14 +186,14 @@ section{
   border-radius:18px;
   overflow:hidden;
   position:relative;
-  transform:translateY(50px);
   opacity:0;
+  transform:translateY(40px);
   transition:0.8s ease;
 }
 
 .card.show{
-  transform:translateY(0);
   opacity:1;
+  transform:translateY(0);
 }
 
 .card img{
@@ -205,9 +203,8 @@ section{
   transition:0.6s ease;
 }
 
-/* Apple-style depth hover */
 .card:hover img{
-  transform:scale(1.1);
+  transform:scale(1.12);
   filter:brightness(1.1);
 }
 
@@ -215,14 +212,14 @@ section{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  background:linear-gradient(to top, rgba(0,0,0,0.65), transparent);
 }
 
-/* ===== CONTACT ===== */
+/* ================= CONTACT ================= */
 .contact{
   text-align:center;
   opacity:0;
-  transform:translateY(50px);
+  transform:translateY(40px);
   transition:1s ease;
 }
 
@@ -231,12 +228,28 @@ section{
   transform:translateY(0);
 }
 
-/* ===== FOOTER ===== */
+/* ================= FOOTER ================= */
 footer{
   text-align:center;
   padding:30px;
   color:#666;
   font-size:12px;
+}
+
+/* ================= SMALL GLASS FLOAT EFFECT ================= */
+.glass-float{
+  position:absolute;
+  width:200px;
+  height:200px;
+  background:rgba(255,255,255,0.05);
+  border-radius:50%;
+  filter:blur(40px);
+  animation:float 12s infinite alternate;
+}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(60px);}
 }
 </style>
 </head>
@@ -256,17 +269,16 @@ footer{
 <!-- HERO -->
 <div class="hero" id="home">
   <h1>Dillu Captures</h1>
-  <p>Luxury cinematic photography capturing emotions, light, and timeless memories.</p>
+  <p>Luxury cinematic photography inspired by light, emotion, and storytelling — turning real moments into timeless art.</p>
 </div>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about reveal">
+  <div class="about">
     <h2>About Me</h2>
     <p>
-      I am a passionate photographer who focuses on cinematic storytelling.
-      Every image is crafted with emotion, natural light, and a luxury feel.
-      My goal is to turn real moments into timeless art.
+      I specialize in cinematic portrait and lifestyle photography.
+      Every frame is crafted using natural light, emotion, and premium storytelling techniques inspired by film aesthetics.
     </p>
   </div>
 </section>
@@ -298,7 +310,7 @@ footer{
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact reveal">
+  <div class="contact">
     <h2>Contact</h2>
     <p>dillucapture@gmail.com | +91 9700034138</p>
   </div>
@@ -317,20 +329,20 @@ function filter(cat){
   event.target.classList.add('active');
 
   cards.forEach(c=>{
-    c.style.display = (cat==='all' || c.classList.contains(cat)) ? "block":"none";
+    c.style.display=(cat==='all'||c.classList.contains(cat))?"block":"none";
   });
 }
 
-/* ===== SCROLL REVEAL (FRAMER STYLE) ===== */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
+/* scroll reveal */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('show');
     }
   });
 },{threshold:0.15});
 
-document.querySelectorAll('.about, .card, .contact').forEach(el=>{
+document.querySelectorAll('.about,.card,.contact').forEach(el=>{
   observer.observe(el);
 });
 </script>
