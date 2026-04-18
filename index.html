@@ -3,106 +3,152 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dillu Captures | Photography Studio</title>
+<title>Dillu Captures | Premium Photography Studio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#050505;
-  --gold:#d4af37;
-  --text:#f5f5f5;
-  --muted:#aaaaaa;
+/* ===== GLOBAL ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
 body{
-  background:var(--bg);
-  color:var(--text);
   font-family:Montserrat;
+  color:#f5f5f5;
+  background:#050505;
   overflow-x:hidden;
 }
 
-/* NAV */
+/* ===== BACKGROUND ANIMATION ===== */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:-200px;
+  z-index:-1;
+  background: radial-gradient(circle at 20% 20%, rgba(212,175,55,0.15), transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(120,119,198,0.12), transparent 45%),
+              radial-gradient(circle at 50% 50%, rgba(255,255,255,0.06), transparent 60%);
+  animation: floatBg 18s ease-in-out infinite alternate;
+  filter: blur(60px);
+}
+
+body::after{
+  animation: floatBg2 22s ease-in-out infinite alternate;
+}
+
+@keyframes floatBg{
+  0%{transform:translate(0,0) scale(1);}
+  100%{transform:translate(-40px,30px) scale(1.1);}
+}
+
+@keyframes floatBg2{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(50px,-30px);}
+}
+
+/* ===== NAV ===== */
 nav{
   position:fixed;
   top:0;
   width:100%;
-  padding:18px 40px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  backdrop-filter:blur(12px);
-  background:rgba(0,0,0,0.6);
+  padding:18px 8%;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(20px);
   z-index:1000;
+  border-bottom:1px solid rgba(255,255,255,0.05);
 }
+
 .logo{
   font-family:"Playfair Display";
   font-size:22px;
-  color:var(--gold);
-  letter-spacing:2px;
+  letter-spacing:3px;
+  color:#d4af37;
 }
+
 nav a{
-  color:var(--text);
   margin-left:20px;
   text-decoration:none;
-  font-size:13px;
+  color:#aaa;
+  font-size:12px;
   letter-spacing:2px;
-  opacity:0.8;
+  transition:0.3s;
 }
-nav a:hover{color:var(--gold);opacity:1;}
 
-/* HERO */
+nav a:hover{
+  color:#fff;
+}
+
+/* ===== HERO ===== */
 .hero{
   height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   text-align:center;
-  background:url("Images/hero.webp") center/cover no-repeat;
   position:relative;
+  padding:0 20px;
 }
-.hero::after{
+
+.hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.65);
+  background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
 }
+
 .hero-content{
   position:relative;
   z-index:2;
+  animation: fadeUp 1.5s ease;
 }
+
 .hero h1{
   font-family:"Playfair Display";
   font-size:60px;
   letter-spacing:3px;
 }
+
 .hero p{
   margin-top:15px;
-  color:var(--muted);
+  color:#aaa;
+  font-size:14px;
+  letter-spacing:2px;
 }
 
-/* SECTION */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== SECTIONS ===== */
 section{
-  padding:80px 10%;
+  padding:100px 10%;
 }
 
-/* ABOUT */
-.about h2{
+/* ===== ABOUT ===== */
+.about h2,
+.gallery-title,
+.contact h2{
   font-family:"Playfair Display";
-  font-size:36px;
+  font-size:38px;
   margin-bottom:20px;
 }
+
 .about p{
-  color:var(--muted);
-  max-width:700px;
+  color:#aaa;
+  max-width:800px;
   line-height:1.8;
 }
 
-/* GALLERY */
+/* ===== GALLERY ===== */
 .gallery-title{
-  font-family:"Playfair Display";
-  font-size:34px;
   margin-bottom:30px;
 }
 
@@ -110,41 +156,48 @@ section{
   column-count:3;
   column-gap:15px;
 }
+
 .gallery img{
   width:100%;
   margin-bottom:15px;
-  border-radius:12px;
+  border-radius:16px;
   cursor:pointer;
-  transition:0.4s;
+  transition:0.5s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
 }
+
 .gallery img:hover{
-  transform:scale(1.03);
+  transform:scale(1.04);
   filter:brightness(1.1);
 }
 
-/* CONTACT */
+/* ===== CONTACT ===== */
 .contact{
   text-align:center;
 }
-.contact h2{
-  font-family:"Playfair Display";
-  font-size:36px;
-}
-.btn{
-  display:inline-block;
-  margin-top:20px;
-  padding:12px 26px;
-  border:1px solid var(--gold);
-  color:var(--gold);
-  text-decoration:none;
-  letter-spacing:2px;
-}
-.btn:hover{
-  background:var(--gold);
-  color:black;
+
+.contact p{
+  color:#aaa;
 }
 
-/* LIGHTBOX */
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:14px 30px;
+  border:1px solid #d4af37;
+  color:#d4af37;
+  text-decoration:none;
+  letter-spacing:2px;
+  transition:0.4s;
+  border-radius:30px;
+}
+
+.btn:hover{
+  background:#d4af37;
+  color:#000;
+}
+
+/* ===== LIGHTBOX ===== */
 #lightbox{
   position:fixed;
   inset:0;
@@ -154,18 +207,22 @@ section{
   justify-content:center;
   z-index:2000;
 }
+
 #lightbox img{
   max-width:90%;
   max-height:90%;
   border-radius:12px;
 }
 
+/* ===== RESPONSIVE ===== */
 @media(max-width:900px){
   .gallery{column-count:2;}
   .hero h1{font-size:40px;}
 }
+
 @media(max-width:600px){
   .gallery{column-count:1;}
+  nav{flex-direction:column;gap:10px;}
 }
 </style>
 </head>
@@ -186,7 +243,7 @@ section{
 <!-- HERO -->
 <div class="hero" id="home">
   <div class="hero-content">
-    <h1>Capturing Timeless Stories</h1>
+    <h1>Capturing Emotions</h1>
     <p>Portrait • Kids • Events • Lifestyle Photography</p>
   </div>
 </div>
@@ -195,7 +252,8 @@ section{
 <section id="about" class="about">
   <h2>About Studio</h2>
   <p>
-    Dillu Captures is a creative photography studio focused on storytelling through natural light, emotion, and candid moments. Every frame is crafted with precision and passion to preserve memories that last forever.
+    Dillu Captures is a premium photography studio focused on storytelling through light, emotion, and cinematic framing.
+    We don’t just take photos — we preserve feelings, moments, and timeless memories.
   </p>
 </section>
 
@@ -218,12 +276,10 @@ section{
 
 <!-- CONTACT -->
 <section id="contact" class="contact">
-  <h2>Let’s Work Together</h2>
-  <p style="color:#aaa;margin-top:10px;">
-    Book your shoot and let’s create something beautiful.
-  </p>
+  <h2>Let’s Create Something Beautiful</h2>
+  <p>Book your session today and turn your moments into timeless memories.</p>
 
-  <a class="btn" href="https://wa.me/919700034138">CONTACT ON WHATSAPP</a>
+  <a class="btn" href="https://wa.me/919700034138">BOOK ON WHATSAPP</a>
 </section>
 
 <!-- LIGHTBOX -->
@@ -232,15 +288,14 @@ section{
 </div>
 
 <script>
-// LIGHTBOX
 const imgs = document.querySelectorAll(".gallery img");
-const box = document.getElementById("lightbox");
-const boxImg = document.getElementById("lightbox-img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
 
 imgs.forEach(img=>{
   img.addEventListener("click",()=>{
-    box.style.display="flex";
-    boxImg.src = img.src;
+    lightbox.style.display="flex";
+    lightboxImg.src = img.src;
   });
 });
 </script>
