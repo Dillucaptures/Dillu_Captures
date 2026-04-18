@@ -21,7 +21,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= CINEMATIC BACKGROUND ================= */
+/* CINEMATIC BACKGROUND */
 body::before{
   content:"";
   position:fixed;
@@ -139,34 +139,23 @@ h2{
   background:rgba(245,197,66,0.1);
 }
 
-/* ================= GALLERY (5 ROW GRID SYSTEM) ================= */
+/* FIXED IMAGE SIZE GRID */
 .gallery{
   display:none;
   margin-top:25px;
-  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-  grid-auto-rows:160px;
-  grid-auto-flow:dense;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
   gap:12px;
 }
 
-/* SHOW ACTIVE */
 .gallery.active{
   display:grid;
 }
 
-/* 5 ROW FEEL (varied height for cinematic look) */
 .card{
+  width:100%;
+  height:220px;        /* SAME SIZE FIX */
   border-radius:12px;
   overflow:hidden;
-  position:relative;
-}
-
-.card:nth-child(3n){
-  grid-row:span 2;
-}
-
-.card:nth-child(5n){
-  grid-row:span 3;
 }
 
 .card img{
@@ -252,11 +241,10 @@ footer{
     <div class="folder" onclick="openFolder('kids')">📸 Kids Shoot</div>
     <div class="folder" onclick="openFolder('haldi')">🌼 Haldi Shoot</div>
     <div class="folder" onclick="openFolder('outdoor')">🌿 Outdoor Shoot</div>
-    <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
+    <div class="folder" onclick="openFolder('cars')">🚗 Cars & Bike</div>
   </div>
 
-  <!-- 5 ROW STYLE GALLERIES -->
-
+  <!-- KIDS -->
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
     <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
@@ -264,31 +252,27 @@ footer{
     <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
     <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
     <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
-
   </div>
 
+  <!-- HALDI -->
   <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
     <div class="card"><img src="Images/haldi/2.jpg"></div>
     <div class="card"><img src="Images/haldi/3.jpg"></div>
-    <div class="card"><img src="Images/haldi/4.jpg"></div>
-    <div class="card"><img src="Images/haldi/5.jpg"></div>
   </div>
 
+  <!-- OUTDOOR -->
   <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
     <div class="card"><img src="Images/outdoor/2.jpg"></div>
     <div class="card"><img src="Images/outdoor/3.jpg"></div>
-    <div class="card"><img src="Images/outdoor/4.jpg"></div>
-    <div class="card"><img src="Images/outdoor/5.jpg"></div>
   </div>
 
-  <div class="gallery" id="wedding">
-    <div class="card"><img src="Images/wedding/1.jpg"></div>
-    <div class="card"><img src="Images/wedding/2.jpg"></div>
-    <div class="card"><img src="Images/wedding/3.jpg"></div>
-    <div class="card"><img src="Images/wedding/4.jpg"></div>
-    <div class="card"><img src="Images/wedding/5.jpg"></div>
+  <!-- CARS & BIKE -->
+  <div class="gallery" id="cars">
+    <div class="card"><img src="Images/cars/1.jpg"></div>
+    <div class="card"><img src="Images/cars/2.jpg"></div>
+    <div class="card"><img src="Images/cars/3.jpg"></div>
   </div>
 
 </section>
