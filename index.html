@@ -95,6 +95,13 @@ nav a.active{
   font-family:Dancing Script;
   font-size:72px;
   color:#f5c542;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:16px;
+  color:#ddd;
+  opacity:0.9;
 }
 
 /* SECTIONS */
@@ -113,6 +120,7 @@ h2{
   border:1px solid rgba(245,197,66,0.2);
   padding:25px;
   border-radius:16px;
+  backdrop-filter:blur(10px);
 }
 
 /* FOLDERS */
@@ -150,7 +158,7 @@ h2{
   display:grid;
 }
 
-/* IMAGE BOX */
+/* FIXED RECTANGLE SHAPE */
 .card{
   width:100%;
   aspect-ratio: 4 / 3;
@@ -187,6 +195,8 @@ h2{
   background:rgba(0,0,0,0.5);
   border:1px solid rgba(245,197,66,0.2);
   color:#fff;
+  backdrop-filter:blur(10px);
+  transition:0.3s;
 }
 
 .contact-btn:hover{
@@ -220,13 +230,14 @@ footer{
 <!-- HERO -->
 <div class="hero" id="home">
   <h1>Dillu Captures</h1>
+  <p>"Preserving the beauty of a moment."</p>
 </div>
 
 <!-- ABOUT -->
 <section id="about">
   <h2>About</h2>
   <div class="about-box">
-    Premium cinematic photography studio.
+    Premium cinematic wedding, kids, haldi & outdoor photography studio.
   </div>
 </section>
 
@@ -241,29 +252,28 @@ footer{
     <div class="folder" onclick="toggleFolder('cars')">🚗 Cars & Bike</div>
   </div>
 
-  <!-- GALLERIES -->
   <div class="gallery" id="kids">
-    <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
-    <div class="card"><img src="Images/NEWBORN/20240805190232_IMG_0703.webp"></div>
+    <div class="card"><img src="Images/NEWBORN/1.webp"></div>
+    <div class="card"><img src="Images/NEWBORN/2.webp"></div>
+    <div class="card"><img src="Images/NEWBORN/3.webp"></div>
   </div>
 
   <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
     <div class="card"><img src="Images/haldi/2.jpg"></div>
+    <div class="card"><img src="Images/haldi/3.jpg"></div>
   </div>
 
   <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
     <div class="card"><img src="Images/outdoor/2.jpg"></div>
+    <div class="card"><img src="Images/outdoor/3.jpg"></div>
   </div>
 
   <div class="gallery" id="cars">
     <div class="card"><img src="Images/cars/1.jpg"></div>
     <div class="card"><img src="Images/cars/2.jpg"></div>
+    <div class="card"><img src="Images/cars/3.jpg"></div>
   </div>
 
 </section>
@@ -284,7 +294,6 @@ footer{
 
 <script>
 
-/* NAV */
 function go(id,el){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
@@ -293,22 +302,15 @@ function go(id,el){
 
 /* TOGGLE OPEN + CLOSE */
 function toggleFolder(id){
-  const el = document.getElementById(id);
+  let el = document.getElementById(id);
 
-  // if already open → close
   if(el.classList.contains("active")){
-    el.classList.remove("active");
-    return;
+    el.classList.remove("active"); // CLOSE
+  }else{
+    document.querySelectorAll(".gallery").forEach(g=>g.classList.remove("active"));
+    el.classList.add("active"); // OPEN
+    el.scrollIntoView({behavior:"smooth", block:"start"});
   }
-
-  // close all
-  document.querySelectorAll(".gallery").forEach(g=>g.classList.remove("active"));
-
-  // open clicked
-  el.classList.add("active");
-
-  // scroll
-  el.scrollIntoView({behavior:"smooth", block:"start"});
 }
 
 </script>
