@@ -22,13 +22,12 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= LOADER (APPLE STYLE) ================= */
+/* ================= LOADER ================= */
 .loader{
   position:fixed;
   inset:0;
   background:#050505;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   z-index:99999;
@@ -40,42 +39,83 @@ body{
   pointer-events:none;
 }
 
-/* camera shutter animation */
-.shutter{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,0.2);
-  position:relative;
-  animation:spin 1.2s linear infinite;
+.loader-content{
+  text-align:center;
 }
 
-.shutter::before,
-.shutter::after{
+/* camera */
+.camera{
+  width:80px;
+  height:60px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:12px;
+  margin:0 auto;
+  position:relative;
+  animation:floatCam 2s ease-in-out infinite;
+}
+
+.camera::before{
   content:"";
   position:absolute;
-  inset:10px;
+  top:-10px;
+  left:20px;
+  width:40px;
+  height:10px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:6px;
+}
+
+.lens{
+  width:22px;
+  height:22px;
   border-radius:50%;
-  border:2px solid rgba(245,197,66,0.6);
-  animation:pulse 1.5s ease-in-out infinite;
+  border:2px solid #f5c542;
+  position:absolute;
+  top:18px;
+  left:28px;
+  animation:pulseLens 1.5s infinite;
 }
 
-@keyframes spin{
-  to{transform:rotate(360deg);}
+@keyframes floatCam{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
 }
 
-@keyframes pulse{
-  0%{transform:scale(0.8); opacity:0.4;}
-  50%{transform:scale(1.1); opacity:1;}
-  100%{transform:scale(0.8); opacity:0.4;}
+@keyframes pulseLens{
+  0%{transform:scale(0.9); opacity:0.5;}
+  50%{transform:scale(1.2); opacity:1;}
+  100%{transform:scale(0.9); opacity:0.5;}
 }
 
 .loader h1{
   margin-top:20px;
   font-family:Dancing Script;
   color:#f5c542;
-  font-size:26px;
-  letter-spacing:1px;
+  font-size:28px;
+}
+
+.loading-bar{
+  width:220px;
+  height:4px;
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  margin:20px auto 10px;
+  overflow:hidden;
+}
+
+.progress{
+  height:100%;
+  width:0%;
+  background:#f5c542;
+  transition:0.2s;
+}
+
+#loading-text{
+  font-size:12px;
+  color:#aaa;
 }
 
 /* ================= BACKGROUND ================= */
@@ -84,7 +124,8 @@ body::before{
   position:fixed;
   inset:0;
   background:
-    url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+    url("https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=80")
+    center/cover no-repeat;
   opacity:0.10;
   filter: blur(2px);
   z-index:-3;
@@ -110,18 +151,14 @@ nav{
   transform:translateX(-50%);
   width:92%;
   max-width:1100px;
-
   display:flex;
   justify-content:space-between;
   align-items:center;
-
   padding:14px 20px;
   border-radius:18px;
-
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.12);
   backdrop-filter:blur(22px);
-
   z-index:1000;
 }
 
@@ -136,16 +173,11 @@ nav a{
   text-decoration:none;
   margin:0 10px;
   font-size:12px;
-  letter-spacing:1px;
-  padding:6px 10px;
-  border-radius:10px;
-  transition:0.3s;
   cursor:pointer;
 }
 
 nav a:hover,
 nav a.active{
-  background:rgba(255,255,255,0.12);
   color:#fff;
 }
 
@@ -157,10 +189,9 @@ nav a.active{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:20px;
   opacity:0;
   transform:scale(1.05);
-  animation:fadeIn 1.2s ease forwards;
+  animation:fadeIn 1.5s ease forwards;
 }
 
 @keyframes fadeIn{
@@ -190,31 +221,8 @@ section.show{
 .about{
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.12);
-  backdrop-filter:blur(18px);
   border-radius:20px;
   padding:40px;
-}
-
-/* ================= FILTERS ================= */
-.filters{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:30px;
-}
-
-.filters button{
-  padding:10px 18px;
-  border-radius:30px;
-  border:1px solid rgba(255,255,255,0.2);
-  background:rgba(255,255,255,0.05);
-  color:#ccc;
-  cursor:pointer;
-}
-
-.filters button.active{
-  background:#f5c542;
-  color:#000;
 }
 
 /* ================= GALLERY ================= */
@@ -246,20 +254,11 @@ section.show{
 
 .card:hover img{
   transform:scale(1.12);
-  filter:brightness(1.1);
 }
 
 /* ================= CONTACT ================= */
 .contact{
   text-align:center;
-}
-
-/* ================= FOOTER ================= */
-footer{
-  text-align:center;
-  padding:30px;
-  color:#666;
-  font-size:12px;
 }
 
 /* ================= CONTACT BAR ================= */
@@ -271,39 +270,48 @@ footer{
   display:flex;
   gap:12px;
   background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.15);
-  backdrop-filter:blur(20px);
-  padding:12px 14px;
   border-radius:50px;
-  z-index:2000;
+  padding:12px;
+  backdrop-filter:blur(20px);
 }
 
 .contact-bar a{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:10px 14px;
-  border-radius:30px;
   color:#ddd;
   text-decoration:none;
   font-size:12px;
-  transition:0.3s;
+  padding:10px 14px;
+  border-radius:30px;
 }
 
 .contact-bar a:hover{
   background:#f5c542;
   color:#000;
-  transform:translateY(-2px);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:30px;
+  color:#666;
+  font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOADER ================= -->
+<!-- LOADER -->
 <div class="loader" id="loader">
-  <div class="shutter"></div>
-  <h1>Dillu Captures</h1>
+  <div class="loader-content">
+    <div class="camera">
+      <div class="lens"></div>
+    </div>
+    <h1>Dillu Captures</h1>
+    <div class="loading-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <p id="loading-text">Loading 0%</p>
+  </div>
 </div>
 
 <nav>
@@ -324,28 +332,16 @@ footer{
 <section id="about">
   <div class="about">
     <h2>About Me</h2>
-    <p>I specialize in cinematic portrait photography with storytelling light.</p>
+    <p>Cinematic photography with storytelling light and emotion.</p>
   </div>
 </section>
 
 <section id="portfolio">
   <h2>Portfolio</h2>
-
-  <div class="filters">
-    <button class="active" onclick="filter('all')">All</button>
-    <button onclick="filter('kids')">Kids</button>
-    <button onclick="filter('haldi')">Haldi</button>
-    <button onclick="filter('outdoor')">Outdoor</button>
-    <button onclick="filter('bikes')">Bikes</button>
-    <button onclick="filter('portraits')">Portraits</button>
-  </div>
-
   <div class="gallery">
-    <div class="card kids"><img src="Images/kids/1.jpg"></div>
-    <div class="card haldi"><img src="Images/haldi/1.jpg"></div>
-    <div class="card outdoor"><img src="Images/outdoor/1.jpg"></div>
-    <div class="card bikes"><img src="Images/bikes/1.jpg"></div>
-    <div class="card portraits"><img src="Images/portraits/1.jpg"></div>
+    <div class="card"><img src="Images/kids/1.jpg"></div>
+    <div class="card"><img src="Images/haldi/1.jpg"></div>
+    <div class="card"><img src="Images/outdoor/1.jpg"></div>
   </div>
 </section>
 
@@ -358,8 +354,8 @@ footer{
 
 <div class="contact-bar">
   <a href="tel:+919700034138">📞 Call</a>
-  <a href="https://wa.me/919700034138" target="_blank">💬 WhatsApp</a>
-  <a href="https://instagram.com/" target="_blank">📸 Instagram</a>
+  <a href="https://wa.me/919700034138">💬 WhatsApp</a>
+  <a href="https://instagram.com/">📸 Instagram</a>
   <a href="mailto:dillucapture@gmail.com">✉ Mail</a>
 </div>
 
@@ -367,12 +363,23 @@ footer{
 
 <script>
 
-/* LOADER */
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document.getElementById("loader").classList.add("hidden");
-  },1500);
-});
+/* LOADER ANIMATION */
+let progress = 0;
+let bar = document.getElementById("progress");
+let text = document.getElementById("loading-text");
+
+let load = setInterval(()=>{
+  progress++;
+  bar.style.width = progress + "%";
+  text.innerText = "Loading " + progress + "%";
+
+  if(progress >= 100){
+    clearInterval(load);
+    setTimeout(()=>{
+      document.getElementById("loader").classList.add("hidden");
+    },500);
+  }
+},20);
 
 /* NAV */
 function goTo(id, el){
@@ -381,7 +388,7 @@ function goTo(id, el){
   el.classList.add("active");
 }
 
-/* REVEAL */
+/* SCROLL REVEAL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -393,19 +400,6 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll("section,.card").forEach(el=>{
   observer.observe(el);
 });
-
-/* FILTER */
-function filter(cat){
-  let cards=document.querySelectorAll('.card');
-  let btns=document.querySelectorAll('.filters button');
-
-  btns.forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-
-  cards.forEach(c=>{
-    c.style.display=(cat==='all'||c.classList.contains(cat))?"block":"none";
-  });
-}
 
 </script>
 
