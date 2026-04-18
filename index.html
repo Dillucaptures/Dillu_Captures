@@ -19,10 +19,9 @@ body{
   font-family:Montserrat;
   background:#050505;
   color:#fff;
-  overflow-x:hidden;
 }
 
-/* ================= NAV ================= */
+/* NAV */
 nav{
   position:fixed;
   top:15px;
@@ -52,10 +51,9 @@ nav a{
   text-decoration:none;
   margin:0 10px;
   font-size:12px;
+  cursor:pointer;
   padding:6px 10px;
   border-radius:10px;
-  transition:0.3s;
-  cursor:pointer;
 }
 
 nav a:hover,
@@ -80,17 +78,22 @@ nav a.active{
   color:#f5c542;
 }
 
-/* SECTION */
+/* SECTIONS */
 section{
   padding:120px 10% 80px;
+}
+
+h2{
+  margin-bottom:20px;
+  color:#f5c542;
 }
 
 /* ABOUT */
 .about-box{
   background:rgba(255,255,255,0.05);
-  border:1px solid rgba(245,197,66,0.2);
-  padding:30px;
-  border-radius:18px;
+  border:1px solid rgba(245,197,66,0.15);
+  padding:25px;
+  border-radius:16px;
 }
 
 /* FOLDERS */
@@ -98,25 +101,25 @@ section{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
-  margin-top:30px;
+  margin-top:20px;
 }
 
 .folder{
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(245,197,66,0.2);
-  padding:40px;
+  padding:35px;
   text-align:center;
   border-radius:16px;
   cursor:pointer;
-  transition:0.4s;
+  transition:0.3s;
 }
 
 .folder:hover{
-  transform:translateY(-8px);
+  transform:translateY(-6px);
   background:rgba(245,197,66,0.1);
 }
 
-/* GALLERY */
+/* IMPORTANT: gallery stays BELOW folder */
 .gallery{
   display:none;
   width:100%;
@@ -138,39 +141,33 @@ section{
   width:100%;
   height:270px;
   object-fit:cover;
-  transition:0.6s;
+  transition:0.5s;
 }
 
 .card:hover img{
-  transform:scale(1.12);
+  transform:scale(1.1);
 }
 
-/* CONTACT BAR */
-.contact-bar{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:12px;
-  background:rgba(255,255,255,0.06);
-  border-radius:50px;
-  padding:12px;
-  backdrop-filter:blur(20px);
+/* CONTACT SECTION */
+.contact-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(245,197,66,0.15);
+  padding:25px;
+  border-radius:16px;
+  line-height:1.8;
 }
 
-.contact-bar a{
-  color:#ddd;
+.contact-box a{
+  color:#f5c542;
   text-decoration:none;
-  font-size:12px;
-  padding:10px 14px;
-  border-radius:30px;
-  transition:0.3s;
 }
 
-.contact-bar a:hover{
-  background:#f5c542;
-  color:#000;
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  color:#666;
+  font-size:12px;
 }
 </style>
 </head>
@@ -181,31 +178,29 @@ section{
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
-    <a onclick="goTo('home',this)" class="active">Home</a>
-    <a onclick="goTo('about',this)">About</a>
-    <a onclick="goTo('portfolio',this)">Portfolio</a>
-    <a onclick="goTo('contact',this)">Contact</a>
+    <a onclick="go('home',this)" class="active">Home</a>
+    <a onclick="go('about',this)">About</a>
+    <a onclick="go('portfolio',this)">Portfolio</a>
+    <a onclick="go('contact',this)">Contact</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero" id="home">
   <h1>Dillu Captures</h1>
+  <p>Luxury cinematic photography capturing emotion</p>
 </div>
 
 <!-- ABOUT -->
 <section id="about">
+  <h2>About</h2>
   <div class="about-box">
-    <h2>About Us</h2>
-    <p>
-      We capture cinematic wedding, kids, and outdoor photography with premium editing style and emotional storytelling.
-    </p>
+    We capture cinematic wedding, kids, haldi and outdoor photography with premium editing style.
   </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
-
   <h2>Folders</h2>
 
   <div class="folders">
@@ -215,6 +210,7 @@ section{
     <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
   </div>
 
+  <!-- BELOW FOLDERS -->
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/kids/1.jpg"></div>
     <div class="card"><img src="Images/kids/2.jpg"></div>
@@ -234,39 +230,43 @@ section{
     <div class="card"><img src="Images/wedding/1.jpg"></div>
     <div class="card"><img src="Images/wedding/2.jpg"></div>
   </div>
-
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
-  <p>Email: dillucapture@gmail.com</p>
+
+  <div class="contact-box">
+    📞 Phone: <a href="tel:+919700034138">+91 9700034138</a><br>
+    💬 WhatsApp: <a href="https://wa.me/919700034138">Chat Now</a><br>
+    📸 Instagram: <a href="https://instagram.com/">Visit Profile</a><br>
+    ✉ Gmail: <a href="mailto:dillucapture@gmail.com">Send Mail</a>
+  </div>
 </section>
 
-<!-- CONTACT BAR -->
-<div class="contact-bar">
-  <a href="tel:+919700034138">📞 Call</a>
-  <a href="https://wa.me/919700034138">💬 WhatsApp</a>
-  <a href="https://instagram.com/">📸 Instagram</a>
-  <a href="mailto:dillucapture@gmail.com">✉ Gmail</a>
-</div>
+<footer>© 2026 Dillu Captures</footer>
 
 <script>
 
-/* NAV SCROLL */
-function goTo(id,el){
+/* NAV */
+function go(id,el){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
   document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
   el.classList.add("active");
 }
 
-/* FOLDERS */
+/* FOLDER OPEN BELOW */
 function openFolder(id){
+
   document.querySelectorAll(".gallery").forEach(g=>{
     g.classList.remove("active");
   });
 
-  document.getElementById(id).classList.add("active");
+  let el = document.getElementById(id);
+  el.classList.add("active");
+
+  // ALWAYS appears BELOW folder
+  el.scrollIntoView({behavior:"smooth", block:"start"});
 }
 
 </script>
