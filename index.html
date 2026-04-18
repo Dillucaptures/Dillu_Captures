@@ -17,8 +17,27 @@
 
 body{
   font-family:Montserrat;
-  background:#050505;
   color:#fff;
+  overflow-x:hidden;
+}
+
+/* ================= CINEMATIC BACKGROUND ================= */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+  filter:brightness(0.35);
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, rgba(245,197,66,0.15), transparent 50%),
+             radial-gradient(circle at bottom, rgba(0,0,0,0.9), transparent 60%);
+  z-index:-1;
 }
 
 /* NAV */
@@ -90,10 +109,11 @@ h2{
 
 /* ABOUT */
 .about-box{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(245,197,66,0.15);
+  background:rgba(0,0,0,0.5);
+  border:1px solid rgba(245,197,66,0.2);
   padding:25px;
   border-radius:16px;
+  backdrop-filter:blur(10px);
 }
 
 /* FOLDERS */
@@ -119,31 +139,48 @@ h2{
   background:rgba(245,197,66,0.1);
 }
 
-/* GALLERY */
+/* ================= GALLERY (5 ROW GRID SYSTEM) ================= */
 .gallery{
   display:none;
-  width:100%;
-  margin-top:20px;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:18px;
+  margin-top:25px;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  grid-auto-rows:160px;
+  grid-auto-flow:dense;
+  gap:12px;
 }
 
+/* SHOW ACTIVE */
 .gallery.active{
   display:grid;
 }
 
+/* 5 ROW FEEL (varied height for cinematic look) */
 .card{
-  border-radius:18px;
+  border-radius:12px;
   overflow:hidden;
+  position:relative;
+}
+
+.card:nth-child(3n){
+  grid-row:span 2;
+}
+
+.card:nth-child(5n){
+  grid-row:span 3;
 }
 
 .card img{
   width:100%;
-  height:270px;
+  height:100%;
   object-fit:cover;
+  transition:0.5s;
 }
 
-/* CONTACT BUTTONS */
+.card:hover img{
+  transform:scale(1.08);
+}
+
+/* CONTACT */
 .contact-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -158,10 +195,10 @@ h2{
   padding:15px;
   border-radius:14px;
   text-decoration:none;
-  font-weight:500;
-  background:rgba(255,255,255,0.05);
+  background:rgba(0,0,0,0.5);
   border:1px solid rgba(245,197,66,0.2);
   color:#fff;
+  backdrop-filter:blur(10px);
   transition:0.3s;
 }
 
@@ -170,15 +207,11 @@ h2{
   transform:translateY(-5px);
 }
 
-.contact-btn span{
-  font-size:18px;
-}
-
 /* FOOTER */
 footer{
   text-align:center;
   padding:30px;
-  color:#666;
+  color:#aaa;
   font-size:12px;
 }
 </style>
@@ -207,7 +240,7 @@ footer{
 <section id="about">
   <h2>About</h2>
   <div class="about-box">
-    We capture cinematic wedding, kids, haldi and outdoor photography with premium editing style.
+    Premium cinematic wedding, kids, haldi & outdoor photography studio.
   </div>
 </section>
 
@@ -222,45 +255,51 @@ footer{
     <div class="folder" onclick="openFolder('wedding')">💍 Wedding Shoot</div>
   </div>
 
+  <!-- 5 ROW STYLE GALLERIES -->
+
   <div class="gallery" id="kids">
     <div class="card"><img src="Images/kids/1.jpg"></div>
+    <div class="card"><img src="Images/kids/2.jpg"></div>
+    <div class="card"><img src="Images/kids/3.jpg"></div>
+    <div class="card"><img src="Images/kids/4.jpg"></div>
+    <div class="card"><img src="Images/kids/5.jpg"></div>
   </div>
 
   <div class="gallery" id="haldi">
     <div class="card"><img src="Images/haldi/1.jpg"></div>
+    <div class="card"><img src="Images/haldi/2.jpg"></div>
+    <div class="card"><img src="Images/haldi/3.jpg"></div>
+    <div class="card"><img src="Images/haldi/4.jpg"></div>
+    <div class="card"><img src="Images/haldi/5.jpg"></div>
   </div>
 
   <div class="gallery" id="outdoor">
     <div class="card"><img src="Images/outdoor/1.jpg"></div>
+    <div class="card"><img src="Images/outdoor/2.jpg"></div>
+    <div class="card"><img src="Images/outdoor/3.jpg"></div>
+    <div class="card"><img src="Images/outdoor/4.jpg"></div>
+    <div class="card"><img src="Images/outdoor/5.jpg"></div>
   </div>
 
   <div class="gallery" id="wedding">
     <div class="card"><img src="Images/wedding/1.jpg"></div>
+    <div class="card"><img src="Images/wedding/2.jpg"></div>
+    <div class="card"><img src="Images/wedding/3.jpg"></div>
+    <div class="card"><img src="Images/wedding/4.jpg"></div>
+    <div class="card"><img src="Images/wedding/5.jpg"></div>
   </div>
+
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <h2>Contact Me</h2>
+  <h2>Contact</h2>
 
   <div class="contact-grid">
-
-    <a class="contact-btn" href="tel:+919700034138">
-      <span>📞</span> Call Now
-    </a>
-
-    <a class="contact-btn" href="https://wa.me/919700034138" target="_blank">
-      <span>💬</span> WhatsApp
-    </a>
-
-    <a class="contact-btn" href="mailto:dillucapture@gmail.com">
-      <span>✉️</span> Gmail
-    </a>
-
-    <a class="contact-btn" href="https://instagram.com/" target="_blank">
-      <span>📸</span> Instagram
-    </a>
-
+    <a class="contact-btn" href="tel:+919700034138">📞 Call</a>
+    <a class="contact-btn" href="https://wa.me/919700034138">💬 WhatsApp</a>
+    <a class="contact-btn" href="mailto:dillucapture@gmail.com">✉ Gmail</a>
+    <a class="contact-btn" href="https://instagram.com/">📸 Instagram</a>
   </div>
 </section>
 
