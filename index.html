@@ -22,7 +22,7 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= LOADER (NEW ADDITION) ================= */
+/* ================= LOADER ================= */
 .loader{
   position:fixed;
   inset:0;
@@ -40,46 +40,29 @@ body{
   transition:1s ease;
 }
 
-/* camera 3D */
-.camera3d{
-  width:90px;
-  height:70px;
-  background:linear-gradient(145deg,#1b1b1b,#000);
-  border:1px solid rgba(255,215,0,0.4);
-  border-radius:14px;
+/* BRAND LOADING TEXT */
+.brand-wrap{
   position:relative;
-  transform:rotateX(20deg) rotateY(-10deg);
-  box-shadow:0 15px 40px rgba(0,0,0,0.8);
-  animation:float 2s infinite ease-in-out;
-}
-
-.camera3d::before{
-  content:"";
-  position:absolute;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:radial-gradient(circle,#222,#000);
-  border:2px solid gold;
-  top:18px;
-  left:28px;
-  box-shadow:0 0 20px rgba(255,215,0,0.6);
-}
-
-/* floating animation */
-@keyframes float{
-  0%{transform:translateY(0) rotateX(20deg) rotateY(-10deg);}
-  50%{transform:translateY(-10px) rotateX(20deg) rotateY(-10deg);}
-  100%{transform:translateY(0) rotateX(20deg) rotateY(-10deg);}
-}
-
-/* brand */
-.brand{
-  margin-top:18px;
   font-family:"Dancing Script";
-  font-size:28px;
+  font-size:40px;
+  letter-spacing:1px;
+}
+
+/* dark base text */
+.brand-bg{
+  color:#222;
+}
+
+/* gold fill text */
+.brand-fill{
+  position:absolute;
+  top:0;
+  left:0;
+  width:0%;
+  white-space:nowrap;
+  overflow:hidden;
   color:gold;
-  text-shadow:0 0 15px rgba(255,215,0,0.4);
+  text-shadow:0 0 20px rgba(255,215,0,0.4);
 }
 
 /* loading bar */
@@ -88,7 +71,7 @@ body{
   height:6px;
   background:#111;
   border-radius:50px;
-  margin-top:20px;
+  margin-top:25px;
   overflow:hidden;
   border:1px solid rgba(0,255,100,0.2);
 }
@@ -99,7 +82,6 @@ body{
   width:0%;
   background:linear-gradient(90deg,#00ff66,#00cc55);
   box-shadow:0 0 15px #00ff66;
-  transition:0.2s;
 }
 
 /* percentage */
@@ -271,8 +253,11 @@ footer{
 
 <!-- ================= LOADER ================= -->
 <div class="loader" id="loader">
-  <div class="camera3d"></div>
-  <div class="brand">Dillu Captures</div>
+
+  <div class="brand-wrap">
+    <div class="brand-bg">Dillu Captures</div>
+    <div class="brand-fill" id="fillText">Dillu Captures</div>
+  </div>
 
   <div class="load-bar">
     <span id="bar"></span>
@@ -352,15 +337,20 @@ footer{
 
 <script>
 
-/* LOADER SCRIPT */
+/* LOADER */
 let i = 0;
 let bar = document.getElementById("bar");
 let percent = document.getElementById("percent");
+let fill = document.getElementById("fillText");
 
 let load = setInterval(()=>{
   i++;
+
   bar.style.width = i + "%";
   percent.innerText = "Loading " + i + "%";
+
+  // TEXT FILL EFFECT
+  fill.style.width = i + "%";
 
   if(i >= 100){
     clearInterval(load);
