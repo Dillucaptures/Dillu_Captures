@@ -59,9 +59,9 @@ nav a{
 .hero{
   height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
   text-align:center;
 }
 
@@ -96,6 +96,7 @@ h2{
   text-align:center;
   cursor:pointer;
   position:relative;
+  transition:.3s;
 }
 
 .folder::before{
@@ -109,7 +110,11 @@ h2{
   border-radius:6px 6px 0 0;
 }
 
-/* ✅ FIXED GRID */
+.folder:hover{
+  transform:translateY(-6px);
+}
+
+/* GALLERY */
 .gallery-wrap{
   grid-column:1/-1;
 }
@@ -117,11 +122,11 @@ h2{
 .gallery{
   margin-top:20px;
   display:grid;
-  grid-template-columns:repeat(5, 1fr); /* 🔥 5 per row */
+  grid-template-columns:repeat(5, 1fr); /* ✅ 5 per row */
   gap:14px;
 }
 
-/* CLEAN IMAGE */
+/* IMAGE ONLY */
 .card{
   cursor:pointer;
 }
@@ -188,6 +193,7 @@ h2{
   <div class="logo">Dillu Captures</div>
   <div>
     <a onclick="go('home')">Home</a>
+    <a onclick="go('about')">About</a>
     <a onclick="go('portfolio')">Portfolio</a>
     <a onclick="go('contact')">Contact</a>
   </div>
@@ -195,17 +201,28 @@ h2{
 
 <div class="hero" id="home">
   <h1>Dillu Captures</h1>
+  <p>"Preserving the beauty of a moment."</p>
 </div>
+
+<!-- ✅ ABOUT RESTORED -->
+<section id="about">
+  <h2>About</h2>
+  <p>Premium cinematic photography studio capturing timeless memories.</p>
+</section>
 
 <section id="portfolio">
   <h2>Folders</h2>
 
   <div class="folder-grid">
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
-    <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars</div>
+    <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity Shoot</div>
+    <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples & Culture</div>
+    <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets & Animals</div>
+    <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars & Bikes</div>
   </div>
 
-  <!-- DATA -->
+  <!-- SAMPLE (YOU KEEP YOUR FULL DATA SAME) -->
   <div id="kids" hidden>
     <div class="gallery">
       <div class="card"><img data-src="https://picsum.photos/400/300?1" onclick="openImg(this)"></div>
@@ -213,7 +230,6 @@ h2{
       <div class="card"><img data-src="https://picsum.photos/400/250?3" onclick="openImg(this)"></div>
       <div class="card"><img data-src="https://picsum.photos/350/600?4" onclick="openImg(this)"></div>
       <div class="card"><img data-src="https://picsum.photos/400/400?5" onclick="openImg(this)"></div>
-      <div class="card"><img data-src="https://picsum.photos/400/300?6" onclick="openImg(this)"></div>
     </div>
   </div>
 
@@ -253,6 +269,11 @@ function openFolder(el,id){
   if(activeBox){
     activeBox.remove();
     activeBox=null;
+  }
+
+  if(el.classList.contains("active")){
+    el.classList.remove("active");
+    return;
   }
 
   document.querySelectorAll(".folder").forEach(f=>f.classList.remove("active"));
