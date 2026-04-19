@@ -81,14 +81,14 @@ h2{
   margin-bottom:10px;
 }
 
-/* 🔥 GRID WRAPPER (IMPORTANT FIX) */
+/* GRID */
 .folder-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 
-/* 🔥 PROFESSIONAL FOLDER */
+/* FOLDER */
 .folder{
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(245,197,66,0.3);
@@ -101,7 +101,6 @@ h2{
   backdrop-filter:blur(10px);
 }
 
-/* top tab */
 .folder::before{
   content:"";
   position:absolute;
@@ -113,38 +112,36 @@ h2{
   border-radius:6px 6px 0 0;
 }
 
-/* hover glow */
 .folder:hover{
   transform:translateY(-6px);
   background:rgba(245,197,66,0.15);
   box-shadow:0 10px 30px rgba(245,197,66,0.2);
 }
 
-/* active */
 .folder.active{
   border-color:#f5c542;
   background:rgba(245,197,66,0.2);
 }
 
-/* 🔥 GALLERY TAKES FULL ROW */
+/* 🔥 GALLERY WRAP */
 .gallery-wrap{
   grid-column:1/-1;
+  overflow-x:auto;
+  padding-bottom:10px;
 }
 
+/* 🔥 5 ROW SYSTEM */
 .gallery{
-  margin-top:15px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:15px;
-  animation:fade .4s ease;
+  grid-auto-flow:column;
+  grid-template-rows:repeat(5, 180px);
+  gap:12px;
+  width:max-content;
 }
 
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
+/* CARD */
 .card{
+  width:260px;
   border-radius:12px;
   overflow:hidden;
   cursor:pointer;
@@ -203,21 +200,24 @@ h2{
   <h2>Folders</h2>
 
   <div class="folder-grid" id="grid">
-
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
     <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity</div>
     <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars</div>
     <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi</div>
     <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples</div>
     <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets</div>
-
   </div>
 
   <!-- DATA -->
+
   <div id="kids" hidden>
     <div class="gallery">
       <div class="card"><img src="https://images.unsplash.com/photo-1607457561901-e6ec3a6d16cf" onclick="openImg(this)"></div>
       <div class="card"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" onclick="openImg(this)"></div>
     </div>
   </div>
 
@@ -264,20 +264,17 @@ function go(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* 🔥 PERFECT BELOW FOLDER FIX */
-let activeBox = null;
+let activeBox=null;
 
 function openFolder(el,id){
 
-  let grid = document.getElementById("grid");
+  let grid=document.getElementById("grid");
 
-  // remove old
   if(activeBox){
     activeBox.remove();
-    activeBox = null;
+    activeBox=null;
   }
 
-  // toggle close
   if(el.classList.contains("active")){
     el.classList.remove("active");
     return;
@@ -286,18 +283,17 @@ function openFolder(el,id){
   document.querySelectorAll(".folder").forEach(f=>f.classList.remove("active"));
   el.classList.add("active");
 
-  let content = document.getElementById(id).innerHTML;
+  let content=document.getElementById(id).innerHTML;
 
-  let wrap = document.createElement("div");
-  wrap.className = "gallery-wrap";
-  wrap.innerHTML = content;
+  let wrap=document.createElement("div");
+  wrap.className="gallery-wrap";
+  wrap.innerHTML=content;
 
-  el.insertAdjacentElement("afterend", wrap);
+  el.insertAdjacentElement("afterend",wrap);
 
-  activeBox = wrap;
+  activeBox=wrap;
 }
 
-/* LIGHTBOX */
 function openImg(img){
   document.getElementById("lightbox").style.display="flex";
   document.getElementById("lightImg").src=img.src;
