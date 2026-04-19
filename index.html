@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dillu Captures | Premium Photography</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dillu Captures</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  scroll-behavior:smooth;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   font-family:Montserrat;
   color:#fff;
-  overflow-x:hidden;
+  background:#000;
 }
 
 /* BACKGROUND */
@@ -26,18 +21,9 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:url("https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
-  filter:brightness(0.35);
+  background:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+  filter:brightness(0.4);
   z-index:-2;
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle at top, rgba(245,197,66,0.15), transparent 50%),
-             radial-gradient(circle at bottom, rgba(0,0,0,0.9), transparent 60%);
-  z-index:-1;
 }
 
 /* NAV */
@@ -50,12 +36,10 @@ nav{
   max-width:1100px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  padding:14px 20px;
+  padding:12px 20px;
   border-radius:18px;
   background:rgba(20,20,20,0.6);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(245,197,66,0.2);
+  backdrop-filter:blur(15px);
   z-index:1000;
 }
 
@@ -66,19 +50,9 @@ nav{
 }
 
 nav a{
-  color:#bbb;
-  text-decoration:none;
+  color:#ddd;
   margin:0 10px;
-  font-size:12px;
   cursor:pointer;
-  padding:6px 10px;
-  border-radius:10px;
-}
-
-nav a:hover,
-nav a.active{
-  background:rgba(245,197,66,0.2);
-  color:#f5c542;
 }
 
 /* HERO */
@@ -93,70 +67,118 @@ nav a.active{
 
 .hero h1{
   font-family:Dancing Script;
-  font-size:72px;
+  font-size:70px;
   color:#f5c542;
-}
-
-.hero p{
-  color:#ddd;
 }
 
 /* SECTION */
 section{
-  padding:120px 10% 80px;
+  padding:70px 8% 50px;
 }
 
 h2{
   color:#f5c542;
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
 
-/* ABOUT */
-.about-box{
-  background:rgba(0,0,0,0.5);
-  padding:25px;
-  border-radius:16px;
+/* FOLDER GRID */
+.folder-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
-/* FOLDERS */
-.folders{
+/* FOLDER */
+.folder{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(245,197,66,0.3);
+  padding:30px;
+  border-radius:18px;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  transition:.3s;
+}
+
+.folder::before{
+  content:"";
+  position:absolute;
+  top:-8px;
+  left:20px;
+  width:45px;
+  height:14px;
+  background:#f5c542;
+  border-radius:6px 6px 0 0;
+}
+
+.folder:hover{
+  transform:translateY(-6px);
+  background:rgba(245,197,66,0.15);
+}
+
+.folder.active{
+  background:rgba(245,197,66,0.2);
+}
+
+/* GALLERY */
+.gallery-wrap{
+  grid-column:1/-1;
+}
+
+.gallery{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:12px;
+}
+
+.card{
+  overflow:hidden;
+  border-radius:20px;
+  cursor:pointer;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.7);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+/* 🔥 FIXED FOR ALL IMAGE TYPES */
+.card img{
+  width:100%;
+  height:auto;          /* keeps original ratio */
+  display:block;
+  border-radius:20px;
+  transition:0.4s;
+}
+
+/* 🔥 Smooth hover */
+.card:hover img{
+  transform:scale(1.05);
+}
+
+/* 🔥 CONTACT BUTTONS */
+.contact{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
 }
 
-.folder{
-  background:rgba(255,255,255,0.06);
-  padding:35px;
-  text-align:center;
-  border-radius:16px;
-  cursor:pointer;
-}
-
-/* 🔥 AUTO FIT GALLERY (NO FIXED SHAPE) */
-.gallery{
-  display:none;
-  margin-top:25px;
-  column-count:5;   /* 5 ROW FEEL */
-  column-gap:12px;
-}
-
-.gallery.active{
-  display:block;
-}
-
-.card{
-  break-inside:avoid;
-  margin-bottom:12px;
+.contact-btn{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
   border-radius:14px;
-  overflow:hidden;
-  cursor:pointer;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(245,197,66,0.3);
+  text-decoration:none;
+  color:#fff;
+  transition:.3s;
 }
 
-.card img{
-  width:100%;
-  height:auto;   /* AUTO SIZE */
-  display:block;
+.contact-btn:hover{
+  background:rgba(245,197,66,0.2);
+  transform:translateY(-4px);
 }
 
 /* LIGHTBOX */
@@ -165,38 +187,13 @@ h2{
   inset:0;
   background:rgba(0,0,0,0.9);
   display:none;
-  align-items:center;
   justify-content:center;
-  z-index:2000;
+  align-items:center;
 }
 
 .lightbox img{
   max-width:90%;
   max-height:90%;
-  border-radius:10px;
-}
-
-/* CONTACT */
-.contact-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:20px;
-}
-
-.contact-btn{
-  display:flex;
-  justify-content:center;
-  padding:15px;
-  border-radius:14px;
-  background:rgba(0,0,0,0.5);
-  color:#fff;
-  text-decoration:none;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px;
 }
 </style>
 </head>
@@ -206,10 +203,10 @@ footer{
 <nav>
   <div class="logo">Dillu Captures</div>
   <div>
-    <a onclick="go('home',this)" class="active">Home</a>
-    <a onclick="go('about',this)">About</a>
-    <a onclick="go('portfolio',this)">Portfolio</a>
-    <a onclick="go('contact',this)">Contact</a>
+    <a onclick="go('home')">Home</a>
+    <a onclick="go('about')">About</a>
+    <a onclick="go('portfolio')">Portfolio</a>
+    <a onclick="go('contact')">Contact</a>
   </div>
 </nav>
 
@@ -220,24 +217,27 @@ footer{
 
 <section id="about">
   <h2>About</h2>
-  <div class="about-box">Premium cinematic photography studio.</div>
+  <p>Premium cinematic photography studio capturing timeless memories.</p>
 </section>
 
 <section id="portfolio">
   <h2>Folders</h2>
 
-  <div class="folders">
-    <div class="folder" onclick="toggleFolder('kids')">📸 Kids Shoot</div>
-    <div class="folder" onclick="toggleFolder('outdoor')">🤰 Maternity Shoots</div>
-    <div class="folder" onclick="toggleFolder('cars')">🚗 Cars & Bike</div>
-    <div class="folder" onclick="toggleFolder('haldi')">🌼 Haldi Shoot</div>
-    <div class="folder" onclick="toggleFolder('temples')">🛕 Temples & Culture</div>
-    <div class="folder" onclick="toggleFolder('pets')">🐾 Pets & Animals</div>
+  <div class="folder-grid">
+
+    <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
+    <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity Shoot</div>
+    <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples & Culture</div>
+    <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets & Animals</div>
+    <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars & Bikes</div>
+
   </div>
 
-  <!-- KEEP YOUR IMAGES SAME -->
-  <div class="gallery" id="kids">
-    <div class="card"><img src="Images/Kids/20240813114300_IMG_0855.webp" onclick="openImg(this)"></div>
+  <!-- DATA -->
+  <div id="kids" hidden>
+    <div class="gallery">
+       <div class="card"><img src="Images/Kids/20240813112805_IMG_0833.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240813111851_IMG_0813.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240813111900_IMG_0814.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240813111948_IMG_0820.webp" onclick="openImg(this)"></div>
@@ -246,6 +246,7 @@ footer{
     <div class="card"><img src="Images/Kids/20240813112158_IMG_0822.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240805190624_IMG_0708.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240813112756_IMG_0832.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813114300_IMG_0855.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240813112805_IMG_0833.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240813101050_IMG_0792.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Kids/20240813113710_IMG_0842.webp" onclick="openImg(this)"></div>
@@ -290,10 +291,18 @@ footer{
     <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
+    </div>
   </div>
 
-    <div class="gallery" id="outdoor">
-    <div class="card"><img src="Images/Maternity Shoot/20240719132714_IMG_0511.webp" onclick="openImg(this)"></div>
+  <div id="cars" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/300?8" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="maternity" hidden>
+    <div class="gallery">
+      <div class="card"><img src="Images/Maternity Shoot/20240719132714_IMG_0511.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Maternity Shoot/20240719132708_IMG_0510.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Maternity Shoot/IMG_4265.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Maternity Shoot/IMG_4216.webp" onclick="openImg(this)"></div>
@@ -307,97 +316,86 @@ footer{
     <div class="card"><img src="Images/Maternity Shoot/1.jpg" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Maternity Shoot/1.jpg" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Maternity Shoot/1.jpg" onclick="openImg(this)"></div>
+    </div>
   </div>
 
-  <div class="gallery" id="cars">
-    <div class="card"><img src="Images/Cars&Bikes/20220920163531_IMG_2265.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920163547_IMG_2273.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920163653_IMG_2277.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920163706_IMG_2279 (2).jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920164140_IMG_2296.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220920164910_IMG_2303.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220921172234_IMG_2442.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20220921173843_IMG_2474.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221117131822_IMG_3322.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221117133706_IMG_3370.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122140951_IMG_3525.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141159_IMG_3529.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141437_IMG_3538.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141456_IMG_3539.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141859_IMG_3551.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141903_IMG_3552.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20221122141911_IMG_3554.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20230208141838_IMG_5027.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20240122144322_IMG_9241.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/20240122144455_IMG_9254.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/241496186_219299540174038_5154124177478257245_n.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/327604064_132846919651142_2243755515612500347_n.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/IMG_6597.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/IMG_6611.jpg"></div>
-    <div class="card"><img src="Images/Cars&Bikes/Snapinsta.app_307835994_1124218248523146_7846878109889793579_n_1080.jpg"></div>
-  </div>
-
-  <div class="gallery" id="haldi">
-    <div class="card"><img src="Images/Haldi/IMG_3059.webp" onclick="openImg(this)"></div>
+  <div id="haldi" hidden>
+    <div class="gallery">
+      <div class="card"><img src="Images/Haldi/IMG_3059.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Haldi/IMG_2577.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/Haldi/IMG_2562.webp" onclick="openImg(this)"></div>
     <div class="card"><img src="Images/haldi/5.jpg" onclick="openImg(this)"></div>
+    </div>
   </div>
 
-  <div class="gallery" id="temples">
-    <div class="card"><img src="Images/temples/1.jpg" onclick="openImg(this)"></div>
+  <div id="temples" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/430?12" onclick="openImg(this)"></div>
+    </div>
   </div>
 
-  <div class="gallery" id="pets">
-    <div class="card"><img src="Images/pets/1.jpg" onclick="openImg(this)"></div>
+  <div id="pets" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/440?13" onclick="openImg(this)"></div>
+    </div>
   </div>
 
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
-  <div class="contact-grid">
+
+  <div class="contact">
     <a class="contact-btn" href="tel:+919700034138">📞 Call</a>
     <a class="contact-btn" href="https://wa.me/919700034138">💬 WhatsApp</a>
+    <a class="contact-btn" href="https://www.instagram.com/dillu_captures/" target="_blank">📸 Instagram</a>
     <a class="contact-btn" href="mailto:dillucapture@gmail.com">✉ Gmail</a>
-    <a class="contact-btn" href="#">📸 Instagram</a>
   </div>
+
 </section>
 
-<footer>© 2026 Dillu Captures</footer>
-
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeImg()">
+<div class="lightbox" id="lightbox" onclick="this.style.display='none'">
   <img id="lightImg">
 </div>
 
 <script>
 
-function go(id,el){
+function go(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
-  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
-  el.classList.add("active");
 }
 
-function toggleFolder(id){
-  let el=document.getElementById(id);
+let activeBox=null;
+
+function openFolder(el,id){
+
+  if(activeBox){
+    activeBox.remove();
+    activeBox=null;
+  }
+
   if(el.classList.contains("active")){
     el.classList.remove("active");
-  }else{
-    document.querySelectorAll(".gallery").forEach(g=>g.classList.remove("active"));
-    el.classList.add("active");
+    return;
   }
+
+  document.querySelectorAll(".folder").forEach(f=>f.classList.remove("active"));
+  el.classList.add("active");
+
+  let content=document.getElementById(id).innerHTML;
+
+  let wrap=document.createElement("div");
+  wrap.className="gallery-wrap";
+  wrap.innerHTML=content;
+
+  el.insertAdjacentElement("afterend",wrap);
+
+  activeBox=wrap;
 }
 
-/* IMAGE OPEN */
 function openImg(img){
   document.getElementById("lightbox").style.display="flex";
   document.getElementById("lightImg").src=img.src;
-}
-
-/* CLOSE */
-function closeImg(){
-  document.getElementById("lightbox").style.display="none";
 }
 
 </script>
