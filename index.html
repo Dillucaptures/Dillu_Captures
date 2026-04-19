@@ -118,39 +118,36 @@ h2{
   background:rgba(245,197,66,0.2);
 }
 
-/* 🔥 GALLERY FIX (MASONRY STYLE) */
+/* 🔥 CLEAN GALLERY */
 .gallery-wrap{
   grid-column:1/-1;
 }
 
 .gallery{
-  column-count:5; /* 🔥 5 vertical columns */
-  column-gap:12px;
+  column-count:5;
+  column-gap:14px;
   margin-top:20px;
 }
 
-/* CARD */
+/* ❌ NO CARD STYLE */
 .card{
   break-inside:avoid;
-  margin-bottom:12px;
-  border-radius:20px;
-  overflow:hidden;
+  margin-bottom:14px;
   cursor:pointer;
-  background:rgba(255,255,255,0.05);
-  box-shadow:0 10px 30px rgba(0,0,0,0.7);
 }
 
-/* IMAGE PERFECT FIT */
+/* ✅ PURE IMAGE STYLE */
 .card img{
   width:100%;
-  height:auto;   /* 🔥 keeps original ratio */
+  height:auto;
   display:block;
-  border-radius:20px;
-  transition:.4s;
+  border-radius:18px; /* smooth curve */
+  transition:0.3s;
 }
 
+/* subtle hover */
 .card:hover img{
-  transform:scale(1.05);
+  transform:scale(1.03);
 }
 
 /* CONTACT */
