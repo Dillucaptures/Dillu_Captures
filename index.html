@@ -40,31 +40,40 @@ nav{
   border-radius:18px;
   background:rgba(20,20,20,0.6);
   backdrop-filter:blur(15px);
+  z-index:1000;
 }
 
 .logo{
   font-family:Dancing Script;
-  font-size:28px;
+  font-size:26px;
   color:#f5c542;
+}
+
+nav a{
+  color:#ddd;
+  margin:0 10px;
+  cursor:pointer;
 }
 
 /* HERO */
 .hero{
   height:100vh;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
 }
 
 .hero h1{
   font-family:Dancing Script;
-  font-size:80px;
+  font-size:70px;
   color:#f5c542;
 }
 
 /* SECTION */
 section{
-  padding:60px 8% 40px;
+  padding:70px 8% 50px;
 }
 
 h2{
@@ -111,7 +120,7 @@ h2{
   background:rgba(245,197,66,0.2);
 }
 
-/* 🔥 GALLERY */
+/* 🔥 GALLERY = 5 ROWS AUTO FLOW */
 .gallery-wrap{
   grid-column:1/-1;
 }
@@ -119,7 +128,8 @@ h2{
 .gallery{
   margin-top:20px;
   display:grid;
-  grid-template-columns:repeat(5, 1fr); /* 🔥 5 IMAGES PER ROW */
+  grid-auto-flow:column;       /* 🔥 COLUMN FLOW */
+  grid-template-rows:repeat(5, auto); /* 🔥 5 ROWS */
   gap:12px;
 }
 
@@ -131,14 +141,26 @@ h2{
 }
 
 .card img{
-  width:100%;
-  height:auto;   /* 🔥 AUTO SIZE */
+  height:180px;
+  width:auto;
+  object-fit:cover;
   display:block;
   transition:.4s;
 }
 
 .card:hover img{
   transform:scale(1.05);
+}
+
+/* CONTACT */
+.contact{
+  display:grid;
+  gap:15px;
+}
+
+.contact a{
+  color:#fff;
+  text-decoration:none;
 }
 
 /* LIGHTBOX */
@@ -162,44 +184,91 @@ h2{
 
 <nav>
   <div class="logo">Dillu Captures</div>
+  <div>
+    <a onclick="go('home')">Home</a>
+    <a onclick="go('about')">About</a>
+    <a onclick="go('portfolio')">Portfolio</a>
+    <a onclick="go('contact')">Contact</a>
+  </div>
 </nav>
 
-<div class="hero">
+<div class="hero" id="home">
   <h1>Dillu Captures</h1>
+  <p>"Preserving the beauty of a moment."</p>
 </div>
 
-<section>
+<section id="about">
+  <h2>About</h2>
+  <p>Premium cinematic photography studio capturing timeless memories.</p>
+</section>
+
+<section id="portfolio">
   <h2>Folders</h2>
 
   <div class="folder-grid" id="grid">
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
-    <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars</div>
+    <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity Shoot</div>
+    <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples & Culture</div>
+    <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets & Animals</div>
+    <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars & Bikes</div>
   </div>
 
   <!-- DATA -->
 
   <div id="kids" hidden>
     <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/400/300?1" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/500?2" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/350?3" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/600?4" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/320?5" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/450?6" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/370?7" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/520?8" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/390?9" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/480?10" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/300/400?1" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/350/500?2" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/320/420?3" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/310/450?4" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/330/480?5" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/300/430?6" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/350/460?7" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="maternity" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/320/400?8" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/300/500?9" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="temples" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/300/450?10" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="haldi" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/300/420?11" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="pets" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/300/460?12" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="cars" hidden>
     <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/400/300?11" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/500?12" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/300/430?13" onclick="openImg(this)"></div>
     </div>
   </div>
 
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact">
+    <a href="tel:+919700034138">📞 Call: 9700034138</a>
+    <a href="https://wa.me/919700034138">💬 WhatsApp</a>
+    <a href="https://www.instagram.com/dillu_captures/" target="_blank">📸 Instagram</a>
+    <a href="mailto:dillucapture@gmail.com">✉ Gmail: Dillucapture@gmail.com</a>
+  </div>
 </section>
 
 <!-- LIGHTBOX -->
@@ -208,6 +277,10 @@ h2{
 </div>
 
 <script>
+
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
 
 let activeBox=null;
 
