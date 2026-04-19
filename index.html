@@ -62,6 +62,7 @@ nav a{
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
 }
 
 .hero h1{
@@ -80,13 +81,14 @@ h2{
   margin-bottom:15px;
 }
 
-/* FOLDERS */
+/* FOLDER GRID */
 .folder-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 
+/* FOLDER */
 .folder{
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(245,197,66,0.3);
@@ -118,39 +120,43 @@ h2{
   background:rgba(245,197,66,0.2);
 }
 
-/* 🔥 CLEAN GALLERY */
+/* GALLERY */
 .gallery-wrap{
   grid-column:1/-1;
 }
 
 .gallery{
-  column-count:5;
-  column-gap:14px;
   margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:12px;
 }
 
-/* ❌ NO CARD STYLE */
 .card{
-  break-inside:avoid;
-  margin-bottom:14px;
+  overflow:hidden;
+  border-radius:20px;
   cursor:pointer;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(6px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.7);
+  border:1px solid rgba(255,255,255,0.08);
 }
 
-/* ✅ PURE IMAGE STYLE */
+/* 🔥 FIXED FOR ALL IMAGE TYPES */
 .card img{
   width:100%;
-  height:auto;
+  height:auto;          /* keeps original ratio */
   display:block;
-  border-radius:18px; /* smooth curve */
-  transition:0.3s;
+  border-radius:20px;
+  transition:0.4s;
 }
 
-/* subtle hover */
+/* 🔥 Smooth hover */
 .card:hover img{
-  transform:scale(1.03);
+  transform:scale(1.05);
 }
 
-/* CONTACT */
+/* 🔥 CONTACT BUTTONS */
 .contact{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -167,10 +173,12 @@ h2{
   border:1px solid rgba(245,197,66,0.3);
   text-decoration:none;
   color:#fff;
+  transition:.3s;
 }
 
 .contact-btn:hover{
   background:rgba(245,197,66,0.2);
+  transform:translateY(-4px);
 }
 
 /* LIGHTBOX */
@@ -204,28 +212,131 @@ h2{
 
 <div class="hero" id="home">
   <h1>Dillu Captures</h1>
+  <p>"Preserving the beauty of a moment."</p>
 </div>
 
 <section id="about">
   <h2>About</h2>
-  <p>Premium cinematic photography studio.</p>
+  <p>Premium cinematic photography studio capturing timeless memories.</p>
 </section>
 
 <section id="portfolio">
   <h2>Folders</h2>
 
   <div class="folder-grid">
+
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
-    <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity</div>
+    <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity Shoot</div>
+    <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples & Culture</div>
+    <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi Shoot</div>
+    <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets & Animals</div>
+    <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars & Bikes</div>
+
   </div>
 
   <!-- DATA -->
   <div id="kids" hidden>
     <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/400/300?1" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/300/500?2" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/250?3" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/350/600?4" onclick="openImg(this)"></div>
+       <div class="card"><img src="Images/Kids/20240813112805_IMG_0833.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813111851_IMG_0813.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813111900_IMG_0814.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813111948_IMG_0820.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_5197.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_5197 (1).webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813112158_IMG_0822.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805190624_IMG_0708.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813112756_IMG_0832.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813114300_IMG_0855.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813112805_IMG_0833.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813101050_IMG_0792.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813113710_IMG_0842.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813113252_IMG_0840.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_5237.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_5237 (1).webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_5332.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_5339.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_5265.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1902.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1905.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1898.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1897.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1896.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1891.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1866.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1862.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_3003.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_0120.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_0180.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_0112.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_0082.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805190232_IMG_0703.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805215454_IMG_0720.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805220231_IMG_0734.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805220449_IMG_0738.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805220457_IMG_0739.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805220623_IMG_0741.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240805220807_IMG_0745.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20240813094157_IMG_0749.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20230907121724_IMG_7966.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20230907121838_IMG_7976.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20230907122030_IMG_7983.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20230907122054_IMG_7986.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20230907122115_IMG_7987.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/20230907122224_IMG_7996.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_1669.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_6615.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_6616.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_6625.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Kids/IMG_6625.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/NEWBORN/1.webp" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="cars" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/300?8" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="maternity" hidden>
+    <div class="gallery">
+      <div class="card"><img src="Images/Maternity Shoot/20240719132714_IMG_0511.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/20240719132708_IMG_0510.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_4265.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_4216.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_4186 (1).webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_4363.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_4287.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_4096.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_5737.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_5980.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/IMG_5693.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/1.jpg" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/1.jpg" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Maternity Shoot/1.jpg" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="haldi" hidden>
+    <div class="gallery">
+      <div class="card"><img src="Images/Haldi/IMG_3059.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Haldi/IMG_2577.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/Haldi/IMG_2562.webp" onclick="openImg(this)"></div>
+    <div class="card"><img src="Images/haldi/5.jpg" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="temples" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/430?12" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="pets" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/440?13" onclick="openImg(this)"></div>
     </div>
   </div>
 
@@ -233,19 +344,23 @@ h2{
 
 <section id="contact">
   <h2>Contact</h2>
+
   <div class="contact">
     <a class="contact-btn" href="tel:+919700034138">📞 Call</a>
     <a class="contact-btn" href="https://wa.me/919700034138">💬 WhatsApp</a>
     <a class="contact-btn" href="https://www.instagram.com/dillu_captures/" target="_blank">📸 Instagram</a>
     <a class="contact-btn" href="mailto:dillucapture@gmail.com">✉ Gmail</a>
   </div>
+
 </section>
 
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
   <img id="lightImg">
 </div>
 
 <script>
+
 function go(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
@@ -282,7 +397,11 @@ function openImg(img){
   document.getElementById("lightbox").style.display="flex";
   document.getElementById("lightImg").src=img.src;
 }
+
 </script>
 
 </body>
 </html>
+
+
+
