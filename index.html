@@ -120,7 +120,7 @@ h2{
   background:rgba(245,197,66,0.2);
 }
 
-/* 🔥 GALLERY = 5 ROWS AUTO FLOW */
+/* 🔥 GALLERY = 5 PER ROW */
 .gallery-wrap{
   grid-column:1/-1;
 }
@@ -128,8 +128,7 @@ h2{
 .gallery{
   margin-top:20px;
   display:grid;
-  grid-auto-flow:column;       /* 🔥 COLUMN FLOW */
-  grid-template-rows:repeat(5, auto); /* 🔥 5 ROWS */
+  grid-template-columns:repeat(5, 1fr); /* 🔥 5 IMAGES PER ROW */
   gap:12px;
 }
 
@@ -141,9 +140,8 @@ h2{
 }
 
 .card img{
-  height:180px;
-  width:auto;
-  object-fit:cover;
+  width:100%;
+  height:auto;  /* 🔥 AUTO SIZE */
   display:block;
   transition:.4s;
 }
@@ -205,57 +203,59 @@ h2{
 <section id="portfolio">
   <h2>Folders</h2>
 
-  <div class="folder-grid" id="grid">
+  <div class="folder-grid">
+
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
     <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity Shoot</div>
     <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples & Culture</div>
     <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi Shoot</div>
     <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets & Animals</div>
     <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars & Bikes</div>
+
   </div>
 
   <!-- DATA -->
 
   <div id="kids" hidden>
     <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/300/400?1" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/350/500?2" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/320/420?3" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/310/450?4" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/330/480?5" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/300/430?6" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/350/460?7" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="maternity" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/320/400?8" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/300/500?9" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="temples" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/300/450?10" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="haldi" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/300/420?11" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="pets" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/300/460?12" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?1" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/500?2" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/350?3" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/600?4" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/320?5" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/450?6" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/370?7" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="cars" hidden>
     <div class="gallery">
-      <div class="card"><img src="https://picsum.photos/300/430?13" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?8" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/500?9" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="maternity" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/400?10" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="haldi" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/420?11" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="temples" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/430?12" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="pets" hidden>
+    <div class="gallery">
+      <div class="card"><img src="https://picsum.photos/400/440?13" onclick="openImg(this)"></div>
     </div>
   </div>
 
@@ -267,7 +267,7 @@ h2{
     <a href="tel:+919700034138">📞 Call: 9700034138</a>
     <a href="https://wa.me/919700034138">💬 WhatsApp</a>
     <a href="https://www.instagram.com/dillu_captures/" target="_blank">📸 Instagram</a>
-    <a href="mailto:dillucapture@gmail.com">✉ Gmail: Dillucapture@gmail.com</a>
+    <a href="mailto:dillucapture@gmail.com">✉ Gmail</a>
   </div>
 </section>
 
