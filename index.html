@@ -40,6 +40,7 @@ nav{
   border-radius:18px;
   background:rgba(20,20,20,0.6);
   backdrop-filter:blur(15px);
+  z-index:1000;
 }
 
 .logo{
@@ -70,11 +71,6 @@ nav a{
   color:#f5c542;
 }
 
-.hero p{
-  margin-top:10px;
-  font-size:18px;
-}
-
 /* SECTION */
 section{
   padding:60px 8% 40px;
@@ -85,47 +81,67 @@ h2{
   margin-bottom:10px;
 }
 
-/* FOLDERS */
-.folders{
+/* 🔥 GRID WRAPPER (IMPORTANT FIX) */
+.folder-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 
+/* 🔥 PROFESSIONAL FOLDER */
 .folder{
   background:rgba(255,255,255,0.06);
-  border:1px solid rgba(245,197,66,0.4);
-  padding:25px;
-  border-radius:14px;
+  border:1px solid rgba(245,197,66,0.3);
+  padding:30px;
+  border-radius:18px;
   text-align:center;
   cursor:pointer;
   position:relative;
   transition:.3s;
+  backdrop-filter:blur(10px);
 }
 
-/* TAB LOOK */
+/* top tab */
 .folder::before{
   content:"";
   position:absolute;
   top:-8px;
   left:20px;
-  width:40px;
-  height:12px;
+  width:45px;
+  height:14px;
   background:#f5c542;
-  border-radius:5px 5px 0 0;
+  border-radius:6px 6px 0 0;
 }
 
+/* hover glow */
 .folder:hover{
-  transform:translateY(-5px);
+  transform:translateY(-6px);
   background:rgba(245,197,66,0.15);
+  box-shadow:0 10px 30px rgba(245,197,66,0.2);
 }
 
-/* GALLERY */
+/* active */
+.folder.active{
+  border-color:#f5c542;
+  background:rgba(245,197,66,0.2);
+}
+
+/* 🔥 GALLERY TAKES FULL ROW */
+.gallery-wrap{
+  grid-column:1/-1;
+}
+
 .gallery{
-  margin-top:20px;
+  margin-top:15px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:15px;
+  animation:fade .4s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 .card{
@@ -186,7 +202,7 @@ h2{
 <section id="portfolio">
   <h2>Folders</h2>
 
-  <div class="folders">
+  <div class="folder-grid" id="grid">
 
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
     <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity</div>
@@ -197,40 +213,39 @@ h2{
 
   </div>
 
-  <!-- HIDDEN DATA -->
-
-  <div id="kids" style="display:none">
+  <!-- DATA -->
+  <div id="kids" hidden>
     <div class="gallery">
       <div class="card"><img src="https://images.unsplash.com/photo-1607457561901-e6ec3a6d16cf" onclick="openImg(this)"></div>
       <div class="card"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" onclick="openImg(this)"></div>
     </div>
   </div>
 
-  <div id="maternity" style="display:none">
+  <div id="maternity" hidden>
     <div class="gallery">
       <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" onclick="openImg(this)"></div>
     </div>
   </div>
 
-  <div id="cars" style="display:none">
+  <div id="cars" hidden>
     <div class="gallery">
       <div class="card"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" onclick="openImg(this)"></div>
     </div>
   </div>
 
-  <div id="haldi" style="display:none">
+  <div id="haldi" hidden>
     <div class="gallery">
       <div class="card"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" onclick="openImg(this)"></div>
     </div>
   </div>
 
-  <div id="temples" style="display:none">
+  <div id="temples" hidden>
     <div class="gallery">
       <div class="card"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" onclick="openImg(this)"></div>
     </div>
   </div>
 
-  <div id="pets" style="display:none">
+  <div id="pets" hidden>
     <div class="gallery">
       <div class="card"><img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" onclick="openImg(this)"></div>
     </div>
@@ -249,16 +264,20 @@ function go(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* 🔥 PERFECT BELOW FOLDER */
-let activeGallery=null;
+/* 🔥 PERFECT BELOW FOLDER FIX */
+let activeBox = null;
 
 function openFolder(el,id){
 
-  if(activeGallery){
-    activeGallery.remove();
-    activeGallery=null;
+  let grid = document.getElementById("grid");
+
+  // remove old
+  if(activeBox){
+    activeBox.remove();
+    activeBox = null;
   }
 
+  // toggle close
   if(el.classList.contains("active")){
     el.classList.remove("active");
     return;
@@ -267,13 +286,15 @@ function openFolder(el,id){
   document.querySelectorAll(".folder").forEach(f=>f.classList.remove("active"));
   el.classList.add("active");
 
-  let content=document.getElementById(id).innerHTML;
-  let box=document.createElement("div");
-  box.innerHTML=content;
+  let content = document.getElementById(id).innerHTML;
 
-  el.insertAdjacentElement("afterend",box);
+  let wrap = document.createElement("div");
+  wrap.className = "gallery-wrap";
+  wrap.innerHTML = content;
 
-  activeGallery=box;
+  el.insertAdjacentElement("afterend", wrap);
+
+  activeBox = wrap;
 }
 
 /* LIGHTBOX */
