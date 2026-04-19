@@ -40,7 +40,6 @@ nav{
   border-radius:18px;
   background:rgba(20,20,20,0.6);
   backdrop-filter:blur(15px);
-  z-index:1000;
 }
 
 .logo{
@@ -49,20 +48,12 @@ nav{
   color:#f5c542;
 }
 
-nav a{
-  color:#ddd;
-  margin:0 10px;
-  cursor:pointer;
-}
-
 /* HERO */
 .hero{
   height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
 }
 
 .hero h1{
@@ -78,10 +69,10 @@ section{
 
 h2{
   color:#f5c542;
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 
-/* GRID */
+/* FOLDER GRID */
 .folder-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -98,7 +89,6 @@ h2{
   cursor:pointer;
   position:relative;
   transition:.3s;
-  backdrop-filter:blur(10px);
 }
 
 .folder::before{
@@ -115,42 +105,35 @@ h2{
 .folder:hover{
   transform:translateY(-6px);
   background:rgba(245,197,66,0.15);
-  box-shadow:0 10px 30px rgba(245,197,66,0.2);
 }
 
 .folder.active{
-  border-color:#f5c542;
   background:rgba(245,197,66,0.2);
 }
 
-/* 🔥 GALLERY WRAP */
+/* 🔥 GALLERY */
 .gallery-wrap{
   grid-column:1/-1;
-  overflow-x:auto;
-  padding-bottom:10px;
 }
 
-/* 🔥 5 ROW SYSTEM */
 .gallery{
+  margin-top:20px;
   display:grid;
-  grid-auto-flow:column;
-  grid-template-rows:repeat(5, 180px);
+  grid-template-columns:repeat(5, 1fr); /* 🔥 5 IMAGES PER ROW */
   gap:12px;
-  width:max-content;
 }
 
-/* CARD */
+/* IMAGE */
 .card{
-  width:260px;
-  border-radius:12px;
   overflow:hidden;
+  border-radius:12px;
   cursor:pointer;
 }
 
 .card img{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:auto;   /* 🔥 AUTO SIZE */
+  display:block;
   transition:.4s;
 }
 
@@ -179,75 +162,41 @@ h2{
 
 <nav>
   <div class="logo">Dillu Captures</div>
-  <div>
-    <a onclick="go('home')">Home</a>
-    <a onclick="go('about')">About</a>
-    <a onclick="go('portfolio')">Portfolio</a>
-  </div>
 </nav>
 
-<div class="hero" id="home">
+<div class="hero">
   <h1>Dillu Captures</h1>
-  <p>"Preserving the beauty of a moment."</p>
 </div>
 
-<section id="about">
-  <h2>About</h2>
-  <p>Premium cinematic photography studio.</p>
-</section>
-
-<section id="portfolio">
+<section>
   <h2>Folders</h2>
 
   <div class="folder-grid" id="grid">
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
-    <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity</div>
     <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars</div>
-    <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi</div>
-    <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples</div>
-    <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets</div>
   </div>
 
   <!-- DATA -->
 
   <div id="kids" hidden>
     <div class="gallery">
-      <div class="card"><img src="https://images.unsplash.com/photo-1607457561901-e6ec3a6d16cf" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="maternity" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?1" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/500?2" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/350?3" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/600?4" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/320?5" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/450?6" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/370?7" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/520?8" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/390?9" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/480?10" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="cars" hidden>
     <div class="gallery">
-      <div class="card"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="haldi" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="temples" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="pets" hidden>
-    <div class="gallery">
-      <div class="card"><img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/300?11" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://picsum.photos/400/500?12" onclick="openImg(this)"></div>
     </div>
   </div>
 
@@ -260,15 +209,9 @@ h2{
 
 <script>
 
-function go(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
-
 let activeBox=null;
 
 function openFolder(el,id){
-
-  let grid=document.getElementById("grid");
 
   if(activeBox){
     activeBox.remove();
