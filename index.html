@@ -120,7 +120,7 @@ h2{
   background:rgba(245,197,66,0.2);
 }
 
-/* 🔥 GALLERY = 5 PER ROW */
+/* GALLERY */
 .gallery-wrap{
   grid-column:1/-1;
 }
@@ -128,11 +128,10 @@ h2{
 .gallery{
   margin-top:20px;
   display:grid;
-  grid-template-columns:repeat(5, 1fr); /* 🔥 5 IMAGES PER ROW */
+  grid-template-columns:repeat(5, 1fr);
   gap:12px;
 }
 
-/* IMAGE */
 .card{
   overflow:hidden;
   border-radius:12px;
@@ -141,7 +140,7 @@ h2{
 
 .card img{
   width:100%;
-  height:auto;  /* 🔥 AUTO SIZE */
+  height:auto;
   display:block;
   transition:.4s;
 }
@@ -150,15 +149,29 @@ h2{
   transform:scale(1.05);
 }
 
-/* CONTACT */
+/* 🔥 CONTACT BUTTONS */
 .contact{
   display:grid;
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
 }
 
-.contact a{
-  color:#fff;
+.contact-btn{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(245,197,66,0.3);
   text-decoration:none;
+  color:#fff;
+  transition:.3s;
+}
+
+.contact-btn:hover{
+  background:rgba(245,197,66,0.2);
+  transform:translateY(-4px);
 }
 
 /* LIGHTBOX */
@@ -215,7 +228,6 @@ h2{
   </div>
 
   <!-- DATA -->
-
   <div id="kids" hidden>
     <div class="gallery">
       <div class="card"><img src="https://picsum.photos/400/300?1" onclick="openImg(this)"></div>
@@ -223,15 +235,12 @@ h2{
       <div class="card"><img src="https://picsum.photos/400/350?3" onclick="openImg(this)"></div>
       <div class="card"><img src="https://picsum.photos/400/600?4" onclick="openImg(this)"></div>
       <div class="card"><img src="https://picsum.photos/400/320?5" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/450?6" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/370?7" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="cars" hidden>
     <div class="gallery">
       <div class="card"><img src="https://picsum.photos/400/300?8" onclick="openImg(this)"></div>
-      <div class="card"><img src="https://picsum.photos/400/500?9" onclick="openImg(this)"></div>
     </div>
   </div>
 
@@ -263,12 +272,14 @@ h2{
 
 <section id="contact">
   <h2>Contact</h2>
+
   <div class="contact">
-    <a href="tel:+919700034138">📞 Call: 9700034138</a>
-    <a href="https://wa.me/919700034138">💬 WhatsApp</a>
-    <a href="https://www.instagram.com/dillu_captures/" target="_blank">📸 Instagram</a>
-    <a href="mailto:dillucapture@gmail.com">✉ Gmail</a>
+    <a class="contact-btn" href="tel:+919700034138">📞 Call</a>
+    <a class="contact-btn" href="https://wa.me/919700034138">💬 WhatsApp</a>
+    <a class="contact-btn" href="https://www.instagram.com/dillu_captures/" target="_blank">📸 Instagram</a>
+    <a class="contact-btn" href="mailto:dillucapture@gmail.com">✉ Gmail</a>
   </div>
+
 </section>
 
 <!-- LIGHTBOX -->
