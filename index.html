@@ -21,15 +21,15 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:url("https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
-  filter:brightness(0.35);
+  background:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+  filter:brightness(0.4);
   z-index:-2;
 }
 
 /* NAV */
 nav{
   position:fixed;
-  top:10px;
+  top:15px;
   left:50%;
   transform:translateX(-50%);
   width:92%;
@@ -40,17 +40,16 @@ nav{
   border-radius:18px;
   background:rgba(20,20,20,0.6);
   backdrop-filter:blur(15px);
-  z-index:1000;
 }
 
 .logo{
   font-family:Dancing Script;
-  font-size:26px;
+  font-size:28px;
   color:#f5c542;
 }
 
 nav a{
-  color:#bbb;
+  color:#ddd;
   margin:0 10px;
   cursor:pointer;
 }
@@ -62,17 +61,28 @@ nav a{
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
 }
 
 .hero h1{
   font-family:Dancing Script;
-  font-size:70px;
+  font-size:80px;
   color:#f5c542;
+}
+
+.hero p{
+  margin-top:10px;
+  font-size:18px;
 }
 
 /* SECTION */
 section{
   padding:60px 8% 40px;
+}
+
+h2{
+  color:#f5c542;
+  margin-bottom:10px;
 }
 
 /* FOLDERS */
@@ -83,16 +93,17 @@ section{
 }
 
 .folder{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(245,197,66,0.3);
-  padding:30px;
-  border-radius:16px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(245,197,66,0.4);
+  padding:25px;
+  border-radius:14px;
   text-align:center;
   cursor:pointer;
   position:relative;
+  transition:.3s;
 }
 
-/* Folder tab */
+/* TAB LOOK */
 .folder::before{
   content:"";
   position:absolute;
@@ -104,16 +115,20 @@ section{
   border-radius:5px 5px 0 0;
 }
 
+.folder:hover{
+  transform:translateY(-5px);
+  background:rgba(245,197,66,0.15);
+}
+
 /* GALLERY */
 .gallery{
   margin-top:20px;
-  column-count:5;
-  column-gap:12px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:15px;
 }
 
 .card{
-  break-inside:avoid;
-  margin-bottom:12px;
   border-radius:12px;
   overflow:hidden;
   cursor:pointer;
@@ -121,6 +136,13 @@ section{
 
 .card img{
   width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.4s;
+}
+
+.card:hover img{
+  transform:scale(1.05);
 }
 
 /* LIGHTBOX */
@@ -165,50 +187,52 @@ section{
   <h2>Folders</h2>
 
   <div class="folders">
+
     <div class="folder" onclick="openFolder(this,'kids')">📸 Kids</div>
-    <div class="folder" onclick="openFolder(this,'outdoor')">🤰 Maternity</div>
+    <div class="folder" onclick="openFolder(this,'maternity')">🤰 Maternity</div>
     <div class="folder" onclick="openFolder(this,'cars')">🚗 Cars</div>
     <div class="folder" onclick="openFolder(this,'haldi')">🌼 Haldi</div>
     <div class="folder" onclick="openFolder(this,'temples')">🛕 Temples</div>
     <div class="folder" onclick="openFolder(this,'pets')">🐾 Pets</div>
+
   </div>
 
-  <!-- HIDDEN GALLERIES -->
+  <!-- HIDDEN DATA -->
+
   <div id="kids" style="display:none">
     <div class="gallery">
-      <div class="card"><img src="Images/Kids/20240813114300_IMG_0855.webp" onclick="openImg(this)"></div>
-      <div class="card"><img src="Images/Kids/20240813111851_IMG_0813.webp" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1607457561901-e6ec3a6d16cf" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" onclick="openImg(this)"></div>
+    </div>
+  </div>
+
+  <div id="maternity" style="display:none">
+    <div class="gallery">
+      <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="cars" style="display:none">
     <div class="gallery">
-      <div class="card"><img src="Images/Cars&Bikes/IMG_6597.jpg" onclick="openImg(this)"></div>
-      <div class="card"><img src="Images/Cars&Bikes/IMG_6611.jpg" onclick="openImg(this)"></div>
-    </div>
-  </div>
-
-  <div id="outdoor" style="display:none">
-    <div class="gallery">
-      <div class="card"><img src="Images/Maternity Shoot/IMG_4265.webp" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="haldi" style="display:none">
     <div class="gallery">
-      <div class="card"><img src="Images/Haldi/IMG_3059.webp" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="temples" style="display:none">
     <div class="gallery">
-      <div class="card"><img src="Images/temples/1.jpg" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" onclick="openImg(this)"></div>
     </div>
   </div>
 
   <div id="pets" style="display:none">
     <div class="gallery">
-      <div class="card"><img src="Images/pets/1.jpg" onclick="openImg(this)"></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d" onclick="openImg(this)"></div>
     </div>
   </div>
 
@@ -221,23 +245,20 @@ section{
 
 <script>
 
-/* NAV */
 function go(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-/* 🔥 OPEN EXACTLY BELOW CLICKED FOLDER */
-let currentGallery = null;
+/* 🔥 PERFECT BELOW FOLDER */
+let activeGallery=null;
 
 function openFolder(el,id){
 
-  // remove previous
-  if(currentGallery){
-    currentGallery.remove();
-    currentGallery = null;
+  if(activeGallery){
+    activeGallery.remove();
+    activeGallery=null;
   }
 
-  // if same clicked again → close
   if(el.classList.contains("active")){
     el.classList.remove("active");
     return;
@@ -246,17 +267,16 @@ function openFolder(el,id){
   document.querySelectorAll(".folder").forEach(f=>f.classList.remove("active"));
   el.classList.add("active");
 
-  let content = document.getElementById(id).innerHTML;
-  let div = document.createElement("div");
-  div.innerHTML = content;
+  let content=document.getElementById(id).innerHTML;
+  let box=document.createElement("div");
+  box.innerHTML=content;
 
-  // insert directly after clicked folder
-  el.insertAdjacentElement("afterend", div);
+  el.insertAdjacentElement("afterend",box);
 
-  currentGallery = div;
+  activeGallery=box;
 }
 
-/* IMAGE VIEW */
+/* LIGHTBOX */
 function openImg(img){
   document.getElementById("lightbox").style.display="flex";
   document.getElementById("lightImg").src=img.src;
