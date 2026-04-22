@@ -2,30 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- FORCE LIGHT MODE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="only light">
-
 <title>Dillu Captures</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
-/* RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  color-scheme: only light;
-}
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #ffffff !important;
-  color: #111 !important;
-  line-height: 1.6;
+  background: linear-gradient(135deg, #f8f9fb, #eef1f6);
+  color: #111;
 }
 
 /* NAV */
@@ -35,10 +23,9 @@ header {
   top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 18px 60px;
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.95) !important;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 20px 60px;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.5);
   z-index: 1000;
 }
 
@@ -49,7 +36,7 @@ header h1 {
 nav a {
   margin-left: 25px;
   text-decoration: none;
-  color: #111 !important;
+  color: #111;
 }
 
 /* SECTIONS */
@@ -65,7 +52,7 @@ section {
   min-height: 100vh;
 }
 
-/* HERO IMAGE */
+/* HERO IMAGE (separate file) */
 .hero::after {
   content: "";
   position: absolute;
@@ -77,7 +64,7 @@ section {
   z-index: -2;
 }
 
-/* FADE */
+/* FADE (no blur, keeps image sharp) */
 .hero::before {
   content: "";
   position: absolute;
@@ -87,54 +74,76 @@ section {
   height: 100%;
 
   background:
-    radial-gradient(circle at 70% 50%, rgba(255,255,255,0) 30%, rgba(255,255,255,0.6) 70%, #fff 100%),
-    linear-gradient(to top, #fff 0%, #fff 10%, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0) 35%);
+    radial-gradient(
+      circle at 70% 50%,
+      rgba(255,255,255,0) 30%,
+      rgba(255,255,255,0.3) 55%,
+      rgba(255,255,255,0.8) 80%,
+      rgba(255,255,255,1) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,1) 10%,
+      rgba(255,255,255,0.6) 20%,
+      rgba(255,255,255,0) 35%
+    );
 
   z-index: -1;
 }
 
 /* TEXT */
 .hero-text {
-  max-width: 520px;
+  max-width: 500px;
+  z-index: 2;
 }
 
 .hero-text h2 {
   font-size: 48px;
   font-family: 'Playfair Display';
+  margin-bottom: 20px;
 }
 
 .hero-text p {
   opacity: 0.7;
+  line-height: 1.6;
 }
 
-/* GLASS */
+/* GLASS CARD */
 .glass {
-  background: rgba(255,255,255,0.9) !important;
+  background: rgba(255,255,255,0.4);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  padding: 25px;
-  border: 1px solid rgba(0,0,0,0.05);
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
 }
 
 /* ABOUT */
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  gap: 40px;
   align-items: center;
 }
 
+/* ABOUT IMAGE (separate file) */
 .about img {
   width: 100%;
   height: 420px;
   object-fit: cover;
   border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+  transition: 0.4s;
+}
+
+.about img:hover {
+  transform: scale(1.03);
 }
 
 /* GALLERY */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
   gap: 25px;
 }
 
@@ -156,22 +165,34 @@ section {
 
 .btn {
   display: inline-block;
-  margin: 10px;
+  margin: 15px;
   padding: 14px 30px;
   border-radius: 30px;
-  background: #fff !important;
-  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.4);
   text-decoration: none;
-  color: #111 !important;
+  color: #111;
 }
 
 .btn:hover {
-  background: #111 !important;
-  color: #fff !important;
+  background: #111;
+  color: #fff;
 }
+
+html { scroll-behavior: smooth; }
 
 /* MOBILE */
 @media (max-width: 768px) {
+
+  header {
+    padding: 15px 20px;
+  }
+
+  nav a {
+    margin-left: 15px;
+    font-size: 14px;
+  }
 
   section {
     padding: 100px 20px;
@@ -184,17 +205,26 @@ section {
 
   .hero::after {
     width: 100%;
-    height: 45%;
+    height: 50%;
+    top: 0;
   }
 
   .hero::before {
     width: 100%;
-    height: 45%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.2), #fff);
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.2),
+      rgba(255,255,255,0.85)
+    );
   }
 
   .hero-text {
-    margin-top: 50vh;
+    margin-top: 55vh;
+  }
+
+  .hero-text h2 {
+    font-size: 32px;
   }
 
   .about {
@@ -206,23 +236,10 @@ section {
   }
 
   .btn {
-    width: 100%;
     display: block;
+    width: 100%;
   }
 }
-
-/* HARD OVERRIDE (VERY IMPORTANT) */
-@media (prefers-color-scheme: dark) {
-  * {
-    background-color: #ffffff !important;
-    color: #111 !important;
-  }
-
-  img {
-    filter: none !important;
-  }
-}
-
 </style>
 </head>
 
@@ -241,36 +258,41 @@ section {
 <section id="home" class="hero">
   <div class="hero-text">
     <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion and elegance.</p>
+    <p>Luxury photography crafted with emotion, elegance, and storytelling.</p>
   </div>
 </section>
 
 <section id="about" class="about">
   <div>
-    <img src="Images/IMG_1164.webp">
+    <!-- ABOUT IMAGE -->
+    <img src="Images/IMG_1164.webp" alt="Photographer Portrait">
   </div>
   <div class="glass">
     <h2>About Me</h2>
-    <p>I am a professional photographer specializing in portraits and cinematic storytelling.</p>
+    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling.</p>
   </div>
 </section>
 
 <section id="gallery">
-  <h2>Gallery</h2>
+  <h2 style="margin-bottom:30px">Gallery</h2>
   <div class="gallery">
-    <div class="glass"><img src="1.jpg"><div class="caption">Elegant moment</div></div>
-    <div class="glass"><img src="2.jpg"><div class="caption">Portrait lighting</div></div>
-    <div class="glass"><img src="3.jpg"><div class="caption">Golden hour</div></div>
-    <div class="glass"><img src="4.jpg"><div class="caption">Candid emotion</div></div>
+    <div class="glass"><img src="1.jpg"><div class="caption">Elegant wedding moment</div></div>
+    <div class="glass"><img src="2.jpg"><div class="caption">Luxury portrait lighting</div></div>
+    <div class="glass"><img src="3.jpg"><div class="caption">Golden hour magic</div></div>
+    <div class="glass"><img src="4.jpg"><div class="caption">Candid emotions</div></div>
   </div>
 </section>
 
 <section id="contact" class="contact">
   <h2>Book a Session</h2>
+  <p>Let’s create something extraordinary together.</p>
 
-  <a class="btn" href="https://wa.me/919700034138">WhatsApp</a>
-  <a class="btn" href="https://instagram.com/yourprofile">Instagram</a>
+  <a class="btn" href="https://wa.me/919700034138">Book on WhatsApp</a>
+  <a class="btn" href="https://instagram.com/yourprofile">View Instagram</a>
 </section>
 
 </body>
 </html>
+
+
+
