@@ -52,7 +52,7 @@ section {
   min-height: 100vh;
 }
 
-/* IMAGE RIGHT SIDE */
+/* IMAGE RIGHT */
 .hero::after {
   content: "";
   position: absolute;
@@ -64,7 +64,7 @@ section {
   z-index: -2;
 }
 
-/* CINEMATIC FADE (TOP + BOTTOM + LEFT) */
+/* FINAL ADVANCED FADE */
 .hero::before {
   content: "";
   position: absolute;
@@ -73,14 +73,26 @@ section {
   width: 50%;
   height: 100%;
 
-  background: radial-gradient(
-    circle at 70% 50%,   /* focus area slightly right */
-    rgba(255,255,255,0) 30%,   /* clear center */
-    rgba(255,255,255,0.4) 55%,
-    rgba(255,255,255,0.9) 80%,
-    rgba(255,255,255,1) 100%   /* heavy fade edges */
-  );
+  background:
+    /* RADIAL (focus center-right) */
+    radial-gradient(
+      circle at 70% 50%,
+      rgba(255,255,255,0) 30%,
+      rgba(255,255,255,0.4) 55%,
+      rgba(255,255,255,0.9) 80%,
+      rgba(255,255,255,1) 100%
+    ),
 
+    /* 🔥 STRONG BOTTOM 10% FADE */
+    linear-gradient(
+      to top,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,1) 10%,
+      rgba(255,255,255,0.6) 20%,
+      rgba(255,255,255,0) 35%
+    );
+
+  backdrop-filter: blur(40px);
   z-index: -1;
 }
 
