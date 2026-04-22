@@ -15,15 +15,17 @@ body{
   font-family:'Montserrat',sans-serif;
   color:#fff;
   background:
-    linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)),
+    linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
     url('images/bg.jpg') center/cover no-repeat fixed;
 }
 
+/* Liquid Glass UI */
 .glass{
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 header{
@@ -36,14 +38,18 @@ header{
   z-index:1000;
 }
 
-header h1{font-family:'Playfair Display',serif;letter-spacing:2px}
+header h1{
+  font-family:'Playfair Display',serif;
+  letter-spacing:2px;
+}
 
 nav a{
   margin:0 15px;
   text-decoration:none;
   color:#ddd;
-  transition:.3s;
+  transition:.4s;
 }
+
 nav a:hover{color:gold}
 
 .hero{
@@ -51,17 +57,32 @@ nav a:hover{color:gold}
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
 }
 
 .hero-box{
-  padding:50px 70px;
+  display:flex;
+  align-items:center;
+  gap:40px;
+  padding:50px;
+  animation:fadeUp 1.5s ease;
 }
 
-.hero h2{
-  font-size:55px;
+.hero img{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid gold;
+}
+
+.hero-text h2{
+  font-size:45px;
   font-family:'Playfair Display',serif;
-  animation:fadeUp 1.5s ease;
+}
+
+.hero-text p{
+  margin-top:10px;
+  color:#ccc;
 }
 
 @keyframes fadeUp{
@@ -69,7 +90,10 @@ nav a:hover{color:gold}
   to{opacity:1;transform:translateY(0)}
 }
 
-section{padding:100px 50px}
+section{
+  padding:100px 50px;
+  animation:fadeUp 1s ease;
+}
 
 .gallery{
   display:grid;
@@ -82,32 +106,34 @@ section{padding:100px 50px}
   height:400px;
   object-fit:cover;
   border-radius:20px;
-  transition:.5s;
+  transition:.6s;
 }
-.gallery img:hover{transform:scale(1.08)}
+
+.gallery img:hover{
+  transform:scale(1.1);
+}
 
 .about,.contact{
   max-width:800px;
   margin:auto;
   text-align:center;
-  padding:40px;
+  padding:50px;
 }
 
 .features{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
-  gap:20px;
+  gap:25px;
 }
 
 .feature{
   padding:30px;
   max-width:250px;
-  text-align:center;
 }
+
 .feature h3{color:gold;margin-bottom:10px}
 
-/* Booking Buttons */
 .booking{
   margin-top:20px;
 }
@@ -119,7 +145,7 @@ section{padding:100px 50px}
   border-radius:30px;
   text-decoration:none;
   font-weight:bold;
-  transition:.3s;
+  transition:.4s;
 }
 
 .instagram{
@@ -132,9 +158,10 @@ section{padding:100px 50px}
   color:black;
 }
 
-.booking a:hover{transform:scale(1.08)}
+.booking a:hover{
+  transform:scale(1.1);
+}
 
-/* Floating WhatsApp */
 .float-btn{
   position:fixed;
   bottom:30px;
@@ -170,7 +197,11 @@ footer{
 
 <section class="hero" id="home">
   <div class="glass hero-box">
-    <h2>Luxury. Emotion. Timeless Frames.</h2>
+    <img src="images/profile.jpg" alt="your photo">
+    <div class="hero-text">
+      <h2>Dillu Capture</h2>
+      <p>Luxury Photography | Cinematic Storytelling</p>
+    </div>
   </div>
 </section>
 
@@ -188,9 +219,9 @@ footer{
 
 <section class="about glass" id="about">
   <h2>About Me</h2>
-  <p>I create premium cinematic photography that turns moments into timeless art. Designed for clients who want luxury visuals.</p>
+  <p>I create cinematic, luxury photography that transforms moments into timeless art.</p>
   <br>
-  <p><strong>Starting from ₹25,000</strong></p>
+  <p><strong>Budget Friendly Packages Available</strong></p>
 </section>
 
 <section class="features">
@@ -200,21 +231,21 @@ footer{
   </div>
   <div class="feature glass">
     <h3>Creative Direction</h3>
-    <p>Unique storytelling approach</p>
+    <p>Story-driven visuals</p>
   </div>
   <div class="feature glass">
-    <h3>Elite Clients</h3>
-    <p>Premium experience guaranteed</p>
+    <h3>Smooth Experience</h3>
+    <p>Premium service for every client</p>
   </div>
 </section>
 
 <section class="contact glass" id="contact">
   <h2>Book Your Shoot</h2>
-  <p>For bookings, connect directly via Instagram or WhatsApp</p>
+  <p>Book directly through Instagram or WhatsApp</p>
 
   <div class="booking">
-    <a class="instagram" href="https://instagram.com/yourusername" target="_blank">Book via Instagram</a>
-    <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">Book via WhatsApp</a>
+    <a class="instagram" href="https://instagram.com/yourusername" target="_blank">Instagram</a>
+    <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp</a>
   </div>
 </section>
 
