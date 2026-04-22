@@ -52,7 +52,7 @@ section {
   min-height: 100vh;
 }
 
-/* IMAGE RIGHT (HALF SCREEN) */
+/* IMAGE RIGHT SIDE */
 .hero::after {
   content: "";
   position: absolute;
@@ -64,7 +64,7 @@ section {
   z-index: -2;
 }
 
-/* SUBTLE FADE ONLY (PREMIUM LOOK) */
+/* CINEMATIC FADE (TOP + BOTTOM + LEFT) */
 .hero::before {
   content: "";
   position: absolute;
@@ -73,11 +73,12 @@ section {
   width: 50%;
   height: 100%;
 
-  background: linear-gradient(
-    to left,
-    rgba(255,255,255,0) 70%,   /* almost full image clear */
-    rgba(255,255,255,0.2) 85%,
-    rgba(255,255,255,0.6) 100% /* very soft fade */
+  background: radial-gradient(
+    circle at 70% 50%,   /* focus area slightly right */
+    rgba(255,255,255,0) 30%,   /* clear center */
+    rgba(255,255,255,0.4) 55%,
+    rgba(255,255,255,0.9) 80%,
+    rgba(255,255,255,1) 100%   /* heavy fade edges */
   );
 
   z-index: -1;
@@ -182,7 +183,7 @@ html { scroll-behavior: smooth; }
 <section id="home" class="hero">
   <div class="hero-text">
     <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion, elegance, and storytelling. Every frame reflects artistry and precision.</p>
+    <p>Luxury photography crafted with emotion, elegance, and storytelling.</p>
   </div>
 </section>
 
@@ -203,8 +204,6 @@ html { scroll-behavior: smooth; }
     <div class="glass"><img src="2.jpg"><div class="caption">Luxury portrait lighting</div></div>
     <div class="glass"><img src="3.jpg"><div class="caption">Golden hour magic</div></div>
     <div class="glass"><img src="4.jpg"><div class="caption">Candid emotions</div></div>
-    <div class="glass"><img src="5.jpg"><div class="caption">Minimal aesthetic</div></div>
-    <div class="glass"><img src="6.jpg"><div class="caption">Urban storytelling</div></div>
   </div>
 </section>
 
