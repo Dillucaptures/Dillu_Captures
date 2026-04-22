@@ -15,17 +15,19 @@ body{
   font-family:'Montserrat',sans-serif;
   color:#fff;
   background:
-    linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
-    url('images/bg.jpg') center/cover no-repeat fixed;
+    radial-gradient(circle at 20% 30%, rgba(255,215,0,0.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05), transparent 40%),
+    linear-gradient(135deg,#050505,#0a0a0a,#050505);
+  overflow-x:hidden;
 }
 
-/* Liquid Glass UI */
+/* Liquid Glass */
 .glass{
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  backdrop-filter: blur(30px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:25px;
+  box-shadow:0 10px 50px rgba(0,0,0,0.6);
 }
 
 header{
@@ -49,7 +51,6 @@ nav a{
   color:#ddd;
   transition:.4s;
 }
-
 nav a:hover{color:gold}
 
 .hero{
@@ -57,32 +58,53 @@ nav a:hover{color:gold}
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:0 50px;
 }
 
 .hero-box{
   display:flex;
   align-items:center;
-  gap:40px;
-  padding:50px;
+  justify-content:space-between;
+  width:100%;
+  max-width:1200px;
+  padding:60px;
+  gap:50px;
   animation:fadeUp 1.5s ease;
 }
 
-.hero img{
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid gold;
+.hero-text{
+  flex:1;
 }
 
 .hero-text h2{
-  font-size:45px;
+  font-size:55px;
   font-family:'Playfair Display',serif;
 }
 
 .hero-text p{
-  margin-top:10px;
+  margin-top:15px;
   color:#ccc;
+  font-size:18px;
+}
+
+.hero-image{
+  flex:1;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.hero-image img{
+  width:350px;
+  height:450px;
+  object-fit:cover;
+  border-radius:20px;
+  border:2px solid rgba(255,215,0,0.6);
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+  transition:.5s;
+}
+
+.hero-image img:hover{
+  transform:scale(1.05);
 }
 
 @keyframes fadeUp{
@@ -92,7 +114,6 @@ nav a:hover{color:gold}
 
 section{
   padding:100px 50px;
-  animation:fadeUp 1s ease;
 }
 
 .gallery{
@@ -108,10 +129,7 @@ section{
   border-radius:20px;
   transition:.6s;
 }
-
-.gallery img:hover{
-  transform:scale(1.1);
-}
+.gallery img:hover{transform:scale(1.1)}
 
 .about,.contact{
   max-width:800px;
@@ -131,7 +149,6 @@ section{
   padding:30px;
   max-width:250px;
 }
-
 .feature h3{color:gold;margin-bottom:10px}
 
 .booking{
@@ -158,9 +175,7 @@ section{
   color:black;
 }
 
-.booking a:hover{
-  transform:scale(1.1);
-}
+.booking a:hover{transform:scale(1.1)}
 
 .float-btn{
   position:fixed;
@@ -197,10 +212,12 @@ footer{
 
 <section class="hero" id="home">
   <div class="glass hero-box">
-    <img src="images/profile.jpg" alt="your photo">
     <div class="hero-text">
       <h2>Dillu Capture</h2>
-      <p>Luxury Photography | Cinematic Storytelling</p>
+      <p>Luxury Photography • Cinematic Storytelling</p>
+    </div>
+    <div class="hero-image">
+      <img src="images/profile.jpg" alt="Photographer">
     </div>
   </div>
 </section>
@@ -241,7 +258,7 @@ footer{
 
 <section class="contact glass" id="contact">
   <h2>Book Your Shoot</h2>
-  <p>Book directly through Instagram or WhatsApp</p>
+  <p>Book via Instagram or WhatsApp</p>
 
   <div class="booking">
     <a class="instagram" href="https://instagram.com/yourusername" target="_blank">Instagram</a>
