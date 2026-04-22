@@ -1,162 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luxury Photography Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Photography Portfolio</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    * {margin:0; padding:0; box-sizing:border-box;}
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    html { scroll-behavior: smooth; }
+html{scroll-behavior:smooth}
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #0a0a0a;
-      color: #fff;
-    }
+body{
+  font-family:'Montserrat',sans-serif;
+  background: linear-gradient(135deg,#0a0a0a,#111,#0a0a0a);
+  color:#fff;
+  overflow-x:hidden;
+}
 
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: space-between;
-      padding: 20px 50px;
-      z-index: 1000;
-    }
+/* Glass effect */
+.glass{
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+}
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 2px;
-    }
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  padding:20px 50px;
+  z-index:1000;
+}
 
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #ddd;
-      transition: 0.3s;
-    }
+header h1{
+  font-family:'Playfair Display',serif;
+}
 
-    nav a:hover { color: gold; }
+nav a{
+  margin:0 15px;
+  text-decoration:none;
+  color:#ddd;
+  transition:.3s;
+}
 
-    .hero {
-      height: 100vh;
-      background: url('images/hero.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+nav a:hover{color:gold}
 
-    .hero h2 {
-      font-size: 60px;
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 3px;
-      animation: fadeIn 2s ease;
-    }
+.hero{
+  height:100vh;
+  background:url('images/hero.jpg') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-    @keyframes fadeIn {
-      from {opacity:0; transform: translateY(30px);} 
-      to {opacity:1; transform: translateY(0);} 
-    }
+.hero .glass{
+  padding:40px 60px;
+}
 
-    section { padding: 100px 50px; }
+.hero h2{
+  font-size:55px;
+  font-family:'Playfair Display',serif;
+  animation:fadeUp 1.5s ease;
+}
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-      gap: 20px;
-    }
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-    .gallery img {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      transition: 0.4s;
-      filter: brightness(80%);
-      cursor: pointer;
-    }
+section{padding:100px 50px}
 
-    .gallery img:hover {
-      transform: scale(1.05);
-      filter: brightness(100%);
-    }
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
 
-    .about {
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
+.gallery img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  border-radius:20px;
+  transition:.5s;
+}
 
-    .about h2 {
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 20px;
-    }
+.gallery img:hover{
+  transform:scale(1.08);
+}
 
-    .features {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      text-align: center;
-    }
+.about,.contact{
+  max-width:800px;
+  margin:auto;
+  text-align:center;
+  padding:40px;
+}
 
-    .feature {
-      margin: 20px;
-      max-width: 250px;
-    }
+.about h2,.contact h2{
+  font-family:'Playfair Display',serif;
+  margin-bottom:20px;
+}
 
-    .feature h3 {
-      color: gold;
-      margin-bottom: 10px;
-    }
+.features{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
 
-    .contact {
-      text-align: center;
-    }
+.feature{
+  padding:30px;
+  max-width:250px;
+  text-align:center;
+}
 
-    .contact input, .contact textarea {
-      width: 80%;
-      padding: 15px;
-      margin: 10px 0;
-      border: none;
-      background: #111;
-      color: white;
-    }
+.feature h3{color:gold;margin-bottom:10px}
 
-    .contact button {
-      padding: 15px 40px;
-      border: none;
-      background: gold;
-      color: black;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.contact input,.contact textarea{
+  width:100%;
+  padding:15px;
+  margin:10px 0;
+  border:none;
+  border-radius:10px;
+  background:#111;
+  color:white;
+}
 
-    .contact button:hover { background: white; }
+.contact button{
+  padding:15px 40px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,gold,#fff);
+  color:black;
+  cursor:pointer;
+  transition:.3s;
+}
 
-    .whatsapp {
-      margin-top: 20px;
-      display: block;
-      color: gold;
-    }
+.contact button:hover{
+  transform:scale(1.05);
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #000;
-      color: #777;
-    }
-  </style>
+.whatsapp{
+  display:inline-block;
+  margin-top:20px;
+  color:gold;
+}
+
+/* Floating WhatsApp */
+.float-btn{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:gold;
+  color:black;
+  padding:15px 20px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:#777;
+}
+
+</style>
 </head>
+
 <body>
 
-<header>
+<header class="glass">
   <h1>DILLU CAPTURE</h1>
   <nav>
     <a href="#home">Home</a>
@@ -167,56 +186,58 @@
 </header>
 
 <section class="hero" id="home">
-  <h2>Capturing Timeless Moments</h2>
-</section>
-
-<section id="gallery">
-  <h2 style="text-align:center; margin-bottom:40px;">Portfolio</h2>
-  <div class="gallery">
-    <img src="images/img1.jpg" alt="photo">
-    <img src="images/img2.jpg" alt="photo">
-    <img src="images/img3.jpg" alt="photo">
-    <img src="images/img4.jpg" alt="photo">
-    <img src="images/img5.jpg" alt="photo">
-    <img src="images/img6.jpg" alt="photo">
+  <div class="glass">
+    <h2>Capturing Timeless Luxury</h2>
   </div>
 </section>
 
-<section class="about" id="about">
+<section id="gallery">
+  <h2 style="text-align:center;margin-bottom:40px">Portfolio</h2>
+  <div class="gallery">
+    <img src="images/img1.jpg">
+    <img src="images/img2.jpg">
+    <img src="images/img3.jpg">
+    <img src="images/img4.jpg">
+    <img src="images/img5.jpg">
+    <img src="images/img6.jpg">
+  </div>
+</section>
+
+<section class="about glass" id="about">
   <h2>About Me</h2>
-  <p>I am a professional photographer specializing in luxury weddings, portraits, and cinematic storytelling. I create timeless visuals that feel premium and emotional.</p>
+  <p>I create cinematic, luxury photography that transforms moments into art. My work blends emotion, elegance, and storytelling.</p>
   <br>
   <p><strong>Starting from ₹25,000</strong></p>
 </section>
 
 <section class="features">
-  <div class="feature">
+  <div class="feature glass">
     <h3>Premium Quality</h3>
-    <p>Luxury editing with cinematic color tones.</p>
+    <p>Luxury editing & cinematic tones</p>
   </div>
-  <div class="feature">
+  <div class="feature glass">
     <h3>Creative Vision</h3>
-    <p>Unique storytelling in every frame.</p>
+    <p>Story-driven photography</p>
   </div>
-  <div class="feature">
-    <h3>Client Experience</h3>
-    <p>Smooth, high-end service from start to finish.</p>
+  <div class="feature glass">
+    <h3>Elite Experience</h3>
+    <p>High-end client service</p>
   </div>
 </section>
 
-<section class="contact" id="contact">
+<section class="contact glass" id="contact">
   <h2>Contact Me</h2>
   <form>
-    <input type="text" placeholder="Your Name" required><br>
-    <input type="email" placeholder="Your Email" required><br>
-    <textarea rows="5" placeholder="Your Message"></textarea><br>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message"></textarea>
     <button type="submit">Send Message</button>
   </form>
 
-  <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">
-    Or Chat on WhatsApp
-  </a>
+  <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">Chat on WhatsApp</a>
 </section>
+
+<a href="https://wa.me/91XXXXXXXXXX" class="float-btn" target="_blank">WhatsApp</a>
 
 <footer>
   <p>© 2026 Dillu Capture | Luxury Photography</p>
