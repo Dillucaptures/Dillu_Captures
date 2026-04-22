@@ -53,7 +53,7 @@ section {
   min-height: 100vh;
 }
 
-/* IMAGE RIGHT SIDE */
+/* RIGHT SIDE IMAGE */
 .hero::after {
   content: "";
   position: absolute;
@@ -65,7 +65,7 @@ section {
   z-index: -2;
 }
 
-/* FADE + GLASS EFFECT */
+/* FADE (LEFT HALF ONLY) */
 .hero::before {
   content: "";
   position: absolute;
@@ -73,12 +73,14 @@ section {
   right: 0;
   width: 60%;
   height: 100%;
+
   background: linear-gradient(
     to left,
-    rgba(255,255,255,0) 25%,   /* clear (right side) */
-    rgba(255,255,255,0.4) 55%,
-    rgba(255,255,255,0.9) 100% /* fully faded (left side) */
+    rgba(255,255,255,0) 50%,   /* clear till middle */
+    rgba(255,255,255,0.5) 75%,
+    rgba(255,255,255,1) 100%   /* full fade at left */
   );
+
   backdrop-filter: blur(25px);
   z-index: -1;
 }
