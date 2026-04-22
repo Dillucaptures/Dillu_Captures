@@ -64,7 +64,7 @@ section {
   z-index: -2;
 }
 
-/* FINAL ADVANCED FADE */
+/* ADVANCED FADE + BLUR */
 .hero::before {
   content: "";
   position: absolute;
@@ -74,25 +74,21 @@ section {
   height: 100%;
 
   background:
-    /* RADIAL (focus center-right) */
     radial-gradient(
-      circle at 70% 50%,
-      rgba(255,255,255,0) 30%,
-      rgba(255,255,255,0.4) 55%,
-      rgba(255,255,255,0.9) 80%,
+      circle at 70% 40%, 
+      rgba(255,255,255,0) 25%,
+      rgba(255,255,255,0.3) 50%,
+      rgba(255,255,255,0.8) 75%,
       rgba(255,255,255,1) 100%
     ),
-
-    /* 🔥 STRONG BOTTOM 10% FADE */
     linear-gradient(
       to top,
       rgba(255,255,255,1) 0%,
-      rgba(255,255,255,1) 10%,
-      rgba(255,255,255,0.6) 20%,
-      rgba(255,255,255,0) 35%
+      rgba(255,255,255,0.9) 30%,
+      rgba(255,255,255,0) 60%
     );
 
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(30px);
   z-index: -1;
 }
 
