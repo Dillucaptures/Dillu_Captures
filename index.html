@@ -15,19 +15,17 @@ body{
   font-family:'Montserrat',sans-serif;
   color:#fff;
   background:
-    radial-gradient(circle at 20% 30%, rgba(255,215,0,0.08), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05), transparent 40%),
-    linear-gradient(135deg,#050505,#0a0a0a,#050505);
-  overflow-x:hidden;
+    radial-gradient(circle at 10% 20%, rgba(255,215,0,0.08), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05), transparent 40%),
+    #000;
 }
 
-/* Liquid Glass */
 .glass{
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(30px) saturate(180%);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(40px) saturate(180%);
   border:1px solid rgba(255,255,255,0.15);
-  border-radius:25px;
-  box-shadow:0 10px 50px rgba(0,0,0,0.6);
+  border-radius:30px;
+  box-shadow:0 25px 100px rgba(0,0,0,0.9);
 }
 
 header{
@@ -40,17 +38,9 @@ header{
   z-index:1000;
 }
 
-header h1{
-  font-family:'Playfair Display',serif;
-  letter-spacing:2px;
-}
+header h1{font-family:'Playfair Display',serif;letter-spacing:2px}
 
-nav a{
-  margin:0 15px;
-  text-decoration:none;
-  color:#ddd;
-  transition:.4s;
-}
+nav a{margin:0 15px;text-decoration:none;color:#aaa;transition:.3s}
 nav a:hover{color:gold}
 
 .hero{
@@ -63,96 +53,97 @@ nav a:hover{color:gold}
 
 .hero-box{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  width:100%;
+  align-items:center;
   max-width:1200px;
-  padding:60px;
-  gap:50px;
-  animation:fadeUp 1.5s ease;
-}
-
-.hero-text{
-  flex:1;
+  width:100%;
+  padding:80px;
+  gap:70px;
 }
 
 .hero-text h2{
-  font-size:55px;
+  font-size:65px;
   font-family:'Playfair Display',serif;
 }
 
-.hero-text p{
-  margin-top:15px;
-  color:#ccc;
-  font-size:18px;
-}
-
-.hero-image{
-  flex:1;
-  display:flex;
-  justify-content:flex-end;
-}
+.hero-text p{margin-top:20px;color:#bbb;font-size:18px}
 
 .hero-image img{
-  width:350px;
-  height:450px;
+  width:420px;
+  height:520px;
   object-fit:cover;
-  border-radius:20px;
-  border:2px solid rgba(255,215,0,0.6);
-  box-shadow:0 20px 60px rgba(0,0,0,0.7);
-  transition:.5s;
+  border-radius:25px;
+  border:2px solid rgba(255,215,0,0.7);
+  box-shadow:0 30px 80px rgba(0,0,0,0.8);
 }
 
-.hero-image img:hover{
-  transform:scale(1.05);
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-section{
-  padding:100px 50px;
-}
+section{padding:160px 50px}
 
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:20px;
+  gap:30px;
 }
-
 .gallery img{
   width:100%;
-  height:400px;
+  height:450px;
   object-fit:cover;
   border-radius:20px;
   transition:.6s;
 }
-.gallery img:hover{transform:scale(1.1)}
+.gallery img:hover{transform:scale(1.08)}
 
-.about,.contact{
-  max-width:800px;
+.philosophy{
+  max-width:900px;
   margin:auto;
   text-align:center;
-  padding:50px;
+  padding:80px;
 }
 
-.features{
+.philosophy p{color:#aaa;line-height:1.9}
+
+.signature{
+  margin-top:40px;
+  font-family:'Playfair Display',serif;
+  color:gold;
+}
+
+.services{
   display:flex;
   justify-content:center;
+  gap:30px;
   flex-wrap:wrap;
-  gap:25px;
 }
 
-.feature{
-  padding:30px;
-  max-width:250px;
+.service{
+  padding:40px;
+  max-width:260px;
 }
-.feature h3{color:gold;margin-bottom:10px}
+.service h3{color:gold;margin-bottom:10px}
 
-.booking{
-  margin-top:20px;
+.process{
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+  padding:70px;
+}
+
+.process p{color:#aaa;margin:15px 0}
+
+.testimonials{
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+  padding:70px;
+}
+
+.testimonials p{font-style:italic;color:#ccc;margin-bottom:20px}
+
+.contact{
+  max-width:700px;
+  margin:auto;
+  text-align:center;
+  padding:70px;
 }
 
 .booking a{
@@ -165,15 +156,8 @@ section{
   transition:.4s;
 }
 
-.instagram{
-  background:linear-gradient(45deg,#fd1d1d,#833ab4,#fcb045);
-  color:white;
-}
-
-.whatsapp{
-  background:gold;
-  color:black;
-}
+.instagram{background:linear-gradient(45deg,#fd1d1d,#833ab4,#fcb045);color:white}
+.whatsapp{background:gold;color:black}
 
 .booking a:hover{transform:scale(1.1)}
 
@@ -185,15 +169,9 @@ section{
   color:black;
   padding:15px 20px;
   border-radius:50px;
-  text-decoration:none;
-  font-weight:bold;
 }
 
-footer{
-  text-align:center;
-  padding:20px;
-  color:#aaa;
-}
+footer{text-align:center;padding:20px;color:#777}
 
 </style>
 </head>
@@ -204,8 +182,8 @@ footer{
   <h1>DILLU CAPTURE</h1>
   <nav>
     <a href="#home">Home</a>
-    <a href="#gallery">Portfolio</a>
-    <a href="#about">About</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#philosophy">Vision</a>
     <a href="#contact">Book</a>
   </nav>
 </header>
@@ -215,15 +193,16 @@ footer{
     <div class="hero-text">
       <h2>Dillu Capture</h2>
       <p>Luxury Photography • Cinematic Storytelling</p>
+      <div class="signature">Minimal • Elegant • Timeless</div>
     </div>
     <div class="hero-image">
-      <img src="images/profile.jpg" alt="Photographer">
+      <img src="images/profile.jpg">
     </div>
   </div>
 </section>
 
-<section id="gallery">
-  <h2 style="text-align:center;margin-bottom:40px">Portfolio</h2>
+<section id="portfolio">
+  <h2 style="text-align:center;margin-bottom:60px">Selected Work</h2>
   <div class="gallery">
     <img src="images/img1.jpg">
     <img src="images/img2.jpg">
@@ -234,31 +213,42 @@ footer{
   </div>
 </section>
 
-<section class="about glass" id="about">
-  <h2>About Me</h2>
-  <p>I create cinematic, luxury photography that transforms moments into timeless art.</p>
-  <br>
-  <p><strong>Budget Friendly Packages Available</strong></p>
+<section class="philosophy glass" id="philosophy">
+  <h2>Vision</h2>
+  <p>
+    My work is built on simplicity, emotion, and refined storytelling. Every frame is designed to feel cinematic, minimal, and timeless — creating visuals that stay elegant for years.
+  </p>
 </section>
 
-<section class="features">
-  <div class="feature glass">
-    <h3>Luxury Quality</h3>
-    <p>High-end cinematic editing</p>
+<section class="services">
+  <div class="service glass">
+    <h3>Weddings</h3>
+    <p>Luxury storytelling experience</p>
   </div>
-  <div class="feature glass">
-    <h3>Creative Direction</h3>
-    <p>Story-driven visuals</p>
+  <div class="service glass">
+    <h3>Portraits</h3>
+    <p>Clean and powerful identity</p>
   </div>
-  <div class="feature glass">
-    <h3>Smooth Experience</h3>
-    <p>Premium service for every client</p>
+  <div class="service glass">
+    <h3>Cinematic</h3>
+    <p>Film-inspired visual art</p>
   </div>
+</section>
+
+<section class="process glass">
+  <h2>Experience</h2>
+  <p>Consultation → Creative Direction → Shoot → Premium Delivery</p>
+  <p>Every step is crafted to feel smooth, premium, and effortless.</p>
+</section>
+
+<section class="testimonials glass">
+  <p>“Feels like a movie scene. Truly premium.”</p>
+  <p>“Minimal, elegant and powerful visuals.”</p>
 </section>
 
 <section class="contact glass" id="contact">
-  <h2>Book Your Shoot</h2>
-  <p>Book via Instagram or WhatsApp</p>
+  <h2>Book Your Experience</h2>
+  <p>Connect via Instagram or WhatsApp</p>
 
   <div class="booking">
     <a class="instagram" href="https://instagram.com/yourusername" target="_blank">Instagram</a>
