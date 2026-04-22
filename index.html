@@ -2,18 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<!-- FORCE LIGHT MODE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+
 <title>Dillu Captures</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+
+/* RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
 
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #f8f9fb, #eef1f6);
-  color: #111;
+  background: #ffffff !important;
+  color: #111 !important;
+  line-height: 1.6;
 }
 
 /* NAV */
@@ -23,20 +35,28 @@ header {
   top: 0;
   display: flex;
   justify-content: space-between;
-  padding: 20px 60px;
-  backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.5);
+  padding: 18px 60px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.8);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
   z-index: 1000;
 }
 
 header h1 {
   font-family: 'Playfair Display';
+  font-size: 20px;
 }
 
 nav a {
   margin-left: 25px;
   text-decoration: none;
   color: #111;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  opacity: 0.6;
 }
 
 /* SECTIONS */
@@ -52,7 +72,7 @@ section {
   min-height: 100vh;
 }
 
-/* HERO IMAGE (separate file) */
+/* HERO IMAGE */
 .hero::after {
   content: "";
   position: absolute;
@@ -64,7 +84,7 @@ section {
   z-index: -2;
 }
 
-/* FADE (no blur, keeps image sharp) */
+/* FADE EFFECT (PURE WHITE) */
 .hero::before {
   content: "";
   position: absolute;
@@ -77,14 +97,13 @@ section {
     radial-gradient(
       circle at 70% 50%,
       rgba(255,255,255,0) 30%,
-      rgba(255,255,255,0.3) 55%,
-      rgba(255,255,255,0.8) 80%,
-      rgba(255,255,255,1) 100%
+      rgba(255,255,255,0.6) 70%,
+      #ffffff 100%
     ),
     linear-gradient(
       to top,
-      rgba(255,255,255,1) 0%,
-      rgba(255,255,255,1) 10%,
+      #ffffff 0%,
+      #ffffff 10%,
       rgba(255,255,255,0.6) 20%,
       rgba(255,255,255,0) 35%
     );
@@ -92,10 +111,9 @@ section {
   z-index: -1;
 }
 
-/* TEXT */
+/* HERO TEXT */
 .hero-text {
-  max-width: 500px;
-  z-index: 2;
+  max-width: 520px;
 }
 
 .hero-text h2 {
@@ -106,33 +124,36 @@ section {
 
 .hero-text p {
   opacity: 0.7;
-  line-height: 1.6;
 }
 
 /* GLASS CARD */
 .glass {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.7);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  padding: 20px;
-  border: 1px solid rgba(255,255,255,0.3);
+  padding: 25px;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.glass:hover {
+  transform: translateY(-5px);
 }
 
 /* ABOUT */
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 50px;
   align-items: center;
 }
 
-/* ABOUT IMAGE (separate file) */
 .about img {
   width: 100%;
   height: 420px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.1);
   transition: 0.4s;
 }
 
@@ -143,13 +164,18 @@ section {
 /* GALLERY */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
   gap: 25px;
 }
 
 .gallery img {
   width: 100%;
   border-radius: 15px;
+  transition: 0.4s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
 }
 
 .caption {
@@ -165,22 +191,20 @@ section {
 
 .btn {
   display: inline-block;
-  margin: 15px;
+  margin: 10px;
   padding: 14px 30px;
   border-radius: 30px;
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.4);
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
   text-decoration: none;
   color: #111;
+  transition: 0.3s;
 }
 
 .btn:hover {
   background: #111;
   color: #fff;
 }
-
-html { scroll-behavior: smooth; }
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -191,7 +215,7 @@ html { scroll-behavior: smooth; }
 
   nav a {
     margin-left: 15px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   section {
@@ -205,22 +229,17 @@ html { scroll-behavior: smooth; }
 
   .hero::after {
     width: 100%;
-    height: 50%;
-    top: 0;
+    height: 45%;
   }
 
   .hero::before {
     width: 100%;
-    height: 50%;
-    background: linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.2),
-      rgba(255,255,255,0.85)
-    );
+    height: 45%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.2), #fff);
   }
 
   .hero-text {
-    margin-top: 55vh;
+    margin-top: 50vh;
   }
 
   .hero-text h2 {
@@ -240,6 +259,23 @@ html { scroll-behavior: smooth; }
     width: 100%;
   }
 }
+
+/* FORCE LIGHT MODE EVEN IF DEVICE IS DARK */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #ffffff !important;
+    color: #111 !important;
+  }
+
+  header {
+    background: rgba(255,255,255,0.9) !important;
+  }
+
+  .glass {
+    background: rgba(255,255,255,0.85) !important;
+  }
+}
+
 </style>
 </head>
 
@@ -264,8 +300,7 @@ html { scroll-behavior: smooth; }
 
 <section id="about" class="about">
   <div>
-    <!-- ABOUT IMAGE -->
-    <img src="Images/IMG_1164.webp" alt="Photographer Portrait">
+    <img src="Images/IMG_1164.webp" alt="Photographer">
   </div>
   <div class="glass">
     <h2>About Me</h2>
@@ -288,7 +323,7 @@ html { scroll-behavior: smooth; }
   <p>Let’s create something extraordinary together.</p>
 
   <a class="btn" href="https://wa.me/919700034138">Book on WhatsApp</a>
-  <a class="btn" href="https://instagram.com/yourprofile">View Instagram</a>
+  <a class="btn" href="https://www.instagram.com/dillu_captures/">View Instagram</a>
 </section>
 
 </body>
