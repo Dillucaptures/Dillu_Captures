@@ -5,7 +5,7 @@
 
 <!-- FORCE LIGHT MODE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="only light">
 
 <title>Dillu Captures</title>
 
@@ -18,7 +18,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: only light;
 }
 
 body {
@@ -37,26 +37,19 @@ header {
   justify-content: space-between;
   padding: 18px 60px;
   backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.95) !important;
   border-bottom: 1px solid rgba(0,0,0,0.05);
   z-index: 1000;
 }
 
 header h1 {
   font-family: 'Playfair Display';
-  font-size: 20px;
 }
 
 nav a {
   margin-left: 25px;
   text-decoration: none;
-  color: #111;
-  font-size: 14px;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  opacity: 0.6;
+  color: #111 !important;
 }
 
 /* SECTIONS */
@@ -84,7 +77,7 @@ section {
   z-index: -2;
 }
 
-/* FADE EFFECT (PURE WHITE) */
+/* FADE */
 .hero::before {
   content: "";
   position: absolute;
@@ -94,24 +87,13 @@ section {
   height: 100%;
 
   background:
-    radial-gradient(
-      circle at 70% 50%,
-      rgba(255,255,255,0) 30%,
-      rgba(255,255,255,0.6) 70%,
-      #ffffff 100%
-    ),
-    linear-gradient(
-      to top,
-      #ffffff 0%,
-      #ffffff 10%,
-      rgba(255,255,255,0.6) 20%,
-      rgba(255,255,255,0) 35%
-    );
+    radial-gradient(circle at 70% 50%, rgba(255,255,255,0) 30%, rgba(255,255,255,0.6) 70%, #fff 100%),
+    linear-gradient(to top, #fff 0%, #fff 10%, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0) 35%);
 
   z-index: -1;
 }
 
-/* HERO TEXT */
+/* TEXT */
 .hero-text {
   max-width: 520px;
 }
@@ -119,25 +101,19 @@ section {
 .hero-text h2 {
   font-size: 48px;
   font-family: 'Playfair Display';
-  margin-bottom: 20px;
 }
 
 .hero-text p {
   opacity: 0.7;
 }
 
-/* GLASS CARD */
+/* GLASS */
 .glass {
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.9) !important;
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 25px;
   border: 1px solid rgba(0,0,0,0.05);
-  transition: 0.3s;
-}
-
-.glass:hover {
-  transform: translateY(-5px);
 }
 
 /* ABOUT */
@@ -153,12 +129,6 @@ section {
   height: 420px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.1);
-  transition: 0.4s;
-}
-
-.about img:hover {
-  transform: scale(1.03);
 }
 
 /* GALLERY */
@@ -171,11 +141,6 @@ section {
 .gallery img {
   width: 100%;
   border-radius: 15px;
-  transition: 0.4s;
-}
-
-.gallery img:hover {
-  transform: scale(1.05);
 }
 
 .caption {
@@ -194,29 +159,19 @@ section {
   margin: 10px;
   padding: 14px 30px;
   border-radius: 30px;
-  background: #fff;
+  background: #fff !important;
   border: 1px solid rgba(0,0,0,0.1);
   text-decoration: none;
-  color: #111;
-  transition: 0.3s;
+  color: #111 !important;
 }
 
 .btn:hover {
-  background: #111;
-  color: #fff;
+  background: #111 !important;
+  color: #fff !important;
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
-
-  header {
-    padding: 15px 20px;
-  }
-
-  nav a {
-    margin-left: 15px;
-    font-size: 13px;
-  }
 
   section {
     padding: 100px 20px;
@@ -242,10 +197,6 @@ section {
     margin-top: 50vh;
   }
 
-  .hero-text h2 {
-    font-size: 32px;
-  }
-
   .about {
     grid-template-columns: 1fr;
   }
@@ -255,24 +206,20 @@ section {
   }
 
   .btn {
-    display: block;
     width: 100%;
+    display: block;
   }
 }
 
-/* FORCE LIGHT MODE EVEN IF DEVICE IS DARK */
+/* HARD OVERRIDE (VERY IMPORTANT) */
 @media (prefers-color-scheme: dark) {
-  body {
-    background: #ffffff !important;
+  * {
+    background-color: #ffffff !important;
     color: #111 !important;
   }
 
-  header {
-    background: rgba(255,255,255,0.9) !important;
-  }
-
-  .glass {
-    background: rgba(255,255,255,0.85) !important;
+  img {
+    filter: none !important;
   }
 }
 
@@ -294,36 +241,35 @@ section {
 <section id="home" class="hero">
   <div class="hero-text">
     <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion, elegance, and storytelling.</p>
+    <p>Luxury photography crafted with emotion and elegance.</p>
   </div>
 </section>
 
 <section id="about" class="about">
   <div>
-    <img src="Images/IMG_1164.webp" alt="Photographer">
+    <img src="Images/IMG_1164.webp">
   </div>
   <div class="glass">
     <h2>About Me</h2>
-    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling.</p>
+    <p>I am a professional photographer specializing in portraits and cinematic storytelling.</p>
   </div>
 </section>
 
 <section id="gallery">
-  <h2 style="margin-bottom:30px">Gallery</h2>
+  <h2>Gallery</h2>
   <div class="gallery">
-    <div class="glass"><img src="1.jpg"><div class="caption">Elegant wedding moment</div></div>
-    <div class="glass"><img src="2.jpg"><div class="caption">Luxury portrait lighting</div></div>
-    <div class="glass"><img src="3.jpg"><div class="caption">Golden hour magic</div></div>
-    <div class="glass"><img src="4.jpg"><div class="caption">Candid emotions</div></div>
+    <div class="glass"><img src="1.jpg"><div class="caption">Elegant moment</div></div>
+    <div class="glass"><img src="2.jpg"><div class="caption">Portrait lighting</div></div>
+    <div class="glass"><img src="3.jpg"><div class="caption">Golden hour</div></div>
+    <div class="glass"><img src="4.jpg"><div class="caption">Candid emotion</div></div>
   </div>
 </section>
 
 <section id="contact" class="contact">
   <h2>Book a Session</h2>
-  <p>Let’s create something extraordinary together.</p>
 
-  <a class="btn" href="https://wa.me/919700034138">Book on WhatsApp</a>
-  <a class="btn" href="https://www.instagram.com/dillu_captures/">View Instagram</a>
+  <a class="btn" href="https://wa.me/919700034138">WhatsApp</a>
+  <a class="btn" href="https://instagram.com/yourprofile">Instagram</a>
 </section>
 
 </body>
