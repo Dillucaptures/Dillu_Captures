@@ -52,7 +52,7 @@ section {
   min-height: 100vh;
 }
 
-/* IMAGE RIGHT SIDE (DESKTOP) */
+/* HERO IMAGE (separate file) */
 .hero::after {
   content: "";
   position: absolute;
@@ -60,11 +60,11 @@ section {
   right: 0;
   width: 50%;
   height: 100%;
-  background: url('Images/1776695215852.webp') center/cover no-repeat;
+  background: url('Images/hero.webp') center/cover no-repeat;
   z-index: -2;
 }
 
-/* FADE EFFECT */
+/* FADE (no blur, keeps image sharp) */
 .hero::before {
   content: "";
   position: absolute;
@@ -88,9 +88,6 @@ section {
       rgba(255,255,255,0.6) 20%,
       rgba(255,255,255,0) 35%
     );
-
-  /* ❌ REMOVE BLUR */
-  /* backdrop-filter: blur(40px); */
 
   z-index: -1;
 }
@@ -129,9 +126,18 @@ section {
   align-items: center;
 }
 
+/* ABOUT IMAGE (separate file) */
 .about img {
   width: 100%;
+  height: 420px;
+  object-fit: cover;
   border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+  transition: 0.4s;
+}
+
+.about img:hover {
+  transform: scale(1.03);
 }
 
 /* GALLERY */
@@ -176,9 +182,7 @@ section {
 
 html { scroll-behavior: smooth; }
 
-/* =========================
-   MOBILE RESPONSIVE DESIGN
-========================= */
+/* MOBILE */
 @media (max-width: 768px) {
 
   header {
@@ -194,10 +198,8 @@ html { scroll-behavior: smooth; }
     padding: 100px 20px;
   }
 
-  /* HERO MOBILE */
   .hero {
     flex-direction: column;
-    justify-content: center;
     text-align: center;
   }
 
@@ -210,7 +212,6 @@ html { scroll-behavior: smooth; }
   .hero::before {
     width: 100%;
     height: 50%;
-
     background: linear-gradient(
       to bottom,
       rgba(255,255,255,0.2),
@@ -219,7 +220,6 @@ html { scroll-behavior: smooth; }
   }
 
   .hero-text {
-    max-width: 100%;
     margin-top: 55vh;
   }
 
@@ -227,23 +227,18 @@ html { scroll-behavior: smooth; }
     font-size: 32px;
   }
 
-  /* ABOUT STACK */
   .about {
     grid-template-columns: 1fr;
   }
 
-  /* GALLERY SINGLE COLUMN */
   .gallery {
     grid-template-columns: 1fr;
   }
 
-  /* BUTTONS FULL WIDTH */
   .btn {
     display: block;
     width: 100%;
-    margin: 10px 0;
   }
-
 }
 </style>
 </head>
@@ -269,7 +264,8 @@ html { scroll-behavior: smooth; }
 
 <section id="about" class="about">
   <div>
-    <img src="Images/1776695215852.webp" alt="Photographer">
+    <!-- ABOUT IMAGE -->
+    <img src="Images/about.jpg" alt="Photographer Portrait">
   </div>
   <div class="glass">
     <h2>About Me</h2>
@@ -291,7 +287,7 @@ html { scroll-behavior: smooth; }
   <h2>Book a Session</h2>
   <p>Let’s create something extraordinary together.</p>
 
-  <a class="btn" href="https://wa.me/91XXXXXXXXXX">Book on WhatsApp</a>
+  <a class="btn" href="https://wa.me/919700034138">Book on WhatsApp</a>
   <a class="btn" href="https://instagram.com/yourprofile">View Instagram</a>
 </section>
 
