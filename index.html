@@ -14,7 +14,6 @@ body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #f8f9fb, #eef1f6);
   color: #111;
-  overflow-x: hidden;
 }
 
 /* NAV */
@@ -25,8 +24,8 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 20px 60px;
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.5);
   z-index: 1000;
 }
 
@@ -53,35 +52,34 @@ section {
   min-height: 100vh;
 }
 
-/* RIGHT SIDE IMAGE */
+/* IMAGE RIGHT (HALF SCREEN) */
 .hero::after {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
-  width: 60%;
+  width: 50%;
   height: 100%;
   background: url('Images/1776695215852.webp') center/cover no-repeat;
   z-index: -2;
 }
 
-/* FADE (LEFT HALF ONLY) */
+/* SUBTLE FADE ONLY (PREMIUM LOOK) */
 .hero::before {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
-  width: 60%;
+  width: 50%;
   height: 100%;
 
   background: linear-gradient(
     to left,
-    rgba(255,255,255,0) 50%,   /* clear till middle */
-    rgba(255,255,255,0.5) 75%,
-    rgba(255,255,255,1) 100%   /* full fade at left */
+    rgba(255,255,255,0) 70%,   /* almost full image clear */
+    rgba(255,255,255,0.2) 85%,
+    rgba(255,255,255,0.6) 100% /* very soft fade */
   );
 
-  backdrop-filter: blur(25px);
   z-index: -1;
 }
 
@@ -109,7 +107,6 @@ section {
   border-radius: 20px;
   padding: 20px;
   border: 1px solid rgba(255,255,255,0.3);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 /* ABOUT */
@@ -165,7 +162,6 @@ section {
   color: #fff;
 }
 
-/* SMOOTH SCROLL */
 html { scroll-behavior: smooth; }
 
 </style>
@@ -196,7 +192,7 @@ html { scroll-behavior: smooth; }
   </div>
   <div class="glass">
     <h2>About Me</h2>
-    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling. My goal is to create timeless visuals that feel authentic and emotionally rich.</p>
+    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling.</p>
   </div>
 </section>
 
@@ -209,10 +205,6 @@ html { scroll-behavior: smooth; }
     <div class="glass"><img src="4.jpg"><div class="caption">Candid emotions</div></div>
     <div class="glass"><img src="5.jpg"><div class="caption">Minimal aesthetic</div></div>
     <div class="glass"><img src="6.jpg"><div class="caption">Urban storytelling</div></div>
-    <div class="glass"><img src="7.jpg"><div class="caption">Creative composition</div></div>
-    <div class="glass"><img src="8.jpg"><div class="caption">Soft light portrait</div></div>
-    <div class="glass"><img src="9.jpg"><div class="caption">Fashion editorial vibe</div></div>
-    <div class="glass"><img src="10.jpg"><div class="caption">Luxury detail shot</div></div>
   </div>
 </section>
 
@@ -220,8 +212,8 @@ html { scroll-behavior: smooth; }
   <h2>Book a Session</h2>
   <p>Let’s create something extraordinary together.</p>
 
-  <a class="btn" href="https://wa.me/91XXXXXXXXXX" target="_blank">Book on WhatsApp</a>
-  <a class="btn" href="https://instagram.com/yourprofile" target="_blank">View Instagram</a>
+  <a class="btn" href="https://wa.me/91XXXXXXXXXX">Book on WhatsApp</a>
+  <a class="btn" href="https://instagram.com/yourprofile">View Instagram</a>
 </section>
 
 </body>
