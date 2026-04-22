@@ -3,148 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dillu Capture | Luxury Photography</title>
+<title>Dillu Capture | Cinematic Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-
 body{
-  font-family:'Montserrat',sans-serif;
+  font-family:'Inter',sans-serif;
+  background:#000;
   color:#fff;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(255,215,0,0.08), transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05), transparent 40%),
-    #000;
+  overflow-x:hidden;
 }
 
+/* Smooth scroll feel */
+html{scroll-behavior:smooth}
+
+/* Glass */
 .glass{
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(40px) saturate(180%);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:30px;
-  box-shadow:0 25px 100px rgba(0,0,0,0.9);
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(30px);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
 }
 
 header{
   position:fixed;
   width:100%;
-  top:0;
+  padding:20px 40px;
   display:flex;
   justify-content:space-between;
-  padding:20px 50px;
   z-index:1000;
 }
 
-header h1{font-family:'Playfair Display',serif;letter-spacing:2px}
+header h1{font-family:'Playfair Display';letter-spacing:2px}
 
-nav a{margin:0 15px;text-decoration:none;color:#aaa;transition:.3s}
-nav a:hover{color:gold}
+nav a{
+  margin:0 15px;
+  color:#aaa;
+  text-decoration:none;
+}
+nav a:hover{color:#fff}
 
+/* Hero */
 .hero{
-  height:85vh;
-  min-height:650px;
+  height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0 50px;
 }
 
 .hero-box{
+  width:90%;
+  max-width:1200px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  max-width:1100px;
-  width:100%;
   padding:60px;
-  gap:50px;
 }
 
 .hero-text h2{
-  font-size:52px;
-  font-family:'Playfair Display',serif;
+  font-size:60px;
+  font-family:'Playfair Display';
 }
 
-.hero-text p{margin-top:20px;color:#bbb;font-size:18px}
+.hero-text p{color:#aaa;margin-top:20px}
 
 .hero-image img{
-  width:340px;
-  height:440px;
-  object-fit:cover;
-  border-radius:25px;
-  border:2px solid rgba(255,215,0,0.7);
-  box-shadow:0 30px 80px rgba(0,0,0,0.8);
-}
-
-section{padding:160px 50px}
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
-}
-.gallery img{
-  width:100%;
-  height:450px;
+  width:400px;
+  height:520px;
   object-fit:cover;
   border-radius:20px;
-  transition:.6s;
-}
-.gallery img:hover{transform:scale(1.08)}
-
-.philosophy{
-  max-width:900px;
-  margin:auto;
-  text-align:center;
-  padding:80px;
 }
 
-.philosophy p{color:#aaa;line-height:1.9}
-
-.signature{
-  margin-top:40px;
-  font-family:'Playfair Display',serif;
-  color:gold;
-}
-
-.services{
+/* Fullscreen sections */
+.section{
+  height:100vh;
   display:flex;
+  align-items:center;
   justify-content:center;
-  gap:30px;
-  flex-wrap:wrap;
 }
 
-.service{
+.image-section{
+  background-size:cover;
+  background-position:center;
+}
+
+.overlay{
+  background:rgba(0,0,0,0.5);
   padding:40px;
-  max-width:260px;
-}
-.service h3{color:gold;margin-bottom:10px}
-
-.process{
-  max-width:900px;
-  margin:auto;
-  text-align:center;
-  padding:70px;
 }
 
-.process p{color:#aaa;margin:15px 0}
-
-.testimonials{
-  max-width:900px;
-  margin:auto;
-  text-align:center;
-  padding:70px;
+.overlay h2{
+  font-size:40px;
+  font-family:'Playfair Display';
 }
 
-.testimonials p{font-style:italic;color:#ccc;margin-bottom:20px}
+/* Portfolio grid */
+.gallery{
+  padding:100px 40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
 
+.gallery img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.gallery img:hover{transform:scale(1.05)}
+
+/* Booking */
 .contact{
-  max-width:700px;
-  margin:auto;
+  padding:120px 40px;
   text-align:center;
-  padding:70px;
 }
 
 .booking a{
@@ -153,26 +128,19 @@ section{padding:160px 50px}
   padding:15px 30px;
   border-radius:30px;
   text-decoration:none;
-  font-weight:bold;
-  transition:.4s;
 }
 
-.instagram{background:linear-gradient(45deg,#fd1d1d,#833ab4,#fcb045);color:white}
-.whatsapp{background:gold;color:black}
-
-.booking a:hover{transform:scale(1.1)}
-
-.float-btn{
-  position:fixed;
-  bottom:30px;
-  right:30px;
-  background:gold;
-  color:black;
-  padding:15px 20px;
-  border-radius:50px;
+.instagram{
+  background:linear-gradient(45deg,#fd1d1d,#833ab4,#fcb045);
+  color:#fff;
 }
 
-footer{text-align:center;padding:20px;color:#777}
+.whatsapp{
+  background:#fff;
+  color:#000;
+}
+
+footer{text-align:center;padding:30px;color:#666}
 
 </style>
 </head>
@@ -180,21 +148,20 @@ footer{text-align:center;padding:20px;color:#777}
 <body>
 
 <header class="glass">
-  <h1>DILLU CAPTURE</h1>
+  <h1>DILLU</h1>
   <nav>
     <a href="#home">Home</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#philosophy">Vision</a>
+    <a href="#work">Work</a>
     <a href="#contact">Book</a>
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="glass hero-box">
     <div class="hero-text">
-      <h2>Dillu Capture</h2>
-      <p>Luxury Photography • Cinematic Storytelling</p>
-      <div class="signature">Minimal • Elegant • Timeless</div>
+      <h2>Cinematic Frames</h2>
+      <p>Luxury Photography Experience</p>
     </div>
     <div class="hero-image">
       <img src="images/profile.jpg">
@@ -202,65 +169,43 @@ footer{text-align:center;padding:20px;color:#777}
   </div>
 </section>
 
-<section id="portfolio">
-  <h2 style="text-align:center;margin-bottom:60px">Selected Work</h2>
-  <div class="gallery">
-    <img src="images/img1.jpg">
-    <img src="images/img2.jpg">
-    <img src="images/img3.jpg">
-    <img src="images/img4.jpg">
-    <img src="images/img5.jpg">
-    <img src="images/img6.jpg">
+<!-- FULLSCREEN SCROLL SECTIONS -->
+<section class="section image-section" style="background-image:url('images/img1.jpg')">
+  <div class="overlay glass">
+    <h2>Emotion</h2>
   </div>
 </section>
 
-<section class="philosophy glass" id="philosophy">
-  <h2>Vision</h2>
-  <p>
-    My work is built on simplicity, emotion, and refined storytelling. Every frame is designed to feel cinematic, minimal, and timeless — creating visuals that stay elegant for years.
-  </p>
-</section>
-
-<section class="services">
-  <div class="service glass">
-    <h3>Weddings</h3>
-    <p>Luxury storytelling experience</p>
-  </div>
-  <div class="service glass">
-    <h3>Portraits</h3>
-    <p>Clean and powerful identity</p>
-  </div>
-  <div class="service glass">
-    <h3>Cinematic</h3>
-    <p>Film-inspired visual art</p>
+<section class="section image-section" style="background-image:url('images/img2.jpg')">
+  <div class="overlay glass">
+    <h2>Luxury</h2>
   </div>
 </section>
 
-<section class="process glass">
-  <h2>Experience</h2>
-  <p>Consultation → Creative Direction → Shoot → Premium Delivery</p>
-  <p>Every step is crafted to feel smooth, premium, and effortless.</p>
+<section class="section image-section" style="background-image:url('images/img3.jpg')">
+  <div class="overlay glass">
+    <h2>Timeless</h2>
+  </div>
 </section>
 
-<section class="testimonials glass">
-  <p>“Feels like a movie scene. Truly premium.”</p>
-  <p>“Minimal, elegant and powerful visuals.”</p>
+<!-- GRID -->
+<section id="work" class="gallery">
+  <img src="images/img4.jpg">
+  <img src="images/img5.jpg">
+  <img src="images/img6.jpg">
 </section>
 
-<section class="contact glass" id="contact">
-  <h2>Book Your Experience</h2>
-  <p>Connect via Instagram or WhatsApp</p>
-
+<!-- BOOK -->
+<section class="contact" id="contact">
+  <h2>Book Your Shoot</h2>
   <div class="booking">
     <a class="instagram" href="https://instagram.com/yourusername" target="_blank">Instagram</a>
     <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp</a>
   </div>
 </section>
 
-<a href="https://wa.me/91XXXXXXXXXX" class="float-btn" target="_blank">WhatsApp</a>
-
 <footer>
-  <p>© 2026 Dillu Capture | Luxury Photography</p>
+  <p>© 2026 Dillu Capture</p>
 </footer>
 
 </body>
