@@ -11,7 +11,48 @@
 
 <style>
 
-/* THEME */
+/* ================= INTRO SCREEN ================= */
+.intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.intro-text {
+  text-align: center;
+  font-family: 'Playfair Display';
+  font-size: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: introText 1.5s ease forwards;
+}
+
+@keyframes introText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro.hide {
+  animation: introHide 1.2s ease forwards;
+}
+
+@keyframes introHide {
+  to {
+    opacity: 0;
+    transform: scale(1.05);
+    visibility: hidden;
+  }
+}
+
+/* ================= THEME ================= */
 :root {
   --bg: #ffffff;
   --text: #111;
@@ -24,15 +65,13 @@ body.dark {
   --glass: rgba(255,255,255,0.08);
 }
 
-/* RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: 0.5s ease;
-  overflow-x: hidden;
+  transition: 0.5s;
 }
 
 /* NAV */
@@ -46,47 +85,6 @@ header {
   backdrop-filter: blur(20px);
   background: var(--glass);
   z-index: 1000;
-}
-
-header h1 {
-  font-family: 'Playfair Display';
-}
-
-nav {
-  display: flex;
-  align-items: center;
-}
-
-nav a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: var(--text);
-  position: relative;
-}
-
-nav a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 1px;
-  bottom: -5px;
-  left: 0;
-  background: var(--text);
-  transition: 0.3s;
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-.toggle {
-  margin-left: 20px;
-  cursor: pointer;
-}
-
-/* SECTIONS */
-section {
-  padding: 120px 60px;
 }
 
 /* HERO */
@@ -104,125 +102,20 @@ section {
   width: 50%;
   height: 100%;
   background: url('Images/1776695215852.webp') center/cover no-repeat;
-  z-index: -2;
-  transition: transform 1.5s ease;
 }
 
-.hero:hover::after {
-  transform: scale(1.08);
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: radial-gradient(circle at 70% 50%,
-    rgba(255,255,255,0) 30%,
-    rgba(255,255,255,0.3) 55%,
-    rgba(255,255,255,1) 100%);
-}
-
+/* TEXT */
 .hero-text {
   max-width: 500px;
   animation: fadeUp 1.2s ease;
 }
 
-.hero-text h2 {
-  font-size: 52px;
-  font-family: 'Playfair Display';
-}
-
-.hero-text p {
-  opacity: 0.7;
-}
-
-/* GLASS */
-.glass {
-  background: var(--glass);
-  backdrop-filter: blur(25px);
-  border-radius: 20px;
-  padding: 25px;
-  transition: 0.4s;
-}
-
-.glass:hover {
-  transform: translateY(-8px);
-}
-
-/* ABOUT */
-.about {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 50px;
-}
-
-.about img {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-  border-radius: 20px;
-  transition: 0.5s;
-}
-
-.about img:hover {
-  transform: scale(1.05);
-}
-
-/* GALLERY */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 25px;
-}
-
-.gallery img {
-  width: 100%;
-  border-radius: 15px;
-  transition: 0.5s;
-}
-
-.gallery img:hover {
-  transform: scale(1.05);
-}
-
-/* BUTTON */
-.btn {
-  padding: 12px 28px;
-  border-radius: 30px;
-  background: var(--glass);
-  color: var(--text);
-  text-decoration: none;
-  transition: 0.4s;
-}
-
-.btn:hover {
-  background: #111;
-  color: #fff;
-}
-
-/* ANIMATIONS */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {opacity:0; transform:translateY(40px);}
+  to {opacity:1; transform:translateY(0);}
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: 1s ease;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =====================
-   LUXURY CURSOR
-===================== */
-
+/* CURSOR */
 .cursor {
   position: fixed;
   width: 18px;
@@ -231,63 +124,60 @@ section {
   background: rgba(0,0,0,0.6);
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, width 0.3s, height 0.3s, background 0.3s;
   z-index: 9999;
 }
 
 .cursor.glow {
   width: 60px;
   height: 60px;
-  background: rgba(0,0,0,0.08);
-  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.1);
 }
 
-body.dark .cursor {
-  background: rgba(255,255,255,0.7);
+@media (max-width:768px){
+  .cursor{display:none;}
 }
 
-body.dark .cursor.glow {
-  background: rgba(255,255,255,0.15);
+/* SECTIONS */
+section {
+  padding: 120px 60px;
 }
 
-@media (min-width: 769px) {
-  body { cursor: none; }
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
 }
 
-@media (max-width: 768px) {
-  .cursor { display: none; }
+.about img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.btn {
+  padding: 12px 25px;
+  background: var(--glass);
+  border-radius: 30px;
+  text-decoration: none;
+  color: var(--text);
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-
-  header { padding: 15px 20px; }
-
-  section { padding: 100px 20px; }
-
-  .hero { flex-direction: column; text-align: center; }
-
-  .hero::after {
-    width: 100%;
-    height: 50%;
-  }
-
-  .hero::before {
-    width: 100%;
-    height: 50%;
-  }
-
-  .hero-text {
-    margin-top: 55vh;
-  }
-
-  .hero-text h2 {
-    font-size: 34px;
-  }
-
-  .about {
-    grid-template-columns: 1fr;
-  }
+@media(max-width:768px){
+  .hero {flex-direction:column; text-align:center;}
+  .hero::after {width:100%; height:50%;}
+  .hero-text {margin-top:55vh;}
+  .about {grid-template-columns:1fr;}
 }
 
 </style>
@@ -295,36 +185,37 @@ body.dark .cursor.glow {
 
 <body>
 
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <div class="intro-text">
+    Dillu Captures
+  </div>
+</div>
+
 <!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 
 <header>
   <h1>Dillu_Captures</h1>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#gallery">Gallery</a>
-    <span class="toggle" onclick="toggleTheme()">🌙</span>
-  </nav>
 </header>
 
-<section id="home" class="hero">
+<section class="hero">
   <div class="hero-text">
     <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion and elegance.</p>
+    <p>Luxury photography crafted with emotion.</p>
   </div>
 </section>
 
-<section id="about" class="about reveal">
+<section class="about">
   <img src="Images/IMG_1164.webp">
-  <div class="glass">
+  <div>
     <h2>About Me</h2>
-    <p>I create cinematic visuals that feel timeless and emotional.</p>
+    <p>Cinematic storytelling through photography.</p>
   </div>
 </section>
 
-<section id="gallery" class="reveal">
-  <h2 style="margin-bottom:30px">Gallery</h2>
+<section>
+  <h2>Gallery</h2>
   <div class="gallery">
     <img src="1.jpg">
     <img src="2.jpg">
@@ -333,29 +224,21 @@ body.dark .cursor.glow {
   </div>
 </section>
 
-<section class="contact reveal">
-  <h2>Book a Session</h2>
-  <br>
+<section>
+  <h2>Contact</h2>
   <a class="btn" href="https://wa.me/919700034138">WhatsApp</a>
 </section>
 
 <script>
 
-// THEME TOGGLE
-function toggleTheme() {
-  document.body.classList.toggle("dark");
-}
-
-// SCROLL REVEAL
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".reveal").forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-      el.classList.add("active");
-    }
-  });
+/* INTRO TIMELINE */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("intro").classList.add("hide");
+  }, 2000);
 });
 
-// CURSOR
+/* CURSOR */
 const cursor = document.getElementById("cursor");
 
 document.addEventListener("mousemove", (e) => {
@@ -363,7 +246,7 @@ document.addEventListener("mousemove", (e) => {
   cursor.style.top = e.clientY + "px";
 });
 
-document.querySelectorAll("a, .btn, img, .glass").forEach(el => {
+document.querySelectorAll("a, img").forEach(el => {
   el.addEventListener("mouseenter", () => cursor.classList.add("glow"));
   el.addEventListener("mouseleave", () => cursor.classList.remove("glow"));
 });
