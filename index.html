@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- 🔥 FORCE LIGHT MODE SUPPORT -->
 <meta name="color-scheme" content="light dark">
 
 <title>Dillu Captures</title>
@@ -13,6 +11,7 @@
 
 <style>
 
+/* THEME */
 :root {
   --bg: #ffffff;
   --text: #111;
@@ -25,13 +24,15 @@ body.dark {
   --glass: rgba(255,255,255,0.08);
 }
 
+/* RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: 0.4s ease;
+  transition: background 0.6s ease, color 0.6s ease;
+  overflow-x: hidden;
 }
 
 /* NAV */
@@ -42,35 +43,53 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 20px 60px;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   background: var(--glass);
   z-index: 1000;
+  transition: 0.4s ease;
 }
 
 header h1 {
   font-family: 'Playfair Display';
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 nav a {
   margin-left: 25px;
   text-decoration: none;
   color: var(--text);
+  position: relative;
 }
 
-/* TOGGLE BUTTON */
+/* underline animation */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 1px;
+  background: var(--text);
+  transition: 0.4s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* toggle */
 .toggle {
   margin-left: 20px;
   cursor: pointer;
-  font-size: 14px;
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
 }
 
 /* SECTIONS */
 section {
   padding: 120px 60px;
-  position: relative;
 }
 
 /* HERO */
@@ -78,49 +97,50 @@ section {
   display: flex;
   align-items: center;
   min-height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
 
-/* IMAGE RIGHT */
+/* IMAGE */
 .hero::after {
   content: "";
   position: absolute;
-  top: 0;
   right: 0;
   width: 50%;
   height: 100%;
   background: url('Images/1776695215852.webp') center/cover no-repeat;
   z-index: -2;
+  transform: scale(1.05);
+  transition: transform 1.5s ease;
+}
+
+/* PARALLAX HOVER */
+.hero:hover::after {
+  transform: scale(1.1);
 }
 
 /* FADE */
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
   right: 0;
   width: 50%;
   height: 100%;
-
   background:
     radial-gradient(circle at 70% 50%,
     rgba(255,255,255,0) 30%,
     rgba(255,255,255,0.3) 55%,
-    rgba(255,255,255,0.8) 80%,
-    rgba(255,255,255,1) 100%),
-    linear-gradient(to top,
-    rgba(255,255,255,1) 0%,
-    rgba(255,255,255,1) 10%,
-    rgba(255,255,255,0.6) 20%,
-    rgba(255,255,255,0) 35%);
+    rgba(255,255,255,1) 100%);
 }
 
 /* TEXT */
 .hero-text {
   max-width: 500px;
+  animation: fadeUp 1.2s ease;
 }
 
 .hero-text h2 {
-  font-size: 48px;
+  font-size: 52px;
   font-family: 'Playfair Display';
   margin-bottom: 20px;
 }
@@ -132,16 +152,24 @@ section {
 /* GLASS */
 .glass {
   background: var(--glass);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px);
   border-radius: 20px;
-  padding: 20px;
+  padding: 25px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* HOVER LIFT */
+.glass:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
 /* ABOUT */
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 50px;
+  align-items: center;
 }
 
 .about img {
@@ -149,6 +177,11 @@ section {
   height: 420px;
   object-fit: cover;
   border-radius: 20px;
+  transition: transform 0.6s ease;
+}
+
+.about img:hover {
+  transform: scale(1.05);
 }
 
 /* GALLERY */
@@ -161,21 +194,49 @@ section {
 .gallery img {
   width: 100%;
   border-radius: 15px;
+  transition: 0.6s ease;
 }
 
-/* CONTACT */
-.contact {
-  text-align: center;
+.gallery img:hover {
+  transform: scale(1.05);
 }
 
+/* BUTTON */
 .btn {
-  display: inline-block;
-  margin: 10px;
-  padding: 12px 25px;
+  padding: 12px 28px;
   border-radius: 30px;
   background: var(--glass);
-  color: var(--text);
   text-decoration: none;
+  color: var(--text);
+  transition: 0.4s;
+}
+
+.btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* MOBILE */
@@ -202,11 +263,6 @@ section {
   .hero::before {
     width: 100%;
     height: 50%;
-    background: linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.2),
-      rgba(255,255,255,1)
-    );
   }
 
   .hero-text {
@@ -214,13 +270,12 @@ section {
   }
 
   .hero-text h2 {
-    font-size: 32px;
+    font-size: 34px;
   }
 
   .about {
     grid-template-columns: 1fr;
   }
-
 }
 
 </style>
@@ -234,9 +289,7 @@ section {
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
 
-    <!-- TOGGLE -->
     <span class="toggle" onclick="toggleTheme()">🌙</span>
   </nav>
 </header>
@@ -244,19 +297,19 @@ section {
 <section id="home" class="hero">
   <div class="hero-text">
     <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion, elegance, and storytelling.</p>
+    <p>Luxury photography crafted with emotion and elegance.</p>
   </div>
 </section>
 
-<section id="about" class="about">
+<section id="about" class="about reveal">
   <img src="Images/IMG_1164.webp">
   <div class="glass">
     <h2>About Me</h2>
-    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling.</p>
+    <p>I create cinematic visuals that feel timeless and emotional.</p>
   </div>
 </section>
 
-<section id="gallery">
+<section id="gallery" class="reveal">
   <h2 style="margin-bottom:30px">Gallery</h2>
   <div class="gallery">
     <img src="1.jpg">
@@ -266,20 +319,29 @@ section {
   </div>
 </section>
 
-<section class="contact">
+<section class="contact reveal">
   <h2>Book a Session</h2>
+  <br>
   <a class="btn" href="https://wa.me/919700034138">WhatsApp</a>
-  <a class="btn" href="#">Instagram</a>
 </section>
 
 <script>
-// FORCE LIGHT MODE FIRST (fix mobile issue)
-document.body.classList.remove("dark");
 
-// TOGGLE
+// THEME
 function toggleTheme() {
   document.body.classList.toggle("dark");
 }
+
+// SCROLL REVEAL (APPLE STYLE)
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".reveal").forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+});
+
 </script>
 
 </body>
