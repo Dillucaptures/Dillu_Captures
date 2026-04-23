@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
 
 <title>Dillu Captures</title>
 
@@ -11,7 +10,7 @@
 
 <style>
 
-/* ================= THEME ================= */
+/* THEME */
 :root {
   --bg: #ffffff;
   --text: #111;
@@ -24,202 +23,115 @@ body.dark {
   --glass: rgba(255,255,255,0.08);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
 body {
-  font-family: 'Inter', sans-serif;
+  margin:0;
+  font-family: 'Inter';
   background: var(--bg);
   color: var(--text);
-  transition: 0.4s ease;
+  transition: .3s;
 }
 
-/* ================= INTRO ================= */
-.intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: var(--bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.intro-text {
-  font-family: 'Playfair Display';
-  font-size: 42px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: introText 1.5s ease forwards;
-}
-
-@keyframes introText {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.intro.hide {
-  animation: fadeOut 1.2s ease forwards;
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
-
-/* ================= NAV ================= */
+/* NAV */
 header {
   position: fixed;
-  width: 100%;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 60px;
-  backdrop-filter: blur(20px);
+  width:100%;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  padding:20px 60px;
+  backdrop-filter: blur(15px);
   background: var(--glass);
-  z-index: 1000;
-}
-
-header h1 {
-  font-family: 'Playfair Display';
 }
 
 nav a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: var(--text);
-  font-size: 14px;
-  position: relative;
+  margin-left:20px;
+  text-decoration:none;
+  color:var(--text);
 }
 
-nav a::after {
-  content: "";
-  width: 0;
-  height: 1px;
-  background: var(--text);
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  transition: 0.3s;
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-.toggle {
-  margin-left: 25px;
-  cursor: pointer;
-}
-
-/* ================= HERO ================= */
+/* HERO */
 .hero {
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-  padding: 120px 60px;
-  position: relative;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  padding:120px 60px;
+  position:relative;
 }
 
 .hero::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: url('Images/1776695215852.webp') center/cover no-repeat;
+  content:"";
+  position:absolute;
+  right:0;
+  width:50%;
+  height:100%;
+  background:url('Images/1776695215852.webp') center/cover;
 }
 
-.hero-text {
-  max-width: 500px;
-  animation: fadeUp 1.2s ease;
+/* SECTIONS */
+section { padding:100px 60px; }
+
+/* CALENDAR */
+.calendar {
+  max-width:400px;
+  margin:auto;
+  text-align:center;
 }
 
-.hero-text h2 {
-  font-family: 'Playfair Display';
-  font-size: 48px;
+.days {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:10px;
+  margin-top:20px;
 }
 
-@keyframes fadeUp {
-  from {opacity:0; transform:translateY(40px);}
-  to {opacity:1; transform:translateY(0);}
+.day {
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+  background:var(--glass);
 }
 
-/* ================= SECTIONS ================= */
-section {
-  padding: 120px 60px;
+.day:hover {
+  background:#111;
+  color:#fff;
 }
 
-.about {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+/* SLOTS */
+.slots {
+  margin-top:20px;
 }
 
-.about img {
-  width: 100%;
-  border-radius: 20px;
+.slot {
+  padding:10px;
+  margin:8px;
+  border-radius:20px;
+  background:var(--glass);
+  cursor:pointer;
+  display:inline-block;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 25px;
+.slot:hover {
+  background:#111;
+  color:#fff;
 }
 
-.gallery img {
-  width: 100%;
-  border-radius: 15px;
-}
-
-/* ================= BUTTONS ================= */
+/* BUTTON */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  border-radius: 30px;
-  background: var(--glass);
-  text-decoration: none;
-  color: var(--text);
-  transition: 0.3s;
-  margin: 10px;
+  display:inline-block;
+  padding:12px 25px;
+  background:var(--glass);
+  border-radius:30px;
+  text-decoration:none;
+  color:var(--text);
+  margin-top:20px;
 }
 
-.btn svg {
-  width: 18px;
-  height: 18px;
-}
-
-.btn:hover {
-  background: #111;
-  color: #fff;
-}
-
-/* ================= MOBILE ================= */
+/* MOBILE */
 @media(max-width:768px){
-
-  header { padding: 15px 20px; }
-
-  nav a { margin-left: 15px; }
-
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 100px 20px;
-  }
-
-  .hero::after {
-    width: 100%;
-    height: 50%;
-  }
-
-  .hero-text { margin-top: 55vh; }
-
-  .about { grid-template-columns: 1fr; }
-
-  section { padding: 100px 20px; }
+  header { padding:15px 20px; }
+  section { padding:80px 20px; }
+  .hero { flex-direction:column; }
+  .hero::after { width:100%; height:50%; }
 }
 
 </style>
@@ -227,91 +139,80 @@ section {
 
 <body>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-  <div class="intro-text">Dillu Captures</div>
-</div>
-
 <header>
-  <h1>Dillu Captures</h1>
+  <h2>Dillu_Captures</h2>
   <nav>
     <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#gallery">Gallery</a>
+    <a href="#booking">Booking</a>
     <a href="#contact">Contact</a>
-    <span class="toggle" onclick="toggleTheme()">☾</span>
+    <span onclick="toggleTheme()" style="cursor:pointer;">☾</span>
   </nav>
 </header>
 
 <section class="hero">
-  <div class="hero-text">
-    <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion.</p>
-  </div>
-</section>
-
-<section id="about" class="about">
-  <img src="Images/IMG_1164.webp">
   <div>
-    <h2>About Me</h2>
-    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling.</p>
+    <h1 style="font-family:Playfair Display;">Luxury Photography</h1>
+    <p>Book your shoot in seconds</p>
   </div>
 </section>
 
-<section id="gallery">
-  <h2 style="margin-bottom:30px">Gallery</h2>
-  <div class="gallery">
-    <img src="1.jpg">
-    <img src="2.jpg">
-    <img src="3.jpg">
-    <img src="4.jpg">
+<!-- BOOKING -->
+<section id="booking">
+  <h2 style="text-align:center;">Select Your Date</h2>
+
+  <div class="calendar">
+    <div class="days" id="days"></div>
+
+    <div class="slots" id="slots"></div>
   </div>
 </section>
 
-<!-- ================= CONTACT ================= -->
-<section id="contact">
-  <h2>Book a Slot</h2>
-  <p>Choose your preferred platform to connect and book your shoot.</p>
-
-  <!-- WhatsApp -->
-  <a class="btn" href="https://wa.me/919700034138" target="_blank">
-    <!-- WhatsApp SVG -->
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20 4a10 10 0 00-17 10l-1 4 4-1a10 10 0 0014-13z"/>
-    </svg>
-    WhatsApp Booking
-  </a>
-
-  <!-- Instagram -->
-  <a class="btn" href="https://www.instagram.com/dillu_captures/" target="_blank">
-    <!-- Instagram SVG -->
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-1.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
-    </svg>
-    Instagram Booking
-  </a>
-
+<!-- CONTACT -->
+<section id="contact" style="text-align:center;">
+  <h2>Contact</h2>
+  <a class="btn" href="https://instagram.com">Instagram</a>
 </section>
 
 <script>
 
-/* INTRO */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.getElementById("intro").classList.add("hide");
-  }, 1800);
-});
-
 /* THEME */
-function toggleTheme() {
+function toggleTheme(){
   document.body.classList.toggle("dark");
-  localStorage.setItem("theme",
-    document.body.classList.contains("dark") ? "dark" : "light"
-  );
 }
 
-if(localStorage.getItem("theme") === "dark"){
-  document.body.classList.add("dark");
+/* CALENDAR GENERATE */
+const daysContainer = document.getElementById("days");
+const slotsContainer = document.getElementById("slots");
+
+for(let i=1;i<=30;i++){
+  const day = document.createElement("div");
+  day.className="day";
+  day.innerText=i;
+
+  day.onclick = () => showSlots(i);
+  daysContainer.appendChild(day);
+}
+
+/* SLOTS */
+function showSlots(date){
+  slotsContainer.innerHTML="";
+
+  const times = ["10:00 AM","12:00 PM","3:00 PM","6:00 PM"];
+
+  times.forEach(time=>{
+    const slot = document.createElement("div");
+    slot.className="slot";
+    slot.innerText=time;
+
+    slot.onclick = () => book(date,time);
+    slotsContainer.appendChild(slot);
+  });
+}
+
+/* BOOK */
+function book(date,time){
+  const msg = `Hi, I want to book a shoot on ${date} at ${time}`;
+  window.open(`https://wa.me/919700034138?text=${encodeURIComponent(msg)}`);
 }
 
 </script>
