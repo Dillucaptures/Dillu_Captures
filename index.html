@@ -268,31 +268,40 @@ section {
   </div>
 </section>
 
-<!-- ================= CONTACT ================= -->
+<!-- ADD THIS INSIDE YOUR CONTACT SECTION (replace existing buttons section) -->
+
 <section id="contact">
   <h2>Book a Slot</h2>
-  <p>Choose your preferred platform to connect and book your shoot.</p>
+  <p>Select your preferred date and time</p>
 
-  <!-- WhatsApp -->
-  <a class="btn" href="https://wa.me/919700034138" target="_blank">
-    <!-- WhatsApp SVG -->
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20 4a10 10 0 00-17 10l-1 4 4-1a10 10 0 0014-13z"/>
-    </svg>
-    WhatsApp Booking
-  </a>
+  <div class="booking-box">
+
+    <!-- DATE -->
+    <input type="date" id="date" class="input">
+
+    <!-- TIME -->
+    <select id="time" class="input">
+      <option value="">Select Time</option>
+      <option>10:00 AM</option>
+      <option>12:00 PM</option>
+      <option>2:00 PM</option>
+      <option>4:00 PM</option>
+      <option>6:00 PM</option>
+    </select>
+
+    <!-- BUTTON -->
+    <button class="btn" onclick="bookSlot()">Book via WhatsApp</button>
+
+  </div>
+
+  <br>
 
   <!-- Instagram -->
-  <a class="btn" href="https://instagram.com/yourprofile" target="_blank">
-    <!-- Instagram SVG -->
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-1.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
-    </svg>
+  <a class="btn" href="https://instagram.com/dillu_captures" target="_blank">
     Instagram Booking
   </a>
 
 </section>
-
 <script>
 
 /* INTRO */
