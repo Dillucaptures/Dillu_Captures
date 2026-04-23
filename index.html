@@ -31,7 +31,7 @@ body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: background 0.6s ease, color 0.6s ease;
+  transition: 0.5s ease;
   overflow-x: hidden;
 }
 
@@ -46,7 +46,6 @@ header {
   backdrop-filter: blur(20px);
   background: var(--glass);
   z-index: 1000;
-  transition: 0.4s ease;
 }
 
 header h1 {
@@ -65,23 +64,21 @@ nav a {
   position: relative;
 }
 
-/* underline animation */
 nav a::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -5px;
   width: 0%;
   height: 1px;
+  bottom: -5px;
+  left: 0;
   background: var(--text);
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 nav a:hover::after {
   width: 100%;
 }
 
-/* toggle */
 .toggle {
   margin-left: 20px;
   cursor: pointer;
@@ -98,10 +95,8 @@ section {
   align-items: center;
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
 }
 
-/* IMAGE */
 .hero::after {
   content: "";
   position: absolute;
@@ -110,30 +105,25 @@ section {
   height: 100%;
   background: url('Images/1776695215852.webp') center/cover no-repeat;
   z-index: -2;
-  transform: scale(1.05);
   transition: transform 1.5s ease;
 }
 
-/* PARALLAX HOVER */
 .hero:hover::after {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
-/* FADE */
 .hero::before {
   content: "";
   position: absolute;
   right: 0;
   width: 50%;
   height: 100%;
-  background:
-    radial-gradient(circle at 70% 50%,
+  background: radial-gradient(circle at 70% 50%,
     rgba(255,255,255,0) 30%,
     rgba(255,255,255,0.3) 55%,
     rgba(255,255,255,1) 100%);
 }
 
-/* TEXT */
 .hero-text {
   max-width: 500px;
   animation: fadeUp 1.2s ease;
@@ -142,7 +132,6 @@ section {
 .hero-text h2 {
   font-size: 52px;
   font-family: 'Playfair Display';
-  margin-bottom: 20px;
 }
 
 .hero-text p {
@@ -155,13 +144,11 @@ section {
   backdrop-filter: blur(25px);
   border-radius: 20px;
   padding: 25px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: 0.4s;
 }
 
-/* HOVER LIFT */
 .glass:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
 /* ABOUT */
@@ -169,7 +156,6 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 50px;
-  align-items: center;
 }
 
 .about img {
@@ -177,7 +163,7 @@ section {
   height: 420px;
   object-fit: cover;
   border-radius: 20px;
-  transition: transform 0.6s ease;
+  transition: 0.5s;
 }
 
 .about img:hover {
@@ -194,7 +180,7 @@ section {
 .gallery img {
   width: 100%;
   border-radius: 15px;
-  transition: 0.6s ease;
+  transition: 0.5s;
 }
 
 .gallery img:hover {
@@ -206,8 +192,8 @@ section {
   padding: 12px 28px;
   border-radius: 30px;
   background: var(--glass);
-  text-decoration: none;
   color: var(--text);
+  text-decoration: none;
   transition: 0.4s;
 }
 
@@ -218,14 +204,8 @@ section {
 
 /* ANIMATIONS */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .reveal {
@@ -239,21 +219,53 @@ section {
   transform: translateY(0);
 }
 
+/* =====================
+   LUXURY CURSOR
+===================== */
+
+.cursor {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s, background 0.3s;
+  z-index: 9999;
+}
+
+.cursor.glow {
+  width: 60px;
+  height: 60px;
+  background: rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+}
+
+body.dark .cursor {
+  background: rgba(255,255,255,0.7);
+}
+
+body.dark .cursor.glow {
+  background: rgba(255,255,255,0.15);
+}
+
+@media (min-width: 769px) {
+  body { cursor: none; }
+}
+
+@media (max-width: 768px) {
+  .cursor { display: none; }
+}
+
 /* MOBILE */
 @media (max-width: 768px) {
 
-  header {
-    padding: 15px 20px;
-  }
+  header { padding: 15px 20px; }
 
-  section {
-    padding: 100px 20px;
-  }
+  section { padding: 100px 20px; }
 
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
+  .hero { flex-direction: column; text-align: center; }
 
   .hero::after {
     width: 100%;
@@ -283,13 +295,15 @@ section {
 
 <body>
 
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+
 <header>
   <h1>Dillu_Captures</h1>
   <nav>
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
-
     <span class="toggle" onclick="toggleTheme()">🌙</span>
   </nav>
 </header>
@@ -327,19 +341,31 @@ section {
 
 <script>
 
-// THEME
+// THEME TOGGLE
 function toggleTheme() {
   document.body.classList.toggle("dark");
 }
 
-// SCROLL REVEAL (APPLE STYLE)
+// SCROLL REVEAL
 window.addEventListener("scroll", () => {
   document.querySelectorAll(".reveal").forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
       el.classList.add("active");
     }
   });
+});
+
+// CURSOR
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+
+document.querySelectorAll("a, .btn, img, .glass").forEach(el => {
+  el.addEventListener("mouseenter", () => cursor.classList.add("glow"));
+  el.addEventListener("mouseleave", () => cursor.classList.remove("glow"));
 });
 
 </script>
