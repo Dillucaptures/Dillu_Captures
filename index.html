@@ -24,15 +24,9 @@ body.dark {
   --glass: rgba(255,255,255,0.08);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', sans-serif;
@@ -114,11 +108,9 @@ nav a:hover::after {
   width: 100%;
 }
 
-/* THEME BUTTON */
 .toggle {
   margin-left: 25px;
   cursor: pointer;
-  font-size: 18px;
 }
 
 /* ================= HERO ================= */
@@ -139,7 +131,6 @@ nav a:hover::after {
   background: url('Images/1776695215852.webp') center/cover no-repeat;
 }
 
-/* TEXT */
 .hero-text {
   max-width: 500px;
   animation: fadeUp 1.2s ease;
@@ -148,11 +139,6 @@ nav a:hover::after {
 .hero-text h2 {
   font-family: 'Playfair Display';
   font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.hero-text p {
-  opacity: 0.7;
 }
 
 @keyframes fadeUp {
@@ -169,17 +155,11 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: center;
 }
 
 .about img {
   width: 100%;
   border-radius: 20px;
-  transition: 0.4s;
-}
-
-.about img:hover {
-  transform: scale(1.03);
 }
 
 .gallery {
@@ -191,22 +171,25 @@ section {
 .gallery img {
   width: 100%;
   border-radius: 15px;
-  transition: 0.4s;
 }
 
-.gallery img:hover {
-  transform: scale(1.05);
-}
-
-/* BUTTON */
+/* ================= BUTTONS ================= */
 .btn {
-  display: inline-block;
-  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
   border-radius: 30px;
   background: var(--glass);
   text-decoration: none;
   color: var(--text);
   transition: 0.3s;
+  margin: 10px;
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 .btn:hover {
@@ -217,14 +200,9 @@ section {
 /* ================= MOBILE ================= */
 @media(max-width:768px){
 
-  header {
-    padding: 15px 20px;
-  }
+  header { padding: 15px 20px; }
 
-  nav a {
-    margin-left: 15px;
-    font-size: 13px;
-  }
+  nav a { margin-left: 15px; }
 
   .hero {
     flex-direction: column;
@@ -235,24 +213,13 @@ section {
   .hero::after {
     width: 100%;
     height: 50%;
-    top: 0;
   }
 
-  .hero-text {
-    margin-top: 55vh;
-  }
+  .hero-text { margin-top: 55vh; }
 
-  .hero-text h2 {
-    font-size: 32px;
-  }
+  .about { grid-template-columns: 1fr; }
 
-  .about {
-    grid-template-columns: 1fr;
-  }
-
-  section {
-    padding: 100px 20px;
-  }
+  section { padding: 100px 20px; }
 }
 
 </style>
@@ -265,10 +232,8 @@ section {
   <div class="intro-text">Dillu Captures</div>
 </div>
 
-<!-- NAV -->
 <header>
   <h1>Dillu_Captures</h1>
-
   <nav>
     <a href="#">Home</a>
     <a href="#about">About</a>
@@ -278,15 +243,13 @@ section {
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-text">
     <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion, elegance, and storytelling.</p>
+    <p>Luxury photography crafted with emotion.</p>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="about">
   <img src="Images/IMG_1164.webp">
   <div>
@@ -295,7 +258,6 @@ section {
   </div>
 </section>
 
-<!-- GALLERY -->
 <section id="gallery">
   <h2 style="margin-bottom:30px">Gallery</h2>
   <div class="gallery">
@@ -306,11 +268,29 @@ section {
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 <section id="contact">
-  <h2>Contact</h2>
-  <br>
-  <a class="btn" href="https://wa.me/919700034138">WhatsApp</a>
+  <h2>Book a Slot</h2>
+  <p>Choose your preferred platform to connect and book your shoot.</p>
+
+  <!-- WhatsApp -->
+  <a class="btn" href="https://wa.me/919700034138" target="_blank">
+    <!-- WhatsApp SVG -->
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20 4a10 10 0 00-17 10l-1 4 4-1a10 10 0 0014-13z"/>
+    </svg>
+    WhatsApp Booking
+  </a>
+
+  <!-- Instagram -->
+  <a class="btn" href="https://instagram.com/yourprofile" target="_blank">
+    <!-- Instagram SVG -->
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-1.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+    </svg>
+    Instagram Booking
+  </a>
+
 </section>
 
 <script>
@@ -322,7 +302,7 @@ window.addEventListener("load", () => {
   }, 1800);
 });
 
-/* THEME TOGGLE (FIXED FOR MOBILE) */
+/* THEME */
 function toggleTheme() {
   document.body.classList.toggle("dark");
   localStorage.setItem("theme",
@@ -330,7 +310,6 @@ function toggleTheme() {
   );
 }
 
-/* LOAD SAVED THEME */
 if(localStorage.getItem("theme") === "dark"){
   document.body.classList.add("dark");
 }
