@@ -84,7 +84,41 @@ nav a {
   font-size:14px;
 }
 
-.toggle { cursor:pointer; margin-left:20px; }
+/* ===== TOGGLE SWITCH (ONLY ADDITION) ===== */
+.theme-toggle {
+  width:52px;
+  height:26px;
+  margin-left:20px;
+  border-radius:30px;
+  background:var(--glass);
+  position:relative;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  vertical-align:middle;
+}
+
+.toggle-circle {
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#111;
+  position:absolute;
+  left:3px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:11px;
+  color:#fff;
+  transition:0.3s ease;
+}
+
+/* DARK MODE POSITION */
+body.dark .toggle-circle {
+  left:29px;
+  background:#fff;
+  color:#111;
+}
 
 /* HERO */
 .hero {
@@ -151,85 +185,20 @@ section { padding:120px 60px; }
   margin:10px;
 }
 
-/* ================= PRO CALENDAR ================= */
-.calendar {
-  max-width:420px;
-  margin:40px auto 0;
-  text-align:center;
-}
-
-.calendar-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.calendar-header button {
-  background:var(--glass);
-  border:none;
-  padding:8px 14px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.weekdays {
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  margin-top:15px;
-  font-size:12px;
-  opacity:0.6;
-}
-
-.days {
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-  margin-top:10px;
-}
-
-.day {
-  padding:12px;
-  border-radius:10px;
-  background:var(--glass);
-  cursor:pointer;
-}
-
-.day:hover {
-  background:#111;
-  color:#fff;
-}
-
-.day.today {
-  border:1px solid #111;
-}
-
-.day.selected {
-  background:#111;
-  color:#fff;
-}
-
-.day.disabled {
-  opacity:0.3;
-  pointer-events:none;
-}
-
-.slots {
-  margin-top:20px;
-}
-
-.slot {
-  display:inline-block;
-  padding:10px 15px;
-  margin:6px;
-  border-radius:20px;
-  background:var(--glass);
-  cursor:pointer;
-}
-
-.slot:hover {
-  background:#111;
-  color:#fff;
-}
+/* CALENDAR (UNCHANGED) */
+.calendar { max-width:420px; margin:40px auto 0; text-align:center; }
+.calendar-header { display:flex; justify-content:space-between; align-items:center; }
+.calendar-header button { background:var(--glass); border:none; padding:8px 14px; border-radius:10px; cursor:pointer; }
+.weekdays { display:grid; grid-template-columns:repeat(7,1fr); margin-top:15px; font-size:12px; opacity:0.6; }
+.days { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-top:10px; }
+.day { padding:12px; border-radius:10px; background:var(--glass); cursor:pointer; }
+.day:hover { background:#111; color:#fff; }
+.day.today { border:1px solid #111; }
+.day.selected { background:#111; color:#fff; }
+.day.disabled { opacity:0.3; pointer-events:none; }
+.slots { margin-top:20px; }
+.slot { display:inline-block; padding:10px 15px; margin:6px; border-radius:20px; background:var(--glass); cursor:pointer; }
+.slot:hover { background:#111; color:#fff; }
 
 /* MOBILE */
 @media(max-width:768px){
@@ -258,7 +227,14 @@ section { padding:120px 60px; }
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
-    <span class="toggle" onclick="toggleTheme()">☾</span>
+
+    <!-- REPLACED ☾ WITH TOGGLE -->
+    <span class="theme-toggle" onclick="toggleTheme()">
+      <span class="toggle-circle">
+        <span id="icon">☀️</span>
+      </span>
+    </span>
+
   </nav>
 </header>
 
@@ -306,7 +282,6 @@ section { padding:120px 60px; }
   <a class="btn" href="https://wa.me/919700034138" target="_blank">WhatsApp</a>
   <a class="btn" href="https://www.instagram.com/dillu_captures/" target="_blank">Instagram</a>
 
-  <!-- PRO CALENDAR -->
   <div class="calendar">
     <div class="calendar-header">
       <button onclick="prevMonth()">‹</button>
@@ -334,9 +309,12 @@ window.onload = () => {
 /* THEME */
 function toggleTheme(){
   document.body.classList.toggle("dark");
+
+  document.getElementById("icon").textContent =
+    document.body.classList.contains("dark") ? "🌙" : "☀️";
 }
 
-/* CALENDAR LOGIC */
+/* CALENDAR LOGIC (UNCHANGED) */
 let currentDate = new Date();
 let selectedDate = null;
 
@@ -421,6 +399,3 @@ renderCalendar();
 
 </body>
 </html>
-
-
-
