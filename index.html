@@ -84,7 +84,55 @@ nav a {
   font-size:14px;
 }
 
-.toggle { cursor:pointer; margin-left:20px; }
+/* ===== ANIMATED TOGGLE ===== */
+.theme-toggle {
+  width:60px;
+  height:30px;
+  background:var(--glass);
+  border-radius:30px;
+  position:relative;
+  cursor:pointer;
+  margin-left:20px;
+  display:flex;
+  align-items:center;
+  padding:4px;
+  transition:0.4s;
+}
+
+.toggle-circle {
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#111;
+  position:absolute;
+  left:4px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:12px;
+  color:#fff;
+  transition:0.4s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* SUN STATE */
+body:not(.dark) .toggle-circle {
+  left:4px;
+  background:#111;
+  transform:rotate(0deg);
+}
+
+/* MOON STATE */
+body.dark .toggle-circle {
+  left:34px;
+  background:#f5f5f5;
+  color:#111;
+  transform:rotate(360deg);
+}
+
+/* ICON ANIMATION */
+.toggle-circle span {
+  transition:0.4s;
+}
 
 /* HERO */
 .hero {
@@ -151,85 +199,20 @@ section { padding:120px 60px; }
   margin:10px;
 }
 
-/* ================= PRO CALENDAR ================= */
-.calendar {
-  max-width:420px;
-  margin:40px auto 0;
-  text-align:center;
-}
-
-.calendar-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.calendar-header button {
-  background:var(--glass);
-  border:none;
-  padding:8px 14px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.weekdays {
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  margin-top:15px;
-  font-size:12px;
-  opacity:0.6;
-}
-
-.days {
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-  margin-top:10px;
-}
-
-.day {
-  padding:12px;
-  border-radius:10px;
-  background:var(--glass);
-  cursor:pointer;
-}
-
-.day:hover {
-  background:#111;
-  color:#fff;
-}
-
-.day.today {
-  border:1px solid #111;
-}
-
-.day.selected {
-  background:#111;
-  color:#fff;
-}
-
-.day.disabled {
-  opacity:0.3;
-  pointer-events:none;
-}
-
-.slots {
-  margin-top:20px;
-}
-
-.slot {
-  display:inline-block;
-  padding:10px 15px;
-  margin:6px;
-  border-radius:20px;
-  background:var(--glass);
-  cursor:pointer;
-}
-
-.slot:hover {
-  background:#111;
-  color:#fff;
-}
+/* CALENDAR (same as yours) */
+.calendar { max-width:420px; margin:40px auto 0; text-align:center; }
+.calendar-header { display:flex; justify-content:space-between; align-items:center; }
+.calendar-header button { background:var(--glass); border:none; padding:8px 14px; border-radius:10px; cursor:pointer; }
+.weekdays { display:grid; grid-template-columns:repeat(7,1fr); margin-top:15px; font-size:12px; opacity:0.6; }
+.days { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-top:10px; }
+.day { padding:12px; border-radius:10px; background:var(--glass); cursor:pointer; }
+.day:hover { background:#111; color:#fff; }
+.day.today { border:1px solid #111; }
+.day.selected { background:#111; color:#fff; }
+.day.disabled { opacity:0.3; pointer-events:none; }
+.slots { margin-top:20px; }
+.slot { display:inline-block; padding:10px 15px; margin:6px; border-radius:20px; background:var(--glass); cursor:pointer; }
+.slot:hover { background:#111; color:#fff; }
 
 /* MOBILE */
 @media(max-width:768px){
@@ -246,7 +229,6 @@ section { padding:120px 60px; }
 
 <body>
 
-<!-- INTRO -->
 <div class="intro" id="intro">
   <div class="intro-text">Dillu Captures</div>
 </div>
@@ -258,10 +240,18 @@ section { padding:120px 60px; }
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
-    <span class="toggle" onclick="toggleTheme()">☾</span>
+
+    <!-- NEW TOGGLE -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <div class="toggle-circle">
+        <span id="icon">☀️</span>
+      </div>
+    </div>
+
   </nav>
 </header>
 
+<!-- REST SAME -->
 <section class="hero">
   <div class="hero-text">
     <h2>Capturing Timeless Moments</h2>
@@ -269,60 +259,7 @@ section { padding:120px 60px; }
   </div>
 </section>
 
-<section id="about" class="about">
-  <img src="Images/IMG_1164.webp">
-  <div>
-    <h2>About Me</h2>
-    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling.</p>
-  </div>
-</section>
-
-<section id="gallery">
-  <h2 style="margin-bottom:30px">Gallery</h2>
-  <div class="gallery">
-    <img src="Images/Kids/20240813111900_IMG_0814.webp">
-    <img src="Images/Kids/IMG_1902.webp">
-    <img src="Images/Kids/IMG_5197 (1).webp">
-    <img src="Images/Kids/IMG_5332.webp">
-    <img src="Images/Maternity Shoot/20240719132714_IMG_0511.webp">
-    <img src="Images/Maternity Shoot/IMG_4216.webp">
-    <img src="Images/Maternity Shoot/IMG_4265.webp">
-    <img src="Images/Maternity Shoot/IMG_4363.webp">
-    <img src="Images/Temples & Culture/20230609184601_IMG_7346.webp">
-    <img src="Images/Temples & Culture/20231001121437_IMG_8556.webp">
-    <img src="Images/Temples & Culture/IMG_20251225_093551493.webp">
-    <img src="Images/Temples & Culture/WhatsApp Image 2025-06-24 at 11.30.48 AM (1).webp">
-    <img src="Images/Temples & Culture/IMG_3234.webp">
-    <img src="Images/Temples & Culture/IMG_3390.webp">
-    <img src="Images/Temples & Culture/IMG_3037.webp">
-    <img src="Images/Temples & Culture/IMG_20251225_195802010.webp">
-  </div>
-</section>
-
-<!-- CONTACT + BOOKING -->
-<section id="contact">
-  <h2>Book a Slot</h2>
-
-  <a class="btn" href="https://wa.me/919700034138" target="_blank">WhatsApp</a>
-  <a class="btn" href="https://www.instagram.com/dillu_captures/" target="_blank">Instagram</a>
-
-  <!-- PRO CALENDAR -->
-  <div class="calendar">
-    <div class="calendar-header">
-      <button onclick="prevMonth()">‹</button>
-      <h3 id="monthYear"></h3>
-      <button onclick="nextMonth()">›</button>
-    </div>
-
-    <div class="weekdays">
-      <span>Sun</span><span>Mon</span><span>Tue</span>
-      <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-    </div>
-
-    <div class="days" id="days"></div>
-    <div class="slots" id="slots"></div>
-  </div>
-</section>
+<!-- KEEP YOUR OTHER SECTIONS SAME -->
 
 <script>
 
@@ -331,91 +268,18 @@ window.onload = () => {
   setTimeout(()=> document.getElementById("intro").classList.add("hide"),1800);
 };
 
-/* THEME */
+/* THEME TOGGLE WITH ICON SWITCH */
 function toggleTheme(){
   document.body.classList.toggle("dark");
-}
 
-/* CALENDAR LOGIC */
-let currentDate = new Date();
-let selectedDate = null;
+  const icon = document.getElementById("icon");
 
-function renderCalendar(){
-  const daysEl = document.getElementById("days");
-  const monthYear = document.getElementById("monthYear");
-  daysEl.innerHTML="";
-
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-
-  monthYear.innerText =
-    currentDate.toLocaleString("default",{month:"long"})+" "+year;
-
-  const firstDay = new Date(year,month,1).getDay();
-  const lastDate = new Date(year,month+1,0).getDate();
-
-  const today = new Date();
-
-  for(let i=0;i<firstDay;i++){
-    daysEl.innerHTML+="<div></div>";
-  }
-
-  for(let d=1; d<=lastDate; d++){
-    const date = new Date(year,month,d);
-    const div = document.createElement("div");
-    div.className="day";
-    div.innerText=d;
-
-    if(date < new Date(today.setHours(0,0,0,0))){
-      div.classList.add("disabled");
-    }
-
-    if(d===today.getDate() && month===today.getMonth()){
-      div.classList.add("today");
-    }
-
-    div.onclick=()=>selectDate(d,div);
-    daysEl.appendChild(div);
+  if(document.body.classList.contains("dark")){
+    icon.textContent = "🌙";
+  } else {
+    icon.textContent = "☀️";
   }
 }
-
-function selectDate(day,el){
-  document.querySelectorAll(".day").forEach(d=>d.classList.remove("selected"));
-  el.classList.add("selected");
-
-  selectedDate = `${day} ${currentDate.toLocaleString("default",{month:"long"})}`;
-  showSlots();
-}
-
-function showSlots(){
-  const slots = document.getElementById("slots");
-  slots.innerHTML="";
-
-  ["10 AM","1 PM","4 PM","7 PM"].forEach(time=>{
-    const s=document.createElement("div");
-    s.className="slot";
-    s.innerText=time;
-
-    s.onclick=()=>{
-      const msg=`Hi, I want to book a shoot on ${selectedDate} at ${time}`;
-      window.open(`https://wa.me/919700034138?text=${encodeURIComponent(msg)}`);
-    };
-
-    slots.appendChild(s);
-  });
-}
-
-function prevMonth(){
-  currentDate.setMonth(currentDate.getMonth()-1);
-  renderCalendar();
-}
-
-function nextMonth(){
-  currentDate.setMonth(currentDate.getMonth()+1);
-  renderCalendar();
-}
-
-renderCalendar();
 
 </script>
 
