@@ -17,7 +17,6 @@
   --text: #111;
   --glass: rgba(255,255,255,0.6);
 }
-
 body.dark {
   --bg: #0f0f0f;
   --text: #f5f5f5;
@@ -25,41 +24,11 @@ body.dark {
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-
 body {
   font-family:'Inter', sans-serif;
   background:var(--bg);
   color:var(--text);
   transition:.4s;
-}
-
-/* INTRO */
-.intro {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:var(--bg);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-.intro-text {
-  font-family:'Playfair Display';
-  font-size:42px;
-  opacity:0;
-  transform:translateY(30px);
-  animation:introText 1.5s forwards;
-}
-@keyframes introText {
-  to {opacity:1; transform:translateY(0);}
-}
-.intro.hide {
-  animation:fadeOut 1.2s forwards;
-}
-@keyframes fadeOut {
-  to {opacity:0; visibility:hidden;}
 }
 
 /* NAV */
@@ -75,8 +44,6 @@ header {
   z-index:1000;
 }
 
-header h1 { font-family:'Playfair Display'; }
-
 nav a {
   margin-left:25px;
   text-decoration:none;
@@ -84,269 +51,137 @@ nav a {
   font-size:14px;
 }
 
-/* ===== ANIMATED TOGGLE ===== */
+/* TOGGLE */
 .theme-toggle {
-  width:60px;
-  height:30px;
+  width:60px; height:30px;
   background:var(--glass);
   border-radius:30px;
   position:relative;
   cursor:pointer;
   margin-left:20px;
-  display:flex;
-  align-items:center;
-  padding:4px;
-  transition:0.4s;
   overflow:hidden;
 }
-
 .toggle-circle {
-  width:22px;
-  height:22px;
+  width:22px; height:22px;
   border-radius:50%;
   background:#111;
   position:absolute;
-  left:4px;
+  left:4px; top:4px;
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:12px;
   color:#fff;
-  transition:0.4s cubic-bezier(.68,-0.55,.27,1.55);
+  transition:.4s cubic-bezier(.68,-0.55,.27,1.55);
 }
-
-/* SUN */
-body:not(.dark) .toggle-circle {
-  left:4px;
-  background:#111;
-  transform:rotate(0deg);
-}
-
-/* MOON */
 body.dark .toggle-circle {
   left:34px;
-  background:#f5f5f5;
+  background:#fff;
   color:#111;
   transform:rotate(360deg);
 }
 
-/* LIQUID RIPPLE */
+/* RIPPLE */
 .ripple {
   position:absolute;
-  width:10px;
-  height:10px;
+  width:10px; height:10px;
   background:rgba(255,255,255,0.5);
   border-radius:50%;
-  pointer-events:none;
   transform:scale(0);
   opacity:0;
   filter:blur(8px);
 }
-
-.ripple.animate {
-  animation:liquidRipple 0.8s ease-out;
-}
-
-@keyframes liquidRipple {
-  0% {
-    transform:scale(0);
-    opacity:0.6;
-  }
-  50% {
-    transform:scale(6);
-    opacity:0.25;
-  }
-  100% {
-    transform:scale(10);
-    opacity:0;
-  }
-}
-
-body.dark .ripple {
-  background:rgba(255,255,255,0.25);
+.ripple.animate { animation:ripple 0.8s ease-out; }
+@keyframes ripple {
+  0%{transform:scale(0);opacity:.6;}
+  100%{transform:scale(10);opacity:0;}
 }
 
 /* HERO */
 .hero {
+  min-height:100vh;
   display:flex;
   align-items:center;
-  min-height:100vh;
   padding:120px 60px;
+}
+
+/* ================= PARALLAX GALLERY ================= */
+.gallery {
+  column-count:3;
+  column-gap:20px;
+  padding:120px 60px;
+}
+
+.gallery-item {
+  break-inside:avoid;
+  margin-bottom:20px;
+  overflow:hidden;
+  border-radius:18px;
   position:relative;
 }
-.hero::after {
-  content:"";
-  position:absolute;
-  right:0;
-  width:50%;
-  height:100%;
-  background:url('Images/1776695215852.webp') center/cover;
-}
-.hero-text {
-  max-width:500px;
-  animation:fadeUp 1.2s;
-}
-.hero-text h2 {
-  font-family:'Playfair Display';
-  font-size:48px;
-}
-@keyframes fadeUp {
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
 
-/* SECTIONS */
-section { padding:120px 60px; }
-
-.about {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-}
-.about img {
+.gallery-item img {
   width:100%;
-  border-radius:20px;
+  display:block;
+  transform:scale(1.1);
+  transition:transform 0.6s ease-out;
+  will-change:transform;
 }
 
-.gallery {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
+/* subtle hover lift */
+.gallery-item:hover img {
+  transform:scale(1.2);
 }
-.gallery img {
-  width:100%;
-  border-radius:15px;
-}
-
-/* BUTTON */
-.btn {
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:14px 28px;
-  border-radius:30px;
-  background:var(--glass);
-  text-decoration:none;
-  color:var(--text);
-  margin:10px;
-}
-
-/* CALENDAR */
-.calendar { max-width:420px; margin:40px auto 0; text-align:center; }
-.calendar-header { display:flex; justify-content:space-between; align-items:center; }
-.calendar-header button { background:var(--glass); border:none; padding:8px 14px; border-radius:10px; cursor:pointer; }
-.weekdays { display:grid; grid-template-columns:repeat(7,1fr); margin-top:15px; font-size:12px; opacity:0.6; }
-.days { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-top:10px; }
-.day { padding:12px; border-radius:10px; background:var(--glass); cursor:pointer; }
-.day:hover { background:#111; color:#fff; }
-.day.today { border:1px solid #111; }
-.day.selected { background:#111; color:#fff; }
-.day.disabled { opacity:0.3; pointer-events:none; }
-.slots { margin-top:20px; }
-.slot { display:inline-block; padding:10px 15px; margin:6px; border-radius:20px; background:var(--glass); cursor:pointer; }
-.slot:hover { background:#111; color:#fff; }
 
 /* MOBILE */
-@media(max-width:768px){
-  header { padding:15px 20px; }
-  .hero { flex-direction:column; text-align:center; padding:100px 20px; }
-  .hero::after { width:100%; height:50%; }
-  .hero-text { margin-top:55vh; }
-  .about { grid-template-columns:1fr; }
-  section { padding:100px 20px; }
+@media(max-width:900px){
+  .gallery { column-count:2; }
 }
+@media(max-width:600px){
+  .gallery { column-count:1; padding:100px 20px; }
+  header { padding:15px 20px; }
+}
+
+/* SECTION */
+section { padding:120px 60px; }
 
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-  <div class="intro-text">Dillu Captures</div>
-</div>
-
 <header>
   <h1>Dillu Captures</h1>
   <nav>
     <a href="#">Home</a>
-    <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
 
-    <!-- TOGGLE -->
     <div class="theme-toggle" onclick="toggleTheme(event)">
       <div class="ripple"></div>
-      <div class="toggle-circle">
-        <span id="icon">☀️</span>
-      </div>
+      <div class="toggle-circle"><span id="icon">☀️</span></div>
     </div>
-
   </nav>
 </header>
 
 <section class="hero">
-  <div class="hero-text">
-    <h2>Capturing Timeless Moments</h2>
-    <p>Luxury photography crafted with emotion.</p>
-  </div>
+  <h2 style="font-size:48px;font-family:Playfair Display;">Capturing Timeless Moments</h2>
 </section>
 
-<section id="about" class="about">
-  <img src="Images/IMG_1164.webp">
-  <div>
-    <h2>About Me</h2>
-    <p>I am a professional photographer specializing in portraits, weddings, and cinematic storytelling.</p>
-  </div>
-</section>
-
+<!-- PARALLAX GALLERY -->
 <section id="gallery">
-  <h2 style="margin-bottom:30px">Gallery</h2>
   <div class="gallery">
-    <img src="Images/Kids/20240813111900_IMG_0814.webp">
-    <img src="Images/Kids/IMG_1902.webp">
-    <img src="Images/Kids/IMG_5197 (1).webp">
-    <img src="Images/Kids/IMG_5332.webp">
-    <img src="Images/Maternity Shoot/20240719132714_IMG_0511.webp">
-    <img src="Images/Maternity Shoot/IMG_4216.webp">
-    <img src="Images/Maternity Shoot/IMG_4265.webp">
-    <img src="Images/Maternity Shoot/IMG_4363.webp">
-    <img src="Images/Temples & Culture/20230609184601_IMG_7346.webp">
-    <img src="Images/Temples & Culture/20231001121437_IMG_8556.webp">
-    <img src="Images/Temples & Culture/IMG_20251225_093551493.webp">
-    <img src="Images/Temples & Culture/IMG_3234.webp">
-  </div>
-</section>
 
-<section id="contact">
-  <h2>Book a Slot</h2>
+    <div class="gallery-item"><img src="Images/Kids/IMG_1902.webp"></div>
+    <div class="gallery-item"><img src="Images/Kids/IMG_5332.webp"></div>
+    <div class="gallery-item"><img src="Images/Maternity Shoot/IMG_4216.webp"></div>
+    <div class="gallery-item"><img src="Images/Maternity Shoot/IMG_4363.webp"></div>
+    <div class="gallery-item"><img src="Images/Temples & Culture/IMG_3234.webp"></div>
+    <div class="gallery-item"><img src="Images/Temples & Culture/IMG_3390.webp"></div>
+    <div class="gallery-item"><img src="Images/Temples & Culture/IMG_3037.webp"></div>
 
-  <a class="btn" href="https://wa.me/919700034138" target="_blank">WhatsApp</a>
-  <a class="btn" href="https://www.instagram.com/dillu_captures/" target="_blank">Instagram</a>
-
-  <div class="calendar">
-    <div class="calendar-header">
-      <button onclick="prevMonth()">‹</button>
-      <h3 id="monthYear"></h3>
-      <button onclick="nextMonth()">›</button>
-    </div>
-
-    <div class="weekdays">
-      <span>Sun</span><span>Mon</span><span>Tue</span>
-      <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-    </div>
-
-    <div class="days" id="days"></div>
-    <div class="slots" id="slots"></div>
   </div>
 </section>
 
 <script>
-
-/* INTRO */
-window.onload = () => {
-  setTimeout(()=> document.getElementById("intro").classList.add("hide"),1800);
-};
 
 /* THEME + RIPPLE */
 function toggleTheme(e){
@@ -357,97 +192,28 @@ function toggleTheme(e){
   void ripple.offsetWidth;
 
   const rect = toggle.getBoundingClientRect();
-  ripple.style.left = (e.clientX - rect.left) + "px";
-  ripple.style.top = (e.clientY - rect.top) + "px";
+  ripple.style.left = (e.clientX - rect.left)+"px";
+  ripple.style.top = (e.clientY - rect.top)+"px";
 
   ripple.classList.add("animate");
 
   document.body.classList.toggle("dark");
-
   document.getElementById("icon").textContent =
     document.body.classList.contains("dark") ? "🌙" : "☀️";
 }
 
-/* CALENDAR */
-let currentDate = new Date();
-let selectedDate = null;
+/* ================= PARALLAX SCROLL ================= */
+const items = document.querySelectorAll(".gallery-item img");
 
-function renderCalendar(){
-  const daysEl = document.getElementById("days");
-  const monthYear = document.getElementById("monthYear");
-  daysEl.innerHTML="";
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
 
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-
-  monthYear.innerText =
-    currentDate.toLocaleString("default",{month:"long"})+" "+year;
-
-  const firstDay = new Date(year,month,1).getDay();
-  const lastDate = new Date(year,month+1,0).getDate();
-
-  const today = new Date();
-
-  for(let i=0;i<firstDay;i++){
-    daysEl.innerHTML+="<div></div>";
-  }
-
-  for(let d=1; d<=lastDate; d++){
-    const date = new Date(year,month,d);
-    const div = document.createElement("div");
-    div.className="day";
-    div.innerText=d;
-
-    if(date < new Date(today.setHours(0,0,0,0))){
-      div.classList.add("disabled");
-    }
-
-    if(d===today.getDate() && month===today.getMonth()){
-      div.classList.add("today");
-    }
-
-    div.onclick=()=>selectDate(d,div);
-    daysEl.appendChild(div);
-  }
-}
-
-function selectDate(day,el){
-  document.querySelectorAll(".day").forEach(d=>d.classList.remove("selected"));
-  el.classList.add("selected");
-
-  selectedDate = `${day} ${currentDate.toLocaleString("default",{month:"long"})}`;
-  showSlots();
-}
-
-function showSlots(){
-  const slots = document.getElementById("slots");
-  slots.innerHTML="";
-
-  ["10 AM","1 PM","4 PM","7 PM"].forEach(time=>{
-    const s=document.createElement("div");
-    s.className="slot";
-    s.innerText=time;
-
-    s.onclick=()=>{
-      const msg=`Hi, I want to book a shoot on ${selectedDate} at ${time}`;
-      window.open(`https://wa.me/919700034138?text=${encodeURIComponent(msg)}`);
-    };
-
-    slots.appendChild(s);
+  items.forEach((img, i) => {
+    const speed = (i % 5 + 1) * 0.03; // different depth
+    img.style.transform =
+      `translateY(${scrollY * speed}px) scale(1.1)`;
   });
-}
-
-function prevMonth(){
-  currentDate.setMonth(currentDate.getMonth()-1);
-  renderCalendar();
-}
-
-function nextMonth(){
-  currentDate.setMonth(currentDate.getMonth()+1);
-  renderCalendar();
-}
-
-renderCalendar();
+});
 
 </script>
 
